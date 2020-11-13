@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MQuince.Repository.Contracts\MQuince.Repository.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.Repository.SQL\MQuince.Repository.SQL.csproj" />
+    <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.Services.Implementation\MQuince.Services.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>
