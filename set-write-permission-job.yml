@@ -31,5 +31,5 @@ steps:
       
       g = Github("$(NewToken)")
       repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
-      g.get_organization("MQuince").get_team(4207823).set_repo_permission(repo, "push")
+      g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "push")
 
