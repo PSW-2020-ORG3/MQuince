@@ -14,6 +14,9 @@ trigger: none
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: PermissionVariables
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -29,7 +32,42 @@ steps:
     script: |
       from github import Github
       
-      g = Github("$(NewToken)")
-      repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
-      g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "push")
+      if "$(IsEven)" == "True":
+        g = Github("$(NewToken)")
+        repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
+        g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "push")
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/distributedtask/variablegroups/1?api-version=5.0-preview.1"
+      Write-Host $url
+
+      function CreateJsonBody
+      {
+          if ("$(IsEven)" -eq "True") {
+            $value = '{"id":2,"type":"Vsts","name":"PermissionVariables","variables":{"IsEven":{"isSecret":false,"value":"False"}}}'
+          } else {
+            $value = '{"id":2,"type":"Vsts","name":"PermissionVariables","variables":{"IsEven":{"isSecret":false,"value":"True"}}}'
+          }
+          return $value
+      }
+
+      $user = ''
+      $pass = '$(AzureToken)'
+      Write-Host "$(AzureToken)"
+      $pair = "$($user):$($pass)"
+
+      $encodedCreds = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
+
+      $basicAuthValue = "Basic $encodedCreds"
+      $json = CreateJsonBody
+
+      $Headers = @{
+          Authorization = $basicAuthValue
+      }
+
+      $pipeline = Invoke-RestMethod -Uri $url -Method Put -Body $json -ContentType "application/json" -Headers $Headers
+      Write-Host "New Variable Value:" $pipeline.variables.IsEven.value
