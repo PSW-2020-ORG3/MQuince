@@ -42,7 +42,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your PowerShell commands here.
-      $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/distributedtask/variablegroups/1?api-version=5.0-preview.1"
+      $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/distributedtask/variablegroups/2?api-version=5.0-preview.1"
       Write-Host $url
 
       function CreateJsonBody
