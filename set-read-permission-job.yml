@@ -15,6 +15,9 @@ trigger: none
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: PermissionVariables
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
@@ -31,7 +34,8 @@ steps:
     scriptSource: 'inline'
     script: |
       from github import Github
-      
-      g = Github("$(NewToken)")
-      repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
-      g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "pull")
+
+      if "$(IsEven)" == "True":
+        g = Github("$(NewToken)")
+        repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
+        g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "pull")
