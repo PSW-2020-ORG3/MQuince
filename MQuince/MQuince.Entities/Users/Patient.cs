@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MQuince.Entities.Users
 {
-    public class Patient
+    public class Patient : User
     {
         private Guid _id;
         public bool Guest { get; set; }

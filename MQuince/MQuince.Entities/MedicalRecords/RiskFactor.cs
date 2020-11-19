@@ -9,9 +9,7 @@ namespace MQuince.Entities.MedicalRecords
     public class RiskFactor
     {
         private Guid _id;
-        public DateTime Date { get; set; }
-        public MedicalStatus MedicalStatus { get; set; }
-        public Guid RiskFactorId { get; set; }
+        public String riskFactor { get; set; }
 
         public Guid Id
         {
