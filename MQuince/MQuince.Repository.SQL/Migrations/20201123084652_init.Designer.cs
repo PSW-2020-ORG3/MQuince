@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    [Migration("20201105180928_DBFeedbackChange")]
-    partial class DBFeedbackChange
+    [Migration("20201123084652_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,54 @@ namespace MQuince.Repository.SQL.Migrations
                     b.ToTable("Contact");
                 });
 
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Communication.HospitalSurveyPersistence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("FiveStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FourStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OneStar")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("QuestionId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("ThreeStar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TwoStar")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("HospitalSurvey");
+                });
+
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Communication.QuestionPersistence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Question")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("QuestionType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Question");
+                });
+
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Drug.AllergenPersistence", b =>
                 {
                     b.Property<Guid>("Id")
@@ -99,6 +147,9 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<bool>("Anonymous")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("Approved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -106,8 +157,8 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<bool>("Publish")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("User")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -159,6 +210,13 @@ namespace MQuince.Repository.SQL.Migrations
                     b.HasIndex("ResidenceId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Communication.HospitalSurveyPersistence", b =>
+                {
+                    b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Communication.QuestionPersistence", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId");
                 });
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.UserPersistence", b =>

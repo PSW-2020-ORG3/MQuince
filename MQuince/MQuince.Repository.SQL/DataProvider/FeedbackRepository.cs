@@ -21,7 +21,7 @@ namespace MQuince.Repository.SQL.DataProvider
         }
         public void Create(Feedback entity)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 _context.Feedbacks.Add(FeedbackMapper.MapFeedbackEntityToFeedbackPersistence(entity));
                 _context.SaveChanges(); //ako ne sacuvamo nece se update-ovati baza
@@ -30,7 +30,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public bool Delete(Guid id)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 FeedbackPersistence feedback = _context.Feedbacks.Find(id);
                 if (feedback == null) return false; //u principu vracamo true ili false, kao indikator uspesnosti operacije, ako ne pronadjemo id, operacija nije uspesna
@@ -43,7 +43,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public IEnumerable<Feedback> GetAll()
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return FeedbackMapper.MapFeedbackPersistenceCollectionToFeedbackEntityCollection(_context.Feedbacks.ToList());
             }
@@ -51,7 +51,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public Feedback GetById(Guid id)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //pomocu lambda izraza se izvuce korisnik sa Id-jem koji je isti kao prosledjeni
                 //isti rezultat ima i foreach gde se unutar nekog if-a porede id-jevi
@@ -61,7 +61,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public void Update(Feedback entity)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //Entity Framework ce po id-ju naci feedback i azurirati ga
                 _context.Update(FeedbackMapper.MapFeedbackEntityToFeedbackPersistence(entity));
@@ -71,7 +71,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public IEnumerable<Feedback> GetByStatus(bool publish, bool approved)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return FeedbackMapper.MapFeedbackPersistenceCollectionToFeedbackEntityCollection(_context.Feedbacks.Where(p => p.Publish == publish && p.Approved == approved).ToList());
             }
@@ -84,7 +84,7 @@ namespace MQuince.Repository.SQL.DataProvider
         /// <returns></returns>
         public IEnumerable<Feedback> GetByParams(bool anonymous, bool approved)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return FeedbackMapper.MapFeedbackPersistenceCollectionToFeedbackEntityCollection(_context.Feedbacks.Where(p => p.Anonymous == anonymous && p.Approved == approved).ToList());
             }
@@ -98,7 +98,7 @@ namespace MQuince.Repository.SQL.DataProvider
         /// <returns></returns>
         public IEnumerable<Feedback> GetByAllParams(bool publish, bool anonymous, bool approved)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return FeedbackMapper.MapFeedbackPersistenceCollectionToFeedbackEntityCollection(_context.Feedbacks.Where(p => p.Publish == publish && p.Anonymous == anonymous && p.Approved == approved).ToList());
             }

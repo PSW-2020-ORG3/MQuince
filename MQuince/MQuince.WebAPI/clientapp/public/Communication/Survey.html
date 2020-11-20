@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Freelancer - Start Bootstrap Theme</title>
+    <!-- Favicon-->
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .rating-group {
+            display: inline-flex;
+        }
+
+        .rating__icon {
+            pointer-events: none;
+        }
+
+        .rating__input {
+            position: absolute !important;
+            left: -9999px !important;
+        }
+
+        .rating__input--none {
+            display: none;
+        }
+
+        .rating__label {
+            cursor: pointer;
+            padding: 0 0.1em;
+            font-size: 1.5rem;
+        }
+
+        .rating__icon--star {
+            color: orange;
+        }
+
+        .rating__input:checked ~ .rating__label .rating__icon--star {
+            color: #ddd;
+        }
+
+        .rating-group:hover .rating__label .rating__icon--star {
+            color: orange;
+        }
+
+        .rating__input:hover ~ .rating__label .rating__icon--star {
+            color: #ddd;
+        }
+    </style>
+
+</head>
+<body id="page-top">
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">MQuince</a>
+            <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Contact Section-->
+    <section class="page-section" id="contact">
+        <div class="container" id="survey">
+            <!-- Contact Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Survey</h2>
+
+            <h5 class=" text-center  mb-0 text-uppercase" style="color:#1abc9c; margin-top: 2rem;">Rate your appointment</h5>
+            <!-- Icon Divider-->
+            <!-- Contact Section Form-->
+            <div class="row section-design">
+                <div class="col-lg-8 mx-auto">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                        <div class="control-group">
+                            <div class="form-group  controls mb-0 pb-2" style=" color: #6c757d;opacity: 1;">
+                                <table style="width: 100%; margin-top: 20px; margin-left: 20px; margin-right: 100px;">
+                                    <tbody>
+                                        <tr v-for="question in questions" v-if="question != null && question.entityDTO.question.questionType == 2">
+                                            <td style="width:68%"><label>{{question.entityDTO.question._question}}</label></td>
+                                            <td>
+                                                <div class="rating-group">
+                                                    <input disabled checked class="rating__input rating__input--none" :name="question.entityDTO.question.id" id="rating3-none" value="0" type="radio">
+                                                    <label aria-label="1 star" class="rating__label" :for="question.entityDTO.question.id + '1'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 1)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '1'" value="1" type="radio">
+                                                    <label aria-label="2 stars" class="rating__label" :for="question.entityDTO.question.id + '2'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 2)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '2'" value="2" type="radio">
+                                                    <label aria-label="3 stars" class="rating__label" :for="question.entityDTO.question.id + '3'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 3)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '3'" value="3" type="radio">
+                                                    <label aria-label="4 stars" class="rating__label" :for="question.entityDTO.question.id + '4'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 4)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '4'" value="4" type="radio">
+                                                    <label aria-label="5 stars" class="rating__label" :for="question.entityDTO.question.id + '5'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 5)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '5'" value="5" type="radio">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <h5 class=" text-center  mb-0 text-uppercase" style="color:#1abc9c; margin-top: 2rem;">Rate our hospital</h5>
+                                <table style="width: 100%; margin-top: 20px; margin-left: 20px; margin-right: 100px;">
+                                    <tbody>
+                                        <tr v-for="question in questions" v-if="question != null && question.entityDTO.question.questionType == 1">
+                                            <td style="width:68%"><label>{{question.entityDTO.question._question}}</label></td>
+                                            <td>
+                                                <div class="rating-group">
+                                                    <input disabled checked class="rating__input rating__input--none" :name="question.entityDTO.question.id" id="rating3-none" value="0" type="radio">
+                                                    <label aria-label="1 star" class="rating__label" :for="question.entityDTO.question.id + '1'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 1)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '1'" value="1" type="radio">
+                                                    <label aria-label="2 stars" class="rating__label" :for="question.entityDTO.question.id + '2'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 2)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '2'" value="2" type="radio">
+                                                    <label aria-label="3 stars" class="rating__label" :for="question.entityDTO.question.id + '3'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 3)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '3'" value="3" type="radio">
+                                                    <label aria-label="4 stars" class="rating__label" :for="question.entityDTO.question.id + '4'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 4)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '4'" value="4" type="radio">
+                                                    <label aria-label="5 stars" class="rating__label" :for="question.entityDTO.question.id + '5'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 5)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '5'" value="5" type="radio">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <h5 class=" text-center  mb-0 text-uppercase" style="color:#1abc9c; margin-top: 2rem;">Rate our medical staff</h5>
+                                <table style="width: 100%; margin-top: 20px; margin-left: 20px; margin-right: 100px;">
+                                    <tbody>
+                                        <tr v-for="question in doctorQuestions" v-if="question != null && question.entityDTO.question.questionType == 0">
+                                            <td style="width:68%"><label>{{question.entityDTO.question._question}}</label></td>
+                                            <td>
+                                                <div class="rating-group">
+                                                    <input disabled checked class="rating__input rating__input--none" :name="question.entityDTO.question.id" id="rating3-none" value="0" type="radio">
+                                                    <label aria-label="1 star" class="rating__label" :for="question.entityDTO.question.id + '1'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 1)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '1'" value="1" type="radio">
+                                                    <label aria-label="2 stars" class="rating__label" :for="question.entityDTO.question.id + '2'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 2)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '2'" value="2" type="radio">
+                                                    <label aria-label="3 stars" class="rating__label" :for="question.entityDTO.question.id + '3'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 3)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '3'" value="3" type="radio">
+                                                    <label aria-label="4 stars" class="rating__label" :for="question.entityDTO.question.id + '4'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 4)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '4'" value="4" type="radio">
+                                                    <label aria-label="5 stars" class="rating__label" :for="question.entityDTO.question.id + '5'"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                                    <input v-on:change="radioChanged(question.entityDTO.question.id, 5)" class="rating__input" :name="question.entityDTO.question.id" :id="question.entityDTO.question.id + '5'" value="5" type="radio">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    
+
+                               <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br />
+                        <div id="success"></div>
+                        <div class="form-group"><button style="width: 20%; margin-left: 40%;" v-on:click="submit()" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Send</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Location-->
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <!-- Core theme JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script src="../axios.js"></script>
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <script src="Survey.js"></script>
+</body>
+</html>
+

@@ -21,7 +21,7 @@ namespace MQuince.Repository.SQL.DataProvider
         }
         public IEnumerable<User> GetAll()
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //u _contextu se nalaze svi korisnici u bazi
                 return UserMapper.MapUserPersistenceCollectionToUserEntityCollection(_context.Users.ToList());
@@ -30,7 +30,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public User GetById(Guid id)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //pomocu lambda izraza se izvuce korisnik sa Id-jem koji je isti kao prosledjeni
                 //isti rezultat ima i foreach gde se unutar nekog if-a porede id-jevi
@@ -40,7 +40,7 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public void Create(User entity)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 _context.Users.Add(UserMapper.MapUserEntityToUserPersistence(entity));
                 _context.SaveChanges();

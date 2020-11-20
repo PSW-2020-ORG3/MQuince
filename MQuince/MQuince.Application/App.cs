@@ -18,7 +18,7 @@ namespace MQuince.Application
         {
             _optionsBuilder = new DbContextOptionsBuilder();
             //_optionsBuilder.UseSqlServer(configuration.GetConnectionString("FeedbackExampleDB"));
-            _optionsBuilder.UseSqlServer(@"server=localhost;port=3306;database=mquince;user=root;password=root");
+            _optionsBuilder.UseMySql(@"server=localhost;port=3306;database=mquince;user=root;password=root");
         }
 
         public IUserService GetUserService()
@@ -26,11 +26,23 @@ namespace MQuince.Application
 
         public IFeedbackService GetFeedbackService()
             => new FeedbackService(this.GetFeedbackRepository());
+        public IQuestionService GetQuestionService()
+            => new QuestionService(this.GetQuestionRepository());
+        public IHospitalSurveyService GetHospitalSurveyService()
+            => new HospitalSurveyService(this.GetHospitalSurveyRepository());
+        public IDoctorSurveyService GetDoctorSurveyService()
+            => new DoctorSurveyService(this.GetDoctorSurveyRepository());
+
 
         private IUserRepository GetUserRepository()
             => new UserRepository(_optionsBuilder);
-
         private IFeedbackRepository GetFeedbackRepository()
              => new FeedbackRepository(_optionsBuilder);
+        private IQuestionRepository GetQuestionRepository()
+             => new QuestionRepository(_optionsBuilder);
+        private IHospitalSurveyRepository GetHospitalSurveyRepository()
+             => new HospitalSurveyRepository(_optionsBuilder);
+        private IDoctorSurveyRepository GetDoctorSurveyRepository()
+             => new DoctorSurveyRepository(_optionsBuilder);
     }
 }

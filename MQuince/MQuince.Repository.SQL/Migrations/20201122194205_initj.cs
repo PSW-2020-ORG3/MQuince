@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MQuince.Repository.SQL.Migrations
 {
-    public partial class DbInit : Migration
+    public partial class initj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,18 @@ namespace MQuince.Repository.SQL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adress", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Allergen",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allergen", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,15 +65,28 @@ namespace MQuince.Repository.SQL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Grade = table.Column<int>(nullable: false),
-                    Comment = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Anonymous = table.Column<bool>(nullable: false)
+                    Comment = table.Column<string>(nullable: false),
+                    User = table.Column<string>(nullable: true),
+                    Anonymous = table.Column<bool>(nullable: false),
+                    Publish = table.Column<bool>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Feedback", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Question = table.Column<string>(nullable: true),
+                    QuestionType = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,6 +128,34 @@ namespace MQuince.Repository.SQL.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "HospitalSurvey",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    OneStar = table.Column<int>(nullable: false),
+                    TwoStar = table.Column<int>(nullable: false),
+                    ThreeStar = table.Column<int>(nullable: false),
+                    FourStar = table.Column<int>(nullable: false),
+                    FiveStar = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HospitalSurvey", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HospitalSurvey_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HospitalSurvey_QuestionId",
+                table: "HospitalSurvey",
+                column: "QuestionId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_User_BirthPlaceId",
                 table: "User",
@@ -122,10 +175,19 @@ namespace MQuince.Repository.SQL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Allergen");
+
+            migrationBuilder.DropTable(
                 name: "Feedback");
 
             migrationBuilder.DropTable(
+                name: "HospitalSurvey");
+
+            migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Question");
 
             migrationBuilder.DropTable(
                 name: "City");

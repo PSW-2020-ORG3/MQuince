@@ -21,7 +21,7 @@ namespace MQuince.Repository.SQL
         }
         public void Create(Allergen entity)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 _context.Allergens.Add(AllergenMapper.MapAllergenEntityToAllergenPersistence(entity));
                 _context.SaveChanges(); //ako ne sacuvamo nece se update-ovati baza
@@ -30,7 +30,7 @@ namespace MQuince.Repository.SQL
 
         public bool Delete(Guid id)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 AllergenPersistence allergen = _context.Allergens.Find(id);
                 if (allergen == null) return false; //u principu vracamo true ili false, kao indikator uspesnosti operacije, ako ne pronadjemo id, operacija nije uspesna
@@ -43,7 +43,7 @@ namespace MQuince.Repository.SQL
 
         public IEnumerable<Allergen> GetAll()
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return AllergenMapper.MapAllergenPersistenceCollectionToAllergenEntityCollection(_context.Allergens.ToList());
             }
@@ -51,7 +51,7 @@ namespace MQuince.Repository.SQL
 
         public Allergen GetById(Guid id)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //pomocu lambda izraza se izvuce korisnik sa Id-jem koji je isti kao prosledjeni
                 //isti rezultat ima i foreach gde se unutar nekog if-a porede id-jevi
@@ -61,7 +61,7 @@ namespace MQuince.Repository.SQL
 
         public void Update(Allergen entity)
         {
-            using (MQuinceDbContext _context = new MQuinceDbContext())
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 //Entity Framework ce po id-ju naci feedback i azurirati ga
                 _context.Update(AllergenMapper.MapAllergenEntityToAllergenPersistence(entity));
