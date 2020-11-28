@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MQuince.Application;
+using MQuince.Repository.SQL.DataAccess;
 using MQuince.Services.Contracts.Interfaces;
 using VueCliMiddleware;
 
@@ -37,11 +41,24 @@ namespace MQuince.WebAPI
             {
                 configuration.RootPath = "ClientApp";
             });
+
+            services.AddDbContext<MQuinceDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
+                // context.Database.Migrate();
+                RelationalDatabaseCreator databaseCreator =
+    (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
+            databaseCreator.CreateTables();
+            }
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,6 +92,18 @@ namespace MQuince.WebAPI
                 }
 
             });
+
+            /*DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
+            builder.UseMySql(@"server=localhost;port=3306;database=quince;user=root;password=root");
+            MQuinceDbContext context = new MQuinceDbContext(builder.Options);
+
+            RelationalDatabaseCreator databaseCreator =
+    (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
+            databaseCreator.CreateTables();*/
+
+
+
+
         }
     }
 }
