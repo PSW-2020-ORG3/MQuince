@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<div class="phamracyContainer">
+    <div class="containsForm">
+        <form action="javascript:void(0);"  onsubmit="addItem()">
+            <table>
+                <tr> <td><label> API-KEY </label></td></tr>
+                <tr> <td> <input type="text" id="apiKey" v-model="apiKey" :class="[apiKey.length <2 ? 'red':'']"></input></td></tr>
+                <tr> <td> <label> NAME </label></td></tr>
+                <tr> <td> <input v-model="name" id="name" :class="{red: name.length<2}" ></input> </td></tr>
+                <tr> <td> <label> WEBSITE </label></td></tr>
+                <tr><td><input type="text" v-model="url" id="url" :class="{red: url.length<2}"></input> </td></tr>
+                <tr> <td> <input id="btn"   type="submit" value="Save" onclick="alert('Successefully')"></td></tr>
+            </table>
+
+
+
+
+
+
+
+            <script src="~/Views/assets/js/addPharmacy.js"></script>
+        </form>
+    </div>
+</div>
