@@ -19,10 +19,12 @@ RUN dotnet publish MQuince.WebAPI/MQuince.WebAPI.csproj -c Release -o out
 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
-RUN useradd -ms /bin/bash defaultuser
-USER defaultuser
+RUN useradd -ms /bin/bash user
+USER user
 WORKDIR /app
 ENV ASPNETCORE_URLS http://*:44359
 EXPOSE 44359
 COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "MQuince.WebAPI.dll"]
+
+# httos 443 expose demo tls sertifikati volume docker slike
