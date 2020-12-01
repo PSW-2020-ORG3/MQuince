@@ -38,6 +38,20 @@ namespace MQuince.Repositories.Tests
         [Fact]
         public void Map_specialization_persistance_collection_to_specialization_entity_collection()
         {
+            List<SpecializationPersistence> specializationPersistences = this.GetListOfSpecialization();
+
+            List<Specialization> listOfSpecialization = SpecializationMapper.MapSpecializationPersistenceCollectionToSpecializationEntityCollection(specializationPersistences).ToList();
+
+            Assert.True(this.CompareSpecializationPersistanceAndSpecializationEntity(listOfSpecialization[0], specializationPersistences[0]));
+            Assert.True(this.CompareSpecializationPersistanceAndSpecializationEntity(listOfSpecialization[1], specializationPersistences[1]));
+        }
+
+        private bool CompareSpecializationPersistanceAndSpecializationEntity(Specialization specialization, SpecializationPersistence specializationPersistence)
+                        => specialization.Id == specializationPersistence.Id
+                           && specialization.Name.Equals(specializationPersistence.Name);
+
+        private List<SpecializationPersistence> GetListOfSpecialization()
+        {
             SpecializationPersistence specializationPersistanceFirst = new SpecializationPersistence()
             {
                 Id = Guid.Parse("11ac21e1-1361-4c06-9751-9666ce10d30a"),
@@ -52,12 +66,7 @@ namespace MQuince.Repositories.Tests
             listOfSpecializationPersistance.Add(specializationPersistanceFirst);
             listOfSpecializationPersistance.Add(specializationPersistanceSecond);
 
-            List<Specialization> listOfSpecialization = SpecializationMapper.MapSpecializationPersistenceCollectionToSpecializationEntityCollection(listOfSpecializationPersistance).ToList();
-
-            Assert.Equal(listOfSpecialization[0].Id, specializationPersistanceFirst.Id);
-            Assert.Equal(listOfSpecialization[0].Name, specializationPersistanceFirst.Name);
-            Assert.Equal(listOfSpecialization[1].Id, specializationPersistanceSecond.Id);
-            Assert.Equal(listOfSpecialization[1].Name, specializationPersistanceSecond.Name);
+            return listOfSpecializationPersistance;
         }
 
         [Fact]
