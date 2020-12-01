@@ -6,9 +6,6 @@
 schedules:
 - cron: "1 0 * * 1"
   displayName: Daily midnight build
-  branches:
-    include:
-    - develop
 
 trigger: none
 
