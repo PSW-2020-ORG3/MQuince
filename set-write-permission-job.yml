@@ -5,7 +5,11 @@
 schedules:
 - cron: "1 0 * * 2"
   displayName: Daily midnight build
+  branches:
+    include:
+    - develop
 
+pr: none
 trigger: none
 
 pool:
