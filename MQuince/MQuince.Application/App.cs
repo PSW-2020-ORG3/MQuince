@@ -17,8 +17,7 @@ namespace MQuince.Application
         public App(IConfiguration configuration)
         {
             _optionsBuilder = new DbContextOptionsBuilder();
-            //_optionsBuilder.UseSqlServer(configuration.GetConnectionString("FeedbackExampleDB"));
-            _optionsBuilder.UseSqlServer(@"server=localhost;port=3306;database=mquince;user=root;password=root");
+            _optionsBuilder.UseMySql(configuration.GetConnectionString("MQuinceDB"));
         }
 
         public IUserService GetUserService()
