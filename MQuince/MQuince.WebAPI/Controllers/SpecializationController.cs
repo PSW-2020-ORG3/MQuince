@@ -9,7 +9,7 @@ namespace MQuince.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SpecializationController
+    public class SpecializationController : ControllerBase
     {
         private readonly ISpecializationService _specializationService;
 
@@ -21,7 +21,14 @@ namespace MQuince.WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_specializationService.GetAll());
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

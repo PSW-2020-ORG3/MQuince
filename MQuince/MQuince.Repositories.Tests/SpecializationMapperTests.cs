@@ -2,6 +2,7 @@ using MQuince.Entities.Users;
 using MQuince.Repository.SQL.DataProvider.Util;
 using MQuince.Repository.SQL.PersistenceEntities.Users;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Xunit;
 
@@ -51,7 +52,7 @@ namespace MQuince.Repositories.Tests
             listOfSpecializationPersistance.Add(specializationPersistanceFirst);
             listOfSpecializationPersistance.Add(specializationPersistanceSecond);
 
-            List<Specialization> listOfSpecialization = (List<Specialization>)SpecializationMapper.MapSpecializationPersistenceCollectionToSpecializationEntityCollection(listOfSpecializationPersistance);
+            List<Specialization> listOfSpecialization = SpecializationMapper.MapSpecializationPersistenceCollectionToSpecializationEntityCollection(listOfSpecializationPersistance).ToList();
 
             Assert.Equal(listOfSpecialization[0].Id, specializationPersistanceFirst.Id);
             Assert.Equal(listOfSpecialization[0].Name, specializationPersistanceFirst.Name);

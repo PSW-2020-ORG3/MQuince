@@ -3,6 +3,8 @@ using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Implementation.Util;
 using System;
+using System.Linq;
+
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
@@ -43,7 +45,7 @@ namespace MQuince.Services.Tests
             listOfSpecialization.Add(specializationFirst);
             listOfSpecialization.Add(specializationSecond);
 
-            List<IdentifiableDTO<SpecializationDTO>> listOfIdentifierSpecializations = (List<IdentifiableDTO<SpecializationDTO>>)SpecializationMapper.MapSpecializationEntityCollectionToSpecializationIdentifierDTOCollection(listOfSpecialization);
+            List<IdentifiableDTO<SpecializationDTO>> listOfIdentifierSpecializations = SpecializationMapper.MapSpecializationEntityCollectionToSpecializationIdentifierDTOCollection(listOfSpecialization).ToList();
 
             Assert.Equal(listOfIdentifierSpecializations[0].Id, specializationFirst.Id);
             Assert.Equal(listOfIdentifierSpecializations[0].EntityDTO.Name, specializationFirst.Name);
