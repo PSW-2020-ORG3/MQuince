@@ -13,11 +13,6 @@ namespace MQuince.Repository.SQL.DataProvider.Util
             throw new NotImplementedException();
         }
 
-        public static SpecializationPersistence MapSpecializationEntityToSpecializationPersistence(Specialization specialization)
-        {
-            throw new NotImplementedException();
-        }
-
         public static IEnumerable<Specialization> MapSpecializationPersistenceCollectionToSpecializationEntityCollection(IEnumerable<SpecializationPersistence> specializations)
         {
             throw new NotImplementedException();

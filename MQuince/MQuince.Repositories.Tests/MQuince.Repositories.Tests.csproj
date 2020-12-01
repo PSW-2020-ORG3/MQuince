@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Repository.SQL\MQuince.Repository.SQL.csproj" />
+    <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

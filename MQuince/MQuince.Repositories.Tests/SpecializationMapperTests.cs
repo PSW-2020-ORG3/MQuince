@@ -33,26 +33,6 @@ namespace MQuince.Repositories.Tests
                   => SpecializationMapper.MapSpecializationPersistenceToSpecializationEntity(specializationPersistance));
         }
 
-        [Fact]
-        public void Map_specialization_entity_to_specialization_persistance()
-        {
-            Guid id = Guid.Parse("11ac21e1-1361-4c06-9751-9666ce10d30a");
-            Specialization specialization = new Specialization(id, "Hirurg");
-
-            SpecializationPersistence specializationPersistance = SpecializationMapper.MapSpecializationEntityToSpecializationPersistence(specialization);
-
-            Assert.Equal(specializationPersistance.Id, specialization.Id);
-            Assert.Equal(specializationPersistance.Name, specialization.Name);
-        }
-
-        [Fact]
-        public void Map_specialization_entity_to_specialization_persistance_when_entity_is_null()
-        {
-            Specialization specialization = null;
-
-            Assert.Throws<ArgumentNullException>(()
-                    => SpecializationMapper.MapSpecializationEntityToSpecializationPersistence(specialization));
-        }
 
         [Fact]
         public void Map_specialization_persistance_collection_to_specialization_entity_collection()
