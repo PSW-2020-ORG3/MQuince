@@ -17,5 +17,11 @@ namespace MQuince.Entities.Users
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
         }
+
+        public Specialization(Guid id, string Name)
+        {
+            this.Id = id;
+            this.Name = Name;
+        }
     }
 }

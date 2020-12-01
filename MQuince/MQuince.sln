@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Application", "MQui
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Services.Tests", "MQuince.Services.Tests\MQuince.Services.Tests.csproj", "{DC179031-B947-41A6-A85F-22B09EC434DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.WebAPI", "MQuince.WebAPI\MQuince.WebAPI.csproj", "{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.WebAPI", "MQuince.WebAPI\MQuince.WebAPI.csproj", "{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Repositories.Tests", "MQuince.Repositories.Tests\MQuince.Repositories.Tests.csproj", "{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
