@@ -24,7 +24,7 @@ namespace MQuince.Repository.SQL
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 _context.Allergens.Add(AllergenMapper.MapAllergenEntityToAllergenPersistence(entity));
-                _context.SaveChanges(); //ako ne sacuvamo nece se update-ovati baza
+                _context.SaveChanges();
             }
         }
 
@@ -33,10 +33,10 @@ namespace MQuince.Repository.SQL
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 AllergenPersistence allergen = _context.Allergens.Find(id);
-                if (allergen == null) return false; //u principu vracamo true ili false, kao indikator uspesnosti operacije, ako ne pronadjemo id, operacija nije uspesna
+                if (allergen == null) return false; 
 
                 _context.Allergens.Remove(allergen);
-                _context.SaveChanges(); // cuvamo promene
+                _context.SaveChanges(); 
                 return true;
             }
         }
@@ -53,8 +53,6 @@ namespace MQuince.Repository.SQL
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                //pomocu lambda izraza se izvuce korisnik sa Id-jem koji je isti kao prosledjeni
-                //isti rezultat ima i foreach gde se unutar nekog if-a porede id-jevi
                 return AllergenMapper.MapAllergenPersistenceToAllergenEntity(_context.Allergens.SingleOrDefault(c => c.Id.Equals(id)));
             }
         }
@@ -63,9 +61,8 @@ namespace MQuince.Repository.SQL
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                //Entity Framework ce po id-ju naci feedback i azurirati ga
                 _context.Update(AllergenMapper.MapAllergenEntityToAllergenPersistence(entity));
-                _context.SaveChanges(); //moramo sacuvati promene
+                _context.SaveChanges(); 
             }
         }
     }

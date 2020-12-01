@@ -21,11 +21,6 @@ namespace MQuince.WebAPI.Controllers
             this._feedbackService = feedbackService;
         }
 
-        /// <summary>
-        /// POST method for add feedbacks
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <returns></returns>
         [HttpPost]
         public IActionResult Add(FeedbackDTO dto)
         {
@@ -36,24 +31,13 @@ namespace MQuince.WebAPI.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// GET method for all feedback by status
-        /// </summary>
-        /// <param name="publish"></param>
-        /// <param name="approved"></param>
-        /// <returns></returns>
         [HttpGet("GetByStatus")]
         public IEnumerable<IdentifiableDTO<FeedbackDTO>> GetByStatus(bool publish, bool approved)
         {
             return _feedbackService.GetByStatus(publish, approved);
         }
 
-        /// <summary>
-        /// GET method for all feedback by parameters
-        /// </summary>
-        /// <param name="anonymous"></param>
-        /// <param name="approved"></param>
-        /// <returns></returns>
+
         [HttpGet("GetByParams")]
         public IEnumerable<IdentifiableDTO<FeedbackDTO>> GetByParams(bool anonymous, bool approved)
         {

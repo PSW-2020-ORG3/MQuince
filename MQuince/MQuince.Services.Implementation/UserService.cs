@@ -20,14 +20,13 @@ namespace MQuince.Services.Implementation
         }
 
         public IEnumerable<IdentifiableDTO<UserDTO>> GetAll()
-            => _userRepository.GetAll().Select(c => CreateUserDTO(c)); //pozivamo metodu za mapiranje za svaki objekat iz baze
+            => _userRepository.GetAll().Select(c => CreateUserDTO(c)); 
 
 
         public IdentifiableDTO<UserDTO> GetById(Guid id)
             => CreateUserDTO(_userRepository.GetById(id));
 
 
-        //metoda za mapiranje Entiteta na DTO
         private IdentifiableDTO<UserDTO> CreateUserDTO(User user)
         {
             if (user == null) return null;
