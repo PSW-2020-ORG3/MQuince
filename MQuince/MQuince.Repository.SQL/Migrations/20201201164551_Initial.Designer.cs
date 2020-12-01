@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    [Migration("20201103094943_DbInit")]
-    partial class DbInit
+    [Migration("20201201164551_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,20 @@ namespace MQuince.Repository.SQL.Migrations
                     b.ToTable("Contact");
                 });
 
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Drug.AllergenPersistence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Allergen");
+                });
+
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.FeedbackPersistence", b =>
                 {
                     b.Property<Guid>("Id")
@@ -85,17 +99,18 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<bool>("Anonymous")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("Approved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Comment")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime(6)");
+                    b.Property<bool>("Publish")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("User")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
