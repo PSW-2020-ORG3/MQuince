@@ -23,7 +23,6 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                //u _contextu se nalaze svi korisnici u bazi
                 return UserMapper.MapUserPersistenceCollectionToUserEntityCollection(_context.Users.ToList());
             }
         }
@@ -32,8 +31,6 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                //pomocu lambda izraza se izvuce korisnik sa Id-jem koji je isti kao prosledjeni
-                //isti rezultat ima i foreach gde se unutar nekog if-a porede id-jevi
                 return UserMapper.MapUserPersistenceToUserEntity(_context.Users.SingleOrDefault(c => c.Id.Equals(id)));
             }
         }

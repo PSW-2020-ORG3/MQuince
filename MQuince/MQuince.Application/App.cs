@@ -31,5 +31,11 @@ namespace MQuince.Application
 
         private IFeedbackRepository GetFeedbackRepository()
              => new FeedbackRepository(_optionsBuilder);
+
+        public ISpecializationService GetSpecializationService()
+            => new SpecializationService(this.GetSpecializationRepository());
+
+        private ISpecializationRepository GetSpecializationRepository()
+             => new SpecializationRepository(_optionsBuilder);
     }
 }
