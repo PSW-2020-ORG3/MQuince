@@ -49,10 +49,10 @@ namespace MQuince.Services.Tests
             if (!patient.Surname.Equals(patientDTO.EntityDTO.Surname))
                 return false;
 
-            if (patient.Guest == patientDTO.EntityDTO.Guest)
+            if (patient.Guest != patientDTO.EntityDTO.Guest)
                 return false;
 
-            if (patient.PersonalDoctor == patientDTO.EntityDTO.PersonalDoctor)
+            if (patient.PersonalDoctor != patientDTO.EntityDTO.PersonalDoctor)
                 return false;
 
             return true;

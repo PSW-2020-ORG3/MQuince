@@ -10,8 +10,20 @@ namespace MQuince.Services.Implementation.Util
     public class PatientMapper
     {
         public static IdentifiableDTO<PatientDTO> MapPatientEntityToPatientIdentifierDTO(Patient patient)
-        {
-            throw new NotImplementedException();
-        }
+                => patient == null ? throw new ArgumentNullException()
+                                            : new IdentifiableDTO<PatientDTO>()
+                                            {
+                                                Id = patient.Id,
+                                                EntityDTO = new PatientDTO()
+                                                {
+                                                    Name=patient.Name,
+                                                    Surname = patient.Surname,
+                                                    Username = patient.Username,
+                                                    Password = patient.Password,
+                                                    Guest = patient.Guest,
+                                                    Jmbg = patient.Jmbg,
+                                                    PersonalDoctor = patient.PersonalDoctor
+                                                }
+                                            };
     }
 }

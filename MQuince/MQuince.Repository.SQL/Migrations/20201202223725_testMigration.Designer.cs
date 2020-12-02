@@ -3,14 +3,16 @@ using System;
 using MQuince.Repository.SQL.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    partial class MQuinceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202223725_testMigration")]
+    partial class testMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,10 +100,7 @@ namespace MQuince.Repository.SQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ChosenDoctorId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("DoctorPersistanceId")
+                    b.Property<Guid?>("ChosenDoctor")
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("Guest")
@@ -124,7 +123,7 @@ namespace MQuince.Repository.SQL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorPersistanceId");
+                    b.HasIndex("ChosenDoctor");
 
                     b.ToTable("Patient");
                 });
@@ -180,9 +179,9 @@ namespace MQuince.Repository.SQL.Migrations
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.PatientPersistence", b =>
                 {
-                    b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Users.DoctorPersistence", "DoctorPersistance")
+                    b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Users.DoctorPersistence", "PersonalDoctor")
                         .WithMany()
-                        .HasForeignKey("DoctorPersistanceId");
+                        .HasForeignKey("ChosenDoctor");
                 });
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.WorkTimePersistence", b =>

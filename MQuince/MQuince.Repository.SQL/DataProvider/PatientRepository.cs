@@ -22,7 +22,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                var patient = _context.Patients.SingleOrDefault(c => c.Id.Equals(id));
+                var patient = _context.Patients.Include("DoctorPersistance").SingleOrDefault(c => c.Id.Equals(id));
                 return PatientMapper.MapPatientPersistenceToPatientEntity(patient);
             }
         }
