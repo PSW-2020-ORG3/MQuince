@@ -19,7 +19,6 @@ namespace MQuince.Repositories.Tests
             WorkTime workTime = WorkTimeMapper.MapWorkTimePersistenceToWorkTimeEntity(workTimePersistence);
 
             Assert.True(IsEqualWorkTimePersistanceAndWorkTimeEntity(workTimePersistence, workTime));
-
         }
 
 
@@ -56,7 +55,7 @@ namespace MQuince.Repositories.Tests
         private WorkTimePersistence GetWorkTimePersistanceFirst()
                 => new WorkTimePersistence()
                 {
-                    Id = Guid.Parse("11ac21e1-1361-4c06-9751-9666ce10d30a"),
+                    Id = Guid.Parse("6a3d67e0-6af6-4947-919f-7a1a80023db3"),
                     StartDate = new DateTime(2020,12,01),
                     EndDate= new DateTime(2020,12,22),
                     StartTime=8,
@@ -85,7 +84,7 @@ namespace MQuince.Repositories.Tests
         private DoctorPersistence GetDoctorPersistanceFirst()
                 => new DoctorPersistence()
                 {
-                    Id = Guid.Parse("22bd31z1-1361-4c06-9751-9666ce10d30a"),
+                    Id = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
                 };
 
         private DoctorPersistence GetDoctorPersistanceSecond()

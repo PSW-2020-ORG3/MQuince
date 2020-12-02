@@ -1,4 +1,5 @@
 ﻿using MQuince.Entities.Users;
+using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
@@ -10,9 +11,12 @@ namespace MQuince.Services.Implementation
 {
     public class WorkTimeService : IWorkTimeService
     {
-        IEnumerable<WorkTime> IWorkTimeService.GetWorkTimesForDoctor(Guid doctorId)
+        public IWorkTimeRepository _worktimeRepository;
+        public WorkTimeService(IWorkTimeRepository worktimeRepository)
         {
-            throw new NotImplementedException();
+            _worktimeRepository = worktimeRepository;
         }
+        IEnumerable<WorkTime> IWorkTimeService.GetWorkTimesForDoctor(Guid doctorId)
+                                    => _worktimeRepository.GetWorkTimesForDoctor(doctorId);
     }
 }
