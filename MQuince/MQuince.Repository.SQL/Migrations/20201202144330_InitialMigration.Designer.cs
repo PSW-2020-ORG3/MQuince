@@ -3,14 +3,16 @@ using System;
 using MQuince.Repository.SQL.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    partial class MQuinceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202144330_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,8 +69,8 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<string>("Biography")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Jmbg")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("Jmbg")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -104,8 +106,8 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<bool>("Guest")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("Jmbg")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("Jmbg")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -152,14 +154,8 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EndTime")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("StartTime")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
