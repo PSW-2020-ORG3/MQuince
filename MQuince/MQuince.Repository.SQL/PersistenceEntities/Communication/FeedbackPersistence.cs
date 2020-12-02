@@ -10,9 +10,9 @@ namespace MQuince.Repository.SQL.PersistenceEntities
     [Table("Feedback")]
     public class FeedbackPersistence
     {
-        [Key] //Anotacija za primarni kljuc 
+        [Key] 
         public Guid Id { get; set; }
-        [Required]//Anotacija pomocu koje se ogranicava tabela da se ne moze proslediti null za username
+        [Required]
         public string Comment { get; set; }
         public String User { get; set; }
         public bool Anonymous { get; set; }

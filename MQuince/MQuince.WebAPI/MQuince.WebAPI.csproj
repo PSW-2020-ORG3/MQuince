@@ -1,23 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>MQuince.WebAPI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
-    <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
+    <PackageReference Include="VueCliMiddleware" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Application\MQuince.Application.csproj" />
-    <ProjectReference Include="..\MQuince.Entities\MQuince.Entities.csproj" />
-    <ProjectReference Include="..\MQuince.Enums\MQuince.Enums.csproj" />
     <ProjectReference Include="..\MQuince.Repository.SQL\MQuince.Repository.SQL.csproj" />
     <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Services.Implementation\MQuince.Services.Implementation.csproj" />

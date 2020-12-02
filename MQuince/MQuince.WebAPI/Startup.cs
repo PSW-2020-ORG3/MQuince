@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,6 +32,7 @@ namespace MQuince.WebAPI
 
             services.AddTransient(typeof(IUserService), s => application.GetUserService());
             services.AddTransient(typeof(IFeedbackService), s => application.GetFeedbackService());
+            services.AddTransient(typeof(ISpecializationService), s => application.GetSpecializationService());
 
             services.AddControllers();
             services.AddSpaStaticFiles(configuration =>
@@ -48,17 +46,6 @@ namespace MQuince.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
-                // context.Database.Migrate();
-                RelationalDatabaseCreator databaseCreator =
-    (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-            databaseCreator.CreateTables();
-            }
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -92,18 +79,6 @@ namespace MQuince.WebAPI
                 }
 
             });
-
-            /*DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-            builder.UseMySql(@"server=localhost;port=3306;database=quince;user=root;password=root");
-            MQuinceDbContext context = new MQuinceDbContext(builder.Options);
-
-            RelationalDatabaseCreator databaseCreator =
-    (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-            databaseCreator.CreateTables();*/
-
-
-
-
         }
     }
 }

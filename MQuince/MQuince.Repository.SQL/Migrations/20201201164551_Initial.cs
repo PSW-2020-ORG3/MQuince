@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MQuince.Repository.SQL.Migrations
 {
-    public partial class DbInit : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,18 @@ namespace MQuince.Repository.SQL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Adress", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Allergen",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allergen", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,11 +65,11 @@ namespace MQuince.Repository.SQL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Grade = table.Column<int>(nullable: false),
-                    Comment = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Anonymous = table.Column<bool>(nullable: false)
+                    Comment = table.Column<string>(nullable: false),
+                    User = table.Column<string>(nullable: true),
+                    Anonymous = table.Column<bool>(nullable: false),
+                    Publish = table.Column<bool>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,6 +133,9 @@ namespace MQuince.Repository.SQL.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Allergen");
+
             migrationBuilder.DropTable(
                 name: "Feedback");
 

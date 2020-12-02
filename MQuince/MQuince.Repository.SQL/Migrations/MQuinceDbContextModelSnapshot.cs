@@ -162,6 +162,20 @@ namespace MQuince.Repository.SQL.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.SpecializationPersistence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specialization");
+                });
+
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.UserPersistence", b =>
                 {
                     b.HasOne("MQuince.Entities.Users.City", "BirthPlace")

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    [Migration("20201125164305_Iniil")]
-    partial class Iniil
+    [Migration("20201201213313_Migration2")]
+    partial class Migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,6 +162,20 @@ namespace MQuince.Repository.SQL.Migrations
                     b.HasIndex("ResidenceId");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.SpecializationPersistence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Specialization");
                 });
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.UserPersistence", b =>

@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Repository.Contract
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Repository.SQL", "MQuince.Repository.SQL\MQuince.Repository.SQL.csproj", "{68B7782B-9D57-43B0-A5B5-194CF1B27F25}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.WebAPI", "MQuince.WebAPI\MQuince.WebAPI.csproj", "{F6412FA2-6B3B-47FF-A49D-6344E9BCD43B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Application", "MQuince.Application\MQuince.Application.csproj", "{10FB3859-944A-42FD-96BA-5A2CFCD05B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Services.Tests", "MQuince.Services.Tests\MQuince.Services.Tests.csproj", "{DC179031-B947-41A6-A85F-22B09EC434DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Services.Tests", "MQuince.Services.Tests\MQuince.Services.Tests.csproj", "{DC179031-B947-41A6-A85F-22B09EC434DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.WebAPI", "MQuince.WebAPI\MQuince.WebAPI.csproj", "{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Repositories.Tests", "MQuince.Repositories.Tests\MQuince.Repositories.Tests.csproj", "{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +53,6 @@ Global
 		{68B7782B-9D57-43B0-A5B5-194CF1B27F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68B7782B-9D57-43B0-A5B5-194CF1B27F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68B7782B-9D57-43B0-A5B5-194CF1B27F25}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6412FA2-6B3B-47FF-A49D-6344E9BCD43B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6412FA2-6B3B-47FF-A49D-6344E9BCD43B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6412FA2-6B3B-47FF-A49D-6344E9BCD43B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6412FA2-6B3B-47FF-A49D-6344E9BCD43B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10FB3859-944A-42FD-96BA-5A2CFCD05B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10FB3859-944A-42FD-96BA-5A2CFCD05B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10FB3859-944A-42FD-96BA-5A2CFCD05B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +61,14 @@ Global
 		{DC179031-B947-41A6-A85F-22B09EC434DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC179031-B947-41A6-A85F-22B09EC434DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC179031-B947-41A6-A85F-22B09EC434DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9274B4-49A3-43C2-9DA3-C07141EE22D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31692B6A-FFA0-4B21-A15C-E5EBB33655F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

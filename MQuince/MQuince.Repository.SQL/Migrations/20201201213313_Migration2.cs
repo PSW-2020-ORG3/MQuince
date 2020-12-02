@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MQuince.Repository.SQL.Migrations
 {
-    public partial class DbInit1 : Migration
+    public partial class Migration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Allergen",
+                name: "Specialization",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -16,14 +16,14 @@ namespace MQuince.Repository.SQL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Allergen", x => x.Id);
+                    table.PrimaryKey("PK_Specialization", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Allergen");
+                name: "Specialization");
         }
     }
 }
