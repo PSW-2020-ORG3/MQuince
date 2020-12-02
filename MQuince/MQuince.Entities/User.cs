@@ -11,11 +11,11 @@ namespace MQuince.Entities
         private Guid _id;
         public string Username { get; set; }
         public string Password { get; set; }
-        public int Jmbg { get; set; }
+        public string Jmbg { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
 
-        public User(Guid id, string username, string password, int jmbg, string name, string surname)
+        public User(Guid id, string username, string password, string jmbg, string name, string surname)
         {
             _id = id;
             Username = username;
@@ -25,7 +25,7 @@ namespace MQuince.Entities
             Surname = surname;
         }
 
-        public User(string username, string password, int jmbg, string name, string surname) : this(Guid.NewGuid(), username, password, jmbg, 
+        public User(string username, string password, string jmbg, string name, string surname) : this(Guid.NewGuid(), username, password, jmbg, 
                 name, surname)
         {
         }

@@ -8,7 +8,8 @@ namespace MQuince.Services.Contracts.DTO.Users
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<Guid> WorkDayId { get; set; }
-        public Guid StaffId { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
+        public Guid DoctorId { get; set; }
     }
 }
