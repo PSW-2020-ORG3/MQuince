@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
+using MQuince.Repository.SQL.DataAccess;
+using MQuince.Repository.SQL.DataProvider.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MQuince.Repository.SQL.DataProvider
@@ -17,7 +20,11 @@ namespace MQuince.Repository.SQL.DataProvider
 
         public Patient GetById(Guid id)
         {
-            throw new NotImplementedException();
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                var patient = _context.Patients.SingleOrDefault(c => c.Id.Equals(id));
+                return PatientMapper.MapPatientPersistenceToPatientEntity(patient);
+            }
         }
     }
 }

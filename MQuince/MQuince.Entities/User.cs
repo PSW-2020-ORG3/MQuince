@@ -37,7 +37,7 @@ namespace MQuince.Entities
         public Guid Id
         {
             get { return _id; }
-            private set
+            set
             {
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }

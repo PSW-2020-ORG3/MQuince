@@ -52,6 +52,9 @@ namespace MQuince.Repositories.Tests
             if (patient.Guest == patientPersistence.Guest)
                 return false;
 
+            if (patient.PersonalDoctor == patientPersistence.PersonalDoctor.Id)
+                return false;
+
             return true;
         }
 
