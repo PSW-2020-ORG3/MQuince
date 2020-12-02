@@ -9,8 +9,7 @@ namespace MQuince.Entities.Users
         private Guid _id;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<Guid> WorkDayId { get; set; }
-        public Guid StaffId { get; set; }
+        public Guid DoctorId { get; set; }
 
         public Guid Id
         {

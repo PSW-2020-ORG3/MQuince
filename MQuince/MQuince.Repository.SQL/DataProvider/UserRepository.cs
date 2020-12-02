@@ -19,6 +19,12 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             _dbContext = optionsBuilders == null ? throw new ArgumentNullException(nameof(optionsBuilders) + "is set to null") : optionsBuilders.Options;
         }
+        /*private readonly DbContextOptions _dbContext;
+
+        public UserRepository(DbContextOptionsBuilder optionsBuilders)
+        {
+            _dbContext = optionsBuilders == null ? throw new ArgumentNullException(nameof(optionsBuilders) + "is set to null") : optionsBuilders.Options;
+        }
         public IEnumerable<User> GetAll()
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
@@ -42,6 +48,20 @@ namespace MQuince.Repository.SQL.DataProvider
                 _context.Users.Add(UserMapper.MapUserEntityToUserPersistence(entity));
                 _context.SaveChanges();
             }
+        }*/
+        public void Create(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

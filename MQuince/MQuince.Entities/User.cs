@@ -9,37 +9,24 @@ namespace MQuince.Entities
     public class User
     {
         private Guid _id;
-        public Usertype UserType { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public int Jmbg { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public DateTime BirthDate { get; set; }
-        //public Gender Gender { get; set; }
-        public City BirthPlace { get; set; }
-        public Adress Residence { get; set; }
-        public Contact Contact { get; set; }
 
-        public User(Guid id, Usertype usertype, string username, string password, int jmbg, string name, string surname,
-            DateTime birthDate, City birthPlace, Adress residence, Contact contact)
+        public User(Guid id, string username, string password, int jmbg, string name, string surname)
         {
             _id = id;
             Username = username;
-            UserType = usertype;
             Password = password;
             Jmbg = jmbg;
             Name = name;
             Surname = surname;
-            BirthDate = birthDate;
-            BirthPlace = birthPlace;
-            Residence = residence;
-            Contact = contact;
         }
 
-        public User(Usertype usertype, string username, string password, int jmbg, string name, string surname,
-            DateTime birthDate, City birthPlace, Adress residence, Contact contact) : this(Guid.NewGuid(), usertype, username, password, jmbg, 
-                name, surname, birthDate, birthPlace, residence, contact)
+        public User(string username, string password, int jmbg, string name, string surname) : this(Guid.NewGuid(), username, password, jmbg, 
+                name, surname)
         {
         }
 
