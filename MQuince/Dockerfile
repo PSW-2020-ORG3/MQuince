@@ -20,15 +20,15 @@ LABEL test=true
 RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=test_results.trx" MQuince.Services.Tests/MQuince.Services.Tests.csproj
 
 FROM build AS publish
-WORKDIR /app/MQuince.Repository.SQL
 WORKDIR /app
+COPY MQuince.WebAPI/clientapp out/clientapp
 RUN dotnet publish MQuince.WebAPI/MQuince.WebAPI.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 RUN useradd -ms /bin/bash defaultuser
-USER defaultuser
 WORKDIR /app
-ENV ASPNETCORE_URLS http://*:44359
-EXPOSE 44359
+ENV ASPNETCORE_URLS http://*:5000
+EXPOSE 5000
+EXPOSE 80
 COPY --from=publish /app/out .
 ENTRYPOINT ["dotnet", "MQuince.WebAPI.dll"]

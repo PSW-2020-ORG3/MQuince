@@ -9,6 +9,7 @@ schedules:
     include:
     - develop
 
+pr: none
 trigger: none
 
 pool:

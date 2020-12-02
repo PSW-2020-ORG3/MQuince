@@ -13,9 +13,9 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
         public Guid Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        [ForeignKey("WorkDayId")]
-        public List<Guid> WorkDayId { get; set; }
-        [ForeignKey("StaffId")]
-        public Guid StaffId { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
+        [ForeignKey("DoctorId")]
+        public DoctorPersistence Doctor { get; set; }
     }
 }

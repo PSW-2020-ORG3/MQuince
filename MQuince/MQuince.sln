@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Reposit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.HospitalApp", "MQuince.Integration.HospitalApp\MQuince.Integration.HospitalApp.csproj", "{02232EB7-2132-489F-A68B-DA67438E7586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.HospitalApp.Tests", "MQuince.HospitalAppTests\MQuince.HospitalApp.Tests.csproj", "{5D54B610-0C41-4E8A-9999-9154F39D5EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.HospitalApp.Tests", "MQuince.Integration.HospitalApp.Tests\MQuince.Integration.HospitalApp.Tests.csproj", "{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,10 +101,10 @@ Global
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D54B610-0C41-4E8A-9999-9154F39D5EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D54B610-0C41-4E8A-9999-9154F39D5EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D54B610-0C41-4E8A-9999-9154F39D5EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D54B610-0C41-4E8A-9999-9154F39D5EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
