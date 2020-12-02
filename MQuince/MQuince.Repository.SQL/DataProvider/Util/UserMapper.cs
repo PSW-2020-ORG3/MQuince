@@ -10,8 +10,7 @@ namespace MQuince.Repository.SQL.DataProvider.Util
     public class UserMapper
     {
         public static User MapUserPersistenceToUserEntity(UserPersistence user)
-            => user == null ? null : new User(user.Id, user.UserType, user.Username, user.Password, user.Jmbg, user.Name, user.Surname,
-                user.BirthDate, user.BirthPlace, user.Residence, user.Contact);
+            => user == null ? null : new User(user.Id, user.Username, user.Password, user.Jmbg, user.Name, user.Surname);
 
         public static IEnumerable<User> MapUserPersistenceCollectionToUserEntityCollection(IEnumerable<UserPersistence> users)
             => users.Select(c => MapUserPersistenceToUserEntity(c));
@@ -21,8 +20,8 @@ namespace MQuince.Repository.SQL.DataProvider.Util
             if (user == null) return null;
 
             UserPersistence retVal = new UserPersistence() {
-               Id = user.Id, Username = user.Username, BirthDate = user.BirthDate, BirthPlace = user.BirthPlace, Contact = user.Contact, Jmbg = user.Jmbg,
-               Name = user.Name, UserType = user.UserType, Password = user.Password, Residence = user.Residence, Surname = user.Surname
+               Id = user.Id, Username = user.Username, Jmbg = user.Jmbg,
+               Name = user.Name, Password = user.Password, Surname = user.Surname
             };
             return retVal;
         }

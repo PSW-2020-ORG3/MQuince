@@ -11,7 +11,7 @@ namespace MQuince.Services.Contracts.DTO
         public Usertype UserType { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int Jmbg { get; set; }
+        public string Jmbg { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }

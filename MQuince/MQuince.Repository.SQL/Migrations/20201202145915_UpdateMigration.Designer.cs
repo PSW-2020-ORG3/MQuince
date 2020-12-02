@@ -3,14 +3,16 @@ using System;
 using MQuince.Repository.SQL.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MQuince.Repository.SQL.Migrations
 {
     [DbContext(typeof(MQuinceDbContext))]
-    partial class MQuinceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202145915_UpdateMigration")]
+    partial class UpdateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,14 +154,8 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EndTime")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("StartTime")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

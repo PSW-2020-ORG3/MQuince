@@ -32,16 +32,14 @@ namespace MQuince.Services.Implementation
             if (user == null) return null;
 
             return new IdentifiableDTO<UserDTO>() { Id = user.Id, EntityDTO = new UserDTO() { Username = user.Username, 
-                BirthDate = user.BirthDate, BirthPlace = user.BirthPlace, Contact = user.Contact, Jmbg = user.Jmbg,
-                Name = user.Name, UserType = user.UserType, Password = user.Password, Residence = user.Residence,
+                Jmbg = user.Jmbg,
+                Name = user.Name, Password = user.Password,
                 Surname = user.Surname  } };
         }
 
         private User CreateUserFromDTO(UserDTO user, Guid? id = null)
-            => id == null ? new User(user.UserType, user.Username, user.Password, user.Jmbg, user.Name, user.Surname, user.BirthDate,
-                user.BirthPlace, user.Residence, user.Contact)
-                          : new User(id.Value, user.UserType, user.Username, user.Password, user.Jmbg, user.Name, user.Surname, user.BirthDate,
-                user.BirthPlace, user.Residence, user.Contact);
+            => id == null ? new User(user.Username, user.Password, user.Jmbg, user.Name, user.Surname)
+                          : new User(id.Value, user.Username, user.Password, user.Jmbg, user.Name, user.Surname);
 
         public Guid Create(UserDTO entityDTO)
         {
