@@ -15,6 +15,10 @@ namespace MQuince.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public User()
+        {
+
+        }
         public User(Guid id, string username, string password, string jmbg, string name, string surname)
         {
             _id = id;
