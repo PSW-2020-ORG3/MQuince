@@ -58,7 +58,7 @@ namespace MQuince.Repository.SQL.Migrations
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     Biography = table.Column<string>(nullable: true),
-                    SpecializationId = table.Column<Guid>(nullable: true)
+                    SpecializationId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@ namespace MQuince.Repository.SQL.Migrations
                         column: x => x.SpecializationId,
                         principalTable: "Specialization",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,7 +104,7 @@ namespace MQuince.Repository.SQL.Migrations
                     EndDate = table.Column<DateTime>(nullable: false),
                     StartTime = table.Column<int>(nullable: false),
                     EndTime = table.Column<int>(nullable: false),
-                    DoctorId = table.Column<Guid>(nullable: true)
+                    DoctorId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,7 +114,7 @@ namespace MQuince.Repository.SQL.Migrations
                         column: x => x.DoctorId,
                         principalTable: "Doctor",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

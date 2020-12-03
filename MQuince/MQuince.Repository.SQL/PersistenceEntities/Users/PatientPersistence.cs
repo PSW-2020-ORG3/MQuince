@@ -13,13 +13,8 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
         public bool Guest { get; set; }
 
         [ForeignKey("DoctorPersistanceId")]
-<<<<<<< HEAD
-        public Guid DoctorPersistanceId { get; set; }
-        public DoctorPersistence DoctorPersistance { get; set; }
-=======
         public DoctorPersistence DoctorPersistance { get; set; }
         public Guid? DoctorPersistanceId { get; set; }
 
->>>>>>> develop
     }
 }

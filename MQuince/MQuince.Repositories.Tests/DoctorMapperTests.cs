@@ -14,7 +14,7 @@ namespace MQuince.Repositories.Tests
         [Fact]
         public void Map_doctor_persistence_to_doctor_entity()
         {
-            DoctorPersistence doctorPersistance = this.GetDoctorersistanceFirst();
+            DoctorPersistence doctorPersistance = this.GetDoctorPersistanceFirst();
 
             Doctor doctorEntity = DoctorMapper.MapDoctorPersistenceToDoctorEntity(doctorPersistance);
 
@@ -51,7 +51,7 @@ namespace MQuince.Repositories.Tests
                     => DoctorMapper.MapDoctorPersistenceCollectionToDoctorEntityCollection(listOfdoctorPersistences));
         }
 
-        private DoctorPersistence GetDoctorersistanceFirst()
+        private DoctorPersistence GetDoctorPersistanceFirst()
                 => new DoctorPersistence()
                 {
                     Id = Guid.Parse("664596ef-c5e2-4b2e-911f-f71ac65d4b8d"),
@@ -64,7 +64,7 @@ namespace MQuince.Repositories.Tests
                     Specialization= new SpecializationPersistence() { Id=Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")}
                 };
 
-        private DoctorPersistence GetDoctorersistanceSecond()
+        private DoctorPersistence GetDoctorPersistanceSecond()
                 => new DoctorPersistence()
                 {
                     Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
@@ -80,8 +80,8 @@ namespace MQuince.Repositories.Tests
         private List<DoctorPersistence> GetListOfDoctorPersistance()
         {
             List<DoctorPersistence> listOfDoctorPersistance = new List<DoctorPersistence>();
-            listOfDoctorPersistance.Add(this.GetDoctorersistanceFirst());
-            listOfDoctorPersistance.Add(this.GetDoctorersistanceSecond());
+            listOfDoctorPersistance.Add(this.GetDoctorPersistanceFirst());
+            listOfDoctorPersistance.Add(this.GetDoctorPersistanceSecond());
             return listOfDoctorPersistance;
         }
 
@@ -105,7 +105,7 @@ namespace MQuince.Repositories.Tests
             if (!doctorPersistence.Surname.Equals(doctor.Surname))
                 return false;
 
-            if (doctorPersistence.Specialization.Id != doctor.SpecializationId)
+            if (doctorPersistence.SpecializationId != doctor.SpecializationId)
                 return false;
 
 

@@ -83,7 +83,7 @@ namespace MQuince.Services.Tests
             if (!doctor.Surname.Equals(identfierDoctorDTO.EntityDTO.Surname))
                 return false;
 
-            if (doctor.Biography.Equals(identfierDoctorDTO.EntityDTO.Biography))
+            if (!doctor.Biography.Equals(identfierDoctorDTO.EntityDTO.Biography))
                 return false;
 
             if (doctor.SpecializationId != identfierDoctorDTO.EntityDTO.Specialization)

@@ -1,6 +1,9 @@
-﻿using MQuince.Services.Contracts.DTO.Users;
+﻿using MQuince.Repository.Contracts;
+using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
+using MQuince.Services.Implementation.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,14 +12,41 @@ namespace MQuince.Services.Implementation
 {
     public class DoctorService : IDoctorService
     {
+        public IDoctorRepository _doctorRepository;
+        public DoctorService(IDoctorRepository doctorRepository)
+        {
+            _doctorRepository = doctorRepository;
+        }
         public IdentifiableDTO<DoctorDTO> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(_doctorRepository.GetById(id));
+            }catch(ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public IEnumerable<IdentifiableDTO<DoctorDTO>> GetDoctorsPerSpecialization(Guid specializationId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return DoctorMapper.MapDoctorEntityCollectionToIdentifierDoctorDTOCollection(_doctorRepository.GetDoctorsPerSpecialization(specializationId));
+            }catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
+
+
+
+
     }
 }

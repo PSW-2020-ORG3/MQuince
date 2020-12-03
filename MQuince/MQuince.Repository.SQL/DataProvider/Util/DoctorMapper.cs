@@ -12,15 +12,23 @@ namespace MQuince.Repository.SQL.DataProvider.Util
     public class DoctorMapper
     {
         public static Doctor MapDoctorPersistenceToDoctorEntity(DoctorPersistence doctorPersistence)
-        {
-            throw new NotImplementedException();
-        }
+              => doctorPersistence == null ? throw new ArgumentNullException()
+                                        : new Doctor()
+                                        {
+                                            Id = doctorPersistence.Id,
+                                            Name = doctorPersistence.Name,
+                                            Surname = doctorPersistence.Surname,
+                                            Username = doctorPersistence.Username,
+                                            Password = doctorPersistence.Password,
+                                            Jmbg = doctorPersistence.Jmbg,
+                                            Biography = doctorPersistence.Biography,
+                                            SpecializationId = doctorPersistence.SpecializationId
+                                        };
 
 
         public static IEnumerable<Doctor> MapDoctorPersistenceCollectionToDoctorEntityCollection(IEnumerable<DoctorPersistence> doctorPersistances)
-        {
-            throw new NotImplementedException();
-        }
-      
+              => doctorPersistances == null ? throw new ArgumentNullException()
+                                         : doctorPersistances.Select(entity => MapDoctorPersistenceToDoctorEntity(entity));
+
     }
 }
