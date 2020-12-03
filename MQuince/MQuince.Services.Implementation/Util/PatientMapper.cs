@@ -22,7 +22,7 @@ namespace MQuince.Services.Implementation.Util
                                                     Password = patient.Password,
                                                     Guest = patient.Guest,
                                                     Jmbg = patient.Jmbg,
-                                                    PersonalDoctor = patient.PersonalDoctor
+                                                    PersonalDoctor = patient.PersonalDoctor ?? Guid.Empty
                                                 }
                                             };
     }

@@ -98,9 +98,6 @@ namespace MQuince.Repository.SQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ChosenDoctorId")
-                        .HasColumnType("char(36)");
-
                     b.Property<Guid?>("DoctorPersistanceId")
                         .HasColumnType("char(36)");
 

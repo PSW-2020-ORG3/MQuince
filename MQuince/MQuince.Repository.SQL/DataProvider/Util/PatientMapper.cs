@@ -19,8 +19,7 @@ namespace MQuince.Repository.SQL.DataProvider.Util
                                                 Password=patientPersistance.Password,
                                                 Guest=patientPersistance.Guest,
                                                 Jmbg=patientPersistance.Jmbg,
-                                                PersonalDoctor=patientPersistance.DoctorPersistance.Id
-                                            };
+                                                PersonalDoctor=patientPersistance.DoctorPersistanceId                                           };
 
     }
 }
