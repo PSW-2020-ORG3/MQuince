@@ -76,7 +76,7 @@ namespace MQuince.Repository.SQL.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<Guid?>("SpecializationId")
+                    b.Property<Guid>("SpecializationId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Surname")
@@ -98,10 +98,7 @@ namespace MQuince.Repository.SQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ChosenDoctorId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("DoctorPersistanceId")
+                    b.Property<Guid>("DoctorPersistanceId")
                         .HasColumnType("char(36)");
 
                     b.Property<bool>("Guest")
@@ -149,7 +146,7 @@ namespace MQuince.Repository.SQL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("DoctorId")
+                    b.Property<Guid>("DoctorId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("EndDate")
@@ -175,21 +172,27 @@ namespace MQuince.Repository.SQL.Migrations
                 {
                     b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Users.SpecializationPersistence", "Specialization")
                         .WithMany()
-                        .HasForeignKey("SpecializationId");
+                        .HasForeignKey("SpecializationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.PatientPersistence", b =>
                 {
                     b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Users.DoctorPersistence", "DoctorPersistance")
                         .WithMany()
-                        .HasForeignKey("DoctorPersistanceId");
+                        .HasForeignKey("DoctorPersistanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MQuince.Repository.SQL.PersistenceEntities.Users.WorkTimePersistence", b =>
                 {
                     b.HasOne("MQuince.Repository.SQL.PersistenceEntities.Users.DoctorPersistence", "Doctor")
                         .WithMany()
-                        .HasForeignKey("DoctorId");
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
