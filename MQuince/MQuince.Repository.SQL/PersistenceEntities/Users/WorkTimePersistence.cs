@@ -15,7 +15,9 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
         public DateTime EndDate { get; set; }
         public int StartTime { get; set; }
         public int EndTime { get; set; }
+
         [ForeignKey("DoctorId")]
+        public Guid DoctorId { get; set; }
         public DoctorPersistence Doctor { get; set; }
     }
 }
