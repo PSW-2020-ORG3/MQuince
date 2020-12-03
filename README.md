@@ -16,7 +16,7 @@ record access and hospital management. Also, the system is connected to pharmaci
 
 DevOps team | Web team | Integration adapter team
 --- | --- | --- 
-Jelena Petković | Helena Anišić | Marija Milenkovic
+Jelena Petković | Helena Anišić | Maja Milenkovic
 Stefan Zindović | Nikola Blesić | Verica Mučibabić
 Dušan Petrović | Aleksandar Savić | Kristina Mučibabić
 Nikola Kolović | Milan Momčilović | Sara Djurić
