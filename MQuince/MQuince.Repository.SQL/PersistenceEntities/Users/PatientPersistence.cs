@@ -11,9 +11,10 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
     public class PatientPersistence : UserPersistence
     {
         public bool Guest { get; set; }
-        //[ForeignKey("MedicalRecordId")]
-        //public MedicalRecordPersistance MedicalRecordId { get; set; }
+
         [ForeignKey("ChosenDoctor")]
-        public DoctorPersistence PersonalDoctor { get; set; }
+        public Guid ChosenDoctorId { get; set; }
+        public DoctorPersistence DoctorPersistance { get; set; }
+
     }
 }

@@ -9,6 +9,6 @@ namespace MQuince.Repository.Contracts
     {
         IEnumerable<User> GetAll();
         User GetById(Guid id);
-        void Create(User entity);
+        void Create(User user);
     }
 }
