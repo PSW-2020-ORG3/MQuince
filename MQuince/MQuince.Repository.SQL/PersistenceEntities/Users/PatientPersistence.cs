@@ -12,9 +12,9 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
     {
         public bool Guest { get; set; }
 
-        [ForeignKey("ChosenDoctor")]
-        public Guid ChosenDoctorId { get; set; }
+        [ForeignKey("DoctorPersistanceId")]
         public DoctorPersistence DoctorPersistance { get; set; }
+        public Guid? DoctorPersistanceId { get; set; }
 
     }
 }
