@@ -18,7 +18,15 @@ namespace MQuince.Services.Implementation
             _patientRepository = patientRepository;
         }
         public IdentifiableDTO<PatientDTO> GetById(Guid id)
-                    => PatientMapper.MapPatientEntityToPatientIdentifierDTO(_patientRepository.GetById(id));
+        {
+            try { 
+                return PatientMapper.MapPatientEntityToPatientIdentifierDTO(_patientRepository.GetById(id));
+            }
+            catch (ArgumentNullException e)
+            {
+                return null;
+            }
+        }
 
     }
 }

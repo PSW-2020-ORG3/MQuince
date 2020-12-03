@@ -52,7 +52,7 @@ namespace MQuince.Repositories.Tests
             if (patient.Guest != patientPersistence.Guest)
                 return false;
 
-            if (patient.PersonalDoctor != patientPersistence.DoctorPersistance.Id)
+            if (patient.PersonalDoctor != patientPersistence.DoctorPersistanceId)
                 return false;
 
             return true;
@@ -68,7 +68,7 @@ namespace MQuince.Repositories.Tests
                 Jmbg="1234567890123",
                 Password="patient3",
                 Username="patient3",
-                DoctorPersistance= new DoctorPersistence()
+                DoctorPersistance = new DoctorPersistence()
                 {
                     Id=Guid.Parse("137bda41-c388-4f5b-8016-0105abbd54d0")
                 }
