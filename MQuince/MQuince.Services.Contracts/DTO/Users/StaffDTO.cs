@@ -5,10 +5,7 @@ using System.Text;
 
 namespace MQuince.Services.Contracts.DTO.Users
 {
-    public class StaffDTO
+    public class StaffDTO : UserDTO
     {
-        public EducationLevel EducationLevel { get; set; }
-        public string Picture { get; set; }
-        public int PictureNumber { get; set; }
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using MQuince.Repository.Contracts;
 using MQuince.Repository.SQL.DataProvider;
+using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
 using MQuince.Services.Implementation;
 using System;
@@ -13,11 +15,15 @@ namespace MQuince.Application
     public class App
     {
         private DbContextOptionsBuilder _optionsBuilder;
+        public static IdentifiableDTO<PatientDTO> loggedPatient;
 
         public App(IConfiguration configuration)
         {
             _optionsBuilder = new DbContextOptionsBuilder();
             _optionsBuilder.UseMySql(configuration.GetConnectionString("MQuinceDB"));
+
+            PatientService _patientService = (PatientService)this.GetPatientService();
+            loggedPatient = _patientService.GetById(Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"));
         }
 
         public IUserService GetUserService()
@@ -37,5 +43,11 @@ namespace MQuince.Application
 
         private ISpecializationRepository GetSpecializationRepository()
              => new SpecializationRepository(_optionsBuilder);
+
+        public IPatientService GetPatientService()
+            => new PatientService(this.GetPatientRepository());
+
+        private IPatientRepository GetPatientRepository()
+             => new PatientRepository(_optionsBuilder);
     }
 }

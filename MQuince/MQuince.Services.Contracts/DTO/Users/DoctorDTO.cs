@@ -8,7 +8,5 @@ namespace MQuince.Services.Contracts.DTO.Users
     {
         public string Biography { get; set; }
         public List<Guid> SpecializationId { get; set; }
-        public Guid WorkRoomId { get; set; }
-        public Guid WorkPlaceId { get; set; }
     }
 }

@@ -15,6 +15,10 @@ namespace MQuince.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
 
+        public User()
+        {
+
+        }
         public User(Guid id, string username, string password, string jmbg, string name, string surname)
         {
             _id = id;
@@ -33,7 +37,7 @@ namespace MQuince.Entities
         public Guid Id
         {
             get { return _id; }
-            private set
+            set
             {
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }

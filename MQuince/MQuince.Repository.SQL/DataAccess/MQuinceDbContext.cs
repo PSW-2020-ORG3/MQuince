@@ -18,11 +18,13 @@ namespace MQuince.Repository.SQL.DataAccess
         public DbSet<PatientPersistence> Patients { get; set; }
         public DbSet<WorkTimePersistence> WorkTimes { get; set; }
 
-        public MQuinceDbContext(DbContextOptions options) : base(options) { }
+        public MQuinceDbContext(DbContextOptions options) : base(options) {
+            
+        }
         public MQuinceDbContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=mysql;port=3306;database=mquince;user=user;password=user;");
+            optionsBuilder.UseMySql(@"server=localhost;port=3306;database=mquince;user=root;password=root;");
         }
 
     }
