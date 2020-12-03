@@ -20,6 +20,10 @@ LABEL test=true
 RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=test_results.trx" MQuince.Services.Tests/MQuince.Services.Tests.csproj
 
 FROM build AS publish
+WORKDIR /app/MQuince.Repository.SQL
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef --version 3.1.0
+RUN dotnet ef migrations add Init
 WORKDIR /app
 COPY MQuince.WebAPI/clientapp out/clientapp
 RUN dotnet publish MQuince.WebAPI/MQuince.WebAPI.csproj -c Release -o out
