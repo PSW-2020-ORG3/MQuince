@@ -44,8 +44,9 @@ namespace MQuince.WebAPI.Controllers
                 return Ok(_doctorService.GetDoctorsPerSpecialization(id));
             }catch (NotFoundEntityException e)
             {
-                return NoContent();
-            }catch (InternalServerErrorException e)
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
             {
                 return StatusCode(500);
             }

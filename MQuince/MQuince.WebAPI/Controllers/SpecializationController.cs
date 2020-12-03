@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,15 @@ namespace MQuince.WebAPI.Controllers
             {
                 return Ok(_specializationService.GetAll());
             }
-            catch
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (Exception e)
             {
                 return StatusCode(500);
             }
+
         }
     }
 }

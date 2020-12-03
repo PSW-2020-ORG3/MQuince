@@ -1,6 +1,7 @@
 ﻿using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
 using System;
@@ -17,6 +18,19 @@ namespace MQuince.Services.Implementation
             _worktimeRepository = worktimeRepository;
         }
         IEnumerable<WorkTime> IWorkTimeService.GetWorkTimesForDoctor(Guid doctorId)
-                                    => _worktimeRepository.GetWorkTimesForDoctor(doctorId);
+        {
+            try
+            {
+                return _worktimeRepository.GetWorkTimesForDoctor(doctorId);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
     }
 }

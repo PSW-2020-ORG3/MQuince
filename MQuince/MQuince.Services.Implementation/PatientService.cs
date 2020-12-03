@@ -1,6 +1,7 @@
 ﻿using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
 using MQuince.Services.Implementation.Util;
@@ -19,12 +20,17 @@ namespace MQuince.Services.Implementation
         }
         public IdentifiableDTO<PatientDTO> GetById(Guid id)
         {
-            try { 
+            try
+            {
                 return PatientMapper.MapPatientEntityToPatientIdentifierDTO(_patientRepository.GetById(id));
             }
             catch (ArgumentNullException e)
             {
-                return null;
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
             }
         }
 
