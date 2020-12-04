@@ -12,13 +12,11 @@ namespace MQuince.Entities.Appointment
     public class Appointment
     {
         private Guid _id;
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
-        public TreatmentType Type { get; set; }
-        public Guid RoomId { get; set; }
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
-
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+        public bool Canceled { get; set; }
 
         public Guid Id
         {
@@ -27,6 +25,29 @@ namespace MQuince.Entities.Appointment
             {
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
+        }
+
+        public Appointment()
+        {
+
+        }
+
+        public Appointment(Guid id, Guid doctorId, Guid patientId, DateTime startDateTime, DateTime endDateTime, bool canceled)
+        {
+            _id = id;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+            Canceled = canceled;
+        }
+
+        public Appointment(Guid id, bool canceled, DateTime startDateTime, DateTime endDateTime)
+        {
+            _id = id;
+            Canceled = canceled;
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
         }
 
     }

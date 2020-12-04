@@ -21,5 +21,19 @@ namespace MQuince.Entities.Appointment
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
         }
+
+        public RecommendAppointmentParameters()
+        {
+
+        }
+
+        public RecommendAppointmentParameters(Guid id, Guid doctorId, DateTime startDateTime, DateTime endDateTime, AppointmentPriority appointmentPriority)
+        {
+            _id = id;
+            DoctorId = doctorId;
+            DateFrom = startDateTime;
+            DateTo = endDateTime;
+            Priority = appointmentPriority;
+        }
     }
 }

@@ -50,13 +50,13 @@ namespace MQuince.WebAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            /*using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
-                // context.Database.Migrate();
+                //context.Database.Migrate();
                 RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
                 databaseCreator.CreateTables();
-            }*/
+            }
 
             if (env.IsDevelopment())
             {
