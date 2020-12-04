@@ -73,6 +73,7 @@ namespace MQuince.WebAPI
             app.UseSpaStaticFiles();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
