@@ -15,7 +15,6 @@ namespace MQuince.Entities.Appointment
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public TreatmentType Type { get; set; }
-        public Guid RoomId { get; set; }
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
 
@@ -23,7 +22,7 @@ namespace MQuince.Entities.Appointment
         public Guid Id
         {
             get { return _id; }
-            private set
+            set
             {
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
