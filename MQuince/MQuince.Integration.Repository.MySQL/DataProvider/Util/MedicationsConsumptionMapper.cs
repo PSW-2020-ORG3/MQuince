@@ -14,7 +14,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
 
         public static MedicationsConsumption MapMedicationsConsumptionPersistenceToMedicationsConsumptionEntity(MedicationsConsumptionPersistance medicationsConsumptionPersistance)
         {
-            if (medicationsConsumptionPersistance == null) return null;
+            if (medicationsConsumptionPersistance == null) throw new ArgumentNullException();
 
             return new MedicationsConsumption(medicationsConsumptionPersistance.KeyConsumtion,
                                                 medicationsConsumptionPersistance.Name,
