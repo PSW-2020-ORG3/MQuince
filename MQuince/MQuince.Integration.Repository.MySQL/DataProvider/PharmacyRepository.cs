@@ -49,16 +49,10 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
             }
         }
 
-        public IEnumerable<MyPharmacy> GetByApi(bool publish)
-        {
-            throw new NotImplementedException();
-        }
-
         public MyPharmacy GetById(Guid id)
         {
             using (DataContext _context = new DataContext())
             {
-
                 return PharmacyMapper.MapPharmacyPersistenceToPharmacyEntity(_context.Pharmacies.SingleOrDefault(c => c.ApiKey.Equals(id)));
             }
         }
@@ -79,10 +73,5 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
                 return PharmacyMapper.MapPharmacyPersistenceCollectionToPharmacyEntityCollection(_context.Pharmacies.Where(p => p.Name == name && p.Url == url && p.ApiKey == api).ToList());
             }
         }
-
-        public IEnumerable<MyPharmacy> GetByAllParams()
-        {
-            throw new NotImplementedException();
-        }
     }
-   }
+ }

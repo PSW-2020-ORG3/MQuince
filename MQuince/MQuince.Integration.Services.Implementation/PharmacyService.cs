@@ -49,8 +49,6 @@ namespace MQuince.Integration.Services.Implementation
           => new MyPharmacy(pharmacy.ApiKey, pharmacy.Name, pharmacy.Url);
 
 
-
-
         public Guid Create(PharmacyDTO entityDTO)
         {
             MyPharmacy pharmacy = CreatePharmacyFromDTO(entityDTO);
@@ -62,15 +60,9 @@ namespace MQuince.Integration.Services.Implementation
         public IEnumerable<IdentifiableDTO<PharmacyDTO>> GetByAllParams(string name, string url, Guid api)
             => _pharmacyRepository.GetByAllParams(name, url, api).Select(c => CreateDTOFromPharmacy(c));
 
-        public IEnumerable<IdentifiableDTO<PharmacyDTO>> GetByAllParams(bool publish, bool anonymous, bool approved)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public void Update(PharmacyDTO entityDTO, Guid id)
         {
-            throw new NotImplementedException();
+            _pharmacyRepository.Update(CreatePharmacyFromDTO(entityDTO));
         }
 
         public IEnumerable<IdentifiableDTO<PharmacyDTO>> GetAll()

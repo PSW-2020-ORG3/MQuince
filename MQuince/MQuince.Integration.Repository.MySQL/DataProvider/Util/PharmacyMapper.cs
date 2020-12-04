@@ -1,5 +1,7 @@
 ﻿using MQuince.Integration.Entities;
 using MQuince.Integration.Repository.MySQL.PersistenceEntities;
+using MQuince.Integration.Services.Constracts.DTO;
+using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
             };
             return retVal;
         }
-
+       
         public static IEnumerable<MyPharmacy> MapPharmacyPersistenceCollectionToPharmacyEntityCollection(IEnumerable<PharmacyPersistence> clients)
             => clients.Select(c => MapPharmacyPersistenceToPharmacyEntity(c));
     }
