@@ -62,18 +62,40 @@ namespace MQuince.Repositories.Tests
                     Type = TreatmentType.Examination,
                     DoctorPersistance = new DoctorPersistence()
                     {
-                        Id = Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151")
+                        Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
+                        Name = "Uros",
+                        Surname = "Urosevic",
+                        Username = "Doctor2",
+                        Password = "Doctor2",
+                        Jmbg = "7234567890123",
+                        Biography = "Test1",
+                        Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
                     },
                     PatientPersistance = new PatientPersistence()
                     {
-                        Id = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546")
+                        Id = Guid.Parse("54477a86-094f-4081-89b3-757cafbd5ea1"),
+                        Name = "Petar",
+                        Surname = "Petrovic",
+                        Guest = false,
+                        Jmbg = "1234567890123",
+                        Password = "patient3",
+                        Username = "patient3",
+                        DoctorPersistance = new DoctorPersistence()
+                        {
+                            Id = Guid.Parse("137bda41-c388-4f5b-8016-0105abbd54d0")
+                        }
                     }
                 };
 
         private AppointmentPersistence GetAppointmentPersistanceSecond()
                 => new AppointmentPersistence()
                 {
-                    Id = Guid.Parse("c389f917-3eb8-4f1a-a22c-bbc34b137f69")
+                    Id = Guid.Parse("c389f917-2eb8-4f1a-a22c-bbc34b137f69"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorPersistanceId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
+                    PatientPersistanceId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
                 };
 
         private List<AppointmentPersistence> GetListOfAppointmentPersistance()
