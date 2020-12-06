@@ -60,6 +60,49 @@ namespace MQuince.Repositories.Tests
                     StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
                     EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                     Type = TreatmentType.Examination,
+                    DoctorPersistanceId = Guid.Parse("54475a55-054f-4081-89b3-757cafbd5ea1"),
+                    PatientPersistanceId = Guid.Parse("54465a55-054f-4081-89b3-757cafbd5ea1")
+                    /*DoctorPersistance = new DoctorPersistence()
+                    {
+                        Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
+                        Name = "Uros",
+                        Surname = "Urosevic",
+                        Username = "Doctor2",
+                        Password = "Doctor2",
+                        Jmbg = "7234567890123",
+                        Biography = "Test1",
+                        Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
+                    },
+                    PatientPersistance = new PatientPersistence()
+                    {
+                        Id = Guid.Parse("54477a86-094f-4081-89b3-757cafbd5ea1"),
+                        Name = "Petar",
+                        Surname = "Petrovic",
+                        Guest = false,
+                        Jmbg = "1234567890123",
+                        Password = "patient3",
+                        Username = "patient3",
+                        DoctorPersistance = new DoctorPersistence()
+                        {
+                            Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
+                            Name = "Uros",
+                            Surname = "Urosevic",
+                            Username = "Doctor2",
+                            Password = "Doctor2",
+                            Jmbg = "7234567890123",
+                            Biography = "Test1",
+                            Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
+                        }
+                    }*/
+                };
+
+        private AppointmentPersistence GetAppointmentPersistanceSecond()
+                => new AppointmentPersistence()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    Type = TreatmentType.Examination,
                     DoctorPersistance = new DoctorPersistence()
                     {
                         Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
@@ -82,20 +125,16 @@ namespace MQuince.Repositories.Tests
                         Username = "patient3",
                         DoctorPersistance = new DoctorPersistence()
                         {
-                            Id = Guid.Parse("137bda41-c388-4f5b-8016-0105abbd54d0")
+                            Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
+                            Name = "Uros",
+                            Surname = "Urosevic",
+                            Username = "Doctor2",
+                            Password = "Doctor2",
+                            Jmbg = "7234567890123",
+                            Biography = "Test1",
+                            Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
                         }
                     }
-                };
-
-        private AppointmentPersistence GetAppointmentPersistanceSecond()
-                => new AppointmentPersistence()
-                {
-                    Id = Guid.Parse("c389f917-2eb8-4f1a-a22c-bbc34b137f69"),
-                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
-                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
-                    Type = TreatmentType.Examination,
-                    DoctorPersistanceId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
-                    PatientPersistanceId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
                 };
 
         private List<AppointmentPersistence> GetListOfAppointmentPersistance()
@@ -111,19 +150,19 @@ namespace MQuince.Repositories.Tests
             if (appointmentPersistence.Id != appointment.Id)
                 return false;
 
-            if (!appointmentPersistence.DoctorPersistance.Equals(appointment.DoctorId))
+            if (appointmentPersistence.DoctorPersistanceId != appointment.DoctorId)
                 return false;
 
-            if (!appointmentPersistence.PatientPersistance.Equals(appointment.PatientId))
+            if (appointmentPersistence.PatientPersistanceId != appointment.PatientId)
                 return false;
 
-            if (!appointmentPersistence.Type.Equals(appointment.Type))
+            if (appointmentPersistence.Type != appointment.Type)
                 return false;
 
-            if (!appointmentPersistence.StartDateTime.Equals(appointment.StartDateTime))
+            if (DateTime.Compare(appointmentPersistence.StartDateTime, appointment.StartDateTime) != 0)
                 return false;
 
-            if (!appointmentPersistence.EndDateTime.Equals(appointment.EndDateTime))
+            if (DateTime.Compare(appointmentPersistence.EndDateTime, appointment.EndDateTime) != 0)
                 return false;
 
             return true;

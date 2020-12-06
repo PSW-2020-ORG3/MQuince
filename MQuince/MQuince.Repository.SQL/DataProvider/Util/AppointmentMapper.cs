@@ -13,6 +13,7 @@ namespace MQuince.Repository.SQL.DataProvider.Util
         => appointments == null ? throw new ArgumentNullException()
                                         : new Appointment()
                                         {
+                                            Id = appointments.Id,
                                             StartDateTime = appointments.StartDateTime,
                                             EndDateTime = appointments.EndDateTime,
                                             Type = appointments.Type,
