@@ -9,10 +9,20 @@ namespace MQuince.Services.Implementation.Util
 {
     public class AppointmentMapper
     {
-        public static IdentifiableDTO<AppointmentDTO> MapAppointmentEntityToAppointmentIdentifierDTO(Appointment appointment) 
-        {
-            throw new NotImplementedException();
-        }
+        public static IdentifiableDTO<AppointmentDTO> MapAppointmentEntityToAppointmentIdentifierDTO(Appointment appointment)
+         => appointment == null ? throw new ArgumentNullException()
+                                      : new IdentifiableDTO<AppointmentDTO>
+                                      {
+                                          Id = appointment.Id,
+                                          EntityDTO = new AppointmentDTO()
+                                          {
+                                              StartDateTime = appointment.StartDateTime,
+                                              EndDateTime = appointment.EndDateTime,
+                                              Type = appointment.Type,
+                                              DoctorId = appointment.DoctorId,
+                                              PatientId = appointment.PatientId
+                                          }
+                                      };
 
 
     }
