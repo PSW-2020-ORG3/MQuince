@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Entities.Appointment
+namespace MQuince.Entities.Appointments
 {
     public class RecommendAppointmentParameters
     {

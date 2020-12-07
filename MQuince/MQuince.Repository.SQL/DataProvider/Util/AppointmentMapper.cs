@@ -1,4 +1,4 @@
-﻿using MQuince.Entities.Appointment;
+﻿using MQuince.Entities.Appointments;
 using MQuince.Repository.SQL.PersistenceEntities.Appointments;
 using System;
 using System.Collections.Generic;

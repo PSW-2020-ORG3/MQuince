@@ -1,4 +1,4 @@
-﻿using MQuince.Entities.Appointment;
+﻿using MQuince.Entities.Appointments;
 using MQuince.Services.Contracts.DTO.Appointment;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using System;

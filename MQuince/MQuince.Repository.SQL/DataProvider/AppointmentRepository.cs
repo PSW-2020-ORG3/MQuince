@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MQuince.Entities.Appointment;
+using MQuince.Entities.Appointments;
 using MQuince.Repository.Contracts;
 using System;
 using System.Collections.Generic;

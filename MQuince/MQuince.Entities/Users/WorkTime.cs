@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MQuince.Entities.Appointments;
+
 
 namespace MQuince.Entities.Users
 {
@@ -12,6 +14,7 @@ namespace MQuince.Entities.Users
         public int StartTime { get; set; }
         public int EndTime { get; set; }
         public Guid DoctorId { get; set; }
+        
 
         public Guid Id
         {
@@ -22,7 +25,7 @@ namespace MQuince.Entities.Users
             }
         }
 
-        public WorkTime(Guid id, DateTime startDate,DateTime endDate,int startTime,int endTime,Guid doctorId)
+        public WorkTime(Guid id, DateTime startDate, DateTime endDate, int startTime, int endTime, Guid doctorId)
         {
             Id = id;
             StartDate = startDate;
@@ -31,5 +34,7 @@ namespace MQuince.Entities.Users
             EndTime = endTime;
             DoctorId = doctorId;
         }
+
+      
     }
 }

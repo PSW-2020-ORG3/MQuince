@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Entities.Appointment
+namespace MQuince.Entities.Appointments
 {
 
     public class Appointment
@@ -33,10 +33,17 @@ namespace MQuince.Entities.Appointment
             DoctorId = doctorId;
         }
 
-      /*  public Appointment(DateTime startDate, DateTime endDate, bool canceled)
-            : this(Guid.NewGuid(), startDate, endDate, canceled, Guid.NewGuid())
-        { 
-        }*/
+        public Appointment(Guid id, DateTime startTime, DateTime endTime, bool canceled)
+        {
+            _id = id;
+            StartDateTime = startTime;
+            EndDateTime = endTime;
+            isCanceled = canceled;
+        }
+        /*  public Appointment(DateTime startDate, DateTime endDate, bool canceled)
+              : this(Guid.NewGuid(), startDate, endDate, canceled, Guid.NewGuid())
+          { 
+          }*/
 
         public Guid Id
         {

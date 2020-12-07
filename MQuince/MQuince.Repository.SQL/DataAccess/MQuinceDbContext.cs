@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using MQuince.Entities.Appointment;
+using MQuince.Entities.Appointments;
 using MQuince.Repository.SQL.PersistenceEntities;
 using MQuince.Repository.SQL.PersistenceEntities.Drug;
 using MQuince.Repository.SQL.PersistenceEntities.Users;
