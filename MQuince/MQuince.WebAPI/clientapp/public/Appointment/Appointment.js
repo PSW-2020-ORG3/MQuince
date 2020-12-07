@@ -1,20 +1,15 @@
 ﻿var app = new Vue({
-	el: '#feedbacks',
+	el: '#specializations',
 	data: {
-		feedbacks: []
+		specializations: []
 	},
 	methods: {
 
 	},
 	created() {
 		axios
-			.get('/api/Feedback/GetByStatus', {
-				params: {
-					publish: true,
-					approved: true
-				}
-			}).then(response => {
-				this.feedbacks = response.data
+			.get('/api/Specialization').then(response => {
+				this.specializations = response.data
 			})
 
 	}

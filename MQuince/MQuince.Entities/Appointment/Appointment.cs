@@ -12,6 +12,20 @@ namespace MQuince.Entities.Appointment
     public class Appointment
     {
         private Guid _id;
+
+        public Appointment()
+        {
+        }
+
+        public Appointment(DateTime startDateTime, DateTime endDateTime, TreatmentType type, Guid doctorId, Guid patientId)
+        {
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+            Type = type;
+            DoctorId = doctorId;
+            PatientId = patientId;
+        }
+
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public TreatmentType Type { get; set; }
