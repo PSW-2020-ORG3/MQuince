@@ -62,38 +62,7 @@ namespace MQuince.Repositories.Tests
                     Type = TreatmentType.Examination,
                     DoctorPersistanceId = Guid.Parse("54475a55-054f-4081-89b3-757cafbd5ea1"),
                     PatientPersistanceId = Guid.Parse("54465a55-054f-4081-89b3-757cafbd5ea1")
-                    /*DoctorPersistance = new DoctorPersistence()
-                    {
-                        Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
-                        Name = "Uros",
-                        Surname = "Urosevic",
-                        Username = "Doctor2",
-                        Password = "Doctor2",
-                        Jmbg = "7234567890123",
-                        Biography = "Test1",
-                        Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
-                    },
-                    PatientPersistance = new PatientPersistence()
-                    {
-                        Id = Guid.Parse("54477a86-094f-4081-89b3-757cafbd5ea1"),
-                        Name = "Petar",
-                        Surname = "Petrovic",
-                        Guest = false,
-                        Jmbg = "1234567890123",
-                        Password = "patient3",
-                        Username = "patient3",
-                        DoctorPersistance = new DoctorPersistence()
-                        {
-                            Id = Guid.Parse("c84268b1-ca63-45d1-9be1-44976dd1119e"),
-                            Name = "Uros",
-                            Surname = "Urosevic",
-                            Username = "Doctor2",
-                            Password = "Doctor2",
-                            Jmbg = "7234567890123",
-                            Biography = "Test1",
-                            Specialization = new SpecializationPersistence() { Id = Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c") }
-                        }
-                    }*/
+                    
                 };
 
         private AppointmentPersistence GetAppointmentPersistanceSecond()
