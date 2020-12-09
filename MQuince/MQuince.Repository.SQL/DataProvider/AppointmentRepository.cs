@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Entities.Appointment;
+using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
 using MQuince.Repository.SQL.DataAccess;
 using MQuince.Repository.SQL.DataProvider.Util;
@@ -38,6 +39,14 @@ namespace MQuince.Repository.SQL.DataProvider
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
                 return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.ToList());
+            }
+        }
+
+        public IEnumerable<Appointment> GetAppointmentForDoctorForDate(Guid doctorId, DateTime requestDate)
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                return this.GetAll().Where(x => x.DoctorId.Equals(doctorId) && x.StartDateTime.Date.Equals(requestDate.Date));
             }
         }
 

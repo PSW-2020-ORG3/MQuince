@@ -17,7 +17,7 @@ namespace MQuince.Services.Implementation
         {
             _worktimeRepository = worktimeRepository;
         }
-        IEnumerable<WorkTime> IWorkTimeService.GetWorkTimesForDoctor(Guid doctorId)
+        public IEnumerable<WorkTime> GetWorkTimesForDoctor(Guid doctorId)
         {
             try
             {
@@ -32,5 +32,18 @@ namespace MQuince.Services.Implementation
                 throw new InternalServerErrorException();
             }
         }
-    }
+        public WorkTime GetWorkTimeForDoctorForDate(Guid doctorId, DateTime date)
+		{
+            List<WorkTime> workTimes = (List<WorkTime>)GetWorkTimesForDoctor(doctorId);
+            foreach(WorkTime workTime in workTimes)
+			{
+                if(date.Date >= workTime.StartDate.Date && date.Date <= workTime.EndDate.Date)
+				{
+                    return new WorkTime(workTime.Id, date, date, workTime.StartTime, workTime.EndTime, doctorId);
+				}
+			}
+            return null;
+        }
+
+	}
 }
