@@ -8,6 +8,7 @@ using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -60,8 +61,10 @@ namespace MQuince.WebAPI.Controllers
         }
 
         [HttpGet("GetFreeApp")]
-        public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType)
+        public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime date)
         {
+            TreatmentType treatmentType = TreatmentType.Examination;
+
             try
             {
                 return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, date, treatmentType));

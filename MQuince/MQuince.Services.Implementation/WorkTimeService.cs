@@ -34,8 +34,7 @@ namespace MQuince.Services.Implementation
         }
         public WorkTime GetWorkTimeForDoctorForDate(Guid doctorId, DateTime date)
 		{
-            List<WorkTime> workTimes = (List<WorkTime>)GetWorkTimesForDoctor(doctorId);
-            foreach(WorkTime workTime in workTimes)
+            foreach(WorkTime workTime in GetWorkTimesForDoctor(doctorId))
 			{
                 if(date.Date >= workTime.StartDate.Date && date.Date <= workTime.EndDate.Date)
 				{

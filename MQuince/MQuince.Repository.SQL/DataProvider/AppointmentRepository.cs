@@ -11,7 +11,7 @@ using System.Text;
 
 namespace MQuince.Repository.SQL.DataProvider
 {
-    class AppointmentRepository : IAppointmentRepository
+    public class AppointmentRepository : IAppointmentRepository
     {
         private readonly DbContextOptions _dbContext;
 

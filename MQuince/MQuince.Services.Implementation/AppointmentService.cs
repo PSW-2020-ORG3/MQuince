@@ -20,6 +20,13 @@ namespace MQuince.Services.Implementation
         public IDoctorService _doctorService;
         public IWorkTimeService _workTimeService;
 
+        public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorService doctorService, IWorkTimeService workTimeService)
+        {
+            _appointmentRepository = appointmentRepository;
+            _workTimeService = workTimeService;
+            _doctorService = doctorService;
+        }
+
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
