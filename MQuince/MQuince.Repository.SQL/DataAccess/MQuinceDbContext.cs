@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using MQuince.Repository.SQL.PersistenceEntities;
+using MQuince.Repository.SQL.PersistenceEntities.Appointments;
 using MQuince.Repository.SQL.PersistenceEntities.Drug;
 using MQuince.Repository.SQL.PersistenceEntities.Users;
 using System;
@@ -17,6 +18,7 @@ namespace MQuince.Repository.SQL.DataAccess
         public DbSet<DoctorPersistence> Doctors { get; set; }
         public DbSet<PatientPersistence> Patients { get; set; }
         public DbSet<WorkTimePersistence> WorkTimes { get; set; }
+        public DbSet<AppointmentPersistence> Appointments { get; set; }
 
         public MQuinceDbContext(DbContextOptions options) : base(options) {
             

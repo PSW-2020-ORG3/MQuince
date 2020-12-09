@@ -41,6 +41,17 @@ namespace MQuince.Application
         public ISpecializationService GetSpecializationService()
             => new SpecializationService(this.GetSpecializationRepository());
 
+        public IAppointmentService GetAppointmentService()
+            => new AppointmentService(this.GetAppointmentRepository(), this.GetDoctorService(), this.GetWorkTimeService());
+        private IAppointmentRepository GetAppointmentRepository()
+          => new AppointmentRepository(_optionsBuilder);
+
+        private IWorkTimeService GetWorkTimeService()
+            => new WorkTimeService(this.GetWorkTimeRepository());
+
+        private IWorkTimeRepository GetWorkTimeRepository()
+            => new WorkTimeRepository(_optionsBuilder);
+
         private ISpecializationRepository GetSpecializationRepository()
              => new SpecializationRepository(_optionsBuilder);
 
