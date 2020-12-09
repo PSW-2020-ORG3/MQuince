@@ -17,7 +17,8 @@ namespace MQuince.Services.Implementation
     public class AppointmentService : IAppointmentService
     {
         public IAppointmentRepository _appointmentRepository;
-        public IDoctorRepository _doctroRepository;
+        public IDoctorService _doctorService;
+        public IWorkTimeService _workTimeService;
 
         public Guid Create(AppointmentDTO entityDTO)
         {
@@ -37,31 +38,7 @@ namespace MQuince.Services.Implementation
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAll()
-        => _appointmentRepository.GetAll().Select(c => CreateDTOFromAppointment(c));
-
-        /// <summary>
-        /// Mathod for sreate DTO from feedbacks
-        /// </summary>
-        /// <param name="feedback"></param>
-        /// <returns></returns>
-        private IdentifiableDTO<AppointmentDTO> CreateDTOFromAppointment(Appointment appointment)
-        {
-            if (appointment == null) return null;
-
-            return new IdentifiableDTO<AppointmentDTO>()
-            {
-                Id = appointment.Id,
-                EntityDTO = new AppointmentDTO()
-                {
-                    StartDateTime = appointment.StartDateTime,
-                    EndDateTime = appointment.EndDateTime,
-                    Type = appointment.Type,
-                    DoctorId = appointment.DoctorId,
-                    PatientId = appointment.PatientId
-                }
-
-            };
-        }
+        => _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
 
         public IdentifiableDTO<AppointmentDTO> GetById(Guid id)
         {
@@ -80,12 +57,12 @@ namespace MQuince.Services.Implementation
         }
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForDoctor(Guid doctorId)
         {
-            return _appointmentRepository.GetForDoctor(doctorId).Select(c => CreateDTOFromAppointment(c));
+            return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId)
         {
-            return _appointmentRepository.GetForPatient(patientId).Select(c => CreateDTOFromAppointment(c));
+            return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
         }
 
         public void Update(AppointmentDTO entityDTO, Guid id)
@@ -95,33 +72,36 @@ namespace MQuince.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAppointmentForDoctorForDate(Guid doctorId, DateTime time)
         {
-            return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => CreateDTOFromAppointment(c));
+            return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
         }
 
 
-        //User patient, User doctor, DateTime date, TreatmentType treatmentType
-        public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime startDateTime, DateTime endDateTime, TreatmentType treatmentType)
+        public IEnumerable<AppointmentDTO> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType)
         {
-            List<Appointment> freeAppointments = new List<Appointment>();
-            Doctor doctorObject = (Doctor)_doctroRepository.GetById(doctorId);
-            
-            List<Appointment> appointments = GetAppointmentForDoctorForDate(doctorId, startDateTime).ToList();
-            EmployeeWorkDay employeeWorkDay = WorkTimeService.GetEmployeeWorkDay(doctor, date);
-            if (employeeWorkDay == null)
+            List<AppointmentDTO> freeAppointments = new List<AppointmentDTO>();
+            List<Appointment> appointments = _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date).ToList();
+
+            WorkTime workTime = _workTimeService.GetWorkTimeForDoctorForDate(doctorId, date);
+            if (workTime == null)
             {
                 return freeAppointments;
             }
             TimeSpan appointmentDuration = GetAppointmentDuration(treatmentType);
-            freeAppointments = FindFreeAppointments(appointments, employeeWorkDay, appointmentDuration).ToList();
+
+            DateTime startDateTime = new DateTime(workTime.StartDate.Year, workTime.StartDate.Month, workTime.StartDate.Day, workTime.StartTime, 0, 0);
+            DateTime endDateTime = new DateTime(workTime.EndDate.Year, workTime.EndDate.Month, workTime.EndDate.Day, workTime.EndTime, 0, 0);
+            
+            freeAppointments = FindFreeAppointments(appointments, startDateTime, endDateTime, appointmentDuration).ToList();
             freeAppointments = InitializeAppointments(freeAppointments, patientId, doctorId, treatmentType).ToList();
+
             return freeAppointments;
         }
         private TimeSpan GetAppointmentDuration(TreatmentType treatmentType)
-            => (treatmentType == TreatmentType.Surgery) ? new TimeSpan(0, App.DefaultAppointmentSurgeryDuration, 0) : new TimeSpan(0, App.DefaultAppointmentExaminationDuration, 0);
+            => new TimeSpan(0, 30, 0);
 
-        private IEnumerable<Appointment> InitializeAppointments(IEnumerable<Appointment> appointments, Guid patientId, Guid doctorId, TreatmentType treatmentType)
+        private IEnumerable<AppointmentDTO> InitializeAppointments(IEnumerable<AppointmentDTO> appointments, Guid patientId, Guid doctorId, TreatmentType treatmentType)
         {
-            foreach (Appointment appointment in appointments)
+            foreach (AppointmentDTO appointment in appointments)
             {
                 appointment.DoctorId = doctorId;
                 appointment.PatientId = patientId;
@@ -130,10 +110,10 @@ namespace MQuince.Services.Implementation
             return appointments;
         }
 
-        private IEnumerable<Appointment> FindFreeAppointments(List<Appointment> appointments, DateTime startDateTime, DateTime endDateTime, TimeSpan appointmentDuration)
+        private IEnumerable<AppointmentDTO> FindFreeAppointments(List<Appointment> appointments, DateTime startDateTime, DateTime endDateTime, TimeSpan appointmentDuration)
         {
             appointments.Sort((x, y) => DateTime.Compare(x.StartDateTime, y.StartDateTime));
-            List<Appointment> freeAppointments = new List<Appointment>();
+            List<AppointmentDTO> freeAppointments = new List<AppointmentDTO>();
 
             DateTime startTime = startDateTime;
             DateTime endTime;
@@ -150,12 +130,12 @@ namespace MQuince.Services.Implementation
             freeAppointments.AddRange(FillFreeInterval(startTime, endTime, appointmentDuration));
             return freeAppointments;
         }
-        public IEnumerable<Appointment> FillFreeInterval(DateTime startTime, DateTime endTime, TimeSpan appointmentDuration)
+        public IEnumerable<AppointmentDTO> FillFreeInterval(DateTime startTime, DateTime endTime, TimeSpan appointmentDuration)
         {
-            List<Appointment> freeAppointments = new List<Appointment>();
+            List<AppointmentDTO> freeAppointments = new List<AppointmentDTO>();
             while (endTime - startTime >= appointmentDuration)
             {
-                Appointment freeAppointment = new Appointment() { StartDateTime = startTime, EndDateTime = startTime.Add(appointmentDuration) };
+                AppointmentDTO freeAppointment = new AppointmentDTO() { StartDateTime = startTime, EndDateTime = startTime.Add(appointmentDuration) };
                 startTime = freeAppointment.EndDateTime;
                 freeAppointments.Add(freeAppointment);
             }

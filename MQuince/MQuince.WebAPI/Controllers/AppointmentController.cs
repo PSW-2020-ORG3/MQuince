@@ -60,11 +60,11 @@ namespace MQuince.WebAPI.Controllers
         }
 
         [HttpGet("GetFreeApp")]
-        public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime startDateTime, DateTime endDateTime, TreatmentType treatmentType)
+        public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType)
         {
             try
             {
-                return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, startDateTime, endDateTime, treatmentType));
+                return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, date, treatmentType));
             }
             catch (NotFoundEntityException e)
             {
