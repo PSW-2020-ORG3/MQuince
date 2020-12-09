@@ -1,4 +1,6 @@
 ﻿using MQuince.Entities.Appointment;
+using MQuince.Entities.Users;
+using MQuince.Enums;
 using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Appointment;
 using MQuince.Services.Contracts.Exceptions;
@@ -15,6 +17,8 @@ namespace MQuince.Services.Implementation
     public class AppointmentService : IAppointmentService
     {
         public IAppointmentRepository _appointmentRepository;
+        public IDoctorRepository _doctroRepository;
+
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
@@ -58,6 +62,7 @@ namespace MQuince.Services.Implementation
 
             };
         }
+
         public IdentifiableDTO<AppointmentDTO> GetById(Guid id)
         {
             try
@@ -73,7 +78,6 @@ namespace MQuince.Services.Implementation
                 throw new InternalServerErrorException();
             }
         }
-
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForDoctor(Guid doctorId)
         {
             return _appointmentRepository.GetForDoctor(doctorId).Select(c => CreateDTOFromAppointment(c));
@@ -81,12 +85,83 @@ namespace MQuince.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId)
         {
-            return _appointmentRepository.GetForDoctor(patientId).Select(c => CreateDTOFromAppointment(c));
+            return _appointmentRepository.GetForPatient(patientId).Select(c => CreateDTOFromAppointment(c));
         }
 
         public void Update(AppointmentDTO entityDTO, Guid id)
         {
             _appointmentRepository.Update(CreateAppointmentFromDTO(entityDTO, id));
         }
+
+        public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAppointmentForDoctorForDate(Guid doctorId, DateTime time)
+        {
+            return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => CreateDTOFromAppointment(c));
+        }
+
+
+        //User patient, User doctor, DateTime date, TreatmentType treatmentType
+        public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime startDateTime, DateTime endDateTime, TreatmentType treatmentType)
+        {
+            List<Appointment> freeAppointments = new List<Appointment>();
+            Doctor doctorObject = (Doctor)_doctroRepository.GetById(doctorId);
+            
+            List<Appointment> appointments = GetAppointmentForDoctorForDate(doctorId, startDateTime).ToList();
+            EmployeeWorkDay employeeWorkDay = WorkTimeService.GetEmployeeWorkDay(doctor, date);
+            if (employeeWorkDay == null)
+            {
+                return freeAppointments;
+            }
+            TimeSpan appointmentDuration = GetAppointmentDuration(treatmentType);
+            freeAppointments = FindFreeAppointments(appointments, employeeWorkDay, appointmentDuration).ToList();
+            freeAppointments = InitializeAppointments(freeAppointments, patientId, doctorId, treatmentType).ToList();
+            return freeAppointments;
+        }
+        private TimeSpan GetAppointmentDuration(TreatmentType treatmentType)
+            => (treatmentType == TreatmentType.Surgery) ? new TimeSpan(0, App.DefaultAppointmentSurgeryDuration, 0) : new TimeSpan(0, App.DefaultAppointmentExaminationDuration, 0);
+
+        private IEnumerable<Appointment> InitializeAppointments(IEnumerable<Appointment> appointments, Guid patientId, Guid doctorId, TreatmentType treatmentType)
+        {
+            foreach (Appointment appointment in appointments)
+            {
+                appointment.DoctorId = doctorId;
+                appointment.PatientId = patientId;
+                appointment.Type = treatmentType;
+            }
+            return appointments;
+        }
+
+        private IEnumerable<Appointment> FindFreeAppointments(List<Appointment> appointments, DateTime startDateTime, DateTime endDateTime, TimeSpan appointmentDuration)
+        {
+            appointments.Sort((x, y) => DateTime.Compare(x.StartDateTime, y.StartDateTime));
+            List<Appointment> freeAppointments = new List<Appointment>();
+
+            DateTime startTime = startDateTime;
+            DateTime endTime;
+            if (appointments.Any())
+            {
+                foreach (Appointment appointment in appointments)
+                {
+                    endTime = appointment.StartDateTime;
+                    freeAppointments.AddRange(FillFreeInterval(startTime, endTime, appointmentDuration));
+                    startTime = appointment.EndDateTime;
+                }
+            }
+            endTime = endDateTime;
+            freeAppointments.AddRange(FillFreeInterval(startTime, endTime, appointmentDuration));
+            return freeAppointments;
+        }
+        public IEnumerable<Appointment> FillFreeInterval(DateTime startTime, DateTime endTime, TimeSpan appointmentDuration)
+        {
+            List<Appointment> freeAppointments = new List<Appointment>();
+            while (endTime - startTime >= appointmentDuration)
+            {
+                Appointment freeAppointment = new Appointment() { StartDateTime = startTime, EndDateTime = startTime.Add(appointmentDuration) };
+                startTime = freeAppointment.EndDateTime;
+                freeAppointments.Add(freeAppointment);
+            }
+            return freeAppointments;
+        }
+
+
     }
 }

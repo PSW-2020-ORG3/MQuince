@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Entities.Appointment;
+using MQuince.Enums;
 using MQuince.Services.Contracts.DTO.Appointment;
 using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.Exceptions;
@@ -47,6 +48,40 @@ namespace MQuince.WebAPI.Controllers
             try
             {
                 return Ok(_appointmentService.GetById(id));
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet("GetFreeApp")]
+        public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime startDateTime, DateTime endDateTime, TreatmentType treatmentType)
+        {
+            try
+            {
+                return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, startDateTime, endDateTime, treatmentType));
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+        }
+
+        [HttpGet("GetForPatient/{id}")]
+        public IActionResult GetForPatient(Guid id)
+        {
+            try
+            {
+                return Ok(_appointmentService.GetForPatient(id));
             }
             catch (NotFoundEntityException e)
             {
