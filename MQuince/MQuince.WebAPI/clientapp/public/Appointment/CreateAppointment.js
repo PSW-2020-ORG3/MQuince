@@ -4,20 +4,25 @@
         return {
             specializations: [],
             doctors: [],
+            dateForAppointment: '',
             appointments: [],
             currentStep: 0,
             visibleSpecialization: true,
             visiblePrevious: false,
             visibleNext: true,
             visibleDoctors: false,
-            visibleAppointments: false,
+            visibleDate:false,
+            visibleAppointment: false,
             visibleSubmit:false,
             visibleAppTime: false,
             visibleFinished:false,
             selectedSpecialization: '',
+            selectedDate: '',
             submitMessage:'',
             selectedDoctor: '',
-            selectedAppointment:'predef'
+            selectedAppointment: 'predef',
+            disabledDates: { to: new Date() }
+
         }
     },
     template: ` 
@@ -26,6 +31,7 @@
             <h5 class=" text-center  mb-0 text-uppercase" style="color:#1abc9c; margin-top: 2rem;">Create appointment</h5>
             <!-- Icon Divider-->
             <!-- Contact Section Form-->
+    
             <div class="row section-design">
                 <div class="col-lg-8 mx-auto">
                     <br/>
@@ -33,40 +39,58 @@
                    
                     <form id="contactForm" name="sentMessage" novalidate="novalidate">
     
-                        <div  class="control-group" v-bind:hidden="!visibleSpecialization">
-                            <label >Select specialization</label>
-                            <br/>
-                            <select style="min-height: 20px;" class="select" v-model="selectedSpecialization">
-					            <option v-for="(specialization, index) in specializations" class="option" v-bind:value="specialization.id"  :value="specialization.id">{{specialization.entityDTO.name}}</option>
-				            </select>
-                        </div>
+                         <div v-bind:hidden="!visibleSpecialization" class="control-group">
+
+                            <div class="form-group floating-form-group controls mb-0 pb-2" style="color: #6c757d;opacity: 1 ;">
+                                <br/>
+                                <label style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select specialization</label>
+                                <select class="form-control"  style="text-indent: 1%" v-model="selectedSpecialization"> 
+                                    <option v-for="(specialization, index) in specializations" class="option" v-bind:value="specialization.id"  :value="specialization.id">{{specialization.entityDTO.name}}</option>
+                                </select>
+                            
+                            </div>
+                        </div>  
+
+                        <div v-bind:hidden="!visibleDoctors" class="control-group">
+                            <div class="form-group floating-form-group controls mb-0 pb-2" style="color: #6c757d;opacity: 1 ;">
+                                <br/>
+                                <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select doctor</label>
+                                <select class="form-control"  style="text-indent: 1%" v-model="selectedDoctor">
+					                <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
+				                </select>
+                            </div>
+                        </div>  
 
 
-                        <div v-bind:hidden="!visibleDoctors">
-                            <label>Select doctor</label>
-                            <br/>
-                            <select style="min-height: 20px;" class="select" v-model="selectedDoctor">
-					            <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
-				            </select>
-                        </div>
 
-                        <!--<div v-bind:hidden="!visibleDoctors">
-                            <label>Select doctor</label>
-                            <br/>
-                            <select style="min-height: 20px;" class="select" v-model="selectedDoctor">
-					            <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
-				            </select>
-                        </div>-->
+                        <div v-bind:hidden="!visibleDate" class="control-group">
+                            <div class="form-group floating-form-group controls mb-0 pb-2" style="color: #6c757d;opacity: 1 ;">
+                                <br/>
+                                <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select date</label>
+                                <vuejs-datepicker class="vue-calendar-control"  style="margin-left: 14%;text-indent: 1%" :disabled-dates="disabledDates" v-model="dateForAppointment"></vuejs-datepicker>
+                            </div>
+                        </div>  
                         
-                        <div v-bind:hidden="!visibleSubmit">
-                            <label>{{submitMessage}}</label>
-                        </div>
+
+                        <div v-bind:hidden="!visibleAppointment" class="control-group">
+                            <div class="form-group floating-form-group controls mb-0 pb-2" style="color: #6c757d;opacity: 1 ;">
+                                <br/>
+                                <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select termin</label>
+                                <select class="form-control"  style="text-indent: 1%" v-model="selectedDoctor">
+					                <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
+				                </select>
+                            </div>
+                        </div>  
+
+                
+
                         <br />
 
                         <div class="form-group">
                             <button v-bind:hidden="!visiblePrevious" v-on:click="previous" style="margin-left: 15%; width: 20%;" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Previous</button>
-                            <button v-bind:hidden="!visibleNext" style="margin-left: 30%; width: 20%;" v-on:click="next" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Next</button>
-                            <button v-bind:hidden="!visibleSubmit" style="margin-left: 30%; width: 20%;" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Potvrdi</button>
+                            <button v-if="visiblePrevious == false" v-bind:hidden="!visibleNext" style="margin-left: 65%; width: 20%;" v-on:click="next" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Next</button>
+                            <button v-else v-bind:hidden="!visibleNext" style="margin-left: 30%; width: 20%;" v-on:click="next" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Next</button>
+                            <button v-bind:hidden="!visibleAppointment" style="margin-left: 30%; width: 20%;" v-on:click="submit" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Potvrdi</button>
                         </div>
                     
                        
@@ -74,7 +98,9 @@
                 </div>
             </div>
         </div>
-`,
+`, components: {
+        vuejsDatepicker
+    },
     mounted() {
 
         axios
@@ -99,20 +125,17 @@
                 this.visiblePrevious = true;
                 this.visibleDoctors = false;
 
-                //get appointment 
-
-                this.visibleAppointments = true;
-            } else if (this.currentStep == 2 && this.selectedAppointment != '') {
+                this.visibleDate = true;
+            } else if (this.currentStep == 2 && this.dateForAppointment != '') {
                 this.currentStep = 3;
                 this.visiblePrevious = true;
                 this.visibleSubmit = true;
                 this.visibleNext= false;
-                this.visibleAppointments = false;
+                this.visibleDate = false;
 
                 //submit
-                this.submitMessage='Da li sigurno zelite da zakazete termin?'
 
-                this.visibleSubmit = true;
+                this.visibleAppointment = true;
             }
         },
         previous: function () {
@@ -129,14 +152,19 @@
                 this.visibleDoctors = true;
 
 
-                this.visibleAppointments = false;
+                this.visibleDate = false;
             } else if (this.currentStep == 3) {
                 this.currentStep = 2;
                 this.visiblePrevious = true;
-                this.visibleAppointments = true;
+                this.visibleDate = true;
 
                 this.visibleNext = true;
-                this.visibleSubmit = false;
+                this.visibleAppointment = false;
+            }
+        },
+        submit: function () {
+            if (this.selectedAppointment != '' && this.selectedDoctor != '' && this.dateForAppointment != '' && this.selectedAppointment!='') {
+                alert("Uspesna rezervacija");
             }
         }
     }
