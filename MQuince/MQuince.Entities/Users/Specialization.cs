@@ -23,5 +23,9 @@ namespace MQuince.Entities.Users
             this.Id = id;
             this.Name = Name;
         }
+
+        public Specialization()
+        {
+        }
     }
 }

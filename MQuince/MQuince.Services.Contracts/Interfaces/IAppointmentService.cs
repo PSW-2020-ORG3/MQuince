@@ -1,6 +1,8 @@
 ﻿using MQuince.Entities.Appointment;
+using MQuince.Entities.Users;
 using MQuince.Enums;
 using MQuince.Services.Contracts.DTO.Appointment;
+using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using System;
 using System.Collections.Generic;
@@ -15,5 +17,7 @@ namespace MQuince.Services.Contracts.Interfaces
         IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId);
 
         IEnumerable<AppointmentDTO> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType);
+       
+        AppointmentDTO GetExaminationInRange(DateTime dateFrom, DateTime dateTo, Guid patientId, Guid doctorId);
     }
 }
