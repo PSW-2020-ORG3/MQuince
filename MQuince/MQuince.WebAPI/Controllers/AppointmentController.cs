@@ -25,6 +25,16 @@ namespace MQuince.WebAPI.Controllers
             this._appointmentService = appointmentService;
         }
 
+        [HttpPost]
+        public IActionResult Create(AppointmentDTO dto)
+        {
+            if (ModelState.IsValid)
+            {
+                _appointmentService.Create(dto);
+            }
+            return Ok();
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {

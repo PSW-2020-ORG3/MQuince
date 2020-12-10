@@ -6,6 +6,7 @@
             doctors: [],
             dateForAppointment: '',
             appointments: [],
+            appointments2:[],
             currentStep: 0,
             visibleSpecialization: true,
             visiblePrevious: false,
@@ -20,7 +21,7 @@
             selectedDate: '',
             submitMessage:'',
             selectedDoctor: '',
-            selectedAppointment: 'predef',
+            selectedAppointment: '',
             disabledDates: { to: new Date() }
 
         }
@@ -56,7 +57,7 @@
                                 <br/>
                                 <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select doctor</label>
                                 <select class="form-control"  style="text-indent: 1%" v-model="selectedDoctor">
-					                <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
+					                <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctor.id"  :value="doctor.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
 				                </select>
                             </div>
                         </div>  
@@ -76,8 +77,8 @@
                             <div class="form-group floating-form-group controls mb-0 pb-2" style="color: #6c757d;opacity: 1 ;">
                                 <br/>
                                 <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select termin</label>
-                                <select class="form-control"  style="text-indent: 1%" v-model="selectedDoctor">
-					                <option v-for="(doctor, index) in doctors" class="option" v-bind:value="doctors.id"  :value="doctors.id">{{'Dr ' + doctor.entityDTO.name + ' '+  doctor.entityDTO.surname}}</option>
+                                <select class="form-control"  style="text-indent: 1%" v-model="selectedAppointment">
+					                <option v-for="(app, index) in appointments" class="option" v-bind:value="app"  :value="app">{{app.startDateTime.substr(11, 5) + ' - '+  app.endDateTime.substr(11, 5)}}</option>
 				                </select>
                             </div>
                         </div>  
@@ -95,6 +96,9 @@
                     
                        
                     </form>
+                <div>
+                    {{selectedAppointment}}
+                </div>
                 </div>
             </div>
         </div>
@@ -133,7 +137,18 @@
                 this.visibleNext= false;
                 this.visibleDate = false;
 
-                //submit
+                axios
+                    .get('/api/Appointment/GetFreeApp', {
+                        params: {
+                            patientId: "6459c216-1770-41eb-a56a-7f4524728546",
+                            doctorId: this.selectedDoctor,
+                            date: this.dateForAppointment
+                        }
+                    }).then(response => {
+                        this.appointments = response.data
+
+                    })
+
 
                 this.visibleAppointment = true;
             }
@@ -163,8 +178,18 @@
             }
         },
         submit: function () {
-            if (this.selectedAppointment != '' && this.selectedDoctor != '' && this.dateForAppointment != '' && this.selectedAppointment!='') {
-                alert("Uspesna rezervacija");
+            if (this.selectedAppointment != '') {
+                axios
+                    .post("/api/appointment", {
+                        StartDateTime: this.selectedAppointment.startDateTime,
+                        EndDateTime: this.selectedAppointment.endDateTime,
+                        DoctorId: this.selectedDoctor,
+                        PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
+                    }).then((response) => {
+                            alert('Uspesno zakazivanje termina')
+                        }, (error) => {
+                            console.log(error);
+                        });
             }
         }
     }

@@ -24,6 +24,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
+                
                 _context.Appointments.Add(AppointmentMapper.MapAppointmentEntityToAppointmentPersistence(entity));
                 _context.SaveChanges();
             }
