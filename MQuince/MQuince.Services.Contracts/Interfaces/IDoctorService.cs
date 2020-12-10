@@ -10,5 +10,6 @@ namespace MQuince.Services.Contracts.Interfaces
     {
         IdentifiableDTO<DoctorDTO> GetById(Guid id);
         IEnumerable<IdentifiableDTO<DoctorDTO>> GetDoctorsPerSpecialization(Guid specializationId);
+        IEnumerable<IdentifiableDTO<DoctorDTO>> GetAll();
     }
 }

@@ -89,12 +89,12 @@ namespace MQuince.WebAPI.Controllers
             }
         }
 
-        [HttpGet("GetForPatient/{id}")]
-        public IActionResult GetForPatient(Guid id)
+        [HttpGet("GetForPatient")]
+        public IActionResult GetForPatient(Guid patientId)
         {
             try
             {
-                return Ok(_appointmentService.GetForPatient(id));
+                return Ok(_appointmentService.GetForPatient(patientId));
             }
             catch (NotFoundEntityException e)
             {

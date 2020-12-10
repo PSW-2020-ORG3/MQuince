@@ -36,6 +36,23 @@ namespace MQuince.WebAPI.Controllers
             }
         }
 
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                return Ok(_doctorService.GetAll());
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+        }
+
         [HttpGet("specialization/{id}")]
         public IActionResult GetSpec(Guid id)
         {
