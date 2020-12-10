@@ -1,33 +1,20 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>MQuince Health</title>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-    <link href="../src/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="../src/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../src/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="../src/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="../src/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../src/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../src/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
-    <link href="../src/assets/style.css" rel="stylesheet">
-
-    <link href="css/toast.css" rel="stylesheet" />
-    <script src="scripts/toast.js"></script>
-    <script src="scripts/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>HealthCare Clinic</title>
+    <!-- Favicon-->
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="styles.css" rel="stylesheet" />
+    <style>
     input[type=text], select, input[type=time] {
         width: 100%;
         padding: 12px 20px;
@@ -56,7 +43,7 @@
 
     .apartment-name2 {
         position: relative;
-        top: 30px;
+        top: 15px;
         max-height: 50px;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -106,54 +93,45 @@
         height: 200px;
     }
 </style>
-
+</head>
 <body id="page-top">
-    <div id="app">
-        <div class="header" id="header">
-            <header id="header" class="fixed-top">
-                <div class="container d-flex align-items-center">
-                    <h1 class="logo mr-auto"><a href="#/web">MQUINCE Medic</a></h1>
-                    
-                </div>
-            </header>
-        </div>
-        <div>
-            <router-view style="margin-top:130px;"></router-view>
-        </div>
-    </div>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-           
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">MQuince</a>
+            <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
             </div>
         </div>
     </nav>
-    <div class="col-lg-8 mx-auto">
-                <select name="feedbackOption" id="feedbackOption" v-model="status" v-on:change="statusChanged" style="width:200px; margin-left: 520px; margin-top: 20px;">
-                    <option value="Nikola Nikolic">Nikola Nikolic</option>
-                    <option value="Pera Peric">Pera Peric</option>
-                    <option value="Ivan Ivic">Ivan Ivic</option>
-                </select>
-            </div>
 
-    <div id="specializations">
-        <div class="container">
-            <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Your specializations</h2>
-            <!-- Icon Divider-->
-            <!-- Contact Section Form-->
-            <div class="commentBox" v-for="specialization in specializations">
-                <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                    <div class="apartment-name2">{{specialization.entityDTO.name}}</div>
-                    <br/>
-                 </div>
-             </div>
+    <!-- Contact Section-->
+    <section class="page-section" id="contact">
+        <div id="createAppointment">
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Your appointments</h2></br>
+           
         </div>
+    </section>
+    
+    <div id="appointments">
+            <div class="container" >
+                <div class="commentBox" v-for="appointment in appointments">
+                    <div class="col-lg-8 mx-auto">
+                        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                        <div class="apartment-name2"><b>Date:</b> {{appointment.entityDTO.startDateTime.substr(0, 10)}}</div>
+                        <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
+                        <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
+                        <!-- <div v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.name}}</div>-->
+                        <br/>
+                        <div class="apartment-name2"><button>Cancel</button></div>
+                        <br/>
+                    </div>
+                </div>
+            </div>
     </div>
-
-
     <!-- Footer-->
     <footer class="footer text-center">
         <div class="container">
@@ -170,12 +148,12 @@
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- Contact form JS-->
-    <script src="assets/mail/jqBootstrapValidation.js"></script>
-    <script src="assets/mail/contact_me.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="../axios.js"></script>
+    
     <script src="js/scripts.js"></script>
-    <script src="Appointment.js"></script>
+    <script src="../scripts/vue.js"></script>
+    <script src="../scripts/axios.js"></script>
+    <script src="../scripts/vue-router.js"></script>
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <script src="../Appointment/Appointment.js"></script>
 </body>
 </html>

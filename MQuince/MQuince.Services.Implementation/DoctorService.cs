@@ -6,6 +6,7 @@ using MQuince.Services.Contracts.Interfaces;
 using MQuince.Services.Implementation.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MQuince.Services.Implementation
@@ -17,6 +18,11 @@ namespace MQuince.Services.Implementation
         {
             _doctorRepository = doctorRepository;
         }
+
+        public IEnumerable<IdentifiableDTO<DoctorDTO>> GetAll()
+            => _doctorRepository.GetAll().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
+
+
         public IdentifiableDTO<DoctorDTO> GetById(Guid id)
         {
             try

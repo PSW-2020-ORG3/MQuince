@@ -9,5 +9,6 @@ namespace MQuince.Repository.Contracts
     {
         Doctor GetById(Guid id);
         IEnumerable<Doctor> GetDoctorsPerSpecialization(Guid specializationId);
+        IEnumerable<Doctor> GetAll();
     }
 }

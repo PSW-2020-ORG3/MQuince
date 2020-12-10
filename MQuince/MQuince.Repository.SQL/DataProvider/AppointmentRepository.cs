@@ -71,7 +71,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.Id.Equals(patientId)));
+                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.PatientPersistanceId == patientId).ToList());
             }
         }
 
