@@ -1,15 +1,16 @@
 ﻿const homepage = { template: '<homepage></homepage>' }
-
-const routes = [
-    { path: '/web', component: homepage }
-
-]
-
+const createAppointment = { template: '<homepage1></homepage1>'}
+const test = { template:"<create-appointment></create-appointment>"}
 const router = new VueRouter({
-    routes 
-})
+	routes: [
+        { path: '/', component: homepage },
+		{ path: '/createappointment', component: createAppointment },
+		{ path: '/app', component: test }
+	]
+});
 
 
-const app = new Vue({
-  router
-}).$mount('#app')
+var app = new Vue({
+	router,
+	el: '#app'
+});
