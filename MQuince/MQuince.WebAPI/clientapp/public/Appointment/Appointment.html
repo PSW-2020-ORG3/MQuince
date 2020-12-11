@@ -126,7 +126,7 @@
                         <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
                         <!-- <div v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.name}}</div>-->
                         <br/>
-                        <div class="apartment-name2" > <button @click="cancelAppointment(appointment.id)"> Cancel </button></div>
+                        <div class="apartment-name2" > <button @click="cancelAppointment(appointment.id, appointment.startDateTime)"> Cancel </button></div>
                         <br/>
                     </div>
                 </div>

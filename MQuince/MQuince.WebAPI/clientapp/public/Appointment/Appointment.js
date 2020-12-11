@@ -22,10 +22,12 @@
 		
 	},
     methods: {
-		cancelAppointment: function (appointmentId) {
+		cancelAppointment: function (appointmentId, starDateTime) {
 			axios.put('/api/Appointment/canceledAppointment/' + appointmentId
 				).then( (response) => {
-						alert("Successful cancellation!")
+						if(response.status !== 204){
+							alert("Successful cancellation!");
+						}
 						})
 					}		
 										
