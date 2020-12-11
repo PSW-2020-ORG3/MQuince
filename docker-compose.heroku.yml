@@ -1,0 +1,43 @@
+services:
+
+  servers:
+    build: 
+      context: ./MQuince
+      args:
+        #DATABASE_USERNAME: postgres
+        #DATABASE_PASSWORD: root
+        #DATABASE_PORT: 5432
+        #STAGE: test
+        DATABASE_USERNAME: dyjeaadgecsqjv
+        DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+        DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+        DATABASE_SCHEMA: d52d2dq2jfttam
+        DATABASE_PORT: 5432
+        STAGE: test
+    image: mquince-postgres
+    environment:
+      #DATABASE_USERNAME: postgres
+      #DATABASE_PASSWORD: root
+      #DATABASE_PORT: 5432
+      #STAGE: test
+      DATABASE_USERNAME: dyjeaadgecsqjv
+      DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+      DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+      DATABASE_SCHEMA: d52d2dq2jfttam
+      DATABASE_PORT: 5432
+      STAGE: test
+
+  mysql:
+    image: fintrace/postgres-uuid
+    container_name: mysql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mquince
+    volumes:
+      - postgres-data:/var/lib/postgres:rw
+
+volumes:
+  postgres-data:
+
+   

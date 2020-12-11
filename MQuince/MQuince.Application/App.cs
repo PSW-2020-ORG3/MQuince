@@ -17,13 +17,23 @@ namespace MQuince.Application
         private DbContextOptionsBuilder _optionsBuilder;
         public static IdentifiableDTO<PatientDTO> loggedPatient;
 
-        public App(IConfiguration configuration)
+        public App(string connectionString)
         {
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            //stage = "test";
             _optionsBuilder = new DbContextOptionsBuilder();
-            _optionsBuilder.UseMySql(configuration.GetConnectionString("MQuinceDB"));
+            if (stage == "dev")
+            {
+                _optionsBuilder.UseMySql(connectionString);
+            }
+            else
+            {
+                _optionsBuilder.UseNpgsql(connectionString);
+            }
 
-            PatientService _patientService = (PatientService)this.GetPatientService();
-            loggedPatient = _patientService.GetById(Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"));
+
+            //PatientService _patientService = (PatientService)this.GetPatientService();
+            //loggedPatient = _patientService.GetById(Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"));
         }
 
         public IUserService GetUserService()
