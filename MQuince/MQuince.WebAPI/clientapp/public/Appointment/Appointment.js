@@ -22,7 +22,7 @@
 		
 	},
     methods: {
-		cancelAppointment: function (appointmentId, starDateTime) {
+		cancelAppointment: function (appointmentId) {
 			axios.put('/api/Appointment/canceledAppointment/' + appointmentId
 				).then( (response) => {
 						if(response.status !== 204){
