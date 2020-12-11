@@ -27,6 +27,8 @@
 				).then( (response) => {
 						if(response.status !== 204){
 							alert("Successful cancellation!");
+						}else{
+							alert("It is not possible to cancel an appointment!");
 						}
 						})
 					}		
