@@ -1,4 +1,5 @@
-﻿using MQuince.Services.Contracts.DTO.Users;
+﻿using MQuince.Entities.Users;
+using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace MQuince.Services.Contracts.Interfaces
         IdentifiableDTO<DoctorDTO> GetById(Guid id);
         IEnumerable<IdentifiableDTO<DoctorDTO>> GetDoctorsPerSpecialization(Guid specializationId);
         IEnumerable<IdentifiableDTO<DoctorDTO>> GetAll();
+
+        
     }
 }

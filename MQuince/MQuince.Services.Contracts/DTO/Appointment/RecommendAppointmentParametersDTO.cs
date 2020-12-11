@@ -9,6 +9,7 @@ namespace MQuince.Services.Contracts.DTO.Appointment
     class RecommendAppointmentParametersDTO
     {
         public Guid DoctorId { get; set; }
+        public Guid PatientId { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public AppointmentPriority Priority { get; set; }

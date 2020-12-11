@@ -25,8 +25,20 @@
 		cancelAppointment: function (appointmentId) {
 			axios.put('/api/Appointment/canceledAppointment/' + appointmentId
 				).then( (response) => {
-						alert("Successful cancellation!")
+						
+						axios
+							.get('/api/Appointment/GetForPatient', {
+								params: {
+									patientId: "6459c216-1770-41eb-a56a-7f4524728546"
+								}
+								}).then(response => {
+									this.appointments = response.data
+							})
+						
 						})
+						alert("Successful cancellation!")
+						
+
 					}		
 										
 			}

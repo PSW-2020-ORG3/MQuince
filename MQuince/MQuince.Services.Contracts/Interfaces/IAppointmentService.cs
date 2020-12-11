@@ -1,6 +1,8 @@
 ﻿using MQuince.Entities.Appointment;
+using MQuince.Entities.Users;
 using MQuince.Enums;
 using MQuince.Services.Contracts.DTO.Appointment;
+using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using System;
 using System.Collections.Generic;
@@ -19,5 +21,7 @@ namespace MQuince.Services.Contracts.Interfaces
         bool CancelAppointment(Guid IdAppointment, DateTime today);
 
         Appointment GetAppointment(Guid id);
+       
+        AppointmentDTO GetExaminationInRange(DateTime dateFrom, DateTime dateTo, Guid patientId, Guid doctorId);
     }
 }

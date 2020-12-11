@@ -3,6 +3,7 @@ using MQuince.Entities.Users;
 using MQuince.Enums;
 using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Appointment;
+using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
@@ -19,6 +20,7 @@ namespace MQuince.Services.Implementation
         public IAppointmentRepository _appointmentRepository;
         public IDoctorService _doctorService;
         public IWorkTimeService _workTimeService;
+        private IStrategy strategy;
 
         public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorService doctorService, IWorkTimeService workTimeService)
         {
@@ -170,5 +172,38 @@ namespace MQuince.Services.Implementation
         {
             return _appointmentRepository.GetById(id);
         }
+
+        public AppointmentDTO GetExaminationInRange(DateTime dateFrom, DateTime dateTo, Guid patientId, Guid doctorId)
+        {
+            List<AppointmentDTO> freeAppointments;
+            TreatmentType treatmentType = TreatmentType.Examination;
+            for (DateTime date = dateFrom; date <= dateTo; date = date.AddDays(1))
+            {
+                freeAppointments = GetFreeAppointments(patientId, doctorId, date, treatmentType).ToList();
+                if (freeAppointments.Count > 0)
+                {
+                    return freeAppointments[0];
+                }
+            }
+            return null;
+        }
+
+        public AppointmentDTO RecommendAppointment(RecommendAppointmentParameters parameters)
+        {
+            strategy = ChooseSrategy(parameters);
+            AppointmentDTO appointment = GetExaminationInRange(parameters.DateFrom, parameters.DateTo, parameters.PatientId, parameters.DoctorId);
+            if (appointment != null)
+            {
+                return appointment;
+            }
+            else
+            {
+                return strategy.recommend(parameters.PatientId, parameters.DoctorId);
+            }
+        }
+
+        IStrategy ChooseSrategy(RecommendAppointmentParameters parameters)
+             => (parameters.Priority == AppointmentPriority.DatePriority) ? (IStrategy)new DatePriorityStrategy(this, parameters) : new DoctorPriorityStrategy(this, parameters);
+
     }
 }

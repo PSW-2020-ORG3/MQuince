@@ -39,7 +39,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.ToList());
+                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.IsCanceled == false).ToList());
             }
         }
 
@@ -71,7 +71,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.PatientPersistanceId == patientId).ToList());
+                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.PatientPersistanceId == patientId && c.IsCanceled == false).ToList());
             }
         }
 
