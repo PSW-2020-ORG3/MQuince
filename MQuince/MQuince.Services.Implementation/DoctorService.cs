@@ -51,8 +51,5 @@ namespace MQuince.Services.Implementation
             }
         }
 
-
-
-
     }
 }

@@ -15,7 +15,7 @@ namespace MQuince.Services.Implementation
         public ISpecializationRepository _specializationRepository;
         public SpecializationService(ISpecializationRepository specializationRepository)
         {
-            _specializationRepository = specializationRepository;
+            _specializationRepository = specializationRepository == null ? throw new ArgumentNullException(nameof(specializationRepository) + "is set to null") : specializationRepository;
         }
         public IEnumerable<IdentifiableDTO<SpecializationDTO>> GetAll()
         {
