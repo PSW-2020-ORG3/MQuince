@@ -47,15 +47,19 @@ namespace MQuince.Services.Tests.UnitTests
         [Fact]
         public void GetAll_returns_data()
         {
-            appointmentRepository.GetAll().Returns(this.GetListOfSpecializations());
+            appointmentRepository.GetAll().Returns(this.GetListOfAppointments());
 
             List<IdentifiableDTO<AppointmentDTO>> returnedList = appointmentService.GetAll().ToList();
 
             Assert.Equal(returnedList[0].Id, Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"));
+            Assert.Equal(new DateTime(2020, 12, 26, 07, 00, 00), returnedList[0].EntityDTO.StartDateTime);
+            Assert.Equal(new DateTime(2020, 12, 26, 07, 30, 00), returnedList[0].EntityDTO.EndDateTime);
             Assert.Equal(Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"), returnedList[0].EntityDTO.PatientId);
             Assert.Equal(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"), returnedList[0].EntityDTO.DoctorId);
 
             Assert.Equal(returnedList[1].Id, Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"));
+            Assert.Equal(new DateTime(2020, 12, 27, 07, 00, 00), returnedList[1].EntityDTO.StartDateTime);
+            Assert.Equal(new DateTime(2020, 12, 27, 07, 30, 00), returnedList[1].EntityDTO.EndDateTime);
             Assert.Equal(Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), returnedList[1].EntityDTO.PatientId);
             Assert.Equal(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), returnedList[1].EntityDTO.DoctorId);
         }
@@ -85,7 +89,7 @@ namespace MQuince.Services.Tests.UnitTests
             Assert.Throws<InternalServerErrorException>(() => appointmentService.GetAll());
         }
 
-        private List<Appointment> GetListOfSpecializations()
+        private List<Appointment> GetListOfAppointments()
         {
             List<Appointment> listOfSpecialization = new List<Appointment>()
             {
