@@ -82,7 +82,13 @@ namespace MQuince.WebAPI
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
-                context.Database.Migrate();
+                string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+                RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
+                if (!databaseCreator.HasTables())
+			    {
+                    context.Database.Migrate();
+                }     
+                
                 //RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
                 //databaseCreator.CreateTables();
             }
