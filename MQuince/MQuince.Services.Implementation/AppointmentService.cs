@@ -31,7 +31,7 @@ namespace MQuince.Services.Implementation
 
         public AppointmentService(IAppointmentRepository appointmentRepository)
         {
-            _appointmentRepository = appointmentRepository;
+            _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
         }
         
         public Guid Create(AppointmentDTO entityDTO)
@@ -52,7 +52,19 @@ namespace MQuince.Services.Implementation
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAll()
-        => _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+        {
+            try { 
+                return _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
 
         public IdentifiableDTO<AppointmentDTO> GetById(Guid id)
         {

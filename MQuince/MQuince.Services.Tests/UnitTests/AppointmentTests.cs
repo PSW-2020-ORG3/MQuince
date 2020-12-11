@@ -1,10 +1,17 @@
 ﻿using Moq;
 using MQuince.Entities.Appointment;
+using MQuince.Entities.Users;
 using MQuince.Enums;
 using MQuince.Repository.Contracts;
+using MQuince.Services.Contracts.DTO.Appointment;
+using MQuince.Services.Contracts.Exceptions;
+using MQuince.Services.Contracts.IdentifiableDTO;
+using MQuince.Services.Contracts.Interfaces;
 using MQuince.Services.Implementation;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -13,6 +20,98 @@ namespace MQuince.Services.Tests.UnitTests
 {
     public class AppointmentTests
     {
+
+        IAppointmentService appointmentService;
+        IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
+
+        public AppointmentTests()
+        {
+            appointmentService = new AppointmentService(appointmentRepository);
+        }
+
+        [Fact]
+        public void Constructor_when_give_repository_as_null()
+        {
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null));
+        }
+
+        [Fact]
+        public void Constructor_when_give_correctly_repository()
+        {
+            IAppointmentService appointmentService = new AppointmentService(appointmentRepository);
+
+
+            Assert.IsType<AppointmentService>(appointmentService);
+        }
+
+        [Fact]
+        public void GetAll_returns_data()
+        {
+            appointmentRepository.GetAll().Returns(this.GetListOfSpecializations());
+
+            List<IdentifiableDTO<AppointmentDTO>> returnedList = appointmentService.GetAll().ToList();
+
+            Assert.Equal(returnedList[0].Id, Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"));
+            Assert.Equal(Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"), returnedList[0].EntityDTO.PatientId);
+            Assert.Equal(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"), returnedList[0].EntityDTO.DoctorId);
+
+            Assert.Equal(returnedList[1].Id, Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"));
+            Assert.Equal(Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), returnedList[1].EntityDTO.PatientId);
+            Assert.Equal(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), returnedList[1].EntityDTO.DoctorId);
+        }
+
+        [Fact]
+        public void GetAll_returns_null()
+        {
+            List<Appointment> listOfAppointemnts = null;
+            appointmentRepository.GetAll().Returns(listOfAppointemnts);
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetAll());
+        }
+
+        [Fact]
+        public void GetAll_returns_any_argument_null_exception()
+        {
+            appointmentRepository.GetAll().Returns(x => { throw new ArgumentNullException(); });
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetAll());
+        }
+
+        [Fact]
+        public void GetAll_returns_any_other_exception()
+        {
+            appointmentRepository.GetAll().Returns(x => { throw new Exception(); });
+
+            Assert.Throws<InternalServerErrorException>(() => appointmentService.GetAll());
+        }
+
+        private List<Appointment> GetListOfSpecializations()
+        {
+            List<Appointment> listOfSpecialization = new List<Appointment>()
+            {
+                new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                },new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                    StartDateTime = new DateTime(2020, 12, 27, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 27, 07, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                }
+            };
+
+
+            return listOfSpecialization;
+        }
+
         [Fact]
         public void Cancel_appointment()
         {
@@ -40,6 +139,13 @@ namespace MQuince.Services.Tests.UnitTests
         }
 
 
+        private static IAppointmentRepository CreateAppointmentRepository()
+        {
+
+            var stubRepository = new Mock<IAppointmentRepository>();
+
+            return stubRepository.Object;
+        }
         private static IAppointmentRepository CreateWorkTimeStubRepository()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
