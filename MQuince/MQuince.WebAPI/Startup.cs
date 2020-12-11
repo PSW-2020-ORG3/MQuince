@@ -84,10 +84,10 @@ namespace MQuince.WebAPI
                 var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
                 string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
                 RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-                if (!databaseCreator.HasTables())
+                if (!databaseCreator.HasTables() && stage=="test")
 			    {
                     context.Database.Migrate();
-                }     
+				}
                 
                 //RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
                 //databaseCreator.CreateTables();
@@ -132,7 +132,7 @@ namespace MQuince.WebAPI
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_DOMAIN") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince2";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
