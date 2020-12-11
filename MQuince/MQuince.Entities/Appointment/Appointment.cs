@@ -17,13 +17,25 @@ namespace MQuince.Entities.Appointment
         {
         }
 
-        public Appointment(DateTime startDateTime, DateTime endDateTime, TreatmentType type, Guid doctorId, Guid patientId)
+        public Appointment(DateTime startDateTime, DateTime endDateTime, TreatmentType type, Guid doctorId, Guid patientId, bool cancled)
         {
             StartDateTime = startDateTime;
             EndDateTime = endDateTime;
             Type = type;
             DoctorId = doctorId;
             PatientId = patientId;
+            IsCanceled = cancled;
+        }
+
+        public Appointment(Guid Id, DateTime startDateTime, DateTime endDateTime, TreatmentType type, Guid doctorId, Guid patientId, bool cancled)
+        {
+            _id = Id;
+            StartDateTime = startDateTime;
+            EndDateTime = endDateTime;
+            Type = type;
+            DoctorId = doctorId;
+            PatientId = patientId;
+            IsCanceled = cancled;
         }
 
         public DateTime StartDateTime { get; set; }
@@ -31,7 +43,7 @@ namespace MQuince.Entities.Appointment
         public TreatmentType Type { get; set; }
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
-
+        public bool IsCanceled { get; set; }
 
         public Guid Id
         {

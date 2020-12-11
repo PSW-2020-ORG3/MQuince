@@ -27,6 +27,11 @@ namespace MQuince.Services.Implementation
             _doctorService = doctorService;
         }
 
+        public AppointmentService(IAppointmentRepository appointmentRepository)
+        {
+            _appointmentRepository = appointmentRepository;
+        }
+        
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
@@ -36,8 +41,8 @@ namespace MQuince.Services.Implementation
             return appointment.Id;
         }
         private Appointment CreateAppointmentFromDTO(AppointmentDTO appointment, Guid? id = null)
-            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId)
-                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId);
+            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled)
+                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled);
 
         public bool Delete(Guid id)
         {
@@ -149,6 +154,21 @@ namespace MQuince.Services.Implementation
             return freeAppointments;
         }
 
+        public bool CancelAppointment(Guid IdAppointment, DateTime today)
+        {
+            Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
+            if (today < appointmentCanceled.StartDateTime.AddHours(-48))
+            {
+                appointmentCanceled.IsCanceled = true;
+                _appointmentRepository.Update(appointmentCanceled);
+                return true;
+            }
+            return false;
+        }
 
+        public Appointment GetAppointment(Guid id)
+        {
+            return _appointmentRepository.GetById(id);
+        }
     }
 }

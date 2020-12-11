@@ -109,8 +109,26 @@ namespace MQuince.WebAPI.Controllers
         [HttpPost("Update")]
         public IActionResult Update(Appointment appointment)
         {
-            _appointmentService.Update(new AppointmentDTO() { StartDateTime = appointment.StartDateTime, EndDateTime = appointment.EndDateTime, Type = appointment.Type, DoctorId = appointment.DoctorId, PatientId = appointment.PatientId }, appointment.Id);
+            _appointmentService.Update(new AppointmentDTO() { StartDateTime = appointment.StartDateTime, EndDateTime = appointment.EndDateTime, Type = appointment.Type, DoctorId = appointment.DoctorId, PatientId = appointment.PatientId, IsCanceled = appointment.IsCanceled }, appointment.Id);
             return Ok();
         }
+
+        [HttpPut("canceledAppointment/{IdAppointment}")]
+        public IActionResult CancelAppointment(Guid IdAppointment)
+        {
+            try
+            {
+                return Ok(_appointmentService.CancelAppointment(IdAppointment, DateTime.Now));
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+        }
+        
     }
 }

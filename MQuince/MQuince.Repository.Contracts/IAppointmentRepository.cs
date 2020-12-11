@@ -9,8 +9,8 @@ namespace MQuince.Repository.Contracts
     public interface IAppointmentRepository : IRepository<Appointment>
     {
         IEnumerable<Appointment> GetForDoctor(Guid doctorId);
-
         IEnumerable<Appointment> GetForPatient(Guid patientId);
         IEnumerable<Appointment> GetAppointmentForDoctorForDate(Guid doctorId, DateTime time);
+        
     }
 }

@@ -18,13 +18,14 @@ namespace MQuince.Repository.SQL.DataProvider.Util
                                             EndDateTime = appointments.EndDateTime,
                                             Type = appointments.Type,
                                             DoctorId = appointments.DoctorPersistanceId,
-                                            PatientId = appointments.PatientPersistanceId
+                                            PatientId = appointments.PatientPersistanceId,
+                                            IsCanceled = appointments.IsCanceled
                                         };
         public static AppointmentPersistence MapAppointmentEntityToAppointmentPersistence(Appointment appointment)
         {
             if (appointment == null) return null;
 
-            AppointmentPersistence retVal = new AppointmentPersistence() { Id = appointment.Id, StartDateTime = appointment.StartDateTime, EndDateTime = appointment.EndDateTime, Type = appointment.Type, DoctorPersistanceId = appointment.DoctorId, PatientPersistanceId = appointment.PatientId };
+            AppointmentPersistence retVal = new AppointmentPersistence() { Id = appointment.Id, StartDateTime = appointment.StartDateTime, EndDateTime = appointment.EndDateTime, Type = appointment.Type, DoctorPersistanceId = appointment.DoctorId, PatientPersistanceId = appointment.PatientId, IsCanceled = appointment.IsCanceled };
             return retVal;
         }
         public static IEnumerable<Appointment> MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(IEnumerable<AppointmentPersistence> appointments)
