@@ -83,7 +83,15 @@ namespace MQuince.Services.Implementation
         }
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForDoctor(Guid doctorId)
         {
-            return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try { 
+                return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+             }catch(ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId)
@@ -106,7 +114,17 @@ namespace MQuince.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAppointmentForDoctorForDate(Guid doctorId, DateTime time)
         {
-            return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try { 
+                return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
 

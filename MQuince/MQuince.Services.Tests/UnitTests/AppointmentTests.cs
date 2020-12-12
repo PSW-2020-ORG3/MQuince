@@ -197,6 +197,75 @@ namespace MQuince.Services.Tests.UnitTests
             Assert.Throws<InternalServerErrorException>(() => appointmentService.GetForPatient(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
 
+        [Fact]
+        public void Get_appointments_for_doctor_returns_appointment()
+        {
+            appointmentRepository.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(this.GetListOfAppointments());
+
+            List<IdentifiableDTO<AppointmentDTO>> appointments = appointmentService.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).ToList();
+
+            Assert.True(this.CompareAppointmentAndIdentifierAppointment(this.GetFirstAppointment(), appointments[0]));
+            Assert.True(this.CompareAppointmentAndIdentifierAppointment(this.GetSecondAppointment(), appointments[1]));
+
+        }
+
+        [Fact]
+        public void Get_appointments_per_doctor_returns_null()
+        {
+            List<Appointment> appointments = null;
+            appointmentRepository.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(appointments);
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")));
+        }
+
+        [Fact]
+        public void Get_appointments_per_doctor_returns_any_argument_null_exception()
+        {
+            appointmentRepository.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(x => { throw new ArgumentNullException(); });
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")));
+        }
+
+        [Fact]
+        public void Get_appointments_per_doctor_return_any_other_exception()
+        {
+            appointmentRepository.GetForDoctor(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
+
+            Assert.Throws<InternalServerErrorException>(() => appointmentService.GetForDoctor(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
+        }
+        [Fact]
+        public void Get_appointment_for_doctor_for_date_return_appointments()
+        {
+            appointmentRepository.GetForDoctor(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba")).Returns(this.GetListOfAppointments());
+            DateTime date = new DateTime(2020, 12, 05);
+
+            List<IdentifiableDTO<AppointmentDTO>> appointemnts = appointmentService.GetAppointmentForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date).ToList();
+
+            Assert.True(this.CompareAppointmentsForDoctorForDate(this.GetListOfAppointments(), appointemnts, date));
+        }
+        private bool CompareAppointmentsForDoctorForDate(List<Appointment> appointemntsFirst, List<IdentifiableDTO<AppointmentDTO>> appointemntsSecond, DateTime date)
+        {
+            bool proba = false;
+            foreach (Appointment a in appointemntsFirst)
+            {
+                if (a.StartDateTime.Date == date)
+                {
+                    proba = false;
+                    foreach (IdentifiableDTO<AppointmentDTO> a2 in appointemntsSecond)
+                    {
+                        if (a2.EntityDTO.StartDateTime.Date == date)
+                        {
+                            if (a.Id == a2.Id)
+                                proba = true;
+                        }
+                    }
+                    if (proba == false)
+                        return false;
+                }
+            }
+
+            return true;
+        }
         private Appointment GetSecondAppointment()
             => new Appointment()
             {

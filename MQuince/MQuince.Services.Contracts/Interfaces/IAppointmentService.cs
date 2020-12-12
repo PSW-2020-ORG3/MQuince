@@ -23,5 +23,6 @@ namespace MQuince.Services.Contracts.Interfaces
         Appointment GetAppointment(Guid id);
        
         AppointmentDTO GetExaminationInRange(DateTime dateFrom, DateTime dateTo, Guid patientId, Guid doctorId);
+        IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAppointmentForDoctorForDate(Guid guid, DateTime date);
     }
 }
