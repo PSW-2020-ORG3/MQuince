@@ -22,28 +22,29 @@ namespace MQuince.Services.Tests.UnitTests
 
         IAppointmentService appointmentService;
         IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
-        IDoctorService doctorRepository = Substitute.For<IDoctorService>();
-        IWorkTimeService workTimeRepository = Substitute.For<IWorkTimeService>();
+        IDoctorService doctorService = Substitute.For<IDoctorService>();
+        IWorkTimeService workTimeService = Substitute.For<IWorkTimeService>();
         public AppointmentTests()
         {
-            appointmentService = new AppointmentService(appointmentRepository, doctorRepository, workTimeRepository);
+            appointmentService = new AppointmentService(appointmentRepository, doctorService, workTimeService);
         }
 
         [Fact]
-        public void Constructor_when_given_repository_as_null()
+        public void Constructor_when_given_argumet_as_null()
         {
             Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, null));
             Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, doctorRepository, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, workTimeRepository));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorRepository, workTimeRepository));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, workTimeRepository));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, doctorService, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, workTimeService));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorService, workTimeService));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, workTimeService));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorService, null));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, workTimeRepository);
+            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorService, workTimeService);
 
 
             Assert.IsType<AppointmentService>(appointmentService);
@@ -166,7 +167,7 @@ namespace MQuince.Services.Tests.UnitTests
            };
 
         [Fact]
-        public void Get_appointments_for_patient_returns_appointment()
+        public void Get_appointments_for_patient_returns_appointments()
         {
             appointmentRepository.GetForPatient(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(this.GetListOfAppointments());
 
@@ -203,7 +204,7 @@ namespace MQuince.Services.Tests.UnitTests
         }
 
         [Fact]
-        public void Get_appointments_for_doctor_returns_appointment()
+        public void Get_appointments_for_doctor_returns_appointments()
         {
             appointmentRepository.GetForDoctor(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(this.GetListOfAppointments());
 
