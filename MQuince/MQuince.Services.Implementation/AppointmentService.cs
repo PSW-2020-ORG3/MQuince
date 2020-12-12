@@ -17,9 +17,9 @@ namespace MQuince.Services.Implementation
 {
     public class AppointmentService : IAppointmentService
     {
-        public IAppointmentRepository _appointmentRepository;
-        public IDoctorService _doctorService;
-        public IWorkTimeService _workTimeService;
+        private IAppointmentRepository _appointmentRepository;
+        private IDoctorService _doctorService;
+        private IWorkTimeService _workTimeService;
         private IStrategy strategy;
 
         public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorService doctorService, IWorkTimeService workTimeService)
@@ -88,7 +88,15 @@ namespace MQuince.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId)
         {
-            return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try { 
+                return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }catch(ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public void Update(AppointmentDTO entityDTO, Guid id)
