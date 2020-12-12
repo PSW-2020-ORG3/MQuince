@@ -22,22 +22,28 @@ namespace MQuince.Services.Tests.UnitTests
 
         IAppointmentService appointmentService;
         IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
-
+        IDoctorService doctorRepository = Substitute.For<IDoctorService>();
+        IWorkTimeService workTimeRepository = Substitute.For<IWorkTimeService>();
         public AppointmentTests()
         {
-            appointmentService = new AppointmentService(appointmentRepository, null, null);
+            appointmentService = new AppointmentService(appointmentRepository, doctorRepository, workTimeRepository);
         }
 
         [Fact]
-        public void Constructor_when_give_repository_as_null()
+        public void Constructor_when_given_repository_as_null()
         {
             Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, doctorRepository, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, workTimeRepository));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorRepository, workTimeRepository));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, workTimeRepository));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, null, null);
+            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorRepository, workTimeRepository);
 
 
             Assert.IsType<AppointmentService>(appointmentService);

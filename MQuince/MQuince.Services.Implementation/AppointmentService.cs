@@ -23,8 +23,8 @@ namespace MQuince.Services.Implementation
         public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorService doctorService, IWorkTimeService workTimeService)
         {
             _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
-            _workTimeService = workTimeService;
-            _doctorService = doctorService;
+            _workTimeService = workTimeService == null ? throw new ArgumentNullException(nameof(workTimeService) + "is set to null") : workTimeService; ;
+            _doctorService = doctorService == null ? throw new ArgumentNullException(nameof(doctorService) + "is set to null") : doctorService; ;
         }
 
         public Guid Create(AppointmentDTO entityDTO)
