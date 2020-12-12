@@ -2,6 +2,7 @@
 using MQuince.Entities.Appointment;
 using MQuince.Enums;
 using MQuince.Repository.Contracts;
+using MQuince.Services.Contracts.DTO.Appointment;
 using MQuince.Services.Implementation;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace MQuince.Services.Tests.UnitTests
             Guid IdAppointment = Guid.Parse("08d89d75-3533-47ac-80a1-6cd77742dd25");
 
             _appointmentService.CancelAppointment(IdAppointment);
-            Appointment canceledAppointment = _appointmentService.GetAppointment(IdAppointment);
+            Appointment canceledAppointment = _appointmentService.GettById(IdAppointment);
 
             Assert.True(canceledAppointment.IsCanceled);
         }
@@ -34,7 +35,7 @@ namespace MQuince.Services.Tests.UnitTests
             Guid IdAppointment = Guid.Parse("08d89d75-46c4-4e41-8da0-54cc9586c109");
 
             _appointmentService.CancelAppointment(IdAppointment);
-            Appointment canceledAppointment = _appointmentService.GetAppointment(IdAppointment);
+            Appointment canceledAppointment = _appointmentService.GettById(IdAppointment);
 
             Assert.False(canceledAppointment.IsCanceled);
         }
