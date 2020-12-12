@@ -15,7 +15,7 @@ namespace MQuince.Services.Implementation
         public IWorkTimeRepository _worktimeRepository;
         public WorkTimeService(IWorkTimeRepository worktimeRepository)
         {
-            _worktimeRepository = worktimeRepository;
+            _worktimeRepository = worktimeRepository == null ? throw new ArgumentNullException(nameof(worktimeRepository) + "is set to null") : worktimeRepository;
         }
         public IEnumerable<WorkTime> GetWorkTimesForDoctor(Guid doctorId)
         {

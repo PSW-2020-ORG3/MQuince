@@ -39,7 +39,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetAll_returns_data()
+        public void Get_all_returns_data()
         {
             doctorRepository.GetAll().Returns(this.GetListOfDoctors());
 
@@ -49,7 +49,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetAll_returns_null()
+        public void Get_all_returns_null()
         {
             doctorService = new DoctorService(doctorRepository);
             List<Doctor> listOfDoctors = null;
@@ -59,7 +59,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetAll_returns_any_argument_null_exception()
+        public void Get_all_returns_any_argument_null_exception()
         {
             doctorRepository.GetAll().Returns(x => { throw new ArgumentNullException(); });
 
@@ -67,7 +67,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetAll_returns_any_other_exception()
+        public void Get_all_returns_any_other_exception()
         {
             doctorRepository.GetAll().Returns(x => { throw new Exception(); });
 
@@ -75,7 +75,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetById_returns_doctor()
+        public void Get_by_id_returns_doctor()
         {
             doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(this.GetFirstDoctor());
 
@@ -85,7 +85,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetById_returns_null()
+        public void Get_by_id_returns_null()
         {
             Doctor doctor = null;
             doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(doctor);
@@ -94,7 +94,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetById_returns_any_argument_null_exception()
+        public void Get_by_id_returns_any_argument_null_exception()
         {
             doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
 
@@ -102,7 +102,7 @@ namespace MQuince.Services.Tests
         }
 
         [Fact]
-        public void GetById_returns_any_other_exception()
+        public void Get_by_id_returns_any_other_exception()
         {
             doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
 
