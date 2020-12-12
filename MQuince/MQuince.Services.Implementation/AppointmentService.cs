@@ -165,10 +165,5 @@ namespace MQuince.Services.Implementation
             }
             return false;
         }
-
-        public Appointment GettById(Guid id)
-        {
-            return _appointmentRepository.GetById(id);
-        }
     }
 }

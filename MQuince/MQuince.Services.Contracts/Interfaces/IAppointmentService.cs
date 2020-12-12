@@ -18,6 +18,5 @@ namespace MQuince.Services.Contracts.Interfaces
 
         bool CancelAppointment(Guid IdAppointment);
 
-        Appointment GettById(Guid id);
     }
 }
