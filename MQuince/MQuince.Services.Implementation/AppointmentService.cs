@@ -154,10 +154,10 @@ namespace MQuince.Services.Implementation
             return freeAppointments;
         }
 
-        public Appointment CancelAppointment(Guid IdAppointment, DateTime today)
+        public Appointment CancelAppointment(Guid IdAppointment)
         {
             Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
-            if (today < appointmentCanceled.StartDateTime.AddHours(-48))
+            if (DateTime.Now < appointmentCanceled.StartDateTime.AddHours(-48))
             {
                 appointmentCanceled.IsCanceled = true;
                 _appointmentRepository.Update(appointmentCanceled);
