@@ -1,4 +1,5 @@
-﻿using MQuince.Repository.Contracts;
+﻿using MQuince.Entities.Users;
+using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Users;
 using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
@@ -16,11 +17,24 @@ namespace MQuince.Services.Implementation
         public IDoctorRepository _doctorRepository;
         public DoctorService(IDoctorRepository doctorRepository)
         {
-            _doctorRepository = doctorRepository;
+            _doctorRepository = doctorRepository == null ? throw new ArgumentNullException(nameof(doctorRepository) + "is set to null") : doctorRepository;
         }
 
         public IEnumerable<IdentifiableDTO<DoctorDTO>> GetAll()
-            => _doctorRepository.GetAll().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
+        {
+            try
+            {
+                return _doctorRepository.GetAll().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
 
 
         public IdentifiableDTO<DoctorDTO> GetById(Guid id)
@@ -50,8 +64,6 @@ namespace MQuince.Services.Implementation
                 throw new InternalServerErrorException();
             }
         }
-
-
 
 
     }

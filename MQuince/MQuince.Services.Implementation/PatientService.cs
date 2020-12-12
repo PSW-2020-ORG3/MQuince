@@ -16,7 +16,7 @@ namespace MQuince.Services.Implementation
         public IPatientRepository _patientRepository;
         public PatientService(IPatientRepository patientRepository)
         {
-            _patientRepository = patientRepository;
+            _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
         }
         public IdentifiableDTO<PatientDTO> GetById(Guid id)
         {
