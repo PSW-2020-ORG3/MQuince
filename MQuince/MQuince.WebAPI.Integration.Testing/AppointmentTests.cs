@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using MQuince.Services.Contracts.DTO.Appointment;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -57,6 +62,33 @@ namespace MQuince.WebAPI.Integration.Testing
 
             Assert.True(this.IsOkOrNotFound(response));
         }
+
+        [Fact]
+        public async Task Create_appointments()
+        {
+            HttpClient client = _factory.CreateClient();
+            AppointmentDTO appointmentDTO = this.GetAppointmentDTO();
+
+            var myContent = JsonConvert.SerializeObject(appointmentDTO);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+            var byteContent = new ByteArrayContent(buffer);
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = await client.PostAsync("/api/Appointment/", byteContent);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        private AppointmentDTO GetAppointmentDTO()
+            =>  new AppointmentDTO()
+                {
+                StartDateTime = new DateTime(2010, 10, 10, 9, 0, 0),
+                    EndDateTime = new DateTime(2010, 10, 10, 9, 30, 0),
+                    PatientId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
+                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
+                    Type = Enums.TreatmentType.Examination
+                };
+
 
         private bool IsOkOrNotFound(HttpResponseMessage response)
         {
