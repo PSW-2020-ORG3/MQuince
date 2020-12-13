@@ -132,7 +132,7 @@ namespace MQuince.WebAPI
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_DOMAIN") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince2";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
