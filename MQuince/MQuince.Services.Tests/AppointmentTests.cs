@@ -122,6 +122,34 @@ namespace MQuince.Services.Tests.UnitTests
             return listOfSpecialization;
         }
 
+        private IEnumerable<Appointment> GetListOfAppointmentsForDoctorForDate()
+        {
+            List<Appointment> listOfSpecialization = new List<Appointment>()
+            {
+                new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                },new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                }
+            };
+
+
+            return listOfSpecialization;
+        }
+
+
         [Fact]
         public void GetById_returns_appointment()
         {
@@ -242,14 +270,26 @@ namespace MQuince.Services.Tests.UnitTests
         [Fact]
         public void Get_appointment_for_doctor_for_date_return_appointments()
         {
-            appointmentRepository.GetForDoctor(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba")).Returns(this.GetListOfAppointments());
             DateTime date = new DateTime(2020, 12, 05);
+            appointmentRepository.GetAppointmentForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date).Returns(this.GetListOfAppointmentsForDoctorForDate());
 
-            List<IdentifiableDTO<AppointmentDTO>> appointemnts = appointmentService.GetAppointmentForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date).ToList();
+            IEnumerable<IdentifiableDTO<AppointmentDTO>> appointemnts = appointmentService.GetAppointmentForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date);
 
-            Assert.True(this.CompareAppointmentsForDoctorForDate(this.GetListOfAppointments(), appointemnts, date));
+            Assert.True(this.CompareAppointments(this.GetListOfAppointmentsForDoctorForDate(), appointemnts));
         }
-        
+
+        private bool CompareAppointments(IEnumerable<Appointment> repo, IEnumerable<IdentifiableDTO<AppointmentDTO>> service)
+		{
+            for (int i = 0; i < repo.Count(); i++)
+			{
+                bool same = CompareAppointmentAndIdentifierAppointment(repo.ElementAt(i), service.ElementAt(i));
+                if (!same)
+                    return false;
+            }
+            return true;
+		}
+
+
         private Appointment GetSecondAppointment()
             => new Appointment()
             {
@@ -279,29 +319,6 @@ namespace MQuince.Services.Tests.UnitTests
 
             if (!appointment.EndDateTime.Equals(identifierAppointment.EntityDTO.EndDateTime))
                 return false;
-
-            return true;
-        }
-        private bool CompareAppointmentsForDoctorForDate(List<Appointment> appointemntsFirst, List<IdentifiableDTO<AppointmentDTO>> appointemntsSecond, DateTime date)
-        {
-            bool temporary = false;
-            foreach (Appointment a in appointemntsFirst)
-            {
-                if (a.StartDateTime.Date == date)
-                {
-                    temporary = false;
-                    foreach (IdentifiableDTO<AppointmentDTO> a2 in appointemntsSecond)
-                    {
-                        if (a2.EntityDTO.StartDateTime.Date == date)
-                        {
-                            if (a.Id == a2.Id)
-                                temporary = true;
-                        }
-                    }
-                    if (temporary == false)
-                        return false;
-                }
-            }
 
             return true;
         }
