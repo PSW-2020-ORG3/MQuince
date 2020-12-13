@@ -22,29 +22,25 @@ namespace MQuince.Services.Tests.UnitTests
 
         IAppointmentService appointmentService;
         IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
-        IDoctorService doctorService = Substitute.For<IDoctorService>();
         IWorkTimeService workTimeService = Substitute.For<IWorkTimeService>();
+
         public AppointmentTests()
         {
-            appointmentService = new AppointmentService(appointmentRepository, doctorService, workTimeService);
+            appointmentService = new AppointmentService(appointmentRepository, workTimeService);
         }
 
         [Fact]
         public void Constructor_when_given_argumet_as_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, doctorService, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, workTimeService));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorService, workTimeService));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, workTimeService));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, doctorService, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, workTimeService));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, doctorService, workTimeService);
+            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, workTimeService);
 
 
             Assert.IsType<AppointmentService>(appointmentService);
@@ -121,34 +117,6 @@ namespace MQuince.Services.Tests.UnitTests
 
             return listOfSpecialization;
         }
-
-        private IEnumerable<Appointment> GetListOfAppointmentsForDoctorForDate()
-        {
-            List<Appointment> listOfSpecialization = new List<Appointment>()
-            {
-                new Appointment()
-                {
-                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"),
-                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
-                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
-                    Type = TreatmentType.Examination,
-                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
-                },new Appointment()
-                {
-                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
-                    StartDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
-                    EndDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
-                    Type = TreatmentType.Examination,
-                    DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
-                }
-            };
-
-
-            return listOfSpecialization;
-        }
-
 
         [Fact]
         public void GetById_returns_appointment()
@@ -278,6 +246,88 @@ namespace MQuince.Services.Tests.UnitTests
             Assert.True(this.CompareAppointments(this.GetListOfAppointmentsForDoctorForDate(), appointemnts));
         }
 
+        private IEnumerable<Appointment> GetListOfAppointmentsForDoctorForDate()
+        {
+            List<Appointment> listOfSpecialization = new List<Appointment>()
+            {
+                new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                },new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                    StartDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                }
+            };
+
+
+            return listOfSpecialization;
+        }
+
+        private IEnumerable<Appointment> GetListOfFreeAppointments()
+        {
+            List<Appointment> listOfSpecialization = new List<Appointment>()
+            {
+                new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea3"),
+                    StartDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 08, 30, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                },new Appointment()
+                {
+                    Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea4"),
+                    StartDateTime = new DateTime(2020, 12, 26, 08, 30, 00),
+                    EndDateTime = new DateTime(2020, 12, 26, 09, 00, 00),
+                    Type = TreatmentType.Examination,
+                    DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                }
+            };
+
+
+            return listOfSpecialization;
+        }
+
+        [Fact]
+        public void Get_free_appointments_return_appointments()
+		{
+            Guid patientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11");
+            Guid doctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba");
+            DateTime date = new DateTime(2020, 12, 26);
+            TreatmentType treatmentType = TreatmentType.Examination;
+            appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date).Returns(this.GetListOfAppointmentsForDoctorForDate());
+            workTimeService.GetWorkTimeForDoctorForDate(doctorId, date).Returns(GetFirstWorkTime());
+            
+            IEnumerable<AppointmentDTO> appointments = appointmentService.GetFreeAppointments(patientId, doctorId, date, treatmentType);
+
+            IEnumerable<Appointment> output = GetListOfFreeAppointments();
+            Assert.True(CompareAppointmentsDTO(output, appointments));
+        }
+
+		private bool CompareAppointmentsDTO(IEnumerable<Appointment> output, IEnumerable<AppointmentDTO> appointments)
+		{
+            for (int i = 0; i < output.Count(); i++)
+            {
+                bool same = CompareAppointmentAndAppointmentDTO(output.ElementAt(i), appointments.ElementAt(i));
+                if (!same)
+                    return false;
+            }
+            return true;
+        }
+
+
         private bool CompareAppointments(IEnumerable<Appointment> repo, IEnumerable<IdentifiableDTO<AppointmentDTO>> service)
 		{
             for (int i = 0; i < repo.Count(); i++)
@@ -321,6 +371,41 @@ namespace MQuince.Services.Tests.UnitTests
                 return false;
 
             return true;
+        }
+
+        private bool CompareAppointmentAndAppointmentDTO(Appointment appointment, AppointmentDTO appointmentDTO)
+        {
+            if (!appointment.DoctorId.Equals(appointmentDTO.DoctorId))
+                return false;
+
+            if (!appointment.PatientId.Equals(appointmentDTO.PatientId))
+                return false;
+
+            if (!appointment.Type.Equals(appointmentDTO.Type))
+                return false;
+
+            if (!appointment.StartDateTime.Equals(appointmentDTO.StartDateTime))
+                return false;
+
+            if (!appointment.EndDateTime.Equals(appointmentDTO.EndDateTime))
+                return false;
+
+            return true;
+        }
+
+        private WorkTime GetFirstWorkTime()
+                => new WorkTime(Guid.Parse("6a3d67e0-6af6-4947-919f-7a1a80023db3"), new DateTime(2020, 12, 26), new DateTime(2020, 12, 26), 7, 9, Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"));
+
+        private WorkTime GetSecondWorkTime()
+           => new WorkTime(Guid.Parse("c1d9ae05-81aa-4203-a830-692383bfca09"), new DateTime(2020, 12, 27), new DateTime(2020, 12, 27), 9, 12, Guid.Parse("7bb28807-f41e-4bf4-b699-6a4780511111"));
+
+
+        private List<WorkTime> GetListOfWorkTimes()
+        {
+            List<WorkTime> listOfWorkTime = new List<WorkTime>();
+            listOfWorkTime.Add(this.GetFirstWorkTime());
+            listOfWorkTime.Add(this.GetSecondWorkTime());
+            return listOfWorkTime;
         }
 
     }
