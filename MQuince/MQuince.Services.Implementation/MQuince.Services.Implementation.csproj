@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MQuince.Entities\MQuince.Entities.csproj" />
     <ProjectReference Include="..\MQuince.Repository.Contracts\MQuince.Repository.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
