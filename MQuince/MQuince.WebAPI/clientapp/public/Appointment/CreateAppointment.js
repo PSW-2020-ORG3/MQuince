@@ -96,9 +96,6 @@
                     
                        
                     </form>
-                <div>
-                    {{selectedAppointment}}
-                </div>
                 </div>
             </div>
         </div>
