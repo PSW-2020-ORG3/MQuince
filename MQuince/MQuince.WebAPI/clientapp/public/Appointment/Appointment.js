@@ -1,4 +1,4 @@
-﻿var app = new Vue({
+﻿﻿var app = new Vue({
 	el: '#appointments',
 	data: {
 		appointments: [],
@@ -17,8 +17,14 @@
 		axios
 			.get('/api/Doctor/GetAll').then(response => {
                 this.doctors = response.data
-            })
-},
+			})
+		
+		
+	},
     methods: {
-	}
+		
+										
+			}
+		
+		
 })

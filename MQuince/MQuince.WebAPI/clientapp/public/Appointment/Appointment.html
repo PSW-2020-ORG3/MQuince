@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -90,7 +90,7 @@
         margin: auto;
         width: 70%;
         margin-top: 10px;
-        height: 200px;
+        height: 240px;
     }
 </style>
 </head>
@@ -124,10 +124,11 @@
                         <div class="apartment-name2"><b>Date:</b> {{appointment.entityDTO.startDateTime.substr(0, 10)}}</div>
                         <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
                         <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
-                        <!-- <div v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.name}}</div>-->
-                        <br/>
-                        <div class="apartment-name2"><button>Cancel</button></div>
-                        <br/>
+                        <div v-for="doctor in doctors" v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.entityDTO.name + ' ' + doctor.entityDTO.surname}}</div>
+                        <div v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" class="apartment-name2">
+                            <div><b>Appointment status:</b>Pending</br></br><button> Cancel </button></div>
+                        </div>
+                        <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
                     </div>
                 </div>
             </div>
