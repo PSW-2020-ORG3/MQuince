@@ -10,7 +10,7 @@ function postDate() {
     };
 
     fetch(uri, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

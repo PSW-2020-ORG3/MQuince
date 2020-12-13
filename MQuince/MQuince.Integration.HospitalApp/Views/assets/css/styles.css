@@ -87,5 +87,12 @@ button:hover
 
 td
 {
-    padding: 10px;
+    padding: 20px;
+}
+
+.specification-container {
+    position:center;
+    margin-top: -250px;
+    font-size: 22px;
+      
 }

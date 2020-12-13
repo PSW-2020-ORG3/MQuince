@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Therapy";
+    Layout = "_Layout";
+}
+
+@using(Html.BeginForm("Therapy", "Home", FormMethod.Post))
+{
+<table style="margin-top: 0px; padding: -5px;" border="1px">
+    <tr style="margin-top: -10px;">
+        <td>Pacient name: </td>
+        <td> <input type="text" name="name" /> </td>
+    </tr>
+    <tr>
+        <td>JMBG: </td>
+        <td> <input type="text" name="jmbg" /> </td>
+    </tr>
+    <tr>
+        <td>Date of prescription: </td>
+        <td> <p name="date" style="font-size:15px; margin-left:18px; text-align:left;"> 
+                <script>document.write(new Date().toLocaleDateString());</script>
+            </p> </td>
+    </tr>
+    <tr>
+        <td>
+            Medicatione:
+        </td>
+            
+        <td>
+            <input type="text" name="medication" />
+        </td>
+    </tr>
+    <tr>
+        <td>Description: </td>
+        <td>
+           <input type="text" name="description"  style="width:400px; height: 70px;"></input>
+        </td>
+    </tr>
+
+
+    <tr>
+
+        <td colspan="2">
+            <input type="submit" value="Send prescription" />
+        </td>
+        
+    </tr>
+    <tr>
+        <td colspan="2">
+            @if (ViewBag.QRCode != null)
+            {
+                <img src="@ViewBag.QRCode" style="width=50px; height=50px; margin 0 " />
+            }
+        </td>
+    </tr>
+
+    </table>
+   
+    
+}
+
+
