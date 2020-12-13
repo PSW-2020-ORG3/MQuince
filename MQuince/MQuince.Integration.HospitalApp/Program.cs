@@ -22,10 +22,11 @@ namespace MQuince.Integration.HospitalApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                    .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
         public static IHostBuilder ActionAndBenefitMessages(string[] args) =>
           Host.CreateDefaultBuilder(args)
           .UseWindowsService()
