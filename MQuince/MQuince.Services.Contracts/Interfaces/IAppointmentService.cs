@@ -15,5 +15,8 @@ namespace MQuince.Services.Contracts.Interfaces
         IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId);
 
         IEnumerable<AppointmentDTO> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType);
+
+        bool CancelAppointment(Guid IdAppointment);
+
     }
 }

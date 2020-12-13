@@ -17,8 +17,22 @@
 		axios
 			.get('/api/Doctor/GetAll').then(response => {
                 this.doctors = response.data
-            })
-},
+			})
+		
+		
+	},
     methods: {
-	}
+		cancelAppointment: function (appointmentId) {
+			axios.put('/api/Appointment/canceledAppointment/' + appointmentId
+				).then( (response) => {
+						if(response.status !== 204){
+							alert("Successful cancellation!");
+						}else{
+							alert("It is not possible to cancel an appointment!");
+						}
+						})
+					}								
+			}
+		
+		
 })
