@@ -52,7 +52,7 @@ namespace MQuince.Application
             => new SpecializationService(this.GetSpecializationRepository());
 
         public IAppointmentService GetAppointmentService()
-            => new AppointmentService(this.GetAppointmentRepository(), this.GetDoctorService(), this.GetWorkTimeService());
+            => new AppointmentService(this.GetAppointmentRepository(), this.GetWorkTimeService());
         private IAppointmentRepository GetAppointmentRepository()
           => new AppointmentRepository(_optionsBuilder);
 
