@@ -16,15 +16,13 @@ namespace MQuince.Services.Implementation
 {
     public class AppointmentService : IAppointmentService
     {
-        public IAppointmentRepository _appointmentRepository;
-        public IDoctorService _doctorService;
-        public IWorkTimeService _workTimeService;
+        private IAppointmentRepository _appointmentRepository;
+        private IWorkTimeService _workTimeService;
 
-        public AppointmentService(IAppointmentRepository appointmentRepository, IDoctorService doctorService, IWorkTimeService workTimeService)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IWorkTimeService workTimeService)
         {
-            _appointmentRepository = appointmentRepository;
-            _workTimeService = workTimeService;
-            _doctorService = doctorService;
+            _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
+            _workTimeService = workTimeService == null ? throw new ArgumentNullException(nameof(workTimeService) + "is set to null") : workTimeService; ;
         }
 
         public Guid Create(AppointmentDTO entityDTO)
@@ -45,7 +43,20 @@ namespace MQuince.Services.Implementation
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAll()
-        => _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+        {
+            try
+            {
+                return _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
 
         public IdentifiableDTO<AppointmentDTO> GetById(Guid id)
         {
@@ -64,12 +75,34 @@ namespace MQuince.Services.Implementation
         }
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForDoctor(Guid doctorId)
         {
-            return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try
+            {
+                return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetForPatient(Guid patientId)
         {
-            return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try
+            {
+                return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public void Update(AppointmentDTO entityDTO, Guid id)
@@ -79,8 +112,20 @@ namespace MQuince.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetAppointmentForDoctorForDate(Guid doctorId, DateTime time)
         {
-            return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            try
+            {
+                return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
+
 
 
         public IEnumerable<AppointmentDTO> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date, TreatmentType treatmentType)
@@ -137,7 +182,7 @@ namespace MQuince.Services.Implementation
             freeAppointments.AddRange(FillFreeInterval(startTime, endTime, appointmentDuration));
             return freeAppointments;
         }
-        public IEnumerable<AppointmentDTO> FillFreeInterval(DateTime startTime, DateTime endTime, TimeSpan appointmentDuration)
+        private IEnumerable<AppointmentDTO> FillFreeInterval(DateTime startTime, DateTime endTime, TimeSpan appointmentDuration)
         {
             List<AppointmentDTO> freeAppointments = new List<AppointmentDTO>();
             while (endTime - startTime >= appointmentDuration)
