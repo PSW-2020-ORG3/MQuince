@@ -18,7 +18,7 @@ using MQuince.Integration.Services.Implementation;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sftpController")]
     [ApiController]
     public class SftpController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Get(DateDTO dto)
         {
             _medicationsConsumptionService.GeneratePdf(dto);
@@ -43,6 +43,18 @@ namespace MQuince.Integration.HospitalApp.Controllers
             else
                 return BadRequest();
         }
-            
+
+
+        [HttpPost("rebexCall")]
+        public IActionResult SaveFile([FromForm] String name)
+        {
+
+            if (_sftpService.SaveFile(name+".txt"))
+                return Ok();
+            else
+                return BadRequest();
+
+
+        }
     }
 }
