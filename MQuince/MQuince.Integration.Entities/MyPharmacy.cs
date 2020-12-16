@@ -11,6 +11,11 @@ namespace MQuince.Integration.Entities
 
         public string Url { get; set; }
 
+        public MyPharmacy()
+        {
+
+        }
+
         public MyPharmacy(Guid apiKey, string name, string url)
         {
             ApiKey = apiKey;
