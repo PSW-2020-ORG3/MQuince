@@ -118,7 +118,15 @@ namespace MQuince.WebAPI.Controllers
         {
             try
             {
-                return Ok(_appointmentService.CancelAppointment(IdAppointment));
+                bool isCanceled = _appointmentService.CancelAppointment(IdAppointment);
+                if (isCanceled == true)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch (NotFoundEntityException e)
             {
