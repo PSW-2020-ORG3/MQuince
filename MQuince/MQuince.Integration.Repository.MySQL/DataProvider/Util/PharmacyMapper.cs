@@ -13,7 +13,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
     {
         public static MyPharmacy MapPharmacyPersistenceToPharmacyEntity(PharmacyPersistence pharmacy)
         {
-            if (pharmacy == null) return null;
+            if (pharmacy == null) throw new ArgumentNullException();
 
             return new MyPharmacy(pharmacy.ApiKey, pharmacy.Name, pharmacy.Url);
 
@@ -31,7 +31,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
             };
             return retVal;
         }
-
+       
         public static IEnumerable<MyPharmacy> MapPharmacyPersistenceCollectionToPharmacyEntityCollection(IEnumerable<PharmacyPersistence> clients)
             => clients.Select(c => MapPharmacyPersistenceToPharmacyEntity(c));
 

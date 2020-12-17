@@ -18,10 +18,21 @@ namespace MQuince.Integration.Entities
 
         public MyPharmacy(Guid apiKey, string name, string url)
         {
-            ApiKey = apiKey;
-            Name = name;
-            Url = url;
+            if (apiKey == Guid.Empty)
+            {
+                throw new ArgumentException("Argument can not be Guid.Empty");
+            }
+            else
+            {
+                ApiKey = apiKey;
+                Name = name;
+                Url = url;
+            }
 
+        }
+
+        public MyPharmacy()
+        {
         }
     }
 }

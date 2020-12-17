@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,17 @@ namespace MQuince.WebAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            if (String.Equals(Environment.GetEnvironmentVariable("SHOW_ENV"), "TRUE"))
+                ShowConfig(configuration);
+        }
+
+        private void ShowConfig(IConfiguration config)
+        {
+            foreach (var pair in config.GetChildren())
+            {
+                Console.WriteLine($"{pair.Path} - {pair.Value}");
+                ShowConfig(pair);
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -30,11 +43,28 @@ namespace MQuince.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            App application = new App(Configuration);
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            //stage = "test";
+            if (stage == "dev")
+            {
+                services.AddDbContext<MQuinceDbContext>(options =>
+                options.UseMySql(CreateConnectionStringFromEnvironment(),
+                b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+            }
+            else
+            {
+                services.AddDbContext<MQuinceDbContext>(options =>
+                options.UseNpgsql(CreateConnectionStringFromEnvironment(),
+                b => b.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName)));
+            }
+
+            App application = new App(CreateConnectionStringFromEnvironment());
 
             services.AddTransient(typeof(IUserService), s => application.GetUserService());
             services.AddTransient(typeof(IFeedbackService), s => application.GetFeedbackService());
             services.AddTransient(typeof(ISpecializationService), s => application.GetSpecializationService());
+            services.AddTransient(typeof(IDoctorService), s => application.GetDoctorService());
+            services.AddTransient(typeof(IAppointmentService), s => application.GetAppointmentService());
 
             services.AddControllers();
             services.AddSpaStaticFiles(configuration =>
@@ -52,9 +82,15 @@ namespace MQuince.WebAPI
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
-                // context.Database.Migrate();
+                string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
                 RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-                databaseCreator.CreateTables();
+                if (!databaseCreator.HasTables() && stage=="test")
+			    {
+                    context.Database.Migrate();
+				}
+                
+                //RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
+                //databaseCreator.CreateTables();
             }
 
             if (env.IsDevelopment())
@@ -71,6 +107,7 @@ namespace MQuince.WebAPI
             app.UseRouting();
             app.UseSpaStaticFiles();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -90,6 +127,30 @@ namespace MQuince.WebAPI
                 }
 
             });
+        }
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_DOMAIN") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            /*stage = "test";
+            server = "localhost";
+            port = "5432";
+            database = "mquince";
+            user = "postgres";
+            password = "root";*/
+
+            if (stage == "dev")
+            {
+                return $"server={server};port={port};database={database};user={user};password={password};";
+            }
+            else
+            {
+                return $"Server={server};Port={port};Database={database};Username={user};Password={password};";
+            }
         }
     }
 }

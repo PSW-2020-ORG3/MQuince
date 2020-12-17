@@ -28,7 +28,7 @@ namespace MQuince.Integration.Services.Implementation
 
             _medicationsConsumptionRepository.Create(medicationsConsumption);
 
-            return medicationsConsumption.getKeyConsumtion;
+            return medicationsConsumption.KeyConsumtion;
         }
 
         public bool Delete(Guid id) => _medicationsConsumptionRepository.Delete(id);
@@ -89,7 +89,7 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<MedicationsConsumptionDTO>()
             {
-                Key = medicationsConsumptation.getKeyConsumtion,
+                Key = medicationsConsumptation.KeyConsumtion,
                 EntityDTO = new MedicationsConsumptionDTO()
                 {
                     Name = medicationsConsumptation.Name,
