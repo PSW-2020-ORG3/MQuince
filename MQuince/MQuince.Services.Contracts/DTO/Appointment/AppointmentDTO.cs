@@ -12,5 +12,6 @@ namespace MQuince.Services.Contracts.DTO.Appointment
         public TreatmentType Type { get; set; }
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
+        public bool IsCanceled { get; set; }
     }
 }

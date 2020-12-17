@@ -24,5 +24,6 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Appointments
         [ForeignKey("PatientPersistanceId")]
         public PatientPersistence PatientPersistance { get; set; }
         public Guid PatientPersistanceId { get; set; }
+        public bool IsCanceled { get; set; }
     }
 }

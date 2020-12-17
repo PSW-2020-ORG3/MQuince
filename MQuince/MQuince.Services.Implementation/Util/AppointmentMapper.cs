@@ -20,7 +20,8 @@ namespace MQuince.Services.Implementation.Util
                                               EndDateTime = appointment.EndDateTime,
                                               Type = appointment.Type,
                                               DoctorId = appointment.DoctorId,
-                                              PatientId = appointment.PatientId
+                                              PatientId = appointment.PatientId,
+                                              IsCanceled = appointment.IsCanceled
                                           }
                                       };
 

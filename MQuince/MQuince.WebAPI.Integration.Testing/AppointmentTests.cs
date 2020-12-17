@@ -79,6 +79,17 @@ namespace MQuince.WebAPI.Integration.Testing
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
+        [Fact]
+        public async void Cancel_appointment_status_code_test()
+        {
+            HttpClient client = _factory.CreateClient();
+
+            HttpResponseMessage response = await client.GetAsync("api/appointment/cancelAppointment/08d8a299-ff01-4112-86a8-e5553e4ec81b");
+
+            Assert.False(this.IsOkOrNotFound(response));
+
+        }
+
         private AppointmentDTO GetAppointmentDTO()
             =>  new AppointmentDTO()
                 {

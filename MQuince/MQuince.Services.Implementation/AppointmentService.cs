@@ -18,11 +18,17 @@ namespace MQuince.Services.Implementation
     {
         private IAppointmentRepository _appointmentRepository;
         private IWorkTimeService _workTimeService;
+        private IAppointmentRepository appointmentRepository;
 
         public AppointmentService(IAppointmentRepository appointmentRepository, IWorkTimeService workTimeService)
         {
             _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
             _workTimeService = workTimeService == null ? throw new ArgumentNullException(nameof(workTimeService) + "is set to null") : workTimeService; ;
+        }
+
+        public AppointmentService(IAppointmentRepository appointmentRepository)
+        {
+            _appointmentRepository = appointmentRepository;
         }
 
         public Guid Create(AppointmentDTO entityDTO)
@@ -34,8 +40,8 @@ namespace MQuince.Services.Implementation
             return appointment.Id;
         }
         private Appointment CreateAppointmentFromDTO(AppointmentDTO appointment, Guid? id = null)
-            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId)
-                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId);
+            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled)
+                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled);
 
         public bool Delete(Guid id)
         {
@@ -194,6 +200,16 @@ namespace MQuince.Services.Implementation
             return freeAppointments;
         }
 
-
+        public bool CancelAppointment(Guid IdAppointment)
+        {
+            Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
+            if (DateTime.Now < appointmentCanceled.StartDateTime.AddHours(-48))
+            {
+                appointmentCanceled.IsCanceled = true;
+                _appointmentRepository.Update(appointmentCanceled);
+                return true;
+            }
+            return false;
+        }
     }
 }

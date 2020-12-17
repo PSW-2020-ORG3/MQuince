@@ -125,10 +125,9 @@
                         <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
                         <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
                         <div v-for="doctor in doctors" v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.entityDTO.name + ' ' + doctor.entityDTO.surname}}</div>
-                        <div v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" class="apartment-name2">
-                            <div><b>Appointment status:</b>Pending</br></br><button> Cancel </button></div>
-                        </div>
-                        <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
+						<br/>
+                        <div class="apartment-name2" > <button @click="cancelAppointment(appointment.id)"> Cancel </button></div>
+                        <br/>
                     </div>
                 </div>
             </div>

@@ -47,7 +47,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return this.GetAll().Where(x => x.DoctorId.Equals(doctorId) && x.StartDateTime.Date.Equals(requestDate.Date));
+                return this.GetAll().Where(x => x.DoctorId.Equals(doctorId) && x.StartDateTime.Date.Equals(requestDate.Date) && x.IsCanceled == false);
             }
         }
 
@@ -63,7 +63,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.Id.Equals(doctorId)));
+                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.IsCanceled == false && c.Id.Equals(doctorId)));
             }
         }
 
@@ -71,7 +71,7 @@ namespace MQuince.Repository.SQL.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.PatientPersistanceId == patientId).ToList());
+                return AppointmentMapper.MapAppointmentsPersistenceCollectionToAppointmentsEntityCollection(_context.Appointments.Where(c => c.IsCanceled == false && c.PatientPersistanceId == patientId).ToList());
             }
         }
 
