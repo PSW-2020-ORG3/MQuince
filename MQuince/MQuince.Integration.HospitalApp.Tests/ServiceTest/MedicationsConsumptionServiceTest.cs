@@ -94,7 +94,7 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
 
         private bool CompareMedicationAndIdentifierMedication(MedicationsConsumption medication, IdentifiableDTO<MedicationsConsumptionDTO> identifierMedication)
         {
-            if (medication.getKeyConsumtion != identifierMedication.Key)
+            if (medication.KeyConsumtion != identifierMedication.Key)
                 return false;
 
             if (!medication.Name.Equals(identifierMedication.EntityDTO.Name))

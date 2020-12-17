@@ -41,10 +41,6 @@ namespace MQuince.Integration.Entities
             
         }
 
-        public MedicationsConsumption()
-        {
-        }
-
 
         public Guid KeyConsumtion
         {

@@ -30,9 +30,5 @@ namespace MQuince.Integration.Entities
             }
 
         }
-
-        public MyPharmacy()
-        {
-        }
     }
 }
