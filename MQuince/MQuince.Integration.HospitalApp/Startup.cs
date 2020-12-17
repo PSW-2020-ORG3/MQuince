@@ -11,14 +11,11 @@ using Microsoft.Extensions.Hosting;
 using MQuince.Integration.Repository.MySQL.DataProvider;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
-<<<<<<< HEAD
-=======
 
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
 
->>>>>>> develop
 namespace MQuince.Integration.HospitalApp
 {
     public class Startup
