@@ -5,6 +5,7 @@
     <title>MQuince Health</title>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico.png" />
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
@@ -37,26 +38,48 @@
 
 </head>
 <body>
-    <header id="header" class="fixed-top">
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+        <div class="container d-flex">
+            <div class="contact-info mr-auto">
+                <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@mquince.com</a>
+                <i class="icofont-phone"></i> +381 62432132
+                <i class="icofont-google-map"></i> Beogradska 15, Beograd
+            </div>
+            <div class="social-links">
+                <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                <a href="#" class="skype"><i class="icofont-skype"></i></a>
+            </div>
+        </div>
+    </div>
+    <header style="margin-top:10px" id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
             <h1 class="logo mr-auto"><a href="#/">MQUINCE Medic</a></h1>
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="/public/Communication/Feedbacks.html">Feedback</a></li>
-                    <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
                     <li class="drop-down">
-                        <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Zakazi pregled</a>
+                        <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul>
-                            <li><a href="../public/Appointment/CreateAppointment.html">Standardno zakazivanje</a></li>
-                            <li><a href="#">Preporuceni termini</a></li>
+                            <li><a href="../public/Communication/AddFeedback.html">Add feedback</a></li>
+                            <li><a href="../public/Communication/Feedbacks.html">Observe feedbacks</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
+
+
+                    <li class="drop-down">
+                        <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Create appointment</a>
+                        <ul>
+                            <li><a href="../public/Appointment/CreateAppointment.html">Standard appointment</a></li>
+                            <li><a href="#">Recommended appointment</a></li>
                         </ul>
                     </li>
                 </ul>
             </nav>
         </div>
         <div>
-            <section style="margin-top: 25px; max-height: 500px; object-fit: fill;" id="hero" class="d-flex align-items-center">
+            <section style="margin-top: 30px; max-height: 500px; object-fit: fill;" id="hero" class="d-flex align-items-center">
                 <div class="container">
                 </div>
             </section>
