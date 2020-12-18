@@ -11,6 +11,11 @@ namespace MQuince.Integration.Entities
 
         public string Url { get; set; }
 
+        public MyPharmacy()
+        {
+
+        }
+
         public MyPharmacy(Guid apiKey, string name, string url)
         {
             if (apiKey == Guid.Empty)
@@ -24,10 +29,6 @@ namespace MQuince.Integration.Entities
                 Url = url;
             }
 
-        }
-
-        public MyPharmacy()
-        {
         }
     }
 }
