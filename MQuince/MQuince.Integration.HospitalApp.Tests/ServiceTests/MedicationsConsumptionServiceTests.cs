@@ -14,12 +14,12 @@ using Xunit;
 namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
 {
    
-    public class MedicationsConsumptionServiceTest
+    public class MedicationsConsumptionServiceTests
     {
         IMedicationsConsumptionService medicationService;
         IMedicationsConsumptionRepository medicationRepository = Substitute.For<IMedicationsConsumptionRepository>();
 
-        public MedicationsConsumptionServiceTest()
+        public MedicationsConsumptionServiceTests()
         {
             medicationService = new MedicationsConsumptationService(medicationRepository);
         }

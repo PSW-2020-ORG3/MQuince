@@ -17,14 +17,12 @@ namespace MQuince.Integration.HospitalApp
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            //ActionAndBenefitMessages(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
-                {
-                    //services.AddHostedService<ClientScheduledService>();
+                {                    
                     services.AddHostedService<RabbitMQService>();
 
                 })

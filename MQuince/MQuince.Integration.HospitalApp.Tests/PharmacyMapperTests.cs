@@ -10,7 +10,7 @@ using Xunit;
 
 namespace MQuince.HospitalAppTests
 {
-    public class PharmacyMapperTest
+    public class PharmacyMapperTests
     {
      
         [Fact]

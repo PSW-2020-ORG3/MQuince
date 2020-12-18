@@ -13,12 +13,12 @@ using Xunit;
 
 namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
 {
-    public class PharmacyServiceTest
+    public class PharmacyServiceTests
     {
         IPharmacyService pharmacyService;
         IPharmacyRepository pharmacyRepository = Substitute.For<IPharmacyRepository>();
 
-        public PharmacyServiceTest()
+        public PharmacyServiceTests()
         {
             pharmacyService = new PharmacyService(pharmacyRepository);
         }

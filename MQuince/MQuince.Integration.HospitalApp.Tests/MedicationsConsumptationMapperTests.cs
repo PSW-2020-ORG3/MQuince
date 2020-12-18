@@ -10,7 +10,7 @@ using Xunit;
 
 namespace MQuince.HospitalAppTests
 {
-    public class MedicationsConsumptationMapperTest
+    public class MedicationsConsumptationMapperTests
     {
         [Fact]
         public void Map_medications_consumption_persistence_to_medications_consumption_entity()
