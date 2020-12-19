@@ -319,7 +319,7 @@ namespace MQuince.Services.Tests.UnitTests
         }
 
         [Fact]
-        public void Cancel_appointment()
+        public void Cancel_appointment_success()
         {
             AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
 
@@ -332,7 +332,7 @@ namespace MQuince.Services.Tests.UnitTests
         }
 
         [Fact]
-        public void Cancel_appointment_when_is_invalid_data_returns_null()
+        public void Cancel_appointment_fail_already_cancelled()
         {
             AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
 
@@ -340,11 +340,36 @@ namespace MQuince.Services.Tests.UnitTests
 
             _appointmentService.CancelAppointment(appointmentId);
             IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
-            
+
             Assert.False(canceledAppointment.EntityDTO.IsCanceled);
         }
 
+        [Fact]
+        public void Cancel_appointment_fail_too_late()
+        {
+            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
 
+            Guid appointmentId = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
+
+            _appointmentService.CancelAppointment(appointmentId);
+            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+
+            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+        }
+
+        [Fact]
+        public void Cancel_appointment_fail_bad_request()
+        {
+            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
+
+            Guid appointmentId = Guid.Parse("08d89d76-5a15-4560-8d39-dd56c5ad776e");
+
+            _appointmentService.CancelAppointment(appointmentId);
+            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+
+            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+        }
+        
         private static IAppointmentRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IAppointmentRepository>();
@@ -353,14 +378,17 @@ namespace MQuince.Services.Tests.UnitTests
             Guid appointmentId1 = Guid.Parse("08d89d75-3533-47ac-80a1-6cd77742dd25");
             Guid appointmentId2 = Guid.Parse("08d89d75-46c4-4e41-8da0-54cc9586c109");
             Guid appointmentId3 = Guid.Parse("08d89d76-5a15-4560-8d39-dd56c5ad776e");
+            Guid appointmentId4 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
             Guid doctorPersistanceId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32");
             Guid patientId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546");
             TreatmentType treatmentType = TreatmentType.Examination;
 
 
-            appointments.Add(new Appointment(appointmentId1, new DateTime(2020, 12, 21, 12, 30, 0), new DateTime(2020, 12, 21, 13, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
-            appointments.Add(new Appointment(appointmentId2, new DateTime(2020, 12, 11, 10, 30, 0), new DateTime(2020, 12, 14, 11, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
-            appointments.Add(new Appointment(appointmentId3, new DateTime(2020, 12, 13, 08, 00, 0), new DateTime(2020, 12, 13, 08, 30, 0), treatmentType, doctorPersistanceId, patientId, true));
+            appointments.Add(new Appointment(appointmentId1, new DateTime(2020, 12, 26, 12, 30, 0), new DateTime(2020, 12, 28, 13, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
+            appointments.Add(new Appointment(appointmentId2, new DateTime(2020, 01, 08, 10, 30, 0), new DateTime(2020, 01, 13, 11, 00, 0), treatmentType, doctorPersistanceId, patientId, true));
+            appointments.Add(new Appointment(appointmentId3, new DateTime(2020, 12, 20, 08, 00, 0), new DateTime(2020, 12, 25, 08, 30, 0), treatmentType, doctorPersistanceId, patientId, false));
+            appointments.Add(new Appointment(appointmentId4, new DateTime(2020, 12, 01, 12, 30, 0), new DateTime(2020, 12, 05, 13, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
+            
 
             stubRepository.Setup(appointmentsRepository => appointmentsRepository.GetAll()).Returns(appointments);
             stubRepository.Setup(appointmentsRepository => appointmentsRepository.GetById(It.IsAny<Guid>())).Returns((Guid id) => appointments.Find(m => m.Id == id));

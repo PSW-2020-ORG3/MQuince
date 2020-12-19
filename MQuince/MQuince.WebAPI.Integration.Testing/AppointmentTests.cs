@@ -96,8 +96,12 @@ namespace MQuince.WebAPI.Integration.Testing
             var retVal = new List<object[]>();
             Guid appointmentId1 = Guid.Parse("08d8a3a6-5fcd-424e-85ce-d5276d99b442");
             Guid appointmentId2 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
+            Guid appointmentId3 = Guid.Parse("08d8a29e-444e-4ee1-84ad-e3047962a418");
+            Guid appointmentId4 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b0748");
             retVal.Add(new object[] { appointmentId1, HttpStatusCode.OK });
             retVal.Add(new object[] { appointmentId2, HttpStatusCode.BadRequest });
+            retVal.Add(new object[] { appointmentId3, HttpStatusCode.NotFound });
+            retVal.Add(new object[] { appointmentId4, HttpStatusCode.InternalServerError });
             return retVal;
         }
 
