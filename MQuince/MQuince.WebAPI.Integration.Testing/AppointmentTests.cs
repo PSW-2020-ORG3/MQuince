@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
+using MQuince.Entities.Appointment;
 using MQuince.Services.Contracts.DTO.Appointment;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -80,41 +81,40 @@ namespace MQuince.WebAPI.Integration.Testing
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Theory]
-        [MemberData(nameof(AppointmentData))]
-        public async void Cancel_appointment_status_code_test(Guid appointmentId, HttpStatusCode expectedResponseStatusCode)
-        {
-            HttpClient client = _factory.CreateClient();
+         [Theory]
+         [MemberData(nameof(AppointmentData))]
+         public async void Cancel_appointment_status_code_test(Guid appointmentId, HttpStatusCode expectedResponseStatusCode)
+         {
+             HttpClient client = _factory.CreateClient();
 
-            var response = await client.PutAsync("/api/Appointment/cancelAppointment/" + appointmentId, new StringContent("1", Encoding.UTF8, "application/json"));
+             var response = await client.PutAsync("/api/Appointment/cancelAppointment/" + appointmentId, new StringContent("1", Encoding.UTF8, "application/json"));
 
-            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
-        }
+             Assert.True(this.IsOkOrNotFound(response));
+         }
 
-        public static IEnumerable<object[]> AppointmentData()
-        {
-            var retVal = new List<object[]>();
-            Guid appointmentId1 = Guid.Parse("08d8a3a6-5fcd-424e-85ce-d5276d99b442");
-            Guid appointmentId2 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
-            Guid appointmentId3 = Guid.Parse("08d8a29e-444e-4ee1-84ad-e3047962a418");
-            Guid appointmentId4 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b0748");
-            retVal.Add(new object[] { appointmentId1, HttpStatusCode.OK });
-            retVal.Add(new object[] { appointmentId2, HttpStatusCode.BadRequest });
-            retVal.Add(new object[] { appointmentId3, HttpStatusCode.NotFound });
-            retVal.Add(new object[] { appointmentId4, HttpStatusCode.InternalServerError });
-            return retVal;
-        }
+         public static IEnumerable<object[]> AppointmentData()
+         {
+             var retVal = new List<object[]>();
+             Guid appointmentId1 = Guid.Parse("08d8a3a6-5fcd-424e-85ce-d5276d99b442");
+             Guid appointmentId2 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
+             Guid appointmentId3 = Guid.Parse("08d8a29e-444e-4ee1-84ad-e3047962a418");
+             Guid appointmentId4 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b0748");
+             retVal.Add(new object[] { appointmentId1, HttpStatusCode.OK });
+             retVal.Add(new object[] { appointmentId2, HttpStatusCode.BadRequest });
+             retVal.Add(new object[] { appointmentId3, HttpStatusCode.NotFound });
+             retVal.Add(new object[] { appointmentId4, HttpStatusCode.InternalServerError });
+             return retVal;
+         }
 
         private AppointmentDTO GetAppointmentDTO()
             =>  new AppointmentDTO()
                 {
-                StartDateTime = new DateTime(2010, 10, 10, 9, 0, 0),
+                    StartDateTime = new DateTime(2010, 10, 10, 9, 0, 0),
                     EndDateTime = new DateTime(2010, 10, 10, 9, 30, 0),
                     PatientId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
                     DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
                     Type = Enums.TreatmentType.Examination
                 };
-
 
         private bool IsOkOrNotFound(HttpResponseMessage response)
         {

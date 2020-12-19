@@ -197,14 +197,26 @@ namespace MQuince.Services.Implementation
 
         public bool CancelAppointment(Guid IdAppointment)
         {
-            Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
-            if (DateTime.Now < appointmentCanceled.StartDateTime.AddHours(-48))
+            try
             {
-                appointmentCanceled.IsCanceled = true;
-                _appointmentRepository.Update(appointmentCanceled);
-                return true;
+                Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
+                if (DateTime.Now < appointmentCanceled.StartDateTime.AddHours(-48))
+                {
+                    appointmentCanceled.IsCanceled = true;
+                    _appointmentRepository.Update(appointmentCanceled);
+                    return true;
+                }
+                return false;
+            
             }
-            return false;
+            catch(ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
     }
 }
