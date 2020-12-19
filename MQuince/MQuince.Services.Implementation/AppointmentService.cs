@@ -195,11 +195,11 @@ namespace MQuince.Services.Implementation
             return freeAppointments;
         }
 
-        public bool CancelAppointment(Guid IdAppointment)
+        public bool CancelAppointment(Guid appointmentId)
         {
             try
             {
-                Appointment appointmentCanceled = _appointmentRepository.GetById(IdAppointment);
+                Appointment appointmentCanceled = _appointmentRepository.GetById(appointmentId);
                 if (DateTime.Now < appointmentCanceled.StartDateTime.AddHours(-48))
                 {
                     appointmentCanceled.IsCanceled = true;
