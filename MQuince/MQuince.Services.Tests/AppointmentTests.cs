@@ -321,7 +321,7 @@ namespace MQuince.Services.Tests.UnitTests
         [Fact]
         public void Cancel_appointment()
         {
-            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), null);
+            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
 
             Guid appointmentId = Guid.Parse("08d89d75-3533-47ac-80a1-6cd77742dd25");
 
@@ -334,7 +334,7 @@ namespace MQuince.Services.Tests.UnitTests
         [Fact]
         public void Cancel_appointment_when_is_invalid_data_returns_null()
         {
-            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), null);
+            AppointmentService _appointmentService = new AppointmentService(CreateStubRepository(), workTimeService);
 
             Guid appointmentId = Guid.Parse("08d89d75-46c4-4e41-8da0-54cc9586c109");
 
