@@ -186,7 +186,7 @@
                         DoctorId: this.selectedDoctor,
                         PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
                     }).then((response) => {
-                        alert('Uspesno zakazivanje termina')
+                        alert('Your appointment has been saved!')
                         //JSAlert.alert("Your appointment has been saved!");
                         window.location.href = "../../public/index.html";
                         }, (error) => {

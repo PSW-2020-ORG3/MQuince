@@ -156,18 +156,31 @@
 
     <div style="margin-top:-45px" id="feedbacks">
         <!-- Contact Section-->
-            <div class="container">
+            <div class="container" >
                 <!-- Contact Section Heading-->                <!-- Icon Divider-->
                 <!-- Contact Section Form-->
-                <div style="margin-top:15px">
-                    <div class="commentBox" v-for="feedback in feedbacks">
-                        <div class="col-lg-8 mx-auto">
-                            <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                            <div class="short-info2">By Helena:</div>
-                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                            <br />
+                <div style=" margin-top: 15px">
+                    
+                    <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                        <div style="display: inline-block">
+                            <table >
+                                <tr>
+                                    <td colspan="2">
+                                        <img src="../static/feedbackIcon.png" height="100" width="100">
+                                    </td>
+                                    <td >
+                                        <div style="margin-left:30px;margin-bottom:30px">
+                                            <div class="short-info2">By Helena:</div>
+                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
     </div>

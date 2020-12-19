@@ -157,17 +157,31 @@
 
     <div style="margin-top:-45px" id="appointments">
         <div class="container">
-            <div class="commentBox" v-for="appointment in appointments">
-                <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                    <div class="apartment-name2"><b>Date:</b> {{appointment.entityDTO.startDateTime.substr(0, 10)}}</div>
-                    <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
-                    <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
-                    <div v-for="doctor in doctors" v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.entityDTO.name + ' ' + doctor.entityDTO.surname}}</div>
-                    <div v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" class="apartment-name2">
-                        <div><b>Appointment status:</b>Pending</br></br><button> Cancel </button></div>
-                    </div>
-                    <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
+            <div style="height:190px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox"  v-for="appointment in appointments">
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <img src="../static/appointment-icon.jpg" height="100" width="100">
+                            </td>
+
+                            <td style="padding-left:50px;" disabled>
+                                <div>
+                                    <div class="apartment-name2"><b>Date:</b> {{appointment.entityDTO.startDateTime.substr(0, 10)}}</div>
+                                    <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
+                                    <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
+                                    <div v-for="doctor in doctors" v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.entityDTO.name + ' ' + doctor.entityDTO.surname}}</div>
+                                    <div v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" class="apartment-name2">
+                                        <div><b>Appointment status:</b>Pending</div>
+                                    </div>
+                                    <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
+                                </div>
+                            </td>
+                            <td  style="padding-left:150px;" disabled>
+                                <button v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Cancel appointment</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
