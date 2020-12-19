@@ -23,7 +23,7 @@
 	},
     methods: {
 				cancelAppointment: function (appointmentId) {
-					axios.put('/api/Appointment/canceledAppointment/' + appointmentId
+					axios.put('/api/Appointment/cancelAppointment/' + appointmentId
 						).then( (response) => {
 							if(response.status === 200){
 								alert("Successful cancellation!");

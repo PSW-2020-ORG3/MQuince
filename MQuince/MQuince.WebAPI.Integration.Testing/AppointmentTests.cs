@@ -2,6 +2,7 @@
 using MQuince.Services.Contracts.DTO.Appointment;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -79,15 +80,25 @@ namespace MQuince.WebAPI.Integration.Testing
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact]
-        public async void Cancel_appointment_status_code_test()
+        [Theory]
+        [MemberData(nameof(AppointmentData))]
+        public async void Cancel_Appointment_Status_Code_Test(Guid appointmentId, HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = _factory.CreateClient();
 
-            HttpResponseMessage response = await client.GetAsync("api/appointment/cancelAppointment/08d8a299-ff01-4112-86a8-e5553e4ec81b");
+            var response = await client.PutAsync("/api/Appointment/cancelAppointment/" + appointmentId, new StringContent("1", Encoding.UTF8, "application/json"));
 
-            Assert.False(this.IsOkOrNotFound(response));
+            response.StatusCode.ShouldBeEquivalentTo(expectedResponseStatusCode);
+        }
 
+        public static IEnumerable<object[]> AppointmentData()
+        {
+            var retVal = new List<object[]>();
+            Guid appointmentId1 = Guid.Parse("08d8a3a6-5fcd-424e-85ce-d5276d99b442");
+            Guid appointmentId2 = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
+            retVal.Add(new object[] { appointmentId1, HttpStatusCode.OK });
+            retVal.Add(new object[] { appointmentId2, HttpStatusCode.BadRequest });
+            return retVal;
         }
 
         private AppointmentDTO GetAppointmentDTO()

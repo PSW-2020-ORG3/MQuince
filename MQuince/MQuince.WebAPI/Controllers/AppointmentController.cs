@@ -113,12 +113,12 @@ namespace MQuince.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpPut("canceledAppointment/{IdAppointment}")]
-        public IActionResult CancelAppointment(Guid IdAppointment)
+        [HttpPut("cancelAppointment/{appointmentId}")]
+        public IActionResult CancelAppointment(Guid appointmentId)
         {
             try
             {
-                bool isCanceled = _appointmentService.CancelAppointment(IdAppointment);
+                bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
                 if (isCanceled == true)
                 {
                     return Ok();
