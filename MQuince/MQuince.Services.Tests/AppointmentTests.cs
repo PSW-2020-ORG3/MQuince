@@ -341,7 +341,7 @@ namespace MQuince.Services.Tests.UnitTests
             _appointmentService.CancelAppointment(appointmentId);
             IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
 
-            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+            Assert.True(canceledAppointment.EntityDTO.IsCanceled);
         }
 
         [Fact]
@@ -384,10 +384,10 @@ namespace MQuince.Services.Tests.UnitTests
             TreatmentType treatmentType = TreatmentType.Examination;
 
 
-            appointments.Add(new Appointment(appointmentId1, new DateTime(2020, 12, 26, 12, 30, 0), new DateTime(2020, 12, 28, 13, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
-            appointments.Add(new Appointment(appointmentId2, new DateTime(2020, 01, 08, 10, 30, 0), new DateTime(2020, 01, 13, 11, 00, 0), treatmentType, doctorPersistanceId, patientId, true));
-            appointments.Add(new Appointment(appointmentId3, new DateTime(2020, 12, 20, 08, 00, 0), new DateTime(2020, 12, 25, 08, 30, 0), treatmentType, doctorPersistanceId, patientId, false));
-            appointments.Add(new Appointment(appointmentId4, new DateTime(2020, 12, 01, 12, 30, 0), new DateTime(2020, 12, 05, 13, 00, 0), treatmentType, doctorPersistanceId, patientId, false));
+            appointments.Add(new Appointment(appointmentId1, DateTime.Now.AddDays(100), DateTime.Now.AddDays(105), treatmentType, doctorPersistanceId, patientId, false));
+            appointments.Add(new Appointment(appointmentId2, DateTime.Now.AddDays(60), DateTime.Now.AddDays(65), treatmentType, doctorPersistanceId, patientId, true));
+            appointments.Add(new Appointment(appointmentId3, DateTime.Now.AddDays(1), DateTime.Now.AddDays(5), treatmentType, doctorPersistanceId, patientId, false));
+            appointments.Add(new Appointment(appointmentId4, DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-7), treatmentType, doctorPersistanceId, patientId, false));
             
 
             stubRepository.Setup(appointmentsRepository => appointmentsRepository.GetAll()).Returns(appointments);
