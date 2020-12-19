@@ -82,7 +82,7 @@ namespace MQuince.WebAPI.Integration.Testing
 
         [Theory]
         [MemberData(nameof(AppointmentData))]
-        public async void Cancel_Appointment_Status_Code_Test(Guid appointmentId, HttpStatusCode expectedResponseStatusCode)
+        public async void Cancel_appointment_status_code_test(Guid appointmentId, HttpStatusCode expectedResponseStatusCode)
         {
             HttpClient client = _factory.CreateClient();
 
