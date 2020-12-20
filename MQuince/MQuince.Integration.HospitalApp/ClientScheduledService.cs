@@ -1,7 +1,7 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.Hosting;
 using MQuince.Integration.Entities;
-using MQuince.Integration.HospitalApp.Protos;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,13 @@ namespace MQuince.Integration.HospitalApp
         private System.Timers.Timer timer;
         public static List<GrpcMessage> messageGrpc = new List<GrpcMessage>();
         private Channel channel;
-        private SpringGrpcService.SpringGrpcServiceClient client;
+        private Protos.SpringGrpcService.SpringGrpcServiceClient client;
         private object source;
         private ElapsedEventArgs e;
         public ClientScheduledService()
         {
             channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
-            client = new SpringGrpcService.SpringGrpcServiceClient(channel);
+            client = new Protos.SpringGrpcService.SpringGrpcServiceClient(channel);
 
         }
 
@@ -40,7 +40,7 @@ namespace MQuince.Integration.HospitalApp
 
             try
             {
-                MessagePharmacyResponse response = await client.communicateAsync(new MessagePharmacy() { Name = name });
+                Protos.MessagePharmacyResponse response = await client.communicateAsync(new Protos.MessagePharmacy() { Name = name });
                 Console.WriteLine("Medication:" + response.Name + " is " + response.Status + "in pharmacy!");
                 GrpcMessage message = new GrpcMessage(response.Name, response.Status);
                 messageGrpc.Add(message);
