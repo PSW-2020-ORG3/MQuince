@@ -6,13 +6,13 @@ namespace MQuince.Integration.Entities
 {
     public class GrpcMessage
     {
-        public string name { get; set; }
-        public string status { get; set; }
+        public string Name { get; set; }
+        public string Status { get; set; }
 
         public GrpcMessage(string name, string status)
         {
-            this.name = name;
-            this.status = status;
+            this.Name = name;
+            this.Status = status;
         }
     }
 }

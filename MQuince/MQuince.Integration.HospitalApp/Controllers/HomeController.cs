@@ -22,7 +22,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
     public class HomeController : Controller
     {
 
-        List<GrpcMessage> messageGrpc = ClientScheduledService.messageGrpc;
+        List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
 
         public IActionResult Index()
         {

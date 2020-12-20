@@ -15,7 +15,7 @@ namespace MQuince.Integration.HospitalApp
     public class ClientScheduledService : IHostedService
     {
         private System.Timers.Timer timer;
-        public static List<GrpcMessage> messageGrpc = new List<GrpcMessage>();
+        public static List<GrpcMessage> MessageGrpc = new List<GrpcMessage>();
         private Channel channel;
         private Protos.SpringGrpcService.SpringGrpcServiceClient client;
         private object source;
@@ -43,7 +43,7 @@ namespace MQuince.Integration.HospitalApp
                 Protos.MessagePharmacyResponse response = await client.communicateAsync(new Protos.MessagePharmacy() { Name = name });
                 Console.WriteLine("Medication:" + response.Name + " is " + response.Status + "in pharmacy!");
                 GrpcMessage message = new GrpcMessage(response.Name, response.Status);
-                messageGrpc.Add(message);
+                MessageGrpc.Add(message);
 
             }
             catch (Exception exc)
