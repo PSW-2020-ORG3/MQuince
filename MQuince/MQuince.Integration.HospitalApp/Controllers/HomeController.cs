@@ -52,7 +52,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPost]
         public IActionResult Therapy(string name, string jmbg, string medication, string description)
         {
-            generateQRCode(name, jmbg, medication, description);            
+            generateQRCode(name, jmbg, medication, description);
             return View();
         }
 
@@ -79,11 +79,11 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             Document document = new Document(PageSize.A4, 10, 10, 10, 10);
 
-            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(jmbg+"_"+ DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + DateTime.Now.Year.ToString() + "_" + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".pdf", FileMode.Create));
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(jmbg + "_" + DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString() + "." + DateTime.Now.Year.ToString() + "_" + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".pdf", FileMode.Create));
             document.Open();
-                
 
-           Paragraph paragraph = new Paragraph();
+
+            Paragraph paragraph = new Paragraph();
             string header = "Prescription for medication:";
             paragraph.Font = FontFactory.GetFont(FontFactory.TIMES_ROMAN, 20f, BaseColor.BLACK);
             paragraph.Add(header);
@@ -98,12 +98,12 @@ namespace MQuince.Integration.HospitalApp.Controllers
             string dateHeader = "Date of perscription:      ";
             string date = DateTime.Now.Day + "." + DateTime.Now.Month + "." + DateTime.Now.Year + ".  @  " + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
 
-            
+
             Paragraph about = new Paragraph();
             about.Add(nameHeader);
             about.SpacingBefore = 3;
             about.SpacingAfter = 5;
-            about.Alignment = Element.ALIGN_LEFT;  
+            about.Alignment = Element.ALIGN_LEFT;
 
             about.Font = FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 12f, BaseColor.BLACK);
             about.Add(name);
@@ -150,7 +150,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
             o.Font = FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 12f, BaseColor.BLACK);
             o.Add(description);
             document.Add(o);
-            
+
             Paragraph qr = new Paragraph();
 
             iTextSharp.text.pdf.BarcodeQRCode qrcode = new BarcodeQRCode(name + " \n " + jmbg + " \n " + DateTime.Today + " \n " + medication + " \n " + description, 200, 200, null);
@@ -163,7 +163,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
             o.SpacingBefore = 3;
             o.SpacingAfter = 5;
             document.Add(po);
-            document.Close();               
+            document.Close();
         }
         public IActionResult sendMessageGrpc()
         {

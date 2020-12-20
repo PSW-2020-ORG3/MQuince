@@ -34,7 +34,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Get(DateDTO dto)
+        public IActionResult Post(DateDTO dto)
         {
             _medicationsConsumptionService.GeneratePdf(dto);
 

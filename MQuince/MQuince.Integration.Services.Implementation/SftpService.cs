@@ -54,24 +54,20 @@ namespace MQuince.Integration.Services.Implementation
             {
                 // connect and log in
                 client.Connect();
-                if (client.IsConnected)
-                {
-                    using (var fileStream = new FileStream(fileName, FileMode.Create))
-                    {
-                        client.BufferSize = 4 * 1024;
-                        client.DownloadFile(Path.GetFileName(fileName), fileStream);
-                    }
 
-
-                    return true;
-                }
-                else
+                if(!client.IsConnected)
                 {
-                    Console.WriteLine("It's not connected.");
+                    Console.WriteLine("It's not connected!");
                     return false;
                 }
 
+                using (var fileStream = new FileStream(fileName, FileMode.Create))
+                {
+                    client.BufferSize = 4 * 1024;
+                    client.DownloadFile(Path.GetFileName(fileName), fileStream);
+                }
 
+                return true;
             }
         }
         }

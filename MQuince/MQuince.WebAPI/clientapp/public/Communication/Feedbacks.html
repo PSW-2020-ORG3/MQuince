@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>MQuince Health</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico.png" />
+
+    <link href="../../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -15,130 +23,167 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="styles.css" rel="stylesheet" />
-</head>
-<style>
-    input[type=text], select, input[type=time] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        input[type=submit]:hover {
-            background-color: #45a049;
+    <link href="../../src/assets/style.css" rel="stylesheet">
+    <style>
+        input[type=text], select, input[type=time] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .apartment-name2 {
-        position: relative;
-        top: 30px;
-        max-height: 50px;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        font-weight: 400;
-        color: rgb(34, 34, 34);
-        font-size: 18px;
-        line-height: 24px;
-        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    }
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
 
-    .short-info2 {
-        position: relative;
-        top: 0px;
-        margin-top: 9px;
-        color: rgb(113, 113, 113);
-        font-weight: 400;
-        min-height: 18px;
-        font-size: 14px;
-        line-height: 18px;
-        max-height: 22px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 
-    .btn {
-        background-color: transparent;
-        border: none;
-        padding: 6px 16px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+        .apartment-name2 {
+            position: relative;
+            top: 15px;
+            max-height: 50px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            font-weight: 400;
+            color: rgb(34, 34, 34);
+            font-size: 18px;
+            line-height: 24px;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+        }
 
-        /* Darker background on mouse-over */
-        .btn:hover {
+        .short-info2 {
+            position: relative;
+            top: 0px;
+            margin-top: 9px;
+            color: rgb(113, 113, 113);
+            font-weight: 400;
+            min-height: 18px;
+            font-size: 14px;
+            line-height: 18px;
+            max-height: 22px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn {
             background-color: transparent;
+            border: none;
+            padding: 6px 16px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-    .commentBox {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        margin: auto;
-        width: 70%;
-        margin-top: 10px;
-        height: 200px;
-    }
-</style>
+            /* Darker background on mouse-over */
+            .btn:hover {
+                background-color: transparent;
+            }
+
+        .commentBox {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: auto;
+            width: 70%;
+            margin-top: 10px;
+            height: 240px;
+        }
+    </style>
+</head>
 
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top">MQuince</a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+        <div class="container d-flex">
+            <div class="contact-info mr-auto">
+                <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@mquince.com</a>
+                <i class="icofont-phone"></i> +381 62432132
+                <i class="icofont-google-map"></i> Beogradska 15, Beograd
+            </div>
+            <div class="social-links">
+                <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                <a href="#" class="skype"><i class="icofont-skype"></i></a>
             </div>
         </div>
-    </nav>
-
-    <div id="feedbacks">
-    <!-- Contact Section-->
-    <section class="page-section" id="contact">
-        <div class="container" >
-            <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Your feedbacks</h2>
-            <!-- Icon Divider-->
-            <!-- Contact Section Form-->
-            <div class="commentBox" v-for="feedback in feedbacks">
-                <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                    <div class="short-info2">By Helena:</div>
-                    <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                    <br/>
-                </div>
-             </div>
-        </div>
-    </section> 
     </div>
-       
-    <!-- Footer-->
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <!-- Footer Location-->
-
-            </div>
+    <header style="margin-top:10px" id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <h1 class="logo mr-auto"><a href="../index.html">MQUINCE Medic</a></h1>
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li  class="drop-down active">
+                        <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
+                        <ul>
+                            <li><a href="../Communication/AddFeedback.html">Add feedback</a></li>
+                            <li><a href="#/">Observe feedbacks</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
+                    <li class="drop-down">
+                        <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Create appointment</a>
+                        <ul>
+                            <li><a href="../Appointment/CreateAppointment.html">Standard appointment</a></li>
+                            <li><a href="#">Recommended appointment</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </footer>
+    </header>
+
+    <section class="page-section" id="contact">
+        <div id="createAppointment">
+            <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Your feedbacks</h5>
+
+        </div>
+    </section>
+
+    <div style="margin-top:-45px" id="feedbacks">
+        <!-- Contact Section-->
+            <div class="container" >
+                <!-- Contact Section Heading-->                <!-- Icon Divider-->
+                <!-- Contact Section Form-->
+                <div style=" margin-top: 15px">
+                    
+                    <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                        <div style="display: inline-block">
+                            <table >
+                                <tr>
+                                    <td colspan="2">
+                                        <img src="../static/feedbackIcon.png" height="100" width="100">
+                                    </td>
+                                    <td >
+                                        <div style="margin-left:30px;margin-bottom:30px">
+                                            <div class="short-info2">By Helena:</div>
+                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+    </div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

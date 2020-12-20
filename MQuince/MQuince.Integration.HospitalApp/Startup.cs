@@ -9,9 +9,11 @@ using Microsoft.Extensions.Hosting;
 using MQuince.Integration.Repository.MySQL.DataProvider;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
+
 using Microsoft.EntityFrameworkCore;
 using Grpc.Core;
 using MQuince.Integration.HospitalApp.Protos;
+
 
 namespace MQuince.Integration.HospitalApp
 {
@@ -69,6 +71,7 @@ namespace MQuince.Integration.HospitalApp
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
+
             {
                 endpoints.MapControllerRoute(
                     name: "default",
