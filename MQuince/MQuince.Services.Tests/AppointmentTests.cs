@@ -325,10 +325,10 @@ namespace MQuince.Services.Tests.UnitTests
 
             Guid appointmentId = Guid.Parse("08d89d75-3533-47ac-80a1-6cd77742dd25");
 
-            _appointmentService.CancelAppointment(appointmentId);
-            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+            bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
+            
 
-            Assert.True(canceledAppointment.EntityDTO.IsCanceled);
+            Assert.True(isCanceled);
         }
 
         [Fact]
@@ -338,10 +338,9 @@ namespace MQuince.Services.Tests.UnitTests
 
             Guid appointmentId = Guid.Parse("08d89d75-46c4-4e41-8da0-54cc9586c109");
 
-            _appointmentService.CancelAppointment(appointmentId);
-            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+            bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
 
-            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+            Assert.False(isCanceled);
         }
 
         [Fact]
@@ -351,10 +350,9 @@ namespace MQuince.Services.Tests.UnitTests
 
             Guid appointmentId = Guid.Parse("08d8a2ab-e138-4e36-8542-68bec07b074c");
 
-            _appointmentService.CancelAppointment(appointmentId);
-            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+            bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
 
-            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+            Assert.False(isCanceled);
         }
 
         [Fact]
@@ -364,10 +362,9 @@ namespace MQuince.Services.Tests.UnitTests
 
             Guid appointmentId = Guid.Parse("08d89d76-5a15-4560-8d39-dd56c5ad776e");
 
-            _appointmentService.CancelAppointment(appointmentId);
-            IdentifiableDTO<AppointmentDTO> canceledAppointment = _appointmentService.GetById(appointmentId);
+            bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
 
-            Assert.False(canceledAppointment.EntityDTO.IsCanceled);
+            Assert.False(isCanceled);
         }
         
         private static IAppointmentRepository CreateStubRepository()
