@@ -5,7 +5,5 @@ option csharp_namespace = "MQuince.Integration.HospitalApp.Protos";
 import "Protos/model.proto";
 
 service NetGrpcService {
-  rpc getDrug (MessagePharmacy) returns (MessagePharmacyResponse);
+  rpc transfer (MessagePharmacy) returns (MessagePharmacyResponse);
 }
-
-

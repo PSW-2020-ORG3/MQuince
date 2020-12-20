@@ -11,3 +11,4 @@ message MessagePharmacyResponse {
   string name=1;
   string status = 2;
 }
+

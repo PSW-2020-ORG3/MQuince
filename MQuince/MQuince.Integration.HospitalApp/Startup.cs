@@ -10,6 +10,8 @@ using MQuince.Integration.Repository.MySQL.DataProvider;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Grpc.Core;
+using MQuince.Integration.HospitalApp.Protos;
 
 namespace MQuince.Integration.HospitalApp
 {
@@ -18,11 +20,9 @@ namespace MQuince.Integration.HospitalApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
-
+        } 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             
@@ -32,26 +32,18 @@ namespace MQuince.Integration.HospitalApp
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(ISftpService), s => new SftpService());
 
-            //
-            //services.AddControllers().AddNewtonsoftJson();
-            //
-
             services.AddMvc().AddNewtonsoftJson(option =>
             {
                 option.SerializerSettings.Culture = new CultureInfo("tr-TR");
             });
-
-
-
-
             services.AddControllers(options =>
             {
                 options.EnableEndpointRouting = false;
 
             }).AddNewtonsoftJson();
         }
+        private Server server;
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
@@ -84,7 +76,24 @@ namespace MQuince.Integration.HospitalApp
 
             });
 
-            
+            server = new Server
+            {
+                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
+
+        }
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
         }
     }
 }

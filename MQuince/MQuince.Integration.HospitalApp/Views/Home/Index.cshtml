@@ -2,14 +2,15 @@
     ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
-<div id="buttons">
-    <button id="btn" onclick="addPage()" asp-controller="Home" asp-action="http://localhost:49544/home/add"> Add new pharmacy     </button>
-    <button id="btn" onclick="" asp-controller="Home" asp-action="http://localhost:49544/home/action"> Action & Benefits     </button>
-    <button id="btn" onclick="addReports()" asp-controller="Home" asp-action="http://localhost:49544/reports"> Reports    </button>
-    <button id="btn" onclick="getSpecification()" asp-controller="Home" asp-action="http://localhost:49544/getSpecification"> Get Medications Specification    </button>
-    <button id="btn" onclick="therapy()" asp-controller="Home" asp-action="Therapy"> Prescribe therapy  </button>
+    <div id="buttons">
+        <button id="btn" onclick="addPage()" asp-controller="Home" asp-action="http://localhost:49544/home/add"> Add new pharmacy     </button>
+        <button id="btn" onclick="" asp-controller="Home" asp-action="http://localhost:49544/home/action"> Action & Benefits     </button>
+        <button id="btn" onclick="addReports()" asp-controller="Home" asp-action="http://localhost:49544/reports"> Reports    </button>
+        <button id="btn" onclick="getSpecification()" asp-controller="Home" asp-action="http://localhost:49544/getSpecification"> Get Medications Specification    </button>
+        <button id="btn" onclick="therapy()" asp-controller="Home" asp-action="Therapy"> Prescribe therapy  </button>
+        <button id="btn" onclick="exists()" asp-controller="Home"  asp-action="sendMessageGrpc"> Ask for medicatons </button>
 
-</div>
+    </div>
 
 
 

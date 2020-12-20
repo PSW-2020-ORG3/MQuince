@@ -12,11 +12,15 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using Syncfusion.Pdf.Graphics;
 using PdfSharp.Drawing;
+using MQuince.Integration.Entities;
+using System.Collections.Generic;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
     public class HomeController : Controller
     {
+        List<GrpcMessage> messageGrpc = ClientScheduledService.messageGrpc;
+
         public IActionResult Index()
         {
             return View();
@@ -161,7 +165,10 @@ namespace MQuince.Integration.HospitalApp.Controllers
             document.Add(po);
             document.Close();               
         }
-
+        public IActionResult sendMessageGrpc()
+        {
+            return View(messageGrpc);
+        }
 
     }
 }
