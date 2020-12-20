@@ -13,5 +13,7 @@ function getSpecification()
 function therapy() {
     window.location.replace("http://localhost:49544/home/therapy");
 }
-
+function exists() {
+    window.location.replace("http://localhost:49544/home/sendMessageGrpc");
+}
 /*document.location.href=*/

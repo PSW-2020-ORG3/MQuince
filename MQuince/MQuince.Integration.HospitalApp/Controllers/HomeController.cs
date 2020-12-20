@@ -14,14 +14,16 @@ using Syncfusion.Pdf.Graphics;
 using PdfSharp.Drawing;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
+using MQuince.Integration.Entities;
+using System.Collections.Generic;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
     public class HomeController : Controller
     {
-        
 
-        
+        List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
+
         public IActionResult Index()
         {
             return View();
@@ -53,11 +55,14 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPost]
         public IActionResult Therapy(string name, string jmbg, string medication, string description)
         {
-            HomeService.generateQRCode(name, jmbg, medication, description);            
+            HomeService.generateQRCode(name, jmbg, medication, description);
             return View();
         }
+        public IActionResult sendMessageGrpc()
+        {
+            return View(messageGrpc);
+        }
 
-        
 
 
 
