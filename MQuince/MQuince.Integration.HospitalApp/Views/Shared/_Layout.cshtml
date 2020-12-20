@@ -6,15 +6,18 @@
 
     <link rel="stylesheet" href="~/Views/assets/bootstrap/css/bootstrap.min.css">
 
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="~/Views/assets/js/vue.js"></script>
 
     <script src="~/Views/assets/js/jquery.min.js"></script>
     <script src="~/Views/assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/Views/assets/css/styles.css" type="text/css" runat="server">
-
+    <script>
+        function home() {
+            window.location.replace("http://localhost:49544/home");
+        }
+    </script>
     <link rel="stylesheet" href="~/Views/assets/css/addPharamcy.css" type="text/css" runat="server">
-    <title> HOSPITAL SERVER </title>
     <title> HOSPITAL SERVER </title>
 </head>
 
@@ -24,7 +27,7 @@
         <div class="nav-bar">
             <div class="hsp_server"> HOSPITAL  SERVER </div>
             <div class="navButton">
-                <button asp-controller="Home" asp-action="Index"> HOME </button>
+                <button asp-controller="Home" onclick="home()"> HOME </button>
             </div>
 
         </div>
@@ -39,5 +42,6 @@
     @RenderSection("Scripts", required: false)
     
 </body>
+
 
 </html>

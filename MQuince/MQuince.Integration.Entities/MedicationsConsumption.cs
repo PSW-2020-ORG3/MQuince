@@ -7,34 +7,47 @@ namespace MQuince.Integration.Entities
     public class MedicationsConsumption
     {
 
-        private Guid KeyConsumtion { get; set; }
+        private Guid _keyConsumtion;
 
         public string Name { get; set; }
 
         public DateTime DateOfConsumtion { get; set; }
 
         public int Quantity { get; set; }
+
+        public MedicationsConsumption()
+        {
+
+        }
         public MedicationsConsumption(Guid keyConsumtion, string name, DateTime dateOfConsumtion, int quantity)
         {
-            KeyConsumtion = keyConsumtion;
+            _keyConsumtion = keyConsumtion;
             Name = name;
             DateOfConsumtion = dateOfConsumtion;
             Quantity = quantity;
         }
         public MedicationsConsumption(string name, DateTime dateOfConsumtion, int quantity)
         {
-            Name = name;
-            DateOfConsumtion = dateOfConsumtion;
-            Quantity = quantity;
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException("Name can not be empty");
+            }
+            else
+            {
+                Name = name;
+                DateOfConsumtion = dateOfConsumtion;
+                Quantity = quantity;
+            }
+            
         }
 
 
-        public Guid getKeyConsumtion
+        public Guid KeyConsumtion
         {
-            get { return KeyConsumtion; }
-            private set
+            get { return _keyConsumtion; }
+            set
             {
-                KeyConsumtion = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(getKeyConsumtion)) : value;
+                _keyConsumtion = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(KeyConsumtion)) : value;
             }
         }
     }

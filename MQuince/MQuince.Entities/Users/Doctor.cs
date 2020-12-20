@@ -8,8 +8,6 @@ namespace MQuince.Entities.Users
     public class Doctor : Staff
     {
         public string Biography { get; set; }
-        public List<Guid> SpecializationId { get; set; }
-        public Guid WorkRoomId { get; set; }
-        public Guid WorkPlaceId { get; set; }
+        public Guid SpecializationId { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace MQuince.Services.Contracts.Interfaces
     public interface IWorkTimeService
     {
         IEnumerable<WorkTime> GetWorkTimesForDoctor(Guid doctorId);
+        WorkTime GetWorkTimeForDoctorForDate(Guid doctorId, DateTime date);
     }
 }

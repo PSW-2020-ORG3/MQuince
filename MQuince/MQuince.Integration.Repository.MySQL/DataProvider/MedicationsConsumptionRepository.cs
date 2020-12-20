@@ -54,7 +54,10 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
         public MedicationsConsumption GetById(Guid id)
         {
 
-            throw new NotImplementedException();
+            using (DataContext _context = new DataContext())
+            {
+                return MedicationsConsumptionMapper.MapMedicationsConsumptionPersistenceToMedicationsConsumptionEntity(_context.MedicationsConsumptions.SingleOrDefault(c => c.KeyConsumtion.Equals(id)));
+            }
         }
 
 

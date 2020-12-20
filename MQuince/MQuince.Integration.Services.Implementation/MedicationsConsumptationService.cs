@@ -19,7 +19,7 @@ namespace MQuince.Integration.Services.Implementation
 
         public MedicationsConsumptationService(IMedicationsConsumptionRepository medicationsConsumptionReposotiry)
         {
-            _medicationsConsumptionRepository = medicationsConsumptionReposotiry;
+            _medicationsConsumptionRepository = medicationsConsumptionReposotiry == null ? throw new ArgumentNullException(nameof(medicationsConsumptionReposotiry) + "is set to null") : medicationsConsumptionReposotiry;
         }
 
         public Guid Create(MedicationsConsumptionDTO entityDTO)
@@ -28,7 +28,7 @@ namespace MQuince.Integration.Services.Implementation
 
             _medicationsConsumptionRepository.Create(medicationsConsumption);
 
-            return medicationsConsumption.getKeyConsumtion;
+            return medicationsConsumption.KeyConsumtion;
         }
 
         public bool Delete(Guid id) => _medicationsConsumptionRepository.Delete(id);
@@ -89,7 +89,7 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<MedicationsConsumptionDTO>()
             {
-                Key = medicationsConsumptation.getKeyConsumtion,
+                Key = medicationsConsumptation.KeyConsumtion,
                 EntityDTO = new MedicationsConsumptionDTO()
                 {
                     Name = medicationsConsumptation.Name,

@@ -110,7 +110,7 @@ namespace MQuince.Repositories.Tests
             if (workTimePersistence.EndTime != workTime.EndTime)
                 return false;
 
-            if (workTimePersistence.Doctor.Id != workTime.DoctorId)
+            if (workTimePersistence.DoctorId != workTime.DoctorId)
                 return false;
 
             return true;

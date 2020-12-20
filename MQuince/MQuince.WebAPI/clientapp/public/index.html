@@ -1,18 +1,72 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>clientapp</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but clientapp doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-     INDEX HTML
-    <!-- built files will be auto injected -->
-  </body>
+    <title>MQuince Health</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link href="../src/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="../src/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../src/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="../src/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../src/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../src/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../src/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <link href="../src/assets/style.css" rel="stylesheet">
+
+    <link href="css/toast.css" rel="stylesheet" />
+    <script src="scripts/toast.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="header" id="header">
+            <header id="header" class="fixed-top">
+                <div class="container d-flex align-items-center">
+                    <h1 class="logo mr-auto"><a href="#/web">MQUINCE Medic</a></h1>
+                    <nav class="nav-menu d-none d-lg-block">
+                        <ul>
+                            <li class="active"><a href="index.html">Home</a></li>
+                            <li><a href="/public/Communication/Feedbacks.html">Feedback</a></li>
+                            <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
+                            <li class="drop-down">
+                                <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Zakazi pregled</a>
+                                <ul>
+                                    <li><a href="../public/Appointment/CreateAppointment.html">Standardno zakazivanje</a></li>
+                                    <li><a href="#">Preporuceni termini</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        </div>
+        <div>
+            <router-view style="margin-top:130px;"></router-view>
+        </div>
+    </div>
+
+
+
+    <script src="scripts/vue.js"></script>
+    <script src="scripts/vue-router.js"></script>
+    <script src="scripts/axios.js"></script>
+    <script src="scripts/vuejs-datepicker.min.js"></script>
+    <script src="scripts/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+    <script src="static/app.js"></script>
+    <script src="static/homepage.js"></script>
+    <script src="static/test.js"></script>
+    <script src="static/createAppointment.js"></script>
+
+</body>
 </html>

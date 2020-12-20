@@ -30,8 +30,15 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] MedicationsConsumptionDTO dto)
         {
-            _medicationsConsumptionService.Create(dto);
-            return Ok(dto);
+            try
+            {
+                _medicationsConsumptionService.Create(dto);
+                return Ok(dto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

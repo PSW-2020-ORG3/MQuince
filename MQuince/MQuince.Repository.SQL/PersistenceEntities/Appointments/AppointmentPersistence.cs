@@ -1,4 +1,5 @@
 ﻿using MQuince.Enums;
+using MQuince.Repository.SQL.PersistenceEntities.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,13 +17,12 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Appointments
         public DateTime EndDateTime { get; set; }
         public TreatmentType Type { get; set; }
 
-        [ForeignKey("RoomId")]
-        public Guid RoomId { get; set; }
+        [ForeignKey("DoctorPersistanceId")]
+        public DoctorPersistence DoctorPersistance { get; set; }
+        public Guid DoctorPersistanceId { get; set; }
 
-        [ForeignKey("DoctorId")]
-        public Guid DoctorId { get; set; }
-
-        [ForeignKey("PatientId")]
-        public Guid PatientId { get; set; }
+        [ForeignKey("PatientPersistanceId")]
+        public PatientPersistence PatientPersistance { get; set; }
+        public Guid PatientPersistanceId { get; set; }
     }
 }

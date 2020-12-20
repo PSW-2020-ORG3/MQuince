@@ -1,5 +1,7 @@
 ﻿using MQuince.Integration.Entities;
 using MQuince.Integration.Repository.MySQL.PersistenceEntities;
+using MQuince.Integration.Services.Constracts.DTO;
+using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
     {
         public static MyPharmacy MapPharmacyPersistenceToPharmacyEntity(PharmacyPersistence pharmacy)
         {
-            if (pharmacy == null) return null;
+            if (pharmacy == null) throw new ArgumentNullException();
 
             return new MyPharmacy(pharmacy.ApiKey, pharmacy.Name, pharmacy.Url);
 
@@ -29,8 +31,21 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
             };
             return retVal;
         }
-
+       
         public static IEnumerable<MyPharmacy> MapPharmacyPersistenceCollectionToPharmacyEntityCollection(IEnumerable<PharmacyPersistence> clients)
             => clients.Select(c => MapPharmacyPersistenceToPharmacyEntity(c));
+
+        public static IdentifiableDTO<PharmacyDTO> MapPhamracyEntityToPharmacyIdentifierDTO(MyPharmacy pharmacy)
+         => pharmacy == null ? throw new ArgumentNullException()
+                                      : new IdentifiableDTO<PharmacyDTO>
+                                      {                                         
+                                          EntityDTO = new PharmacyDTO()
+                                          {
+                                              ApiKey = pharmacy.ApiKey,
+                                              Name = pharmacy.Name,
+                                              Url = pharmacy.Url
+                                              
+                                          }
+                                      };
     }
 }

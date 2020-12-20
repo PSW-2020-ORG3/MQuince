@@ -10,10 +10,9 @@ namespace MQuince.Repository.SQL.PersistenceEntities.Users
     [Table("Doctor")]
     public class DoctorPersistence : UserPersistence
     {
-        //[Key]
-        //public Guid Id { get; set; }
         public string Biography { get; set; }
         [ForeignKey("SpecializationId")]
+        public Guid SpecializationId { get; set; }
         public SpecializationPersistence Specialization { get; set; }
     }
 }
