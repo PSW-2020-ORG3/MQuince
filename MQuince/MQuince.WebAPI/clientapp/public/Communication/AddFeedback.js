@@ -15,7 +15,8 @@ var app = new Vue({
 						Anonymous: this.Anonymous,
 						Publish: this.Publish
 					}).then(response => {
-						JSAlert.alert("Your feedback has been saved!");
+						//JSAlert.alert("Your feedback has been saved!");
+						alert("Your feedback has been saved!")
 
 						setTimeout(function () {
 							if (window.location.hash != '#r') {
