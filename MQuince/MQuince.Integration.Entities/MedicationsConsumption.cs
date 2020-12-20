@@ -14,6 +14,11 @@ namespace MQuince.Integration.Entities
         public DateTime DateOfConsumtion { get; set; }
 
         public int Quantity { get; set; }
+
+        public MedicationsConsumption()
+        {
+
+        }
         public MedicationsConsumption(Guid keyConsumtion, string name, DateTime dateOfConsumtion, int quantity)
         {
             _keyConsumtion = keyConsumtion;
@@ -34,10 +39,6 @@ namespace MQuince.Integration.Entities
                 Quantity = quantity;
             }
             
-        }
-
-        public MedicationsConsumption()
-        {
         }
 
 

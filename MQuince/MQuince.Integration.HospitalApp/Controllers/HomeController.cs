@@ -1,13 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using QRCoder;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Syncfusion.Pdf.Barcode;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using Syncfusion.Pdf.Graphics;
+using PdfSharp.Drawing;
+using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Integration.Services.Implementation;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
     public class HomeController : Controller
     {
+        
+
+        
         public IActionResult Index()
         {
             return View();
@@ -26,5 +40,27 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return View();
         }
+
+        public IActionResult getSpecification()
+        {
+            return View();
+        }
+
+        public IActionResult Therapy()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Therapy(string name, string jmbg, string medication, string description)
+        {
+            HomeService.generateQRCode(name, jmbg, medication, description);            
+            return View();
+        }
+
+        
+
+
+
+
     }
 }
