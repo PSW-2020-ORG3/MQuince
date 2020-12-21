@@ -102,7 +102,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+                    IsCanceled= false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
@@ -110,7 +111,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 27, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                    IsCanceled= false
                 }
             };
 
@@ -159,7 +161,8 @@ namespace MQuince.Services.Tests.UnitTests
                EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                Type = TreatmentType.Examination,
                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
-               PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+               PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+               IsCanceled= false
            };
 
         [Fact]
@@ -257,7 +260,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+                    IsCanceled=false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
@@ -265,7 +269,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                    IsCanceled=false
                 }
             };
 
@@ -284,7 +289,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 08, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11"),
+                    IsCanceled=false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea4"),
@@ -292,7 +298,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 09, 00, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11"),
+                    IsCanceled=false
                 }
             };
 
@@ -316,7 +323,100 @@ namespace MQuince.Services.Tests.UnitTests
             Assert.True(CompareAppointmentsDTO(output, appointments));
         }
 
-		private bool CompareAppointmentsDTO(IEnumerable<Appointment> output, IEnumerable<AppointmentDTO> appointments)
+
+        [Fact]
+        public void Cancel_appointment_when_appointment_can_be_canceled()
+        {
+            Appointment appointmentForCancel = this.GetAppointmentForCancelSuccesfull();
+            appointmentRepository.GetById(appointmentForCancel.Id).Returns(appointmentForCancel);
+
+
+            bool isCanceled = appointmentService.CancelAppointment(appointmentForCancel.Id);
+
+            Assert.True(isCanceled);
+            Assert.True(appointmentForCancel.IsCanceled);
+        }
+
+        [Fact]
+        public void Cancel_appointment_when_appointment_can_not_be_canceled_because_has_expired()
+        {
+            Appointment appointmentForCancel = this.GetExpiredAppointment();
+            appointmentRepository.GetById(appointmentForCancel.Id).Returns(appointmentForCancel);
+
+
+            bool isCanceled = appointmentService.CancelAppointment(appointmentForCancel.Id);
+
+            Assert.False(isCanceled);
+            Assert.False(appointmentForCancel.IsCanceled);
+        }
+
+        [Fact]
+        public void Cancel_appointment_when_appointment_can_not_be_canceled_because_appointment_is_soon()
+        {
+            Appointment appointmentForCancel = this.GetAppointmentWhichIsSoon();
+            appointmentRepository.GetById(appointmentForCancel.Id).Returns(appointmentForCancel);
+
+            bool isCanceled = appointmentService.CancelAppointment(appointmentForCancel.Id);
+
+            Assert.False(isCanceled);
+            Assert.False(appointmentForCancel.IsCanceled);
+        }
+
+        [Fact]
+        public void Cancel_appointment_when_appointment_not_exist()
+        {
+            Guid appointmentId = Guid.NewGuid();
+            appointmentRepository.GetById(appointmentId).Returns(x => { throw new ArgumentNullException(); });
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.CancelAppointment(appointmentId));
+        }
+
+        [Fact]
+        public void Cancel_appointment_when_service_give_any_other_exception()
+        {
+            Guid appointmentId = Guid.NewGuid();
+            appointmentRepository.GetById(appointmentId).Returns(x => { throw new Exception(); });
+
+            Assert.Throws<InternalServerErrorException>(() => appointmentService.CancelAppointment(appointmentId));
+        }
+
+        private Appointment GetAppointmentForCancelSuccesfull()
+            => new Appointment()
+            {
+                Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                StartDateTime = DateTime.Now.AddHours(72),
+                EndDateTime = DateTime.Now.AddHours(72).AddMinutes(30),
+                Type = TreatmentType.Examination,
+                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                IsCanceled=false
+            };
+
+        private Appointment GetExpiredAppointment()
+            => new Appointment()
+            {
+                Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                StartDateTime = new DateTime(2010,12,12,12,30,00),
+                EndDateTime = new DateTime(2010, 12, 12, 12, 30,00),
+                Type = TreatmentType.Examination,
+                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                IsCanceled = false
+            };
+
+        private Appointment GetAppointmentWhichIsSoon()
+            => new Appointment()
+            {
+                Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
+                StartDateTime = DateTime.Now.AddHours(47),
+                EndDateTime = DateTime.Now.AddHours(47).AddMinutes(30),
+                Type = TreatmentType.Examination,
+                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
+                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                IsCanceled = false
+            };
+
+        private bool CompareAppointmentsDTO(IEnumerable<Appointment> output, IEnumerable<AppointmentDTO> appointments)
 		{
             for (int i = 0; i < output.Count(); i++)
             {
@@ -348,7 +448,8 @@ namespace MQuince.Services.Tests.UnitTests
                 EndDateTime = new DateTime(2020, 12, 27, 07, 30, 00),
                 Type = TreatmentType.Examination,
                 DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                IsCanceled=false
             };
         private bool CompareAppointmentAndIdentifierAppointment(Appointment appointment, IdentifiableDTO<AppointmentDTO> identifierAppointment)
         {
@@ -370,6 +471,9 @@ namespace MQuince.Services.Tests.UnitTests
             if (!appointment.EndDateTime.Equals(identifierAppointment.EntityDTO.EndDateTime))
                 return false;
 
+            if (appointment.IsCanceled != identifierAppointment.EntityDTO.IsCanceled)
+                return false;
+
             return true;
         }
 
@@ -388,6 +492,9 @@ namespace MQuince.Services.Tests.UnitTests
                 return false;
 
             if (!appointment.EndDateTime.Equals(appointmentDTO.EndDateTime))
+                return false;
+
+            if (appointment.IsCanceled != appointmentDTO.IsCanceled)
                 return false;
 
             return true;

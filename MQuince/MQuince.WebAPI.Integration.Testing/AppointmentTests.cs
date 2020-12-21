@@ -79,6 +79,19 @@ namespace MQuince.WebAPI.Integration.Testing
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
+        [Fact]
+        public async Task Cancel_appointment()
+        {
+            HttpClient client = _factory.CreateClient();
+            Guid appointmentId = Guid.NewGuid();
+            string serializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(appointmentId);
+            var httpContent = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync("/api/Appointment/CancelAppointment/"+ appointmentId, httpContent);
+
+            Assert.True(IsOkOrNotFoundOrBadRequest(response));
+        }
+
         private AppointmentDTO GetAppointmentDTO()
             =>  new AppointmentDTO()
                 {
@@ -93,6 +106,18 @@ namespace MQuince.WebAPI.Integration.Testing
         private bool IsOkOrNotFound(HttpResponseMessage response)
         {
             if (response.StatusCode.Equals(HttpStatusCode.OK))
+                return true;
+            if (response.StatusCode.Equals(HttpStatusCode.NotFound))
+                return true;
+
+            return false;
+        }
+
+        private bool IsOkOrNotFoundOrBadRequest(HttpResponseMessage response)
+        {
+            if (response.StatusCode.Equals(HttpStatusCode.OK))
+                return true;
+            if (response.StatusCode.Equals(HttpStatusCode.BadRequest))
                 return true;
             if (response.StatusCode.Equals(HttpStatusCode.NotFound))
                 return true;
