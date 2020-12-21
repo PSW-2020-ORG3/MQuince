@@ -34,8 +34,8 @@ namespace MQuince.Services.Implementation
             return appointment.Id;
         }
         private Appointment CreateAppointmentFromDTO(AppointmentDTO appointment, Guid? id = null)
-            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId)
-                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId);
+            => id == null ? new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled)
+                          : new Appointment(appointment.StartDateTime, appointment.EndDateTime, appointment.Type, appointment.DoctorId, appointment.PatientId, appointment.IsCanceled);
 
         public bool Delete(Guid id)
         {
@@ -194,6 +194,34 @@ namespace MQuince.Services.Implementation
             return freeAppointments;
         }
 
+        public bool CancelAppointment(Guid appointmentId)
+        {
+            try
+            {
+                Appointment appointment = _appointmentRepository.GetById(appointmentId);
+                if (this.CanAppointmentBeCanceled(appointment.StartDateTime))
+                {
+                    appointment.IsCanceled = true;
+                    _appointmentRepository.Update(appointment);
+                    return true;
+                }
+                return false;
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
 
+        private bool CanAppointmentBeCanceled(DateTime startDate)
+        {
+            if (startDate < DateTime.Now.AddHours(48))
+                return false;
+            return true;
+        }
     }
 }

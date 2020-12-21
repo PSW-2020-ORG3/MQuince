@@ -112,5 +112,26 @@ namespace MQuince.WebAPI.Controllers
             _appointmentService.Update(new AppointmentDTO() { StartDateTime = appointment.StartDateTime, EndDateTime = appointment.EndDateTime, Type = appointment.Type, DoctorId = appointment.DoctorId, PatientId = appointment.PatientId }, appointment.Id);
             return Ok();
         }
+
+        [HttpPut("CancelAppointment/{appointmentId}")]
+        public IActionResult CancelAppointment(Guid appointmentId)
+        {
+            try
+            {
+                bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
+                if (isCanceled)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

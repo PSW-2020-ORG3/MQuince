@@ -52,6 +52,9 @@ namespace MQuince.Services.Tests
             if (!appointment.EndDateTime.Equals(appointmentDTO.EntityDTO.EndDateTime))
                 return false;
 
+            if (appointment.IsCanceled != appointmentDTO.EntityDTO.IsCanceled)
+                return false;
+
             return true;
         }
 
