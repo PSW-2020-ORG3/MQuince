@@ -1,0 +1,50 @@
+services:
+  servers:
+    build:
+      context: ./MQuince
+      args:
+        DATABASE_USERNAME: user
+        DATABASE_PASSWORD: user
+        DATABASE_DOMAIN: mysql
+        DATABASE_SCHEMA: mquince
+        DATABASE_PORT: 3306
+        STAGE: dev 
+    image: mquince-mysql
+    container_name: mquince
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - 5000:5000
+    environment:
+      DATABASE_USERNAME: user
+      DATABASE_PASSWORD: user
+      DATABASE_DOMAIN: mysql
+      DATABASE_SCHEMA: mquince
+      DATABASE_PORT: 3306
+      STAGE: dev
+      SHOW_ENV: "TRUE"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0.19
+    container_name: mysql
+    restart: always
+    networks:
+      - demo
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_DATABASE: mquince
+    volumes:
+      - mysql-data:/var/lib/mysql:rw
+
+volumes:
+  mysql-data:
+
+networks:
+  demo:
+    name: demo
+    driver: bridge

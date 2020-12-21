@@ -1,0 +1,42 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+schedules:
+- cron: "1 0 * * 1"
+  displayName: Daily midnight build
+  branches:
+    include:
+    - develop
+
+pr: none
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: PermissionVariables
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    python -m pip install PyGithub
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
+
+
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'inline'
+    script: |
+      from github import Github
+
+      if "$(IsEven)" == "True":
+        g = Github("$(NewToken)")
+        repo = g.get_organization("PSW-2020-ORG3").get_repo("MQuince")
+        g.get_organization("PSW-2020-ORG3").get_team(4207823).set_repo_permission(repo, "pull")
