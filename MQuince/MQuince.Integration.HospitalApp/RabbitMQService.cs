@@ -13,10 +13,7 @@ using System.Threading.Tasks;
 namespace MQuince.Integration.HospitalApp
 {
     public class RabbitMQService : BackgroundService
-
     {
-
-
         IConnection connection;
         IModel channel;
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -24,7 +21,7 @@ namespace MQuince.Integration.HospitalApp
             var factory = new ConnectionFactory() { HostName = "localhost" };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
-            channel.QueueDeclare(queue: "Mquince",
+            channel.QueueDeclare(queue: "nina.queue",
                                     durable: false,
                                     exclusive: false,
                                     autoDelete: false,
@@ -34,23 +31,25 @@ namespace MQuince.Integration.HospitalApp
             consumer.Received += (model, ea) =>
             {
                 byte[] body = ea.Body.ToArray();
-                var jsonMessage = Encoding.UTF8.GetString(body);
-                ActionsAndBenefits message = null;
-                try
-                {   
-                    message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
-                }
-                catch (Exception)    
-                {
-                    //message = JsonConvert.DeserializeObject<ActionAndBenefit>(jsonMessage, new MyDateTimeConverter());
-                }
-                Console.WriteLine(" [x] Received {0}", message);
+                string jsonMessage = Encoding.UTF8.GetString(body);
+                ActionsAndBenefits message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
+                Console.WriteLine(" [x] Received {0}", message.Action);
+                Console.WriteLine(" [x] Received json {0}", jsonMessage);
                 Program.ActionAndBenefitMessage.Add(message);
+
+
+                foreach (ActionsAndBenefits a in Program.ActionAndBenefitMessage)
+                {
+                    Console.WriteLine("Action: " + a.Action);
+                    Console.WriteLine("Date: " + a.Date);
+
+                }
+                Console.WriteLine(message);
 
 
 
             };
-            channel.BasicConsume(queue: "Mquince",
+            channel.BasicConsume(queue: "nina.queue",
                                     autoAck: true,
                                     consumer: consumer);
             return base.StartAsync(cancellationToken);
