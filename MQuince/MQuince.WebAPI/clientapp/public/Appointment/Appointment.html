@@ -177,7 +177,7 @@
 							   </div>
                             </td>
                             <td  style="padding-left:150px;" disabled>
-                                <button @click="cancelAppointment(appointment.id)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Cancel appointment</button>
+                                <button v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" @click="cancelAppointment(appointment.id)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Cancel appointment</button>
                             </td>
 							
                         </tr>
