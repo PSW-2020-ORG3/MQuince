@@ -102,7 +102,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+                    IsCanceled= false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
@@ -110,7 +111,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 27, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                    IsCanceled= false
                 }
             };
 
@@ -159,7 +161,8 @@ namespace MQuince.Services.Tests.UnitTests
                EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                Type = TreatmentType.Examination,
                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
-               PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+               PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+               IsCanceled= false
            };
 
         [Fact]
@@ -257,7 +260,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 07, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
+                    IsCanceled=false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
@@ -265,7 +269,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 08, 00, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                    PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                    IsCanceled=false
                 }
             };
 
@@ -284,7 +289,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 08, 30, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11"),
+                    IsCanceled=false
                 },new Appointment()
                 {
                     Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea4"),
@@ -292,7 +298,8 @@ namespace MQuince.Services.Tests.UnitTests
                     EndDateTime = new DateTime(2020, 12, 26, 09, 00, 00),
                     Type = TreatmentType.Examination,
                     DoctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"),
-                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11")
+                    PatientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11"),
+                    IsCanceled=false
                 }
             };
 
@@ -441,7 +448,8 @@ namespace MQuince.Services.Tests.UnitTests
                 EndDateTime = new DateTime(2020, 12, 27, 07, 30, 00),
                 Type = TreatmentType.Examination,
                 DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
-                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca")
+                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
+                IsCanceled=false
             };
         private bool CompareAppointmentAndIdentifierAppointment(Appointment appointment, IdentifiableDTO<AppointmentDTO> identifierAppointment)
         {
@@ -463,6 +471,9 @@ namespace MQuince.Services.Tests.UnitTests
             if (!appointment.EndDateTime.Equals(identifierAppointment.EntityDTO.EndDateTime))
                 return false;
 
+            if (appointment.IsCanceled != identifierAppointment.EntityDTO.IsCanceled)
+                return false;
+
             return true;
         }
 
@@ -481,6 +492,9 @@ namespace MQuince.Services.Tests.UnitTests
                 return false;
 
             if (!appointment.EndDateTime.Equals(appointmentDTO.EndDateTime))
+                return false;
+
+            if (appointment.IsCanceled != appointmentDTO.IsCanceled)
                 return false;
 
             return true;
