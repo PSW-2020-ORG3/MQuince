@@ -174,12 +174,14 @@
                                         <div><b>Appointment status:</b>Pending</div>
                                     </div>
                                     <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
-                                </div>
+							   </div>
                             </td>
                             <td  style="padding-left:150px;" disabled>
-                                <button v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Cancel appointment</button>
+                                <button @click="cancelAppointment(appointment.id)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" id="sendMessageButton" type="button">Cancel appointment</button>
                             </td>
+							
                         </tr>
+						
                     </table>
                 </div>
             </div>
