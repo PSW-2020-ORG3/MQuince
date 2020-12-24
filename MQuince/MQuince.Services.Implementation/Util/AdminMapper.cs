@@ -14,6 +14,7 @@ namespace MQuince.Services.Implementation.Util
                 => admin == null ? throw new ArgumentNullException()
                                         : new IdentifiableDTO<AdminDTO>()
                                         {
+                                            Id = admin.Id,
                                             EntityDTO = new AdminDTO()
                                             {
                                                 Name = admin.Name,

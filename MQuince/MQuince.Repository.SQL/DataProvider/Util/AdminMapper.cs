@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MQuince.Repository.SQL.DataProvider.Util
 {
-    class AdminMapper
+    public class AdminMapper
     {
         public static Admin MapAdminPersistenceToAdminEntity(AdminPersistence adminPersistence)
             => adminPersistence == null ? throw new ArgumentNullException()

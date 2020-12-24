@@ -6,7 +6,7 @@ using System.Text;
 namespace MQuince.Repository.SQL.PersistenceEntities.Users
 {
     [Table("Admin")]
-    class AdminPersistence : UserPersistence
+    public class AdminPersistence : UserPersistence
     {
     }
 }
