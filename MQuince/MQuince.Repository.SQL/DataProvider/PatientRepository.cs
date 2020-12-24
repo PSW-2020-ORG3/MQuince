@@ -3,6 +3,7 @@ using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
 using MQuince.Repository.SQL.DataAccess;
 using MQuince.Repository.SQL.DataProvider.Util;
+using MQuince.Services.Contracts.DTO.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,19 @@ namespace MQuince.Repository.SQL.DataProvider
         public PatientRepository(DbContextOptionsBuilder optionsBuilders)
         {
             _dbContext = optionsBuilders == null ? throw new ArgumentNullException(nameof(optionsBuilders) + "is set to null") : optionsBuilders.Options;
+        }
+
+        public IEnumerable<Patient> GetAll()
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                var patients = _context.Patients.ToList();
+
+                if (patients == null)
+                    return null;
+
+                return PatientMapper.MapPatientPersistenceCollectionToPatientEntityCollection(patients);
+            }
         }
 
         public Patient GetById(Guid id)

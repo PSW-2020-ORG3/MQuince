@@ -2,6 +2,7 @@
 using MQuince.Repository.SQL.PersistenceEntities.Users;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MQuince.Repository.SQL.DataProvider.Util
@@ -19,7 +20,11 @@ namespace MQuince.Repository.SQL.DataProvider.Util
                                                 Password=patientPersistance.Password,
                                                 Guest=patientPersistance.Guest,
                                                 Jmbg=patientPersistance.Jmbg,
-                                                PersonalDoctor=patientPersistance.DoctorPersistanceId                                           };
+                                                PersonalDoctor=patientPersistance.DoctorPersistanceId                                           
+                                            };
 
+        public static IEnumerable<Patient> MapPatientPersistenceCollectionToPatientEntityCollection(IEnumerable<PatientPersistence> patients)
+                  => patients == null ? throw new ArgumentNullException()
+                                             : patients.Select(entity => MapPatientPersistenceToPatientEntity(entity));
     }
 }

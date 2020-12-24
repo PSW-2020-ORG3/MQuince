@@ -37,13 +37,11 @@ namespace MQuince.Application
         }
 
         public IUserService GetUserService()
-            => new UserService(this.GetUserRepository());
+            => new UserService(this.GetPatientRepository());
 
         public IFeedbackService GetFeedbackService()
             => new FeedbackService(this.GetFeedbackRepository());
 
-        private IUserRepository GetUserRepository()
-            => new UserRepository(_optionsBuilder);
 
         private IFeedbackRepository GetFeedbackRepository()
              => new FeedbackRepository(_optionsBuilder);
