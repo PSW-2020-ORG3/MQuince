@@ -7,7 +7,7 @@ var app = new Vue({
 	},
 	methods: {
 		submit() {
-			if (this.username != '' || this.password != '') {
+			if (this.username.length !== 0 || this.password.length !== 0) {
 				axios
 					.post("/api/User", {
 						username: this.username,
