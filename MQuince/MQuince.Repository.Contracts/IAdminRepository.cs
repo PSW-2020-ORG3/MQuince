@@ -8,5 +8,6 @@ namespace MQuince.Repository.Contracts
     public interface IAdminRepository
     {
         Admin GetById(Guid id);
+        IEnumerable<Admin> GetAll();
     }
 }
