@@ -8,5 +8,6 @@ namespace MQuince.Repository.Contracts
     public interface IPatientRepository
     {
         Patient GetById(Guid id);
+        IEnumerable<Patient> GetAll();
     }
 }
