@@ -18,7 +18,6 @@ namespace MQuince.Services.Implementation
             _adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
         }
 
-
         public IdentifiableDTO<AdminDTO> GetById(Guid id)
         {
             try

@@ -21,22 +21,17 @@ namespace MQuince.Services.Implementation
     {
 
         private readonly IPatientRepository _patientRepository;
+        private readonly IAdminRepository _adminRepository;
 
         public UserService(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
+            //_adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
         }
 
         public AuthenticateResponseDTO Login(LoginDTO loginDTO)
         {
-            var user = this.GetPatientFromLoginDTO(loginDTO);
-
-            if (user == null)
-            {
-                user = null; //_administratorRepository...
-                if (user == null)
-                    throw new NotFoundEntityException();
-            }
+            var user = this.TryLogin(loginDTO);
 
             try
             {
@@ -48,6 +43,34 @@ namespace MQuince.Services.Implementation
                 throw new InternalServerErrorException();
             }
             
+        }
+
+        private User TryLogin(LoginDTO loginDTO)
+        {
+            var user = this.GetPatientFromLoginDTO(loginDTO);
+
+            if (user == null)
+            {
+                user = this.GetAdminFromLoginDTO(loginDTO);
+            }
+
+            if (user==null)
+                throw new NotFoundEntityException();
+
+            return user;
+        }
+
+        private User GetAdminFromLoginDTO(LoginDTO loginDTO)
+        {
+            try
+            {
+                return null;
+                //return _patientRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         private User GetPatientFromLoginDTO(LoginDTO loginDTO)
