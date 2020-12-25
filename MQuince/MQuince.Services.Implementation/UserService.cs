@@ -41,7 +41,7 @@ namespace MQuince.Services.Implementation
             try
             {
                 string token = GenerateJwtToken(user);
-
+                
                 return new AuthenticateResponseDTO(user, token);
             }catch(Exception e)
             {
@@ -76,6 +76,22 @@ namespace MQuince.Services.Implementation
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private string DecodeJWTToken(string token)
+        {
+            string secret = "SECMQUINCEAPPNKSGGASR5323";
+            var key = Encoding.ASCII.GetBytes(secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token, validations, out var tokenSecure);
+            return claims.Identity.Name;
         }
     }
 }
