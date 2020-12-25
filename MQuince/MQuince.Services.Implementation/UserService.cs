@@ -21,33 +21,56 @@ namespace MQuince.Services.Implementation
     {
 
         private readonly IPatientRepository _patientRepository;
+        private readonly IAdminRepository _adminRepository;
 
         public UserService(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
+            //_adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
         }
 
         public AuthenticateResponseDTO Login(LoginDTO loginDTO)
         {
-            var user = this.GetPatientFromLoginDTO(loginDTO);
-
-            if (user == null)
-            {
-                user = null; //_administratorRepository...
-                if (user == null)
-                    throw new NotFoundEntityException();
-            }
+            var user = this.TryLogin(loginDTO);
 
             try
             {
                 string token = GenerateJwtToken(user);
-
+                
                 return new AuthenticateResponseDTO(user, token);
             }catch(Exception e)
             {
                 throw new InternalServerErrorException();
             }
             
+        }
+
+        private User TryLogin(LoginDTO loginDTO)
+        {
+            var user = this.GetPatientFromLoginDTO(loginDTO);
+
+            if (user == null)
+            {
+                user = this.GetAdminFromLoginDTO(loginDTO);
+            }
+
+            if (user==null)
+                throw new NotFoundEntityException();
+
+            return user;
+        }
+
+        private User GetAdminFromLoginDTO(LoginDTO loginDTO)
+        {
+            try
+            {
+                return null;
+                //return _patientRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         private User GetPatientFromLoginDTO(LoginDTO loginDTO)
@@ -76,6 +99,22 @@ namespace MQuince.Services.Implementation
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private string DecodeJWTToken(string token)
+        {
+            string secret = "SECMQUINCEAPPNKSGGASR5323";
+            var key = Encoding.ASCII.GetBytes(secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token, validations, out var tokenSecure);
+            return claims.Identity.Name;
         }
     }
 }
