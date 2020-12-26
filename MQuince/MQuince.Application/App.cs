@@ -49,8 +49,6 @@ namespace MQuince.Application
         public IFeedbackService GetFeedbackService()
             => new FeedbackService(this.GetFeedbackRepository());
 
-        private IUserRepository GetUserRepository()
-            => new UserRepository(_optionsBuilder);
 
         private IFeedbackRepository GetFeedbackRepository()
              => new FeedbackRepository(_optionsBuilder);
@@ -73,15 +71,13 @@ namespace MQuince.Application
              => new SpecializationRepository(_optionsBuilder);
 
         public IPatientService GetPatientService()
-            => new PatientService(this.GetPatientRepository());
-
-        private IPatientRepository GetPatientRepository()
-             => new PatientRepository(_optionsBuilder);
+            => new PatientService(this.GetUserRepository());
 
         public IDoctorService GetDoctorService()
-              => new DoctorService(this.GetDoctorRepository());
+              => new DoctorService(this.GetUserRepository());
 
-        private IDoctorRepository GetDoctorRepository()
-             => new DoctorRepository(_optionsBuilder);
+        private IUserRepository GetUserRepository()
+             => new UserRepository(_optionsBuilder);
+
     }
 }

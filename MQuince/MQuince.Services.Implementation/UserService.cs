@@ -1,54 +1,117 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using MQuince.Entities;
+using MQuince.Entities.Users;
 using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO;
+using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
 using MQuince.Services.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace MQuince.Services.Implementation
 {
     public class UserService : IUserService
     {
+
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepositoty)
+
+        public UserService(IUserRepository userRepository)
         {
-            _userRepository = userRepositoty;
+            _userRepository = userRepository == null ? throw new ArgumentNullException(nameof(userRepository) + "is set to null") : userRepository;
         }
 
-        public IEnumerable<IdentifiableDTO<UserDTO>> GetAll()
-            => _userRepository.GetAll().Select(c => CreateUserDTO(c)); 
-
-
-        public IdentifiableDTO<UserDTO> GetById(Guid id)
-            => CreateUserDTO(_userRepository.GetById(id));
-
-
-        private IdentifiableDTO<UserDTO> CreateUserDTO(User user)
+        public AuthenticateResponseDTO Login(LoginDTO loginDTO)
         {
-            if (user == null) return null;
+            var user = this.TryLogin(loginDTO);
 
-            return new IdentifiableDTO<UserDTO>() { Id = user.Id, EntityDTO = new UserDTO() { Username = user.Username, 
-                Jmbg = user.Jmbg,
-                Name = user.Name, Password = user.Password,
-                Surname = user.Surname  } };
+            try
+            {
+                string token = GenerateJwtToken(user);
+                
+                return new AuthenticateResponseDTO(user, token);
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+            
         }
 
-        private User CreateUserFromDTO(UserDTO user, Guid? id = null)
-            => id == null ? new User(user.Username, user.Password, user.Jmbg, user.Name, user.Surname)
-                          : new User(id.Value, user.Username, user.Password, user.Jmbg, user.Name, user.Surname);
-
-        public Guid Create(UserDTO entityDTO)
+        private User TryLogin(LoginDTO loginDTO)
         {
-            User user = CreateUserFromDTO(entityDTO);
-            _userRepository.Create(user);
-            return user.Id;
+            var user = this.GetPatientFromLoginDTO(loginDTO);
+
+            if (user == null)
+            {
+                user = this.GetAdminFromLoginDTO(loginDTO);
+            }
+
+            if (user==null)
+                throw new NotFoundEntityException();
+
+            return user;
         }
 
-        private bool IsJmbgUnique(UserDTO entityDTO)
-            => GetAll().SingleOrDefault(x => x.EntityDTO.Jmbg == entityDTO.Jmbg) == null;
+        private User GetAdminFromLoginDTO(LoginDTO loginDTO)
+        {
+            try
+            {
+                return _userRepository.GetAllAdmins().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
+
+        private User GetPatientFromLoginDTO(LoginDTO loginDTO)
+        {
+            try
+            {
+                return _userRepository.GetAllPatients().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
+
+        private string GenerateJwtToken(User user)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SECURITASKEYINMQUINCEALLIANCETEST123 phase"));
+            
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7), // mnogo je 7 dana :D
+                SigningCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        private string DecodeJWTToken(string token)
+        {
+            string secret = "SECMQUINCEAPPNKSGGASR5323";
+            var key = Encoding.ASCII.GetBytes(secret);
+            var handler = new JwtSecurityTokenHandler();
+            var validations = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+            var claims = handler.ValidateToken(token, validations, out var tokenSecure);
+            return claims.Identity.Name;
+        }
     }
 }

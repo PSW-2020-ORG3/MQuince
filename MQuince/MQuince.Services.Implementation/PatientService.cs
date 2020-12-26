@@ -13,16 +13,16 @@ namespace MQuince.Services.Implementation
 {
     public class PatientService : IPatientService
     {
-        public IPatientRepository _patientRepository;
-        public PatientService(IPatientRepository patientRepository)
+        public IUserRepository _userRepository;
+        public PatientService(IUserRepository userRepository)
         {
-            _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
+            _userRepository = userRepository == null ? throw new ArgumentNullException(nameof(userRepository) + "is set to null") : userRepository;
         }
         public IdentifiableDTO<PatientDTO> GetById(Guid id)
         {
             try
             {
-                return PatientMapper.MapPatientEntityToPatientIdentifierDTO(_patientRepository.GetById(id));
+                return PatientMapper.MapPatientEntityToPatientIdentifierDTO(_userRepository.GetPatientById(id));
             }
             catch (ArgumentNullException e)
             {

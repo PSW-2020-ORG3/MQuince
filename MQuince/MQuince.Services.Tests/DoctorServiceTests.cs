@@ -17,11 +17,11 @@ namespace MQuince.Services.Tests
     public class DoctorServiceTests
     {
         IDoctorService doctorService;
-        IDoctorRepository doctorRepository = Substitute.For<IDoctorRepository>();
+        IUserRepository userRepository = Substitute.For<IUserRepository>();
 
         public DoctorServiceTests()
         {
-            doctorService = new DoctorService(doctorRepository);
+            doctorService = new DoctorService(userRepository);
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IDoctorService doctorService = new DoctorService(doctorRepository);
+            IDoctorService doctorService = new DoctorService(userRepository);
 
             Assert.IsType<DoctorService>(doctorService);
         }
@@ -41,7 +41,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_data()
         {
-            doctorRepository.GetAll().Returns(this.GetListOfDoctors());
+            userRepository.GetAllDoctors().Returns(this.GetListOfDoctors());
 
             List<IdentifiableDTO<DoctorDTO>> returnedList = doctorService.GetAll().ToList();
 
@@ -51,9 +51,9 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_null()
         {
-            doctorService = new DoctorService(doctorRepository);
+            doctorService = new DoctorService(userRepository);
             List<Doctor> listOfDoctors = null;
-            doctorRepository.GetAll().Returns(listOfDoctors);
+            userRepository.GetAllDoctors().Returns(listOfDoctors);
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetAll());
         }
@@ -61,7 +61,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_any_argument_null_exception()
         {
-            doctorRepository.GetAll().Returns(x => { throw new ArgumentNullException(); });
+            userRepository.GetAllDoctors().Returns(x => { throw new ArgumentNullException(); });
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetAll());
         }
@@ -69,7 +69,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_any_other_exception()
         {
-            doctorRepository.GetAll().Returns(x => { throw new Exception(); });
+            userRepository.GetAllDoctors().Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => doctorService.GetAll());
         }
@@ -77,7 +77,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_doctor()
         {
-            doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(this.GetFirstDoctor());
+            userRepository.GetDoctorById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(this.GetFirstDoctor());
 
             IdentifiableDTO<DoctorDTO> doctor = doctorService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526"));
 
@@ -88,7 +88,7 @@ namespace MQuince.Services.Tests
         public void Get_by_id_returns_null()
         {
             Doctor doctor = null;
-            doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(doctor);
+            userRepository.GetDoctorById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(doctor);
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
@@ -96,7 +96,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_any_argument_null_exception()
         {
-            doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
+            userRepository.GetDoctorById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
@@ -104,7 +104,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_any_other_exception()
         {
-            doctorRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
+            userRepository.GetDoctorById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => doctorService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
@@ -112,7 +112,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_doctors_per_specialization_returns_doctor()
         {
-            doctorRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(this.GetListOfDoctors());
+            userRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(this.GetListOfDoctors());
 
             List<IdentifiableDTO<DoctorDTO>> doctors = doctorService.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).ToList();
 
@@ -125,7 +125,7 @@ namespace MQuince.Services.Tests
         public void Get_doctors_per_specialization_returns_null()
         {
             List<Doctor> doctors = null;
-            doctorRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(doctors);
+            userRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(doctors);
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")));
         }
@@ -133,7 +133,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_doctors_per_specialization_returns_any_argument_null_exception()
         {
-            doctorRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(x => { throw new ArgumentNullException(); });
+            userRepository.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")).Returns(x => { throw new ArgumentNullException(); });
 
             Assert.Throws<NotFoundEntityException>(() => doctorService.GetDoctorsPerSpecialization(Guid.Parse("b1a7b927-6489-456e-bee6-4bd1fa5e2c7c")));
         }
@@ -141,7 +141,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_doctors_per_specialization_return_any_other_exception()
         {
-            doctorRepository.GetDoctorsPerSpecialization(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
+            userRepository.GetDoctorsPerSpecialization(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => doctorService.GetDoctorsPerSpecialization(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }

@@ -28,6 +28,25 @@ namespace MQuince.Repository.SQL.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AdminPersistence>().HasData(new AdminPersistence[] {
+                new AdminPersistence{
+                    Id= Guid.Parse("be809f83-d599-4482-acea-0a4a422a411d"),
+                    Username="admin",
+                    Password="admin",
+                    Jmbg="000000000000",
+                    Name="Pera",
+                    Surname="Djuric",  
+                },
+                new AdminPersistence{
+                    Id= Guid.Parse("28c51a88-870c-42ce-bf4c-b9ad68126784"),
+                    Username="admin1",
+                    Password="admin123",
+                    Jmbg="1233211233211",
+                    Name="Dusan",
+                    Surname="Petrovic",
+                }
+            });
+
             modelBuilder.Entity<SpecializationPersistence>().HasData(new SpecializationPersistence[] {
                 new SpecializationPersistence{Id=Guid.Parse("11b55bea-8dd3-4491-84a9-471bc7d28b19"),Name="Neurologija"},
                 new SpecializationPersistence{Id=Guid.Parse("2f3c1c3e-9d67-4a0c-acc0-58f8f1fc4e77"),Name="Hirurg"},
