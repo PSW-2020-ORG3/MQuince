@@ -55,8 +55,6 @@ var app = new Vue({
 						console.log(user.token)
 						if(user.userRole === 0){
 							window.location.href = ".../public/Communication/Feedbacks.html";
-							this.$router.push({name: 'homepage'})
-
 						} else if(user.userRole === 1) {
 							window.location.href = "../public/Communication/AdminFeedbacks.html";
 							this.$router.push({name: 'homepage'})
