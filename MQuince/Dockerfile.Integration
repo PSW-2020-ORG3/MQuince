@@ -40,5 +40,6 @@ ENV PATH $PATH:/root/.dotnet/tools
 RUN dotnet tool install -g dotnet-ef --version 3.1.0
 RUN dotnet ef migrations add Init
 
+#running script
 LABEL test=true
 CMD ["sh","../dockercmd.sh"]
