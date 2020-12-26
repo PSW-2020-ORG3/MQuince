@@ -9,5 +9,7 @@ namespace MQuince.Services.Contracts.Interfaces
     public interface IAdminService
     {
         IdentifiableDTO<AdminDTO> GetById(Guid id);
+
+        IEnumerable<IdentifiableDTO<AdminDTO>> GetAll();
     }
 }
