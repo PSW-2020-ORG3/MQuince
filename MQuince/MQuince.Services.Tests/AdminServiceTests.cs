@@ -1,7 +1,12 @@
 ﻿using MQuince.Entities.Users;
+using MQuince.Repository.Contracts;
 using MQuince.Services.Contracts.DTO.Users;
+using MQuince.Services.Contracts.Exceptions;
 using MQuince.Services.Contracts.IdentifiableDTO;
+using MQuince.Services.Contracts.Interfaces;
+using MQuince.Services.Implementation;
 using MQuince.Services.Implementation.Util;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +17,14 @@ namespace MQuince.Services.Tests
 {
     public class AdminServiceTests
     {
+        IAdminService adminService;
+        IAdminRepository adminRepository = Substitute.For<IAdminRepository>();
+
+        public AdminServiceTests()
+        {
+            adminService = new AdminService(adminRepository);
+        }
+
         [Fact]
         public void Map_doctor_entity_to_identifier_doctor_dto()
         {
@@ -42,7 +55,41 @@ namespace MQuince.Services.Tests
             Assert.True(this.IsEqualAdminEntitiesAndIdentifierAdminDTO(listOfAdmins[0], listOfIdentifierAdminDTO[0]));
             Assert.True(this.IsEqualAdminEntitiesAndIdentifierAdminDTO(listOfAdmins[1], listOfIdentifierAdminDTO[1]));
         }
+        [Fact]
+        public void Get_all_returns_data()
+        {
+            adminRepository.GetAll().Returns(this.GetListOfAdmins());
 
+            List<IdentifiableDTO<AdminDTO>> returnedList = adminService.GetAll().ToList();
+
+            Assert.Equal(2, returnedList.Count);
+        }
+
+        [Fact]
+        public void Get_all_returns_null()
+        {
+            adminService = new AdminService(adminRepository);
+            List<Admin> listOfAdmin = null;
+            adminRepository.GetAll().Returns(listOfAdmin);
+
+            Assert.Throws<NotFoundEntityException>(() => adminService.GetAll());
+        }
+
+        [Fact]
+        public void Get_all_returns_any_argument_null_exception()
+        {
+            adminRepository.GetAll().Returns(x => { throw new ArgumentNullException(); });
+
+            Assert.Throws<NotFoundEntityException>(() => adminService.GetAll());
+        }
+
+        [Fact]
+        public void Get_all_returns_any_other_exception()
+        {
+            adminRepository.GetAll().Returns(x => { throw new Exception(); });
+
+            Assert.Throws<InternalServerErrorException>(() => adminService.GetAll());
+        }
 
         [Fact]
         public void Map_Admin_entities_collection_to_identifier_AdminDTO_collection_when_entities_collection_is_null()

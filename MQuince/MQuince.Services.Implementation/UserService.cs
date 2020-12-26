@@ -23,10 +23,10 @@ namespace MQuince.Services.Implementation
         private readonly IPatientRepository _patientRepository;
         private readonly IAdminRepository _adminRepository;
 
-        public UserService(IPatientRepository patientRepository)
+        public UserService(IPatientRepository patientRepository,IAdminRepository adminRepository)
         {
             _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
-            //_adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
+            _adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
         }
 
         public AuthenticateResponseDTO Login(LoginDTO loginDTO)
@@ -64,8 +64,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return null;
-                //return _patientRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+                return _adminRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
             }
             catch (Exception e)
             {

@@ -25,6 +25,23 @@ namespace MQuince.WebAPI.Controllers
             this._adminService = adminService;
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                return Ok(_adminService.GetAll());
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
