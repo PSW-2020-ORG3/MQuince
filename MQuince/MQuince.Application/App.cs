@@ -20,7 +20,8 @@ namespace MQuince.Application
         public App(string connectionString)
         {
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
-            //stage = "test";
+            stage = ExtractArgument(stage);
+
             _optionsBuilder = new DbContextOptionsBuilder();
             if (stage == "dev")
             {
@@ -34,6 +35,12 @@ namespace MQuince.Application
 
             //PatientService _patientService = (PatientService)this.GetPatientService();
             //loggedPatient = _patientService.GetById(Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"));
+        }
+
+        private string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
         }
 
         public IUserService GetUserService()
