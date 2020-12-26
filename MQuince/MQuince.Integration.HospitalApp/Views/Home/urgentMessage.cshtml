@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "urgentMessage";
+    Layout = "_Layout";
+}
+
+<div id="urgentMesssage-container">
+    <h3> Enter the medicine: </h3>
+    <form onsubmit="sendMedicationName()" action="javascript:void(0);">
+        <table>
+            <tr> <td><label> Medication name: </label></td></tr>
+            <tr> <td> <input type="text" id="name" /></td></tr>
+            <tr> <td><label> Quantity: </label></td></tr>
+            <tr> <td> <input type="text" id="quantity" /></td></tr>
+            <tr> <td> <input id="send" type="submit" value="Send"></td></tr>
+        </table>
+        <script src="~/Views/assets/js/urgentMedications.js"></script>
+    </form>
+
+    <script src="~/Views/assets/js/urgentMedications.js"></script>
+
+</div>
+
