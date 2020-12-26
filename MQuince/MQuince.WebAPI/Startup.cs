@@ -44,7 +44,8 @@ namespace MQuince.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
-            //stage = "test";
+            stage = ExtractArgument(stage);
+
             if (stage == "dev")
             {
                 services.AddDbContext<MQuinceDbContext>(options =>
@@ -78,20 +79,21 @@ namespace MQuince.WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<MQuinceDbContext>();
-                string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
                 RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-                if (!databaseCreator.HasTables() && stage=="test")
-			    {
-                    context.Database.Migrate();
-				}
-                
-                //RelationalDatabaseCreator databaseCreator = (RelationalDatabaseCreator)context.Database.GetService<IDatabaseCreator>();
-                //databaseCreator.CreateTables();
+                if (stage == "test")
+                {
+                    if (!databaseCreator.HasTables())
+                    {
+                        context.Database.Migrate();
+                    }
+                } 
             }
+
 
             if (env.IsDevelopment())
             {
@@ -103,7 +105,7 @@ namespace MQuince.WebAPI
                 .AllowAnyOrigin()
                 .AllowAnyMethod());
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseSpaStaticFiles();
             app.UseAuthorization();
@@ -136,21 +138,29 @@ namespace MQuince.WebAPI
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
-            /*stage = "test";
-            server = "localhost";
-            port = "5432";
-            database = "mquince";
-            user = "postgres";
-            password = "root";*/
+            
+            stage = ExtractArgument(stage);
+            server = ExtractArgument(server);
+            port = ExtractArgument(port);
+            database = ExtractArgument(database);
+            user = ExtractArgument(user);
+            password = ExtractArgument(password);
 
             if (stage == "dev")
             {
+                Console.WriteLine($"server={server};port={port};database={database};user={user};password={password};");
                 return $"server={server};port={port};database={database};user={user};password={password};";
             }
             else
             {
                 return $"Server={server};Port={port};Database={database};Username={user};Password={password};";
             }
+        }
+
+        private string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
         }
     }
 }

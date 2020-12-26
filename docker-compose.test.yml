@@ -1,7 +1,6 @@
 services:
-
   servers:
-    build: 
+    build:
       context: ./MQuince
       args:
         DATABASE_USERNAME: postgres
@@ -30,5 +29,3 @@ services:
 
 volumes:
   postgres-data:
-
-   
