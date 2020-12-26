@@ -26,7 +26,7 @@ namespace MQuince.Integration.Repository.MySQL.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
+            optionsBuilder.UseMySql(@"server=localhost;user=root;password=Mucibabic*1;database=pharmacymskv");
         }
     }
 }

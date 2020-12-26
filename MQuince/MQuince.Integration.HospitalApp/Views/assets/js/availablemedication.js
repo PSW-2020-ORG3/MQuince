@@ -1,10 +1,13 @@
 ﻿const uri = 'http://localhost:49544/api/GrpcController'
 
 function sendName() {
-    const name = document.getElementById('name');
+    const name = document.getElementById('name'); 
+    const quantity = document.getElementById('quantity');
+
 
     const item = {
         name: name.value
+        quantity: quantity.value
     };
 
     fetch(uri, {
@@ -18,6 +21,7 @@ function sendName() {
         .then(response => response.json())
         .then(() => {
             name.value = '';
+            quantity.value = '';
 
         })
         .catch(error => console.error('Unable to add item.', error));

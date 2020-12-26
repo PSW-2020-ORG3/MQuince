@@ -5,6 +5,7 @@ option csharp_namespace = "MQuince.Integration.HospitalApp.Protos";
 
 message MessagePharmacy{
   string name=1;
+  string quantity=2;
 }
 
 message MessagePharmacyResponse {

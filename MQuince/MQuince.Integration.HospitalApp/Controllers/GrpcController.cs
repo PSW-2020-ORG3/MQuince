@@ -26,8 +26,10 @@ namespace MQuince.Integration.HospitalApp.Controllers
                 string json = name.ToString();
                 dynamic result = JObject.Parse(json);
                 var nameMedicine = result.name;
-                service.SendMessage(nameMedicine.ToString());
+                var quantityOfMedicine = result.quantity;
+                service.SendMessage(nameMedicine.ToString(), quantityOfMedicine.toString());
                 return Ok("Drug: "+nameMedicine);
             }
+
      }
 }

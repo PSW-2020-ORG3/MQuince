@@ -5,15 +5,20 @@
 
 @model IEnumerable<MQuince.Integration.Entities.GrpcMessage>
 <div id="availablemedication-container">
-<h3> Send message to pharmacy: </h3>
-<form onsubmit="sendName()" action="javascript:void(0);">
-    <table>
-        <tr> <td><label> Medication name: </label></td></tr>
-        <tr> <td> <input type="text" id="name" /></td></tr>
-        <tr> <td> <input id="send" type="submit" value="Send"></td></tr>
-    </table>
+  <h3> Send message to pharmacy: </h3>
+   <form onsubmit="sendName()" action="javascript:void(0);">
+       <table>
+           <tr> <td><label> Medication name: </label></td></tr>
+           <tr> <td> <input type="text" id="name" /></td></tr>
+
+
+           <tr> <td><label> Quantity: </label></td></tr>
+           <tr> <td> <input type="text" id="quantity" /></td></tr>
+
+           <tr> <td> <input id="send" type="submit" value="Send"></td></tr>
+       </table>
     <script src="~/Views/assets/js/availablemedication.js"></script>
-</form>
+  </form>
 @foreach (var a in Model)
 {
     <p>  Medication: @Html.DisplayFor(modelItem => a.Name)  @Html.DisplayFor(modelItem => a.Status) </p>
