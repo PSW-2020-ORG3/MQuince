@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Action and benefits";
+    Layout = "_Layout";
+}
+@model IEnumerable<MQuince.Integration.Entities.ActionsAndBenefits>
+<div class="action-div">
+    <h3>Actions and benefits: </h3>
+    <table class="table" border="1px">
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => a.Action) </td>
+                <td>@Html.DisplayFor(modelItem => a.Date) </td>
+                <td><button type="button" class="Approve"> Approve </button></td>
+                <td><button type="button" class="Disapprove"> Disapprove </button></td>
+            </tr>
+
+        }
+    </table>
+    <script src="~/Views/assets/js/action.js"></script>
+    <script src="~/Views/assets/js/jquery.min.js"></script>
+</div>
+
+
+
+
