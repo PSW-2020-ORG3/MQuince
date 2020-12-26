@@ -16,22 +16,22 @@ namespace MQuince.Services.Tests
     {
         IUserService userService;
         IPatientRepository patientRepository = Substitute.For<IPatientRepository>();
-
+        IAdminRepository adminRepository = Substitute.For<IAdminRepository>();
         public UserServiceTests()
         {
-            userService = new UserService(patientRepository);
+            userService = new UserService(patientRepository, adminRepository);
         }
 
         [Fact]
         public void Constructor_when_give_repository_as_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new UserService(null));
+            Assert.Throws<ArgumentNullException>(() => new UserService(null,null));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IUserService userService = new UserService(patientRepository);
+            IUserService userService = new UserService(patientRepository,adminRepository);
 
             Assert.IsType<UserService>(userService);
         }

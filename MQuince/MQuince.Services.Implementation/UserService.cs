@@ -98,7 +98,9 @@ namespace MQuince.Services.Implementation
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddHours(3),
+
+                Expires = DateTime.UtcNow.AddDays(7), // mnogo je 7 dana :D
+
                 SigningCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
             };
 
