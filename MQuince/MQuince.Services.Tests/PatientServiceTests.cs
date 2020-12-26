@@ -16,11 +16,11 @@ namespace MQuince.Services.Tests
     public class PatientServiceTests
     {
         IPatientService patientService;
-        IPatientRepository patientRepository = Substitute.For<IPatientRepository>();
+        IUserRepository userRepository = Substitute.For<IUserRepository>();
 
         public PatientServiceTests()
         {
-            patientService = new PatientService(patientRepository);
+            patientService = new PatientService(userRepository);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IPatientService patientService = new PatientService(patientRepository);
+            IPatientService patientService = new PatientService(userRepository);
 
             Assert.IsType<PatientService>(patientService);
         }
@@ -40,7 +40,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_doctor()
         {
-            patientRepository.GetById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1")).Returns(this.GetPatient());
+            userRepository.GetPatientById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1")).Returns(this.GetPatient());
 
             IdentifiableDTO<PatientDTO> patient = patientService.GetById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1"));
 
@@ -51,7 +51,7 @@ namespace MQuince.Services.Tests
         public void Get_by_id_returns_null()
         {
             Patient patient = null;
-            patientRepository.GetById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1")).Returns(patient);
+            userRepository.GetPatientById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1")).Returns(patient);
 
             Assert.Throws<NotFoundEntityException>(() => patientService.GetById(Guid.Parse("54455a55-094f-4081-89b3-757cafbd5ea1")));
         }
@@ -59,7 +59,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_any_argument_null_exception()
         {
-            patientRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
+            userRepository.GetPatientById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
 
             Assert.Throws<NotFoundEntityException>(() => patientService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
@@ -67,7 +67,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_by_id_returns_any_other_exception()
         {
-            patientRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
+            userRepository.GetPatientById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => patientService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
         }
