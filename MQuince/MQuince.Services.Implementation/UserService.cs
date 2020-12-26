@@ -22,11 +22,17 @@ namespace MQuince.Services.Implementation
 
         private readonly IPatientRepository _patientRepository;
         private readonly IAdminRepository _adminRepository;
+        
 
         public UserService(IPatientRepository patientRepository,IAdminRepository adminRepository)
         {
             _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
             _adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
+        }
+
+        public UserService(IPatientRepository patientRepository)
+        {
+            _patientRepository = patientRepository;
         }
 
         public AuthenticateResponseDTO Login(LoginDTO loginDTO)
@@ -92,7 +98,7 @@ namespace MQuince.Services.Implementation
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
             };
 

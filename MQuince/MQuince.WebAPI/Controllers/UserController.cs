@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MQuince.WebAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -20,12 +21,18 @@ namespace MQuince.WebAPI.Controllers
             this._userService = userService;
         }
 
+        
         [HttpPost]
         public IActionResult Login(LoginDTO loginDTO)
         {
             try
             {
                 var response = _userService.Login(loginDTO);
+
+                if(response == null)
+                {
+                    return Forbid();
+                }
 
                 return Ok(response);
             }
