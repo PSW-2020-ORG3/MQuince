@@ -8,7 +8,8 @@ services:
         DATABASE_DOMAIN: mysql
         DATABASE_SCHEMA: mquince
         DATABASE_PORT: 3306
-        STAGE: dev 
+        STAGE: dev
+        PORT: 5000
     image: mquince-mysql
     container_name: mquince
     restart: on-failure
@@ -24,6 +25,7 @@ services:
       DATABASE_PORT: 3306
       STAGE: dev
       SHOW_ENV: "TRUE"
+      PORT: 5000
     depends_on:
       - mysql
 

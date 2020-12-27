@@ -14,17 +14,17 @@ namespace MQuince.Services.Implementation
 {
     public class DoctorService : IDoctorService
     {
-        public IDoctorRepository _doctorRepository;
-        public DoctorService(IDoctorRepository doctorRepository)
+        public IUserRepository _userRepository;
+        public DoctorService(IUserRepository userRepository)
         {
-            _doctorRepository = doctorRepository == null ? throw new ArgumentNullException(nameof(doctorRepository) + "is set to null") : doctorRepository;
+            _userRepository = userRepository == null ? throw new ArgumentNullException(nameof(userRepository) + "is set to null") : userRepository;
         }
 
         public IEnumerable<IdentifiableDTO<DoctorDTO>> GetAll()
         {
             try
             {
-                return _doctorRepository.GetAll().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
+                return _userRepository.GetAllDoctors().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
             }
             catch (ArgumentNullException e)
             {
@@ -41,7 +41,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(_doctorRepository.GetById(id));
+                return DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(_userRepository.GetDoctorById(id));
             }catch(ArgumentNullException e)
             {
                 throw new NotFoundEntityException();
@@ -55,7 +55,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return DoctorMapper.MapDoctorEntityCollectionToIdentifierDoctorDTOCollection(_doctorRepository.GetDoctorsPerSpecialization(specializationId));
+                return DoctorMapper.MapDoctorEntityCollectionToIdentifierDoctorDTOCollection(_userRepository.GetDoctorsPerSpecialization(specializationId));
             }catch (ArgumentNullException e)
             {
                 throw new NotFoundEntityException();

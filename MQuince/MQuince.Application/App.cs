@@ -20,7 +20,8 @@ namespace MQuince.Application
         public App(string connectionString)
         {
             string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
-            //stage = "test";
+            stage = ExtractArgument(stage);
+
             _optionsBuilder = new DbContextOptionsBuilder();
             if (stage == "dev")
             {
@@ -36,14 +37,18 @@ namespace MQuince.Application
             //loggedPatient = _patientService.GetById(Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"));
         }
 
+        private string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
+        }
+
         public IUserService GetUserService()
             => new UserService(this.GetUserRepository());
 
         public IFeedbackService GetFeedbackService()
             => new FeedbackService(this.GetFeedbackRepository());
 
-        private IUserRepository GetUserRepository()
-            => new UserRepository(_optionsBuilder);
 
         private IFeedbackRepository GetFeedbackRepository()
              => new FeedbackRepository(_optionsBuilder);
@@ -66,15 +71,13 @@ namespace MQuince.Application
              => new SpecializationRepository(_optionsBuilder);
 
         public IPatientService GetPatientService()
-            => new PatientService(this.GetPatientRepository());
-
-        private IPatientRepository GetPatientRepository()
-             => new PatientRepository(_optionsBuilder);
+            => new PatientService(this.GetUserRepository());
 
         public IDoctorService GetDoctorService()
-              => new DoctorService(this.GetDoctorRepository());
+              => new DoctorService(this.GetUserRepository());
 
-        private IDoctorRepository GetDoctorRepository()
-             => new DoctorRepository(_optionsBuilder);
+        private IUserRepository GetUserRepository()
+             => new UserRepository(_optionsBuilder);
+
     }
 }
