@@ -42,9 +42,21 @@ namespace MQuince.Integration.HospitalApp
             try
             {
                 MessagePharmacyResponse response = await client.communicateAsync(new MessagePharmacy() { Name = name,Quantity=quantity});
-                Console.WriteLine("Medication:" + response.Name + " is " + response.Status + "in pharmacy!");
+                Console.WriteLine( response.Name + " is " + response.Status + "in pharmacy!");
                 GrpcMessage message = new GrpcMessage(response.Name, response.Status);
+                String m = message.Status;
+                Console.WriteLine("Status je:"+ m);
+                String[] words = m.Split(":");
+                String[] words1 = words[1].Split(",");
+                String poruka = words1[0];
+                if (poruka == "")
+                {
+                    poruka = "Medication doesn't exist in any pharmacy!";
+                }
+                GrpcMessage messageForUrgentProcurement = new GrpcMessage(poruka, response.Status);
+
                 MessageGrpc.Add(message);
+                MessageForUrgentProcurement.Add(messageForUrgentProcurement);
 
             }
             catch (Exception exc)

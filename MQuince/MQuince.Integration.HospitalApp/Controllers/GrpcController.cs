@@ -21,15 +21,17 @@ namespace MQuince.Integration.HospitalApp.Controllers
 
             
             [HttpPost]
-            public IActionResult PostMedicineDescriptionGrpc([FromBody] object name)
+            public IActionResult PostMedicineDescriptionGrpc([FromBody] object obj)
             {
-                string json = name.ToString();
-                dynamic result = JObject.Parse(json);
-                var nameMedicine = result.name;
-                var quantityOfMedicine = result.quantity;
-                service.SendMessage(nameMedicine.ToString(), quantityOfMedicine.toString());
-                return Ok("Drug: "+nameMedicine);
-            }
+            string json = obj.ToString();
+            dynamic result = JObject.Parse(json);
+            var nameMedicine = result.name;
+            var quantityOfMedicine = result.quantity;
+            Console.WriteLine("Name medication :" + nameMedicine + " quantity :" + quantityOfMedicine);
+            service.SendMessage(nameMedicine.ToString(), (string)quantityOfMedicine);
+            return Ok("Drug: " + nameMedicine);
 
-     }
+        }
+
+    }
 }

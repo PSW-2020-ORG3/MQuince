@@ -6,7 +6,7 @@ function sendName() {
 
 
     const item = {
-        name: name.value
+        name: name.value,
         quantity: quantity.value
     };
 
