@@ -73,5 +73,9 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return View(messageForUrgentProcurement);
         }
+        public IActionResult tender()
+        {
+            return View();
+        }
     }
 }

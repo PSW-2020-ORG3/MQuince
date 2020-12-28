@@ -19,4 +19,7 @@ function exists() {
 function urgentMessage() {
     window.location.replace("http://localhost:49544/home/urgentMessage");
 }
+function tender() {
+    window.location.replace("http://localhost:49544/home/tender");
+}
 /*document.location.href=*/

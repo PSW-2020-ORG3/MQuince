@@ -1,4 +1,4 @@
-﻿const uri = 'http://localhost:49544/api/pharmacyController'
+﻿const uri = 'http://localhost:49544/api/Pharmacy'
 let todos = [];
 
 function addItem() {

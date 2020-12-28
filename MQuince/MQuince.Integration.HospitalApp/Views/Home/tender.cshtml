@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "tender";
+    Layout = "_Layout";
+}
+<div id="urgentMesssage-container">
+    <h3> Enter the medicine: </h3>
+    <form onsubmit="sendName()" action="javascript:void(0);">
+        <table style="margin-top: 0px; padding: -5px;" border="1px">
+            <tr style="margin-top: -5px;">
+                <td><label> Name: </label></td>
+                <td> <input type="text" id="name" /></td>
+            </tr>
+
+            <tr>
+                <td><label> Description: </label></td>
+                <td> <input type="text" id="descritpion" /></td>
+            </tr>
+
+            <tr>
+                <td><label> Start: </label></td>
+                <td> <input type="date" id="startDate" /></td>
+            </tr>
+
+            <tr>
+                <td><label> End: </label></td>
+                <td> <input type="date" id="endDate" /></td>
+            </tr>
+
+            <tr>
+                <td><label> Form link: </label></td>
+                <td> <input type="text" id="formLink" /></td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <input id="btn" type="submit" value="Create">
+                </td>
+            </tr>
+
+
+
+
+        </table>
+
+
+
+        <script src="~/Views/assets/js/tender.js"></script>
+    </form>
+   
+</div>
+
