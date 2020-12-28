@@ -20,20 +20,16 @@ namespace MQuince.Services.Implementation
     public class UserService : IUserService
     {
 
-        private readonly IPatientRepository _patientRepository;
-        private readonly IAdminRepository _adminRepository;
+
+        private readonly IUserRepository _userRepository;
+
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository == null ? throw new ArgumentNullException(nameof(userRepository) + "is set to null") : userRepository;
+        }
+
         
-
-        public UserService(IPatientRepository patientRepository,IAdminRepository adminRepository)
-        {
-            _patientRepository = patientRepository == null ? throw new ArgumentNullException(nameof(patientRepository) + "is set to null") : patientRepository;
-            _adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
-        }
-
-        public UserService(IPatientRepository patientRepository)
-        {
-            _patientRepository = patientRepository;
-        }
 
         public AuthenticateResponseDTO Login(LoginDTO loginDTO)
         {
@@ -70,7 +66,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return _adminRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+                return _userRepository.GetAllAdmins().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
             }
             catch (Exception e)
             {
@@ -82,7 +78,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return _patientRepository.GetAll().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
+                return _userRepository.GetAllPatients().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
             }
             catch (Exception e)
             {

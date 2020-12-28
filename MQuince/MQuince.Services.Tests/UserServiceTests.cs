@@ -15,23 +15,22 @@ namespace MQuince.Services.Tests
     public class UserServiceTests
     {
         IUserService userService;
-        IPatientRepository patientRepository = Substitute.For<IPatientRepository>();
-        IAdminRepository adminRepository = Substitute.For<IAdminRepository>();
+        IUserRepository userRepository = Substitute.For<IUserRepository>();
         public UserServiceTests()
         {
-            userService = new UserService(patientRepository, adminRepository);
+            userService = new UserService(userRepository);
         }
 
         [Fact]
         public void Constructor_when_give_repository_as_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new UserService(null,null));
+            Assert.Throws<ArgumentNullException>(() => new UserService(null));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IUserService userService = new UserService(patientRepository,adminRepository);
+            IUserService userService = new UserService(userRepository);
 
             Assert.IsType<UserService>(userService);
         }
@@ -40,7 +39,7 @@ namespace MQuince.Services.Tests
         public void Login_when_give_valid_data()
         {
             LoginDTO loginDTO = this.GetValidLoginDTO();
-            patientRepository.GetAll().Returns(this.GetListOfPatient());
+            userRepository.GetAllPatients().Returns(this.GetListOfPatient());
 
             AuthenticateResponseDTO authentificateResponse = userService.Login(loginDTO);
 
@@ -51,7 +50,7 @@ namespace MQuince.Services.Tests
         public void Login_when_user_with_given_data_not_found()
         {
             LoginDTO loginDTO = this.GetInvalidLoginDTO();
-            patientRepository.GetAll().Returns(this.GetListOfPatient());
+            userRepository.GetAllPatients().Returns(this.GetListOfPatient());
 
             Assert.Throws<NotFoundEntityException>(() => userService.Login(loginDTO));
         }
@@ -60,7 +59,7 @@ namespace MQuince.Services.Tests
         public void Login_when_repositories_give_any_exception()
         {
             LoginDTO loginDTO = this.GetInvalidLoginDTO();
-            patientRepository.GetAll().Returns(x => { throw new Exception(); });
+            userRepository.GetAllPatients().Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => userService.Login(loginDTO));
         }

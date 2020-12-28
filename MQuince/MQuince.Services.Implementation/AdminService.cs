@@ -13,17 +13,17 @@ namespace MQuince.Services.Implementation
 {
     public class AdminService : IAdminService
     {
-        public IAdminRepository _adminRepository;
-        public AdminService(IAdminRepository adminRepository)
+        public IUserRepository _userRepository;
+        public AdminService(IUserRepository userRepository)
         {
-            _adminRepository = adminRepository == null ? throw new ArgumentNullException(nameof(adminRepository) + "is set to null") : adminRepository;
+            _userRepository = userRepository == null ? throw new ArgumentNullException(nameof(userRepository) + "is set to null") : userRepository;
         }
 
         public IEnumerable<IdentifiableDTO<AdminDTO>> GetAll()
         {
             try
             {
-                return _adminRepository.GetAll().Select(c => AdminMapper.MapAdminEntityToIdentifierAdminDTO(c));
+                return _userRepository.GetAllAdmins().Select(c => AdminMapper.MapAdminEntityToIdentifierAdminDTO(c));
             }
             catch (ArgumentNullException e)
             {
@@ -39,7 +39,7 @@ namespace MQuince.Services.Implementation
         {
             try
             {
-                return AdminMapper.MapAdminEntityToIdentifierAdminDTO(_adminRepository.GetById(id));
+                return AdminMapper.MapAdminEntityToIdentifierAdminDTO(_userRepository.GetAdminById(id));
             }
             catch (ArgumentNullException e)
             {

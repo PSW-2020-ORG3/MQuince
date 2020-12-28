@@ -18,11 +18,11 @@ namespace MQuince.Services.Tests
     public class AdminServiceTests
     {
         IAdminService adminService;
-        IAdminRepository adminRepository = Substitute.For<IAdminRepository>();
+        IUserRepository userRepository = Substitute.For<IUserRepository>();
 
         public AdminServiceTests()
         {
-            adminService = new AdminService(adminRepository);
+            adminService = new AdminService(userRepository);
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_data()
         {
-            adminRepository.GetAll().Returns(this.GetListOfAdmins());
+            userRepository.GetAllAdmins().Returns(this.GetListOfAdmins());
 
             List<IdentifiableDTO<AdminDTO>> returnedList = adminService.GetAll().ToList();
 
@@ -68,9 +68,9 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_null()
         {
-            adminService = new AdminService(adminRepository);
+            adminService = new AdminService(userRepository);
             List<Admin> listOfAdmin = null;
-            adminRepository.GetAll().Returns(listOfAdmin);
+            userRepository.GetAllAdmins().Returns(listOfAdmin);
 
             Assert.Throws<NotFoundEntityException>(() => adminService.GetAll());
         }
@@ -78,7 +78,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_any_argument_null_exception()
         {
-            adminRepository.GetAll().Returns(x => { throw new ArgumentNullException(); });
+            userRepository.GetAllAdmins().Returns(x => { throw new ArgumentNullException(); });
 
             Assert.Throws<NotFoundEntityException>(() => adminService.GetAll());
         }
@@ -86,7 +86,7 @@ namespace MQuince.Services.Tests
         [Fact]
         public void Get_all_returns_any_other_exception()
         {
-            adminRepository.GetAll().Returns(x => { throw new Exception(); });
+            userRepository.GetAllAdmins().Returns(x => { throw new Exception(); });
 
             Assert.Throws<InternalServerErrorException>(() => adminService.GetAll());
         }
