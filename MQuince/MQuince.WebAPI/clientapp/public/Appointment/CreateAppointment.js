@@ -185,6 +185,10 @@
                         EndDateTime: this.selectedAppointment.endDateTime,
                         DoctorId: this.selectedDoctor,
                         PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
+                    }, {
+                            headers: {
+                                'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                         alert('Your appointment has been saved!')
                         //JSAlert.alert("Your appointment has been saved!");

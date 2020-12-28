@@ -3,9 +3,6 @@
 	data: {
 		feedbacks: []
 	},
-	methods: {
-
-	},
 	created() {
 		axios
 			.get('/api/Feedback/GetByStatus', {

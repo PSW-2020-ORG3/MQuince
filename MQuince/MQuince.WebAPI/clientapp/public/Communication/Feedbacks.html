@@ -105,7 +105,7 @@
     </style>
 </head>
 
-<body id="page-top">
+<body>
     <!-- Navigation-->
     <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
         <div class="container d-flex">
@@ -127,11 +127,11 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
-                    <li  class="drop-down active">
+                    <li class="drop-down active">
                         <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul>
-                            <li><a href="../Communication/AddFeedback.html">Add feedback</a></li>
-                            <li><a href="#/">Observe feedbacks</a></li>
+                            <li><a href="#/">Add feedback</a></li>
+                            <li><a href="../Communication/Feedbacks.html">Observe feedbacks</a></li>
                         </ul>
                     </li>
                     <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
@@ -156,33 +156,33 @@
 
     <div style="margin-top:-45px" id="feedbacks">
         <!-- Contact Section-->
-            <div class="container" >
-                <!-- Contact Section Heading-->                <!-- Icon Divider-->
-                <!-- Contact Section Form-->
-                <div style=" margin-top: 15px">
-                    
-                    <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
-                        <div style="display: inline-block">
-                            <table >
-                                <tr>
-                                    <td colspan="2">
-                                        <img src="../static/feedbackIcon.png" height="100" width="100">
-                                    </td>
-                                    <td >
-                                        <div style="margin-left:30px;margin-bottom:30px">
-                                            <div class="short-info2">By Helena:</div>
-                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+        <div class="container">
+            <!-- Contact Section Heading-->                <!-- Icon Divider-->
+            <!-- Contact Section Form-->
+            <div style=" margin-top: 15px">
+
+                <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                    <div style="display: inline-block">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../static/feedbackIcon.png" height="100" width="100">
+                                </td>
+                                <td>
+                                    <div style="margin-left:30px;margin-bottom:30px">
+                                        <div class="short-info2">By Helena:</div>
+                                        <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-
-
-
                 </div>
+
+
+
             </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JS-->
@@ -198,5 +198,6 @@
     <script src="../axios.js"></script>
     <script src="js/scripts.js"></script>
     <script src="Feedbacks.js"></script>
+
 </body>
 </html>
