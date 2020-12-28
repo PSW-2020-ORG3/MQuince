@@ -1,18 +1,15 @@
 ﻿var app = new Vue({
-	el: '#addFeedback',
+	el: '#index',
 	data: {
-		Comment: "",
-		Anonymous: false,
-		Publish: true,
 		showLogIn: true,
 		showLogOut: false,
 		showCreateAppointment: false,
 		showAddFeedback: false,
-		showFeedback: true,
-		showObserveFeedback: true,
+		showFeedback: false,
+		showObserveFeedback: false,
 		showObserveAppointment: false
 	},
-	created() {
+	mounted() {
 		var role = localStorage.getItem('keyRole');
 		//role=2
 		if (role == null) {
@@ -23,7 +20,7 @@
 			this.showFeedback = true;
 			this.showObserveFeedback = true;
 			this.showObserveAppointment = false
-		}
+        }
 		if (role == 0) { // patient
 			this.showLogIn = false;
 			this.showLogOut = true;
@@ -41,38 +38,25 @@
 			this.showObserveFeedback = false;
 			this.showObserveAppointment = false;
 		}
-
 	},
 	methods: {
-		submit() {
-			if (this.Comment != "") {
-				axios
-					.post("/api/Feedback", {
-						Comment: this.Comment,
-						Anonymous: this.Anonymous,
-						Publish: this.Publish
-					}).then(response => {
-						//JSAlert.alert("Your feedback has been saved!");
-						alert("Your feedback has been saved!")
-
-						setTimeout(function () {
-							if (window.location.hash != '#r') {
-								window.location.hash = 'r';
-								window.location.reload(1);
-							}
-						}, 3000);
-
-
-					})
-			} else {
-				JSAlert.alert("You have to fill in the form");
-			}
-
+		logIn: function () {
+			axios
+				.post("/api/User", {
+					Username: "admin",
+					Password: "admin"
+				}).then((response) => {
+					console.log('test')
+					localStorage.setItem('keyToken', response.data.token)
+					localStorage.setItem('keyRole', response.data.userRole)
+					}, (error) => {
+						console.log(error);
+					});
 		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');
-			localStorage.removeItem('keyRole');
-			window.location.href = "/public/index.html";
+			localStorage.removeItem('keyRole')
+        }
 		}
-	}
+	
 })

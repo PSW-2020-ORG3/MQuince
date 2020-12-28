@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
 {
@@ -22,26 +23,45 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         [Obsolete]
         public void Add_Feedback()
         {
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
-            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Feedback")));
+            var lnkfeedback = wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Feedback")));
+            Assert.That(lnkfeedback.Displayed);
 
             Actions action = new Actions(webDriver);
-            action.MoveToElement(element).Perform();
+            action.MoveToElement(lnkfeedback).Perform();
 
             IWebElement lnkAddFeedback = webDriver.FindElement(By.LinkText("Add feedback"));
+            Assert.That(lnkAddFeedback.Displayed);
             lnkAddFeedback.Click();
 
-            IWebElement txtMessageBox = webDriver.FindElement(By.Id("name"));
+            Thread.Sleep(1000);
 
+            IWebElement txtMessageBox = webDriver.FindElement(By.Id("name"));
             Assert.That(txtMessageBox.Displayed);
+
+            Thread.Sleep(1000);
 
             txtMessageBox.SendKeys(Keys.Tab);
             txtMessageBox.Clear();
             txtMessageBox.SendKeys("Some Sample Text Here");
 
+            Thread.Sleep(2000);
+
+            IWebElement cbForSign= webDriver.FindElement(By.Id("Anonymous"));
+            Assert.That(cbForSign.Displayed);
+
+            cbForSign.Click();
+            Thread.Sleep(1000);
+
+
             var lnkSubmitButton = webDriver.FindElement(By.Id("sendMessageButton"));
 
             lnkSubmitButton.Click();
+
+            Thread.Sleep(1000);
+            
         }
     }
 }

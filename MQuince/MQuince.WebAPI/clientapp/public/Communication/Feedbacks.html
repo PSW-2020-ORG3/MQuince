@@ -105,7 +105,7 @@
     </style>
 </head>
 
-<body id="page-top">
+<body id="feedbacks">
     <!-- Navigation-->
     <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
         <div class="container d-flex">
@@ -121,68 +121,74 @@
             </div>
         </div>
     </div>
+    
     <header style="margin-top:10px" id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
-            <h1 class="logo mr-auto"><a href="../index.html">MQUINCE Medic</a></h1>
+            <h1 class="logo mr-auto"><a href="/public/index.html">MQUINCE Medic</a></h1>
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li  class="drop-down active">
-                        <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
-                        <ul>
-                            <li><a href="../Communication/AddFeedback.html">Add feedback</a></li>
-                            <li><a href="#/">Observe feedbacks</a></li>
+                    <li><a href="/public/index.html">Home</a></li>
+                    <li v-bind:hidden="!showFeedback" class="drop-down">
+                        <a id="feedback" href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
+                        <ul class="drop-down-menu">
+                            <li v-bind:hidden="!showAddFeedback"><a id="addFeedback" href="/public/Communication/AddFeedback.html">Add feedback</a></li>
+                            <li v-bind:hidden="!showObserveFeedback"><a href="/public/Communication/Feedbacks.html">Observe feedbacks</a></li>
                         </ul>
                     </li>
-                    <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
-                    <li class="drop-down">
+                    <li v-bind:hidden="!showObserveAppointment"><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
+
+
+                    <li v-bind:hidden="!showCreateAppointment" class="drop-down">
                         <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Create appointment</a>
                         <ul>
-                            <li><a href="../Appointment/CreateAppointment.html">Standard appointment</a></li>
+                            <li><a href="/public/Appointment/CreateAppointment.html">Standard appointment</a></li>
                             <li><a href="#">Recommended appointment</a></li>
                         </ul>
                     </li>
+                    <li v-on:click="logIn" v-bind:hidden="!showLogIn"><a href="#">Log in</a></li>
+                    <li v-on:click="logOut" v-bind:hidden="!showLogOut"><a href="#">Log out</a></li>
+
                 </ul>
             </nav>
         </div>
     </header>
 
     <section class="page-section" id="contact">
-        <div id="createAppointment">
+        <div>
             <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Your feedbacks</h5>
 
         </div>
     </section>
 
-    <div style="margin-top:-45px" id="feedbacks">
+    <div style="margin-top:-45px">
         <!-- Contact Section-->
-            <div class="container" >
-                <!-- Contact Section Heading-->                <!-- Icon Divider-->
-                <!-- Contact Section Form-->
-                <div style=" margin-top: 15px">
-                    
-                    <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
-                        <div style="display: inline-block">
-                            <table >
-                                <tr>
-                                    <td colspan="2">
-                                        <img src="../static/feedbackIcon.png" height="100" width="100">
-                                    </td>
-                                    <td >
-                                        <div style="margin-left:30px;margin-bottom:30px">
-                                            <div class="short-info2">By Helena:</div>
-                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+        <div class="container">
+            <!-- Contact Section Heading-->                <!-- Icon Divider-->
+            <!-- Contact Section Form-->
+            <div style=" margin-top: 15px">
+
+                <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                    <div style="display: inline-block">
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../static/feedbackIcon.png" height="100" width="100">
+                                </td>
+                                <td>
+                                    <div style="margin-left:30px;margin-bottom:30px">
+                                        <div class="short-info2">By Helena:</div>
+                                        <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-
-
-
                 </div>
+
+
+
             </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JS-->
@@ -191,12 +197,11 @@
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- Contact form JS-->
-    <script src="assets/mail/jqBootstrapValidation.js"></script>
-    <script src="assets/mail/contact_me.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <!-- Core theme JS-->
     <script src="../axios.js"></script>
-    <script src="js/scripts.js"></script>
     <script src="Feedbacks.js"></script>
+    <script src="../Header/Header.js"></script>
+
 </body>
 </html>
