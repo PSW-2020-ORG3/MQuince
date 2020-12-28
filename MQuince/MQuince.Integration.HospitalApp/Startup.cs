@@ -33,6 +33,7 @@ namespace MQuince.Integration.HospitalApp
             services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(ISftpService), s => new SftpService());
+            services.AddTransient(typeof(ITenderService), s => new TenderService(new TenderRepository(dbContextOptionsBuilder)));
 
             services.AddMvc().AddNewtonsoftJson(option =>
             {

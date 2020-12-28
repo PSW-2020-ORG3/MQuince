@@ -23,10 +23,12 @@ namespace MQuince.Integration.Repository.MySQL.DataAccess
         public DbSet<PharmacyPersistence> Pharmacies { get; set; }
         public DbSet<MedicationsConsumptionPersistance> MedicationsConsumptions { get; set; }
 
+        public DbSet<TenderPersistance> Tenders { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=localhost;user=root;password=Mucibabic*1;database=pharmacymskv");
+            optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
         }
     }
 }

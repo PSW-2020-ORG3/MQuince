@@ -80,7 +80,7 @@ namespace MQuince.Integration.Services.Implementation
 
         public void Update(MedicationsConsumptionDTO entityDTO, Guid id)
         {
-            throw new NotImplementedException();
+            _medicationsConsumptionRepository.Update(CreateMedicationsConsumptionFromDTO(entityDTO));
         }
 
         private IdentifiableDTO<MedicationsConsumptionDTO> CreateDTOFromMedicationsConsumption(MedicationsConsumption medicationsConsumptation)
