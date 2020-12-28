@@ -76,6 +76,9 @@ namespace MQuince.Application
         public IDoctorService GetDoctorService()
               => new DoctorService(this.GetUserRepository());
 
+        public IAdminService GetAdminService()
+              => new AdminService(this.GetUserRepository());
+
         private IUserRepository GetUserRepository()
              => new UserRepository(_optionsBuilder);
 

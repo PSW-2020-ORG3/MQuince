@@ -6,6 +6,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>MQuince Health</title>
+    <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../../favicon.ico.png" />
 
     <link href="../../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -24,86 +25,99 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="styles.css" rel="stylesheet" />
     <link href="../../src/assets/style.css" rel="stylesheet">
-    <style>
-        input[type=text], select, input[type=time] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type=submit] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-            input[type=submit]:hover {
-                background-color: #45a049;
-            }
-
-
-        .apartment-name2 {
-            position: relative;
-            top: 15px;
-            max-height: 50px;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            font-weight: 400;
-            color: rgb(34, 34, 34);
-            font-size: 18px;
-            line-height: 24px;
-            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-        }
-
-        .short-info2 {
-            position: relative;
-            top: 0px;
-            margin-top: 9px;
-            color: rgb(113, 113, 113);
-            font-weight: 400;
-            min-height: 18px;
-            font-size: 14px;
-            line-height: 18px;
-            max-height: 22px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .btn {
-            background-color: transparent;
-            border: none;
-            padding: 6px 16px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-            /* Darker background on mouse-over */
-            .btn:hover {
-                background-color: transparent;
-            }
-
-        .commentBox {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            margin: auto;
-            width: 70%;
-            margin-top: 10px;
-            height: 240px;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="styles.css" rel="stylesheet" />
 </head>
+<style>
+    input[type=text], select, input[type=time] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+
+    .apartment-name2 {
+        position: relative;
+        top: 30px;
+        max-height: 50px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        font-weight: 400;
+        color: rgb(34, 34, 34);
+        font-size: 18px;
+        line-height: 24px;
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    .short-info2 {
+        position: relative;
+        top: 0px;
+        margin-top: 9px;
+        color: rgb(113, 113, 113);
+        font-weight: 400;
+        min-height: 18px;
+        font-size: 14px;
+        line-height: 18px;
+        max-height: 22px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .btn {
+        background-color: transparent;
+        border: none;
+        padding: 6px 16px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: transparent;
+        }
+
+    .commentBox {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        margin: auto;
+        width: 70%;
+        margin-top: 10px;
+        height: 200px;
+    }
+</style>
 
 <body id="page-top">
     <!-- Navigation-->
@@ -127,11 +141,11 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li><a href="../index.html">Home</a></li>
-                    <li  class="drop-down active">
+                    <li class="drop-down active">
                         <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul>
-                            <li><a href="../Communication/AddFeedback.html">Add feedback</a></li>
-                            <li><a href="#/">Observe feedbacks</a></li>
+                            <li><a href="#/">Add feedback</a></li>
+                            <li><a href="../Communication/Feedbacks.html">Observe feedbacks</a></li>
                         </ul>
                     </li>
                     <li><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
@@ -147,44 +161,63 @@
         </div>
     </header>
 
+    <!-- Contact Section-->
     <section class="page-section" id="contact">
-        <div id="createAppointment">
-            <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Your feedbacks</h5>
+       <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedbacks</h4>
+    
+       <div class="container" id="feedbacks">
+            <!-- Icon Divider-->
+            <!-- Contact Section Form-->
+            <br/>
+            <div class="col-lg-8 mx-auto">
+                <select name="feedbackOption" id="feedbackOption" v-model="status" @change="onChange" style="width:200px; margin-left: 520px; margin-top: 20px;">
+                    <option value="AllFeedbacks">AllFeedbacks</option>
+                    <option value="MyFeedbacks">MyFeedbacks</option>
+                </select>
+            </div>
+
+            <div v-if="status == 'AllFeedbacks' " style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                    <div style="display: inline-block">
+                        <table >
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../static/feedbackIcon.png" height="100" width="100">
+                                </td>
+                                <td>
+                                    <div style="margin-left:30px;margin-bottom:30px">
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous ===  false ">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                        <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            </div>
+
+            <div v-if="status == 'MyFeedbacks' && feedback.entityDTO.user == 'Helena'" style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                    <div style="display: inline-block">
+                        <table >
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../static/feedbackIcon.png" height="100" width="100">
+                                </td>
+                                <td>
+                                    <div style="margin-left:30px;margin-bottom:30px">
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
+                                        <div class="short-info2" v-else>By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                        <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            </div>
 
         </div>
     </section>
 
-    <div style="margin-top:-45px" id="feedbacks">
-        <!-- Contact Section-->
-            <div class="container" >
-                <!-- Contact Section Heading-->                <!-- Icon Divider-->
-                <!-- Contact Section Form-->
-                <div style=" margin-top: 15px">
-                    
-                    <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
-                        <div style="display: inline-block">
-                            <table >
-                                <tr>
-                                    <td colspan="2">
-                                        <img src="../static/feedbackIcon.png" height="100" width="100">
-                                    </td>
-                                    <td >
-                                        <div style="margin-left:30px;margin-bottom:30px">
-                                            <div class="short-info2">By Helena:</div>
-                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-    </div>
-
+    
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -197,6 +230,7 @@
     <!-- Core theme JS-->
     <script src="../axios.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
     <script src="Feedbacks.js"></script>
 </body>
 </html>

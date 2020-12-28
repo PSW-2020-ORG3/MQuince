@@ -66,6 +66,7 @@ namespace MQuince.WebAPI
             services.AddTransient(typeof(ISpecializationService), s => application.GetSpecializationService());
             services.AddTransient(typeof(IDoctorService), s => application.GetDoctorService());
             services.AddTransient(typeof(IAppointmentService), s => application.GetAppointmentService());
+            services.AddTransient(typeof(IAdminService), s => application.GetAdminService());
 
             services.AddControllers();
             services.AddSpaStaticFiles(configuration =>

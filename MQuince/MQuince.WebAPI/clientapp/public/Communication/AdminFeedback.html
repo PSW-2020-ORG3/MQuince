@@ -29,7 +29,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Freelancer - Start Bootstrap Theme</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -185,7 +184,8 @@
                                     </td>
                                     <td>
                                         <div style="margin-left:30px;margin-bottom:30px">
-                                             <div class="short-info2">By&nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
+                                             <div class="short-info2" v-else>By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
                                             <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
                                         </div>
                                     </td>

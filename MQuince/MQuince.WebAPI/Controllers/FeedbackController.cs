@@ -24,6 +24,7 @@ namespace MQuince.WebAPI.Controllers
         [HttpPost]
         public IActionResult Add(FeedbackDTO dto)
         {
+            dto.User = "Helena";
             if (ModelState.IsValid)
             {
                 _feedbackService.Create(dto);

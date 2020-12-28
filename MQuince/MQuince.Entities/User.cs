@@ -42,5 +42,10 @@ namespace MQuince.Entities
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
         }
+
+        public static implicit operator string(User v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
