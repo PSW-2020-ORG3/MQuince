@@ -18,6 +18,10 @@ namespace MQuince.Integration.HospitalApp
 
         public static void Main(string[] args)
         {
+            /*ActionsAndBenefits a = new ActionsAndBenefits("Apoteka1", "Akcija1", new DateTime(2020, 12, 10), new DateTime(2020, 12, 21), 1000, 600);
+            Console.WriteLine("AKCIJA:" + a.PharmacyName + " -> " + a.IsApproved.ToString());
+            a.IsApproved = true;
+            Console.WriteLine("AKCIJA ODOBRENA:" + a.PharmacyName + "-> "+ a.IsApproved.ToString());*/
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -19,11 +19,7 @@ namespace MQuince.Integration.Services.Implementation
             _actionAndBenefitsRepository = actionAndBenefitsRepository == null ? throw new ArgumentNullException(nameof(actionAndBenefitsRepository) + "is set to null") : actionAndBenefitsRepository;
 
         }
-
-        public ActionAndBenefitsService()
-        {
-        }
-
+       
         public Guid Create(ActionAndBenefitsDTO entityDTO)
         {
             ActionsAndBenefits action = CreateActionsAndBenefitsFromDTO(entityDTO);
@@ -35,7 +31,12 @@ namespace MQuince.Integration.Services.Implementation
         public bool Delete(Guid id) => _actionAndBenefitsRepository.Delete(id);
 
         public IEnumerable<IdentifiableDTO<ActionAndBenefitsDTO>> GetAll()
-            => _actionAndBenefitsRepository.GetAll().Select(c => CreateDTOFromActionAndBenefits(c));
+        {
+            
+                return _actionAndBenefitsRepository.GetAll().Select(c => CreateDTOFromActionAndBenefits(c));
+           
+        }
+//            => _actionAndBenefitsRepository.GetAll().Select(c => CreateDTOFromActionAndBenefits(c));
 
         public IdentifiableDTO<ActionAndBenefitsDTO> GetByID(Guid id) => CreateDTOFromActionAndBenefits(_actionAndBenefitsRepository.GetById(id));
 
@@ -46,6 +47,7 @@ namespace MQuince.Integration.Services.Implementation
             return new IdentifiableDTO<ActionAndBenefitsDTO>()
             {
                 Key = actionAndBenefits.IDAction,
+                IsApproved = actionAndBenefits.IsApproved,
                 EntityDTO = new ActionAndBenefitsDTO()
                 {
                     PharmacyName = actionAndBenefits.PharmacyName,
@@ -59,17 +61,25 @@ namespace MQuince.Integration.Services.Implementation
             };
         }
 
+        private ActionsAndBenefits CreateActionsAndBenefitsFromDTOWithIsApproved(ActionAndBenefitsDTO action, Guid? actionKey = null , Boolean? isApproved = false)
+          => actionKey == null && isApproved == false ? new ActionsAndBenefits(action.PharmacyName, action.ActionName, action.BeginDate, action.EndDate, action.OldCost, action.NewCost)
+                        : new ActionsAndBenefits(actionKey.Value, action.PharmacyName, action.ActionName, action.BeginDate, action.EndDate, action.OldCost, action.NewCost, isApproved.Value);
         private ActionsAndBenefits CreateActionsAndBenefitsFromDTO(ActionAndBenefitsDTO action, Guid? actionKey = null)
           => actionKey == null ? new ActionsAndBenefits(action.PharmacyName, action.ActionName, action.BeginDate, action.EndDate, action.OldCost, action.NewCost)
-                        : new ActionsAndBenefits(actionKey.Value, action.PharmacyName, action.ActionName, action.BeginDate, action.EndDate, action.OldCost, action.NewCost);
+                        : new ActionsAndBenefits(actionKey.Value, action.PharmacyName, action.ActionName, action.BeginDate, action.EndDate, action.OldCost, action.NewCost, false);
+        
 
+        public void Update(ActionAndBenefitsDTO entityDTO, Guid id,Boolean isApproved)
+        {
+            _actionAndBenefitsRepository.Update(CreateActionsAndBenefitsFromDTOWithIsApproved(entityDTO,id,isApproved));
+        }
 
         public void Update(ActionAndBenefitsDTO entityDTO, Guid id)
         {
             _actionAndBenefitsRepository.Update(CreateActionsAndBenefitsFromDTO(entityDTO));
         }
 
-        public ActionsAndBenefits FindActionByProperties(String pharmacyName, String actionName, DateTime beginDate, DateTime endDate)
+        /*public ActionsAndBenefits FindActionByProperties(String pharmacyName, String actionName, DateTime beginDate, DateTime endDate)
         {
             Console.WriteLine("Pozvao findActionByProperties:" + actionName);
             foreach (IdentifiableDTO<ActionAndBenefitsDTO> action in GetAll())
@@ -99,6 +109,19 @@ namespace MQuince.Integration.Services.Implementation
             }
             return null;
         }
+
+        public bool DeleteActionAndBenefitsFromList(ActionAndBenefitsDTO dto)
+        {
+            /*foreach (ActionsAndBenefits a in Program.ActionAndBenefitMessage)
+            {
+                if (dto.PharmacyName.Contains(a.PharmacyName))
+                {
+                    Program.ActionAndBenefitMessage.Remove(a);
+                    return true;
+                }
+            }
+            return false;
+        }*/
     }
 
 

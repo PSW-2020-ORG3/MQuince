@@ -8,5 +8,6 @@ namespace MQuince.Integration.Services.Constracts.Interfaces
 {
     public interface IActionAndBenefitsService : IService<ActionAndBenefitsDTO, IdentifiableDTO<ActionAndBenefitsDTO>>
     {
+        void Update(ActionAndBenefitsDTO entityDTO, Guid id, Boolean isApproved);
     }
 }
