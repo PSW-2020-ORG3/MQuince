@@ -33,17 +33,7 @@ namespace MQuince.Integration.HospitalApp
                 byte[] body = ea.Body.ToArray();
                 string jsonMessage = Encoding.UTF8.GetString(body);
                 ActionsAndBenefits message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
-                Console.WriteLine(" [x] Received {0}", message.Action);
-                Console.WriteLine(" [x] Received json {0}", jsonMessage);
                 Program.ActionAndBenefitMessage.Add(message);
-
-
-                foreach (ActionsAndBenefits a in Program.ActionAndBenefitMessage)
-                {
-                    Console.WriteLine("Action: " + a.Action);
-                    Console.WriteLine("Date: " + a.Date);
-
-                }
                 Console.WriteLine(message);
 
 
