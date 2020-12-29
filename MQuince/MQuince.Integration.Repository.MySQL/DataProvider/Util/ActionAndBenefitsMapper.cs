@@ -21,7 +21,8 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                                                 actionAndBenefitsPersistance.BeginDate,
                                                 actionAndBenefitsPersistance.EndDate,
                                                 actionAndBenefitsPersistance.OldCost,
-                                                actionAndBenefitsPersistance.NewCost);
+                                                actionAndBenefitsPersistance.NewCost,
+                                                actionAndBenefitsPersistance.IsApproved);
 
         }
 
@@ -37,7 +38,8 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 BeginDate = actionsAndBenefits.BeginDate,
                 EndDate = actionsAndBenefits.EndDate,
                 OldCost = actionsAndBenefits.OldCost,
-                NewCost = actionsAndBenefits.NewCost
+                NewCost = actionsAndBenefits.NewCost,
+                IsApproved = actionsAndBenefits.IsApproved
             };
             return retVal;
         }
@@ -47,6 +49,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                                            : new IdentifiableDTO<ActionAndBenefitsDTO>()
                                            {
                                                Key = actionsAndBenefits.IDAction,
+                                               IsApproved = actionsAndBenefits.IsApproved,
                                                EntityDTO = new ActionAndBenefitsDTO()
                                                {
                                                    PharmacyName = actionsAndBenefits.PharmacyName,

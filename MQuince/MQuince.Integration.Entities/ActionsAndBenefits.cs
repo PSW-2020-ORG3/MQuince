@@ -13,8 +13,9 @@ namespace MQuince.Integration.Entities
         public DateTime EndDate { get; set; }
         public double OldCost { get; set; }
         public double NewCost { get; set; }
+        public Boolean IsApproved { get; set; }
 
-        public ActionsAndBenefits(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost)
+        public ActionsAndBenefits(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost,Boolean isApproved)
         {
             _actionKey = actionKey;
             PharmacyName = pharmacyName;
@@ -23,7 +24,7 @@ namespace MQuince.Integration.Entities
             EndDate = endDate;
             OldCost = oldCost;
             NewCost = newCost;
-
+            IsApproved = isApproved;
         }
         public ActionsAndBenefits() { }
 
@@ -42,6 +43,7 @@ namespace MQuince.Integration.Entities
                 EndDate = endDate;
                 OldCost = oldCost;
                 NewCost = newCost;
+                IsApproved = false;
             }
         }
 

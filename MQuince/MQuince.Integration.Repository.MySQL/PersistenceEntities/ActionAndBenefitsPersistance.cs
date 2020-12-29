@@ -23,9 +23,11 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
         public double OldCost { get; set; }
         [Required]
         public double NewCost { get; set; }
+        [Required]
+        public Boolean IsApproved { get; set; }
 
         public ActionAndBenefitsPersistance() { }
-        public ActionAndBenefitsPersistance(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost)
+        public ActionAndBenefitsPersistance(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost,Boolean isApproved)
         {
             ActionKey = actionKey;
             PharmacyName = pharmacyName;
@@ -34,6 +36,7 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
             EndDate = endDate;
             OldCost = oldCost;
             NewCost = newCost;
+            IsApproved = isApproved;
 
         }
     }
