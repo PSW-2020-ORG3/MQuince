@@ -34,6 +34,7 @@ namespace MQuince.Integration.HospitalApp
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(ISftpService), s => new SftpService());
 
+            services.AddTransient(typeof(IActionAndBenefitsService), s => new ActionAndBenefitsService(new ActionAndBenefitsRepository(dbContextOptionsBuilder)));
             services.AddMvc().AddNewtonsoftJson(option =>
             {
                 option.SerializerSettings.Culture = new CultureInfo("tr-TR");
