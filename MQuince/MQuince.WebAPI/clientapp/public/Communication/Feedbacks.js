@@ -59,28 +59,26 @@
 
 	},
 	mounted() {
-		this.userToken = localStorage.getItem('validToken');
+		localStorage.getItem('keyToken');
+		localStorage.getItem('keyRole');
 		axios
 			.get('/api/Feedback/GetByStatus', {
 				params: {
 					publish: true,
 					approved: true
-				}, 
-				headers: {
-					'Authorization': 'Bearer ' + this.userToken
 				}
 		}).then(response => {
 			this.feedbacks = response.data;
 		}).catch(error => {
 			if (error.response.status === 400 || error.response.status === 403) {
 				alert("You don't have access this page!");
-				this.$router.push({ name: 'loginUser' })
+				window.location.href = "/public/index.html";
 			}
 		});
 
 	},
 	methods: {
-		logIn: function () {
+		/*logIn: function () {
 			axios
 				.post("/api/User", {
 					Username: "patient2",
@@ -93,7 +91,7 @@
 				}, (error) => {
 					console.log(error);
 				});
-		},
+		},*/
 		logOut: function () {
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole');

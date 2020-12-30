@@ -43,26 +43,29 @@ var app = new Vue({
        
         
         submit: function () {
-			document.getElementById("contactForm").setAttribute("submit", "return false;");
-            if (this.username.length !== 0 && this.password.length !== 0) {
+			
+            if (this.username.length !== 0 &&  this.password !== 0) {
 				axios
-					.post("/api/user/", {
+					.post("/api/User/", {
 						username: this.username,
 						password: this.password
 					}).then(response => {
-						var user = response.data
-						localStorage.setItem("validToken", user.token)		
-						console.log(user.token)
-						if(user.userRole === 0){
-							window.location.href = ".../public/Communication/Feedbacks.html";
-						} else if(user.userRole === 1) {
-							window.location.href = "../public/Communication/AdminFeedbacks.html";
-							this.$router.push({name: 'homepage'})
+						
+						localStorage.setItem('keyToken', response.data.token)
+						localStorage.setItem('keyRole', response.data.userRole)
+						
+						
+						if(response.data.userRole === 0){
+							window.location.href = "/public/index.html";
+						} else if(response.data.userRole === 1) {
+							window.location.href = "/public/Communication/AdminFeedback.html";
+						}else{
+							alert("Username doesn't exist or username/password is incorrect!")
 						}
-					}).catch(function (error) {
+					}).catch(error => {
 						this.serverError = true;
+						console.log(error.response.status)
 						if (error.response.status === 400 || error.response.status === 403) {
-							console.log(error.response.status)
 							alert("Username doesn't exist or username/password is incorrect!")
 						} else if (error.request) {
 							console.log(error.request)
@@ -70,7 +73,7 @@ var app = new Vue({
 						}
 					});
 			}else {
-				console.log(this.username)
+			
 				alert("You have to fill in the form!");
 		}
         }
