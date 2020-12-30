@@ -1,10 +1,5 @@
-﻿using MQuince.Entities.MedicalRecords;
-using MQuince.Entities.Rooms;
-using MQuince.Entities.Users;
-using MQuince.Enums;
+﻿using MQuince.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MQuince.Entities.Appointment
 {

@@ -1,8 +1,4 @@
-﻿using MQuince.Entities.MedicalRecords;
-using MQuince.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace MQuince.Entities.Users
 {

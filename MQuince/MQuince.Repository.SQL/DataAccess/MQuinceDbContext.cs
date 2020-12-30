@@ -2,18 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using MQuince.Repository.SQL.PersistenceEntities;
 using MQuince.Repository.SQL.PersistenceEntities.Appointments;
-using MQuince.Repository.SQL.PersistenceEntities.Drug;
 using MQuince.Repository.SQL.PersistenceEntities.Users;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MQuince.Repository.SQL.DataAccess
 {
     public class MQuinceDbContext : DbContext
     {
         public DbSet<FeedbackPersistence> Feedbacks { get; set; }
-        public DbSet<AllergenPersistence> Allergens { get; set; }
         public DbSet<SpecializationPersistence> Specializations { get; set; }
         public DbSet<DoctorPersistence> Doctors { get; set; }
         public DbSet<PatientPersistence> Patients { get; set; }
@@ -21,8 +17,9 @@ namespace MQuince.Repository.SQL.DataAccess
         public DbSet<AppointmentPersistence> Appointments { get; set; }
         public DbSet<AdminPersistence> Admin { get; set; }
 
-        public MQuinceDbContext(DbContextOptions options) : base(options) {
-            
+        public MQuinceDbContext(DbContextOptions options) : base(options)
+        {
+
         }
         public MQuinceDbContext() { }
 
@@ -35,7 +32,7 @@ namespace MQuince.Repository.SQL.DataAccess
                     Password="admin",
                     Jmbg="000000000000",
                     Name="Pera",
-                    Surname="Djuric",  
+                    Surname="Djuric",
                 },
                 new AdminPersistence{
                     Id= Guid.Parse("28c51a88-870c-42ce-bf4c-b9ad68126784"),
@@ -57,8 +54,8 @@ namespace MQuince.Repository.SQL.DataAccess
             });
 
             modelBuilder.Entity<DoctorPersistence>().HasData(new DoctorPersistence[] {
-                new DoctorPersistence{ 
-                    Id= Guid.Parse("6dd84745-8fcb-4a4b-84da-fe215ebd2f85"), 
+                new DoctorPersistence{
+                    Id= Guid.Parse("6dd84745-8fcb-4a4b-84da-fe215ebd2f85"),
                     Username="doctor1",
                     Password="doctor1",
                     Jmbg="1234567890123",
