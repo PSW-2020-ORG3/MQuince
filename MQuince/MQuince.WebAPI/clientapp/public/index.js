@@ -1,16 +1,15 @@
 ﻿var app = new Vue({
-	el: '#feedbacks',
+	el: '#index',
 	data: {
-		feedbacks: [],
 		showLogIn: true,
 		showLogOut: false,
 		showCreateAppointment: false,
 		showAddFeedback: false,
-		showFeedback: true,
-		showObserveFeedback: true,
+		showFeedback: false,
+		showObserveFeedback: false,
 		showObserveAppointment: false
 	},
-	created() {
+	mounted() {
 		var role = localStorage.getItem('keyRole');
 		//role=2
 		if (role == null) {
@@ -21,7 +20,7 @@
 			this.showFeedback = true;
 			this.showObserveFeedback = true;
 			this.showObserveAppointment = false
-		}
+        }
 		if (role == 0) { // patient
 			this.showLogIn = false;
 			this.showLogOut = true;
@@ -39,36 +38,25 @@
 			this.showObserveFeedback = false;
 			this.showObserveAppointment = false;
 		}
-		axios
-			.get('/api/Feedback/GetByStatus', {
-				params: {
-					publish: true,
-					approved: true
-				}
-			}).then(response => {
-				this.feedbacks = response.data
-			})
-
 	},
 	methods: {
 		logIn: function () {
 			axios
 				.post("/api/User", {
-					Username: "patient2",
-					Password: "patient2"
+					Username: "admin",
+					Password: "admin"
 				}).then((response) => {
-					window.location.href = "/public/index.html";
+					console.log('test')
 					localStorage.setItem('keyToken', response.data.token)
 					localStorage.setItem('keyRole', response.data.userRole)
-
-				}, (error) => {
-					console.log(error);
-				});
+					}, (error) => {
+						console.log(error);
+					});
 		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');
-			localStorage.removeItem('keyRole');
-			window.location.href = "/public/index.html";
+			localStorage.removeItem('keyRole')
+        }
 		}
-	}
+	
 })
