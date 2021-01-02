@@ -30,7 +30,7 @@ namespace MQuince.Review.Application
         {
             //SREDITI PREKO ENV
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=probicadb");
+            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
             services.AddTransient(typeof(IFeedbackService), s => new FeedbackService(new FeedbackRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();
