@@ -1,0 +1,44 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Feedback/GetByStatus?publish={publish}&approved={approved}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61040
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Feedback/GetByStatus?publish={publish}&approved={approved}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Feedback",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61040
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Feedback",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Feedback/Approve/{feedbackId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 61040
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Feedback/Approve/{feedbackId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:44382"
+  }
+
+}  
