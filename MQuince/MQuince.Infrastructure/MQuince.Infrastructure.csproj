@@ -18,6 +18,7 @@
     <ProjectReference Include="..\MQuince.Review.Domain\MQuince.Review.Domain.csproj" />
     <ProjectReference Include="..\MQuince.Scheduler.Contracts\MQuince.Scheduler.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Scheduler.Domain\MQuince.Scheduler.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.StaffManagement.Contracts\MQuince.StaffManagement.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

@@ -68,12 +68,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Core", "MQuince.Core\MQuince.Core.csproj", "{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Contracts", "MQuince.Scheduler.Contracts\MQuince.Scheduler.Contracts.csproj", "{C78C83A0-E95F-42D8-A19C-D385445268E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Contracts", "MQuince.Scheduler.Contracts\MQuince.Scheduler.Contracts.csproj", "{C78C83A0-E95F-42D8-A19C-D385445268E0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{78F1AB65-CED0-4414-B455-BE60D5A48D80} = {78F1AB65-CED0-4414-B455-BE60D5A48D80}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Review.Contracts", "MQuince.Review.Contracts\MQuince.Review.Contracts.csproj", "{53F199FD-F47A-4221-BE45-635232DBAA9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Contracts", "MQuince.Review.Contracts\MQuince.Review.Contracts.csproj", "{53F199FD-F47A-4221-BE45-635232DBAA9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Application", "MQuince.StaffManagement.Application\MQuince.StaffManagement.Application.csproj", "{540E7FE6-325A-466C-93C7-C93B171F6576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Domain", "MQuince.StaffManagement.Domain\MQuince.StaffManagement.Domain.csproj", "{3852B93C-4F84-4F00-9367-21ED33841B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Contracts", "MQuince.StaffManagement.Contracts\MQuince.StaffManagement.Contracts.csproj", "{B81A909D-C375-415A-9982-340FC61AF81E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +195,18 @@ Global
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540E7FE6-325A-466C-93C7-C93B171F6576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540E7FE6-325A-466C-93C7-C93B171F6576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540E7FE6-325A-466C-93C7-C93B171F6576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540E7FE6-325A-466C-93C7-C93B171F6576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +220,9 @@ Global
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {5B0E3DB6-B1D3-4F3E-A19E-C81CD1A1DB03}
 		{C78C83A0-E95F-42D8-A19C-D385445268E0} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{53F199FD-F47A-4221-BE45-635232DBAA9C} = {2BBD0BE8-2559-4485-B442-12DB4ED5FA48}
+		{540E7FE6-325A-466C-93C7-C93B171F6576} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+		{3852B93C-4F84-4F00-9367-21ED33841B4C} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+		{B81A909D-C375-415A-9982-340FC61AF81E} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}
