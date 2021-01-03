@@ -1,10 +1,12 @@
 ﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Infrastructure.DataProvider;
 using MQuince.Scheduler.Application.Services.Util;
 using MQuince.Scheduler.Contracts.DTO;
 using MQuince.Scheduler.Contracts.Exceptions;
 using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Contracts.Service;
 using MQuince.Scheduler.Domain;
+using MQuince.Scheduler.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,20 @@ namespace MQuince.Scheduler.Application.Services
 	public class AppointmentService : IAppointmentService
 	{
         private IAppointmentRepository _appointmentRepository;
-
-        public AppointmentService(IAppointmentRepository appointmentRepository)
+        private EventRepository _eventRepository;
+        public AppointmentService(IAppointmentRepository appointmentRepository, EventRepository eventRepository)
         {
             _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
+            _eventRepository = eventRepository == null ? throw new ArgumentNullException(nameof(eventRepository) + "is set to null") : eventRepository;
         }
 
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
+            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id);
 
             _appointmentRepository.Create(appointment);
+            _eventRepository.Create(scheduleEvent);
 
             return appointment.Id;
         }
@@ -43,11 +48,11 @@ namespace MQuince.Scheduler.Application.Services
             {
                 return _appointmentRepository.GetAll().Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -59,11 +64,11 @@ namespace MQuince.Scheduler.Application.Services
             {
                 return AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(_appointmentRepository.GetById(id));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -74,11 +79,11 @@ namespace MQuince.Scheduler.Application.Services
             {
                 return _appointmentRepository.GetForDoctor(doctorId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -90,11 +95,11 @@ namespace MQuince.Scheduler.Application.Services
             {
                 return _appointmentRepository.GetForPatient(patientId).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -111,11 +116,11 @@ namespace MQuince.Scheduler.Application.Services
             {
                 return _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, time).Select(c => AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(c));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -126,10 +131,13 @@ namespace MQuince.Scheduler.Application.Services
             try
             {
                 Appointment appointment = _appointmentRepository.GetById(appointmentId);
+                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id);
+
                 if (appointment.IsCancelable())
                 {
                     appointment.Cancel();
                     _appointmentRepository.Update(appointment);
+                    _eventRepository.Create(scheduleEvent);
                     return true;
                 }
                 return false;
@@ -138,7 +146,7 @@ namespace MQuince.Scheduler.Application.Services
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }

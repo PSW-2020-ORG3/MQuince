@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MQuince.Infrastructure.DataProvider;
 using MQuince.Scheduler.Application.Services;
 using MQuince.Scheduler.Contracts.Service;
@@ -30,7 +24,7 @@ namespace MQuince.Scheduler.Application
         {
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
             dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
-            services.AddTransient(typeof(IAppointmentService), s => new AppointmentService(new AppointmentRepository(dbContextOptionsBuilder)));
+            services.AddTransient(typeof(IAppointmentService), s => new AppointmentService(new AppointmentRepository(dbContextOptionsBuilder), new EventRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MQuince.Infrastructure.PersistenceEntities.Events.Feedback;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
