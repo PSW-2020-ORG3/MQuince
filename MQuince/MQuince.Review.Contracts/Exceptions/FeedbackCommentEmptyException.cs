@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace MQuince.Review.Domain.Exceptions
+namespace MQuince.Review.Contracts.Exceptions
 {
     public class FeedbackCommentEmptyException : Exception
     {

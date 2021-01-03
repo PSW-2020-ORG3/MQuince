@@ -53,17 +53,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scheduler", "Scheduler", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StafManagement", "StafManagement", "{063816A9-01D2-460C-8FA6-ED1A6F5B688B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Infrastructure", "MQuince.Infrastructure\MQuince.Infrastructure.csproj", "{C27CA60D-3B47-4FFD-8155-B52E0825EFDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Infrastructure", "MQuince.Infrastructure\MQuince.Infrastructure.csproj", "{C27CA60D-3B47-4FFD-8155-B52E0825EFDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Review.Application", "MQuince.Review.Application\MQuince.Review.Application.csproj", "{A6C54F8A-8154-4A46-9B00-2E5246521D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Application", "MQuince.Review.Application\MQuince.Review.Application.csproj", "{A6C54F8A-8154-4A46-9B00-2E5246521D15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Review.Domain", "MQuince.Review.Domain\MQuince.Review.Domain.csproj", "{334C98F8-7A82-4721-9C93-2142CAEFA3E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Domain", "MQuince.Review.Domain\MQuince.Review.Domain.csproj", "{334C98F8-7A82-4721-9C93-2142CAEFA3E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Application", "MQuince.Scheduler.Application\MQuince.Scheduler.Application.csproj", "{E5B1F921-356D-4B2B-813B-3EB9D0DC9DA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Application", "MQuince.Scheduler.Application\MQuince.Scheduler.Application.csproj", "{E5B1F921-356D-4B2B-813B-3EB9D0DC9DA7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C27CA60D-3B47-4FFD-8155-B52E0825EFDA} = {C27CA60D-3B47-4FFD-8155-B52E0825EFDA}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Domain", "MQuince.Scheduler.Domain\MQuince.Scheduler.Domain.csproj", "{78F1AB65-CED0-4414-B455-BE60D5A48D80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Domain", "MQuince.Scheduler.Domain\MQuince.Scheduler.Domain.csproj", "{78F1AB65-CED0-4414-B455-BE60D5A48D80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Core", "MQuince.Core\MQuince.Core.csproj", "{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Core", "MQuince.Core\MQuince.Core.csproj", "{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Contracts", "MQuince.Scheduler.Contracts\MQuince.Scheduler.Contracts.csproj", "{C78C83A0-E95F-42D8-A19C-D385445268E0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78F1AB65-CED0-4414-B455-BE60D5A48D80} = {78F1AB65-CED0-4414-B455-BE60D5A48D80}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Review.Contracts", "MQuince.Review.Contracts\MQuince.Review.Contracts.csproj", "{53F199FD-F47A-4221-BE45-635232DBAA9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +181,14 @@ Global
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C78C83A0-E95F-42D8-A19C-D385445268E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78C83A0-E95F-42D8-A19C-D385445268E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78C83A0-E95F-42D8-A19C-D385445268E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78C83A0-E95F-42D8-A19C-D385445268E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,6 +200,8 @@ Global
 		{E5B1F921-356D-4B2B-813B-3EB9D0DC9DA7} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{78F1AB65-CED0-4414-B455-BE60D5A48D80} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {5B0E3DB6-B1D3-4F3E-A19E-C81CD1A1DB03}
+		{C78C83A0-E95F-42D8-A19C-D385445268E0} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
+		{53F199FD-F47A-4221-BE45-635232DBAA9C} = {2BBD0BE8-2559-4485-B442-12DB4ED5FA48}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

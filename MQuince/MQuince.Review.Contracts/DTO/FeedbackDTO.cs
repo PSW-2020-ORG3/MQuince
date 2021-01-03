@@ -1,4 +1,8 @@
-﻿namespace MQuince.Review.Domain.Contracts.DTO
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace MQuince.Review.Contracts.DTO
 {
     public class FeedbackDTO
     {

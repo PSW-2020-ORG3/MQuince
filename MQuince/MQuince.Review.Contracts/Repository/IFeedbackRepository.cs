@@ -1,7 +1,10 @@
 ﻿using MQuince.Core.Contracts;
+using MQuince.Review.Domain;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace MQuince.Review.Domain.Contracts.Repository
+namespace MQuince.Review.Contracts.Repository
 {
     public interface IFeedbackRepository : IRepository<Feedback>
     {

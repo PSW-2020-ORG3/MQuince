@@ -10,9 +10,13 @@ namespace MQuince.Scheduler.Domain
         public Guid PatientId { get; private set; }
         public bool IsCanceled { get; private set; }
 
-        public Appointment()
-        {
-        }
+        public Appointment() { }
+
+        public Appointment(DateRange dateRange)
+		{
+            DateRange = dateRange;
+            Id = Guid.NewGuid();
+		}
 
         public Appointment(Guid id, DateRange dateRange, Guid doctorId, Guid patientId, bool isCanceled)
         {
@@ -45,7 +49,7 @@ namespace MQuince.Scheduler.Domain
             this.IsCanceled = true;
         }
 
-        private bool IsCancelable()
+        public bool IsCancelable()
         {
             if (this.DateRange.StartDateTime < DateTime.Now.AddHours(48))
                 return false;

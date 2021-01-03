@@ -1,13 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-		<ProjectReference Include="..\MQuince.Infrastructure\MQuince.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Core\MQuince.Core.csproj" />
     <ProjectReference Include="..\MQuince.Scheduler.Domain\MQuince.Scheduler.Domain.csproj" />
   </ItemGroup>
-
 
 </Project>

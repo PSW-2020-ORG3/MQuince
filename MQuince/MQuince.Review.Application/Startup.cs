@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MQuince.Infrastructure.DataProvider;
 using MQuince.Review.Application.Services;
-using MQuince.Review.Domain.Contracts.Service;
+using MQuince.Review.Contracts.Service;
 
 namespace MQuince.Review.Application
 {
@@ -30,7 +30,7 @@ namespace MQuince.Review.Application
         {
             //SREDITI PREKO ENV
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=probicadb");
+            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
             services.AddTransient(typeof(IFeedbackService), s => new FeedbackService(new FeedbackRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();

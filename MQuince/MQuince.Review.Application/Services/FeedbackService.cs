@@ -1,9 +1,9 @@
 ﻿using MQuince.Core.IdentifiableDTO;
 using MQuince.Review.Application.Services.Util;
+using MQuince.Review.Contracts.DTO;
+using MQuince.Review.Contracts.Repository;
+using MQuince.Review.Contracts.Service;
 using MQuince.Review.Domain;
-using MQuince.Review.Domain.Contracts.DTO;
-using MQuince.Review.Domain.Contracts.Repository;
-using MQuince.Review.Domain.Contracts.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;

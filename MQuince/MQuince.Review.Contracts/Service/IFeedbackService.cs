@@ -1,10 +1,11 @@
 ﻿using MQuince.Core.Contracts;
 using MQuince.Core.IdentifiableDTO;
-using MQuince.Review.Domain.Contracts.DTO;
+using MQuince.Review.Contracts.DTO;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace MQuince.Review.Domain.Contracts.Service
+namespace MQuince.Review.Contracts.Service
 {
     public interface IFeedbackService : IService<FeedbackDTO, IdentifiableDTO<FeedbackDTO>>
     {
