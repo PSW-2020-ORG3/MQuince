@@ -33,6 +33,9 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<double>("NewCost")
                         .HasColumnType("double");
 

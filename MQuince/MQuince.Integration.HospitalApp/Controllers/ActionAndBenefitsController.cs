@@ -25,6 +25,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return _actionAndBenefitsService.GetAll();
         }
+               
 
         [HttpPost]
         public IActionResult Add(ActionAndBenefitsDTO dto)
@@ -46,37 +47,38 @@ namespace MQuince.Integration.HospitalApp.Controllers
         public IActionResult Update(ActionsAndBenefits action)
         {
             try
-            {
-                _actionAndBenefitsService.Update(new ActionAndBenefitsDTO()
-                {
-                    PharmacyName = action.PharmacyName,
-                    ActionName = action.ActionName,
-                    BeginDate = action.BeginDate,
-                    EndDate = action.EndDate,
-                    OldCost = action.OldCost,
-                    NewCost = action.NewCost
-                }, action.IDAction, action.IsApproved);
-            }
-            catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+              {
+                  _actionAndBenefitsService.Update(new ActionAndBenefitsDTO()
+                  {
+                      PharmacyName = action.PharmacyName,
+                      ActionName = action.ActionName,
+                      BeginDate = action.BeginDate,
+                      EndDate = action.EndDate,
+                      OldCost = action.OldCost,
+                      NewCost = action.NewCost
+                  }, action.IDAction, true);
+                  return Ok(action);
+              }
+              catch(Exception e)
+              {
+                  return BadRequest(e.Message);
+              }
+            //return Ok(action);
              
-            return Ok();
+            
         }
 
         [HttpDelete]
         public IActionResult Delete(ActionsAndBenefits action)
-        {
-
-            try
-            {
-                _actionAndBenefitsService.Delete(action.IDAction);
-                return Ok("Successefully deleted action and benefits!");
-            }catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+        {           
+             try
+             {
+                 _actionAndBenefitsService.Delete(action.IDAction);
+                 return Ok(action);
+             }catch(Exception e)
+             {
+                 return BadRequest(e.Message);
+             }
             
         }
 
