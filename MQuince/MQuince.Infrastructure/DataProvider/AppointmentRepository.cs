@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Infrastructure.DataAccess;
 using MQuince.Infrastructure.DataProvider.Util;
+using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Domain;
-using MQuince.Scheduler.Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

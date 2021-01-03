@@ -1,8 +1,10 @@
 ﻿using MQuince.Core.Contracts;
+using MQuince.Scheduler.Domain;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace MQuince.Scheduler.Domain.Contracts
+namespace MQuince.Scheduler.Contracts.Repository
 {
     public interface IAppointmentRepository : IRepository<Appointment>
     {

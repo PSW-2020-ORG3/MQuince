@@ -1,5 +1,5 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Scheduler.Application.DTO;
+using MQuince.Scheduler.Contracts.DTO;
 using MQuince.Scheduler.Domain;
 using System;
 using System.Collections.Generic;

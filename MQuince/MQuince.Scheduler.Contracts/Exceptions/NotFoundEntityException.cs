@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace MQuince.Scheduler.Application.Contracts.Exceptions
+namespace MQuince.Scheduler.Contracts.Exceptions
 {
 	public class NotFoundEntityException : Exception
 	{

@@ -1,14 +1,13 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Scheduler.Application.Contracts;
-using MQuince.Scheduler.Application.Contracts.Exceptions;
-using MQuince.Scheduler.Application.DTO;
 using MQuince.Scheduler.Application.Services.Util;
+using MQuince.Scheduler.Contracts.DTO;
+using MQuince.Scheduler.Contracts.Exceptions;
+using MQuince.Scheduler.Contracts.Repository;
+using MQuince.Scheduler.Contracts.Service;
 using MQuince.Scheduler.Domain;
-using MQuince.Scheduler.Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MQuince.Scheduler.Application.Services
 {

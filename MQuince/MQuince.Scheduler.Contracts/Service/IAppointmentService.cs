@@ -1,12 +1,10 @@
 ﻿using MQuince.Core.Contracts;
 using MQuince.Core.IdentifiableDTO;
-using MQuince.Scheduler.Application.DTO;
+using MQuince.Scheduler.Contracts.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace MQuince.Scheduler.Application.Contracts
+namespace MQuince.Scheduler.Contracts.Service
 {
 	public interface IAppointmentService : IService<AppointmentDTO, IdentifiableDTO<AppointmentDTO>>
 	{
