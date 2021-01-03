@@ -1,9 +1,11 @@
 ﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Infrastructure.DataProvider;
 using MQuince.Review.Application.Services.Util;
 using MQuince.Review.Contracts.DTO;
 using MQuince.Review.Contracts.Repository;
 using MQuince.Review.Contracts.Service;
 using MQuince.Review.Domain;
+using MQuince.Review.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +14,21 @@ namespace MQuince.Review.Application.Services
 {
     public class FeedbackService : IFeedbackService
     {
-        public IFeedbackRepository _feedbackRepository;
-        public FeedbackService(IFeedbackRepository feedbackRepository)
+        private IFeedbackRepository _feedbackRepository;
+        private EventRepository _eventRepository;
+        public FeedbackService(IFeedbackRepository feedbackRepository, EventRepository eventRepository)
         {
             _feedbackRepository = feedbackRepository;
+            _eventRepository = eventRepository;
         }
 
         public Guid Create(FeedbackDTO entityDTO)
         {
             Feedback feedback = FeedbackMapper.CreateFeedbackFromDTO(entityDTO);
+            FeedbackEvent feedbackEvent = new FeedbackEvent(FeedbackEventType.CREATED, feedback.Id);
 
             _feedbackRepository.Create(feedback);
+            _eventRepository.Create(feedbackEvent);
 
             return feedback.Id;
         }
@@ -46,8 +52,11 @@ namespace MQuince.Review.Application.Services
             try
             {
                 Feedback feedback = _feedbackRepository.GetById(id);
+                FeedbackEvent feedbackEvent = new FeedbackEvent(FeedbackEventType.APPROVED, feedback.Id);
+
                 feedback.Approve();
                 _feedbackRepository.Update(feedback);
+                _eventRepository.Create(feedbackEvent);
 
                 return true;
             }

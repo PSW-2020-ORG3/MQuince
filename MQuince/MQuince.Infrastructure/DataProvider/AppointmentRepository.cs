@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Infrastructure.DataAccess;
 using MQuince.Infrastructure.DataProvider.Util;
+using MQuince.Infrastructure.PersistenceEntities.Appointments;
+using MQuince.Infrastructure.PersistenceEntities.Events.Scheduler;
 using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Domain;
 using System;
@@ -78,7 +80,7 @@ namespace MQuince.Infrastructure.DataProvider
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
             {
-                _context.Update(AppointmentMapper.MapAppointmentEntityToAppointmentPersistence(entity));
+                _context.Appointments.Update(AppointmentMapper.MapAppointmentEntityToAppointmentPersistence(entity));
                 _context.SaveChanges();
             }
         }

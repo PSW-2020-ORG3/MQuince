@@ -1,5 +1,7 @@
-﻿using MQuince.Infrastructure.PersistenceEntities.Users;
+﻿using MQuince.Infrastructure.PersistenceEntities.Events.Scheduler;
+using MQuince.Infrastructure.PersistenceEntities.Users;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
