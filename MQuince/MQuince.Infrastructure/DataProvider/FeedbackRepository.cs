@@ -2,8 +2,8 @@
 using MQuince.Infrastructure.DataAccess;
 using MQuince.Infrastructure.DataProvider.Util;
 using MQuince.Infrastructure.PersistenceEntities.Communication;
+using MQuince.Review.Contracts.Repository;
 using MQuince.Review.Domain;
-using MQuince.Review.Domain.Contracts.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

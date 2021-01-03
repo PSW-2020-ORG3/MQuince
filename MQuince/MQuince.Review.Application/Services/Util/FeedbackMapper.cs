@@ -1,6 +1,6 @@
 ﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Review.Contracts.DTO;
 using MQuince.Review.Domain;
-using MQuince.Review.Domain.Contracts.DTO;
 using System;
 
 namespace MQuince.Review.Application.Services.Util

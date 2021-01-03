@@ -1,5 +1,4 @@
-﻿using MQuince.Review.Domain.Exceptions;
-using System;
+﻿using System;
 
 namespace MQuince.Review.Domain
 {
@@ -36,7 +35,7 @@ namespace MQuince.Review.Domain
                 throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id));
 
             if (Comment == "")
-                throw new FeedbackCommentEmptyException();
+                throw new ArgumentException("Comment can not be empty", nameof(Comment));
         }
 
         public void Approve()

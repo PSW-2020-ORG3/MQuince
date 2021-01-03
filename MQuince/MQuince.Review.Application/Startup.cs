@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MQuince.Infrastructure.DataProvider;
 using MQuince.Review.Application.Services;
-using MQuince.Review.Domain.Contracts.Service;
+using MQuince.Review.Contracts.Service;
 
 namespace MQuince.Review.Application
 {

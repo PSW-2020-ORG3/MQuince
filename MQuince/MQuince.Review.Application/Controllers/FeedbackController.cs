@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Core.IdentifiableDTO;
-using MQuince.Review.Domain.Contracts.DTO;
-using MQuince.Review.Domain.Contracts.Service;
-using MQuince.Review.Domain.Exceptions;
+using MQuince.Review.Contracts.DTO;
+using MQuince.Review.Contracts.Exceptions;
+using MQuince.Review.Contracts.Service;
 using System;
 using System.Collections.Generic;
 
