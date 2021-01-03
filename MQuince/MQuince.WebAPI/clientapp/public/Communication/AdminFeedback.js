@@ -75,7 +75,11 @@
 				params: {
 					publish: true,
 					approved: true
-				}
+				},
+					headers: {
+						'Authorization': localStorage.getItem('keyToken')
+					}
+				
 		}).then(response => {
 			this.feedbacks = response.data;
 		}).catch(error => {
@@ -87,15 +91,26 @@
 
 	},
 	created() {
+		localStorage.getItem('keyToken');
+		localStorage.getItem('keyRole');
 		axios
 			.get('/api/Feedback/GetByStatus', {
 				params: {
 					publish: true,
 					approved: true
+				},
+				headers: {
+					'Authorization': localStorage.getItem('keyToken')
 				}
+				
 			}).then(response => {
 				this.feedbacks = response.data
-			})
+			}).catch(error => {
+			if (error.response.status === 400 || error.response.status === 403) {
+				alert("You don't have access this page!");
+				window.location.href = "/public/index.html";
+			}
+		});
 
     }
 })

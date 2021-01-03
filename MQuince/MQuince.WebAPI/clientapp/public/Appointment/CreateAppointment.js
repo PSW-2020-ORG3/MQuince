@@ -106,10 +106,10 @@
         vuejsDatepicker
     },
     mounted() {
-
+		localStorage.getItem('keyToken');
+		localStorage.getItem('keyRole');
         axios
-            .get('/api/specialization')
-            .then(response => (this.specializations = response.data));
+            .get('/api/specialization').then(response => (this.specializations = response.data));
     },
     methods: {
         next: function () {
@@ -189,6 +189,7 @@
                             headers: {
                                 'Authorization': localStorage.getItem('keyToken')
                         }
+					
                     }).then((response) => {
                         alert('Your appointment has been saved!')
                         //JSAlert.alert("Your appointment has been saved!");

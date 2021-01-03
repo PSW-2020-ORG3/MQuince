@@ -5,7 +5,7 @@
             showLogIn: true,
             showLogOut: false,
             showCreateAppointment: false,
-            showAddFeedback: false,
+            showAddFeedback: true,
 			showFeedback: true,
             showObserveFeedback: true,
             showObserveAppointment: false

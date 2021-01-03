@@ -56,11 +56,9 @@ var app = new Vue({
 						
 						
 						if(response.data.userRole === 0){
-							window.location.href = "/public/index.html";
+							window.location.href = "/public/Communication/AddFeedback.html";
 						} else if(response.data.userRole === 1) {
 							window.location.href = "/public/Communication/AdminFeedback.html";
-						}else{
-							alert("Username doesn't exist or username/password is incorrect!")
 						}
 					}).catch(error => {
 						this.serverError = true;

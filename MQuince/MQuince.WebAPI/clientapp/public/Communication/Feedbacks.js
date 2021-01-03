@@ -44,16 +44,17 @@
 				params: {
 					publish: true,
 					approved: true
-				}, 
-				headers: {
-					'Authorization': 'Bearer ' + this.userToken
-				}
+				},
+					headers: {
+						'Authorization': localStorage.getItem('keyToken')
+					}
+				
 			}).then(response => {
 				this.feedbacks = response.data
 			}).catch(error => {
 						if (error.response.status === 400 || error.response.status === 403) {
 							alert("You don't have access this page!");
-							this.$router.push({ name: 'loginUser' })
+							
 						}
 				});
 
@@ -66,7 +67,11 @@
 				params: {
 					publish: true,
 					approved: true
-				}
+				},
+					headers: {
+						'Authorization': localStorage.getItem('keyToken')
+					}
+				
 		}).then(response => {
 			this.feedbacks = response.data;
 		}).catch(error => {
@@ -78,20 +83,9 @@
 
 	},
 	methods: {
-		/*logIn: function () {
-			axios
-				.post("/api/User", {
-					Username: "patient2",
-					Password: "patient2"
-				}).then((response) => {
-					window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-
-				}, (error) => {
-					console.log(error);
-				});
-		},*/
+		
+		
+		
 		logOut: function () {
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole');
