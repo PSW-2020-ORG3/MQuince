@@ -34,11 +34,11 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return Ok(_appointmentService.GetAll());
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -52,11 +52,11 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return Ok(_appointmentService.GetById(id));
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }
@@ -70,11 +70,11 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, date));
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }
@@ -87,21 +87,14 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return Ok(_appointmentService.GetForPatient(patientId));
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }
-        }
-
-        [HttpPost("Update/{appointmentId}")]
-        public IActionResult Update(AppointmentDTO appointment, Guid appointmentId)
-        {
-            _appointmentService.Update(appointment, appointmentId);
-            return Ok();
         }
 
         [HttpPut("CancelAppointment/{appointmentId}")]
@@ -115,11 +108,11 @@ namespace MQuince.Scheduler.Application.Controllers
                 else
                     return BadRequest();
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (Exception)
             {
                 return StatusCode(500);
             }

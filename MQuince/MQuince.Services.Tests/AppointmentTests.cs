@@ -11,7 +11,6 @@ using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 
@@ -162,7 +161,7 @@ namespace MQuince.Services.Tests.UnitTests
                Type = TreatmentType.Examination,
                DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
                PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595daa"),
-               IsCanceled= false
+               IsCanceled = false
            };
 
         [Fact]
@@ -309,14 +308,14 @@ namespace MQuince.Services.Tests.UnitTests
 
         [Fact]
         public void Get_free_appointments_return_appointments()
-		{
+        {
             Guid patientId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051ad11");
             Guid doctorId = Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba");
             DateTime date = new DateTime(2020, 12, 26);
             TreatmentType treatmentType = TreatmentType.Examination;
             appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date).Returns(this.GetListOfAppointmentsForDoctorForDate());
             workTimeService.GetWorkTimeForDoctorForDate(doctorId, date).Returns(GetFirstWorkTime());
-            
+
             IEnumerable<AppointmentDTO> appointments = appointmentService.GetFreeAppointments(patientId, doctorId, date, treatmentType);
 
             IEnumerable<Appointment> output = GetListOfFreeAppointments();
@@ -389,15 +388,15 @@ namespace MQuince.Services.Tests.UnitTests
                 Type = TreatmentType.Examination,
                 DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
                 PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
-                IsCanceled=false
+                IsCanceled = false
             };
 
         private Appointment GetExpiredAppointment()
             => new Appointment()
             {
                 Id = Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"),
-                StartDateTime = new DateTime(2010,12,12,12,30,00),
-                EndDateTime = new DateTime(2010, 12, 12, 12, 30,00),
+                StartDateTime = new DateTime(2010, 12, 12, 12, 30, 00),
+                EndDateTime = new DateTime(2010, 12, 12, 12, 30, 00),
                 Type = TreatmentType.Examination,
                 DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
                 PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
@@ -417,7 +416,7 @@ namespace MQuince.Services.Tests.UnitTests
             };
 
         private bool CompareAppointmentsDTO(IEnumerable<Appointment> output, IEnumerable<AppointmentDTO> appointments)
-		{
+        {
             for (int i = 0; i < output.Count(); i++)
             {
                 bool same = CompareAppointmentAndAppointmentDTO(output.ElementAt(i), appointments.ElementAt(i));
@@ -429,15 +428,15 @@ namespace MQuince.Services.Tests.UnitTests
 
 
         private bool CompareAppointments(IEnumerable<Appointment> repo, IEnumerable<IdentifiableDTO<AppointmentDTO>> service)
-		{
+        {
             for (int i = 0; i < repo.Count(); i++)
-			{
+            {
                 bool same = CompareAppointmentAndIdentifierAppointment(repo.ElementAt(i), service.ElementAt(i));
                 if (!same)
                     return false;
             }
             return true;
-		}
+        }
 
 
         private Appointment GetSecondAppointment()
@@ -449,7 +448,7 @@ namespace MQuince.Services.Tests.UnitTests
                 Type = TreatmentType.Examination,
                 DoctorId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"),
                 PatientId = Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"),
-                IsCanceled=false
+                IsCanceled = false
             };
         private bool CompareAppointmentAndIdentifierAppointment(Appointment appointment, IdentifiableDTO<AppointmentDTO> identifierAppointment)
         {

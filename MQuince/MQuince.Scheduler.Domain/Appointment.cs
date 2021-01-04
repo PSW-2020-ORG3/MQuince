@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MQuince.Scheduler.Domain.Events;
+using System;
+using System.Collections.Generic;
 
 namespace MQuince.Scheduler.Domain
 {
@@ -44,7 +46,7 @@ namespace MQuince.Scheduler.Domain
 
         public void Cancel()
         {
-            if (!IsCancelable()) throw new ArgumentException("Argument can not be Guid.Empty", nameof(IsCanceled));
+            if (!IsCancelable()) throw new ArgumentException("Appointment cannot be canceled", nameof(IsCanceled));
 
             this.IsCanceled = true;
         }

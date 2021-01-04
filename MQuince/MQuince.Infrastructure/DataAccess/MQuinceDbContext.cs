@@ -2,6 +2,8 @@
 using MQuince.Infrastructure.PersistenceEntities.Appointments;
 using MQuince.Infrastructure.PersistenceEntities.Communication;
 using MQuince.Infrastructure.PersistenceEntities.Drug;
+using MQuince.Infrastructure.PersistenceEntities.Events.Feedback;
+using MQuince.Infrastructure.PersistenceEntities.Events.Scheduler;
 using MQuince.Infrastructure.PersistenceEntities.Users;
 using System;
 
@@ -24,6 +26,8 @@ namespace MQuince.Infrastructure.DataAccess
         public DbSet<WorkTimePersistence> WorkTimes { get; set; }
         public DbSet<AppointmentPersistence> Appointments { get; set; }
         public DbSet<AdminPersistence> Admin { get; set; }
+        public DbSet<ScheduleEventPersistence> ScheduleEvents { get; set; }
+        public DbSet<FeedbackEventPersistence> FeedbackEvents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
