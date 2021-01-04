@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MQuince.Autentication.Contracts\MQuince.Autentication.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Review.Contracts\MQuince.Review.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Review.Domain\MQuince.Review.Domain.csproj" />
     <ProjectReference Include="..\MQuince.Scheduler.Contracts\MQuince.Scheduler.Contracts.csproj" />

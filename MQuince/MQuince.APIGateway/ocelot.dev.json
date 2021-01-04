@@ -35,6 +35,18 @@
       ],
       "UpstreamPathTemplate": "/gateway/Feedback/Approve/{feedbackId}",
       "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 60179
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User",
+      "UpstreamHttpMethod": [ "POST" ]
     }
   ],
   "GlobalConfiguration": {

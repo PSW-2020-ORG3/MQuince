@@ -42,7 +42,7 @@
 	methods: {
 		logIn: function () {
 			axios
-				.post("/api/User", {
+				.post("/gateway/User", {
 					Username: "admin",
 					Password: "admin"
 				}).then((response) => {

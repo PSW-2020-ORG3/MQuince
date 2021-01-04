@@ -47,13 +47,13 @@
 				}
 			}).then(response => {
 				this.feedbacks = response.data
-			//})
+			})
 
 	},
 	methods: {
 		logIn: function () {
 			axios
-				.post("/api/User", {
+				.post("/gateway/User", {
 					Username: "patient2",
 					Password: "patient2"
 				}).then((response) => {
