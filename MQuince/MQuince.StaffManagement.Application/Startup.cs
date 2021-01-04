@@ -35,6 +35,8 @@ namespace MQuince.StaffManagement.Application
             services.AddTransient(typeof(IAdminService), s => new AdminService(new UserRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IDoctorService), s => new AdminService(new UserRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IPatientService), s => new AdminService(new UserRepository(dbContextOptionsBuilder)));
+            services.AddTransient(typeof(ISpecializationService), s => new SpecializationService(new SpecializationRepository(dbContextOptionsBuilder)));
+            services.AddTransient(typeof(IWorkTimeService), s => new WorkTimeService(new WorkTimeRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();
         }
