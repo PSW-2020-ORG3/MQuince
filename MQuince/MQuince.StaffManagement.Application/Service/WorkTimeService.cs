@@ -36,11 +36,17 @@ namespace MQuince.StafManagement.Application.Service
 			{
                 if(date.Date >= workTime.StartDate.Date && date.Date <= workTime.EndDate.Date)
 				{
-                    return new WorkTime(workTime.Id, date, date, workTime.StartTime, workTime.EndTime, doctorId);
+                    return new WorkTime(date, date, workTime.StartTime, workTime.EndTime, doctorId);
 				}
 			}
             return null;
         }
 
-	}
+        public DateRange GetWorkHoursForDoctorForDate(Guid doctorId, DateTime date)
+		{
+            return GetWorkTimeForDoctorForDate(doctorId, date).GetWorkHour(date);
+        }
+
+
+    }
 }

@@ -12,7 +12,7 @@ namespace MQuince.Infrastructure.DataProvider.Util
     {
         public static WorkTime MapWorkTimePersistenceToWorkTimeEntity(WorkTimePersistence workTimePersistance)
               => workTimePersistance == null ? throw new ArgumentNullException()
-                                        : new WorkTime(workTimePersistance.Id, workTimePersistance.StartDate, workTimePersistance.EndDate, workTimePersistance.StartTime, workTimePersistance.EndTime, workTimePersistance.DoctorId);
+                                        : new WorkTime(workTimePersistance.StartDate, workTimePersistance.EndDate, workTimePersistance.StartTime, workTimePersistance.EndTime, workTimePersistance.DoctorId);
 
         public static IEnumerable<WorkTime> MapWorkTimePersistenceCollectionToWorkTimeEntityCollection(IEnumerable<WorkTimePersistence> workTimes)
               => workTimes == null ? throw new ArgumentNullException()

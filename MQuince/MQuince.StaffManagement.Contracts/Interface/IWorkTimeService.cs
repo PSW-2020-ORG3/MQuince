@@ -9,5 +9,6 @@ namespace MQuince.StafManagement.Contracts.Interfaces
     {
         IEnumerable<WorkTime> GetWorkTimesForDoctor(Guid doctorId);
         WorkTime GetWorkTimeForDoctorForDate(Guid doctorId, DateTime date);
+        DateRange GetWorkHoursForDoctorForDate(Guid doctorId, DateTime date);
     }
 }

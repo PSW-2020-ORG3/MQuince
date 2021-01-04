@@ -1,5 +1,5 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Infrastructure.DataProvider.Util;
+using MQuince.StafManagement.Application.Services.Util;
 using MQuince.StafManagement.Contracts.DTO;
 using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
