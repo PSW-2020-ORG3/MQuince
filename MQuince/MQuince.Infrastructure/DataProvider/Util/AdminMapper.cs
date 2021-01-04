@@ -1,4 +1,4 @@
-﻿using MQuince.Autentication.Domain;
+using MQuince.Autentication.Domain;
 using MQuince.Infrastructure.PersistenceEntities.Users;
 using System;
 using System.Collections.Generic;

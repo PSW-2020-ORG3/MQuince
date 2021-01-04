@@ -3,13 +3,16 @@ using MQuince.Autentication.Contracts.Repository;
 using MQuince.Autentication.Domain;
 using MQuince.Infrastructure.DataAccess;
 using MQuince.Infrastructure.DataProvider.Util;
+using MQuince.StafManagement.Contracts.Repository;
+using MQuince.StafManagement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace MQuince.Infrastructure.DataProvider
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : Autentication.Contracts.Repository.IUserRepository, StafManagement.Contracts.Repository.IUserRepository
     {
         private readonly DbContextOptions _dbContext;
 
@@ -33,6 +36,31 @@ namespace MQuince.Infrastructure.DataProvider
                 return AdminMapper.MapAdminPersistenceCollectionToAdminEntityCollection(_context.Admin.ToList());
             }
         }
+        public IEnumerable<Doctor> GetAllDoctors()
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                return DoctorMapper.MapDoctorPersistenceCollectionToDoctorEntityCollection(_context.Doctors.ToList());
+            }
+        }
+
+
+        public Doctor GetDoctorById(Guid id)
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                var doctor = _context.Doctors.Include("Specialization").SingleOrDefault(c => c.Id.Equals(id));
+                return DoctorMapper.MapDoctorPersistenceToDoctorEntity(doctor);
+            }
+        }
+
+        public IEnumerable<Doctor> GetDoctorsPerSpecialization(Guid specializationId)
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                return DoctorMapper.MapDoctorPersistenceCollectionToDoctorEntityCollection(_context.Doctors.Where(c => c.SpecializationId == specializationId).ToList());
+            }
+        }
 
         public IEnumerable<Patient> GetAllPatients()
         {
@@ -50,5 +78,6 @@ namespace MQuince.Infrastructure.DataProvider
                 return PatientMapper.MapPatientPersistenceToPatientEntity(patient);
             }
         }
+
     }
 }

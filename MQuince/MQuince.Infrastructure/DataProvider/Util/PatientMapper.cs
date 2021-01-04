@@ -1,4 +1,4 @@
-﻿using MQuince.Autentication.Domain;
+using MQuince.Autentication.Domain;
 using MQuince.Infrastructure.PersistenceEntities.Users;
 using System;
 using System.Collections.Generic;
@@ -12,14 +12,14 @@ namespace MQuince.Infrastructure.DataProvider.Util
               => patientPersistance == null ? throw new ArgumentNullException()
                                             : new Patient()
                                             {
-                                                Id = patientPersistance.Id,
-                                                Name = patientPersistance.Name,
-                                                Surname = patientPersistance.Surname,
-                                                Username = patientPersistance.Username,
-                                                Password = patientPersistance.Password,
-                                                Guest = patientPersistance.Guest,
-                                                Jmbg = patientPersistance.Jmbg,
-                                                PersonalDoctor = patientPersistance.DoctorPersistanceId
+                                                Id=patientPersistance.Id,
+                                                Name=patientPersistance.Name,
+                                                Surname=patientPersistance.Surname,
+                                                Username=patientPersistance.Username,
+                                                Password=patientPersistance.Password,
+                                                Guest=patientPersistance.Guest,
+                                                Jmbg=patientPersistance.Jmbg,
+                                                PersonalDoctor=patientPersistance.DoctorPersistanceId                                           
                                             };
 
         public static IEnumerable<Patient> MapPatientPersistenceCollectionToPatientEntityCollection(IEnumerable<PatientPersistence> patients)

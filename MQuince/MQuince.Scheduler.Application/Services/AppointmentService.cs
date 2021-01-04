@@ -7,9 +7,12 @@ using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Contracts.Service;
 using MQuince.Scheduler.Domain;
 using MQuince.Scheduler.Domain.Events;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MQuince.Scheduler.Application.Services
 {
@@ -154,10 +157,11 @@ namespace MQuince.Scheduler.Application.Services
 
 		public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date)
 		{
+            DateRange workHours = GetWorkHours(doctorId, date).Result;
             IEnumerable<Appointment> scheduledAppointments = _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date);
-            DateTime startWorkHour = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
-            DateTime endWorkHour = new DateTime(date.Year, date.Month, date.Day, 17, 0, 0);
-            DateRange workHours = new DateRange(startWorkHour, endWorkHour);
+            //DateTime startWorkHour = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
+            //DateTime endWorkHour = new DateTime(date.Year, date.Month, date.Day, 17, 0, 0);
+            //DateRange workHours = new DateRange(startWorkHour, endWorkHour);
 			Domain.Scheduler scheduler = new Domain.Scheduler(scheduledAppointments, workHours);
             return scheduler.GetFreeAppointments().Select(c => InitializeAppointments(c, patientId, doctorId));
 		}
@@ -169,5 +173,20 @@ namespace MQuince.Scheduler.Application.Services
             appointmentDTO.EntityDTO.DoctorId = doctorId;
             return appointmentDTO;
         }
-	}
+
+        private async Task<DateRange> GetWorkHours(Guid doctorId, DateTime date)
+        {
+            var URL = $"http://localhost:5021/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
+            HttpClient client = new HttpClient();
+            HttpResponseMessage res = await client.GetAsync(URL);
+            HttpContent content = res.Content;
+			string data = await content.ReadAsStringAsync();
+            DateRange workHours = JsonConvert.DeserializeObject<DateRange>(data);
+            if (data != null)
+			{
+				Console.WriteLine(data);
+			}
+            return workHours;
+		}
+    }
 }

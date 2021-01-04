@@ -75,6 +75,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Contracts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Contracts", "MQuince.Review.Contracts\MQuince.Review.Contracts.csproj", "{53F199FD-F47A-4221-BE45-635232DBAA9C}"
 EndProject
+<<<<<<< HEAD
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.APIGateway", "MQuince.APIGateway\MQuince.APIGateway.csproj", "{0B069653-3938-46E0-ACDE-2D0378513D71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Application", "MQuince.Autentication.Application\MQuince.Autentication.Application.csproj", "{5E390251-EA7F-4581-A814-467FFBDE64E6}"
@@ -82,6 +83,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Contracts", "MQuince.Autentication.Contracts\MQuince.Autentication.Contracts.csproj", "{72E9A5BA-0E4D-49EB-B7BD-805FF1648545}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Domain", "MQuince.Autentication.Domain\MQuince.Autentication.Domain.csproj", "{EC722D2E-1A17-48AA-B846-FF3CAE44F545}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Domain", "MQuince.StaffManagement.Domain\MQuince.StaffManagement.Domain.csproj", "{3852B93C-4F84-4F00-9367-21ED33841B4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Contracts", "MQuince.StaffManagement.Contracts\MQuince.StaffManagement.Contracts.csproj", "{B81A909D-C375-415A-9982-340FC61AF81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Application", "MQuince.StaffManagement.Application\MQuince.StaffManagement.Application.csproj", "{0AF1663D-0E07-47BF-A089-080DA6DD8594}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3852B93C-4F84-4F00-9367-21ED33841B4C} = {3852B93C-4F84-4F00-9367-21ED33841B4C}
+	EndProjectSection
+>>>>>>> feature/refactor-following-ddd
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +208,7 @@ Global
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -213,6 +225,20 @@ Global
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81A909D-C375-415A-9982-340FC61AF81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> feature/refactor-following-ddd
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,9 +252,15 @@ Global
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {5B0E3DB6-B1D3-4F3E-A19E-C81CD1A1DB03}
 		{C78C83A0-E95F-42D8-A19C-D385445268E0} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{53F199FD-F47A-4221-BE45-635232DBAA9C} = {2BBD0BE8-2559-4485-B442-12DB4ED5FA48}
+<<<<<<< HEAD
 		{5E390251-EA7F-4581-A814-467FFBDE64E6} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
 		{72E9A5BA-0E4D-49EB-B7BD-805FF1648545} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
+=======
+		{3852B93C-4F84-4F00-9367-21ED33841B4C} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+		{B81A909D-C375-415A-9982-340FC61AF81E} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+		{0AF1663D-0E07-47BF-A089-080DA6DD8594} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+>>>>>>> feature/refactor-following-ddd
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}
