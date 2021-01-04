@@ -26,9 +26,7 @@ namespace MQuince.StaffManagement.Application
 		{
 			DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
 			dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
-			services.AddTransient(typeof(IAdminService), s => new AdminService(new UserRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(IDoctorService), s => new DoctorService(new UserRepository(dbContextOptionsBuilder)));
-			services.AddTransient(typeof(IPatientService), s => new PatientService(new UserRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(ISpecializationService), s => new SpecializationService(new SpecializationRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(IWorkTimeService), s => new WorkTimeService(new WorkTimeRepository(dbContextOptionsBuilder)));
 

@@ -65,7 +65,6 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet("GetFreeApp")]
         public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime date)
         {
-
             try
             {
                 return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, date));

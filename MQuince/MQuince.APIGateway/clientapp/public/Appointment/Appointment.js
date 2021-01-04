@@ -7,7 +7,7 @@
     mounted() {
 
        axios
-			.get('/api/Appointment/GetForPatient', {
+			.get('/gateway/Appointment/GetForPatient', {
 				params: {
 					patientId: "6459c216-1770-41eb-a56a-7f4524728546"
 				}
@@ -15,7 +15,7 @@
 					this.appointments = response.data
 			})
 		axios
-			.get('/api/Doctor/GetAll').then(response => {
+			.get('/gateway/Doctor/GetAll').then(response => {
                 this.doctors = response.data
 			})
 		
@@ -23,7 +23,7 @@
 	},
     methods: {
 		cancelAppointment: function (appointmentId) {
-			axios.put('/api/Appointment/CancelAppointment/' + appointmentId
+			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId
 			).then((response) => {
 				if (response.status === 200) {
 					alert("Successful cancellation!");

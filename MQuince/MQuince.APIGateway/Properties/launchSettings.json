@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "public/index.html",
+      "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "dev"
       }
@@ -19,8 +19,9 @@
     "MQuince.APIGateway": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "public/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "dev"
       },
       "applicationUrl": "http://localhost:5000"
     }

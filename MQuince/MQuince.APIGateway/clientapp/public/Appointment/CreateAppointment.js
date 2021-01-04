@@ -79,12 +79,12 @@
                                 <br/>
                                 <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select termin</label>
                                 <select class="form-control"  style="text-indent: 1%" v-model="selectedAppointment">
-					                <option v-for="(app, index) in appointments" class="option" v-bind:value="app"  :value="app">{{app.startDateTime.substr(11, 5) + ' - '+  app.endDateTime.substr(11, 5)}}</option>
+					                <option v-for="(app, index) in appointments" class="option" v-bind:value="app"  :value="app">{{app.entityDTO.startDateTime.substr(11, 5) + ' - '+  app.entityDTO.endDateTime.substr(11, 5)}}</option>
 				                </select>
                             </div>
                         </div>  
 
-                
+          
 
                         <br />
 
@@ -108,7 +108,7 @@
     mounted() {
 
         axios
-            .get('/api/specialization')
+            .get('/gateway/specialization')
             .then(response => (this.specializations = response.data));
     },
     methods: {
@@ -119,7 +119,7 @@
                 this.visibleSpecialization = false;
 
                 axios
-                    .get('/api/doctor/specialization/' + this.selectedSpecialization).then(response => {
+                    .get('/gateway/doctor/specialization/' + this.selectedSpecialization).then(response => {
                         this.doctors = response.data
                     })
 
@@ -138,7 +138,7 @@
                 this.visibleDate = false;
 
                 axios
-                    .get('/api/Appointment/GetFreeApp', {
+                    .get('/gateway/Appointment/GetFreeApp', {
                         params: {
                             patientId: "6459c216-1770-41eb-a56a-7f4524728546",
                             doctorId: this.selectedDoctor,
@@ -180,9 +180,9 @@
         submit: function () {
             if (this.selectedAppointment != '') {
                 axios
-                    .post("/api/appointment", {
-                        StartDateTime: this.selectedAppointment.startDateTime,
-                        EndDateTime: this.selectedAppointment.endDateTime,
+                    .post("/gateway/appointment", {
+                        StartDateTime: this.selectedAppointment.entityDTO.startDateTime,
+                        EndDateTime: this.selectedAppointment.entityDTO.endDateTime,
                         DoctorId: this.selectedDoctor,
                         PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
                     }, {

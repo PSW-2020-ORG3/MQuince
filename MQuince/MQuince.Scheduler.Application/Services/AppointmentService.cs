@@ -176,7 +176,7 @@ namespace MQuince.Scheduler.Application.Services
 
         private async Task<DateRange> GetWorkHours(Guid doctorId, DateTime date)
         {
-            var URL = $"http://localhost:5021/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
+            var URL = $"http://localhost:5003/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
             HttpClient client = new HttpClient();
             HttpResponseMessage res = await client.GetAsync(URL);
             HttpContent content = res.Content;

@@ -44,7 +44,13 @@ namespace MQuince.StafManagement.Application.Service
 
         public DateRange GetWorkHoursForDoctorForDate(Guid doctorId, DateTime date)
 		{
-            return GetWorkTimeForDoctorForDate(doctorId, date).GetWorkHour(date);
+            try
+            {
+                return GetWorkTimeForDoctorForDate(doctorId, date).GetWorkHour(date);
+            }catch (Exception)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
 
