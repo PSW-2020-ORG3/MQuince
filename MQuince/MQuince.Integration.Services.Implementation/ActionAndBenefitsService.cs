@@ -31,15 +31,14 @@ namespace MQuince.Integration.Services.Implementation
         public bool Delete(Guid id) => _actionAndBenefitsRepository.Delete(id);
 
         public IEnumerable<IdentifiableDTO<ActionAndBenefitsDTO>> GetAll()
-        {
-            
+        {            
                 return _actionAndBenefitsRepository.GetAll().Select(c => CreateDTOFromActionAndBenefits(c));
            
-        }
-//            => _actionAndBenefitsRepository.GetAll().Select(c => CreateDTOFromActionAndBenefits(c));
+        }      
 
         public IdentifiableDTO<ActionAndBenefitsDTO> GetByID(Guid id) => CreateDTOFromActionAndBenefits(_actionAndBenefitsRepository.GetById(id));
 
+        public ActionsAndBenefits GetById(Guid id) => _actionAndBenefitsRepository.GetById(id);
         private IdentifiableDTO<ActionAndBenefitsDTO> CreateDTOFromActionAndBenefits(ActionsAndBenefits actionAndBenefits)
         {
             if (actionAndBenefits == null) return null;
@@ -79,49 +78,6 @@ namespace MQuince.Integration.Services.Implementation
             _actionAndBenefitsRepository.Update(CreateActionsAndBenefitsFromDTO(entityDTO));
         }
 
-        /*public ActionsAndBenefits FindActionByProperties(String pharmacyName, String actionName, DateTime beginDate, DateTime endDate)
-        {
-            Console.WriteLine("Pozvao findActionByProperties:" + actionName);
-            foreach (IdentifiableDTO<ActionAndBenefitsDTO> action in GetAll())
-            {
-                Console.WriteLine("usao u for kod findActionByProperties:" + action.EntityDTO.ActionName + " " + action.EntityDTO.PharmacyName);
-                if (action.EntityDTO.ActionName.Contains(actionName) &&
-                    action.EntityDTO.PharmacyName.Contains(pharmacyName) &&
-                    action.EntityDTO.BeginDate == beginDate &&
-                    action.EntityDTO.EndDate == endDate
-                    )
-                {
-                    Console.WriteLine("USLO?");
-                    return new ActionsAndBenefits(action.EntityDTO.PharmacyName,
-                      action.EntityDTO.ActionName,
-                      action.EntityDTO.BeginDate,
-                      action.EntityDTO.EndDate,
-                      action.EntityDTO.OldCost,
-                      action.EntityDTO.NewCost);
-                }
-                else
-                {
-                    Console.WriteLine("ELSE:" + action.EntityDTO.ActionName + " " + actionName);
-
-                }
-
-
-            }
-            return null;
-        }
-
-        public bool DeleteActionAndBenefitsFromList(ActionAndBenefitsDTO dto)
-        {
-            /*foreach (ActionsAndBenefits a in Program.ActionAndBenefitMessage)
-            {
-                if (dto.PharmacyName.Contains(a.PharmacyName))
-                {
-                    Program.ActionAndBenefitMessage.Remove(a);
-                    return true;
-                }
-            }
-            return false;
-        }*/
     }
 
 

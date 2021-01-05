@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
         setInterval(function () {
             cache_clear()
-        }, 5000);   
+        }, 5000);
 
     $.ajax({
         url: "/api/ActionAndBenefits",
@@ -50,25 +50,14 @@
                         actionName == data[i].entityDTO.actionName &&
                         beginDate == data[i].entityDTO.beginDate &&
                         endDate == data[i].entityDTO.endDate) {
+                        alert(data[i].key);
                         $.ajax(
                             {
                                 type: "DELETE",
-                                url: "/api/ActionAndBenefits",
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                data: JSON.stringify({
-                                    IDAction: data[i].key,
-                                    IsApproved: data[i].isApproved,
-                                    PharmacyName: data[i].entityDTO.pharmacyName,
-                                    ActionName: data[i].entityDTO.actionName,
-                                    BeginDate: getYYYYMMDD(data[i].entityDTO.beginDate),
-                                    EndDate: getYYYYMMDD(data[i].entityDTO.endDate),
-                                    OldCost: parseFloat(data[i].entityDTO.oldCost),
-                                    NewCost: parseFloat(data[i].entityDTO.newCost),
-
-                                }),
-                                success: function (result) {
-
+                                url: "/api/ActionAndBenefits/" + data[i].key,                                
+                                data: { id: data[i].key },
+                                   
+                                success: function (result) {                                    
                                     alert("Successefully deleted action!");
                                     location.reload();
                                 },
@@ -119,20 +108,13 @@
                        $.ajax(
                             {
                                 type: "PUT",
-                                url: "/api/ActionAndBenefits",
+                               url: "/api/ActionAndBenefits/" + data[i].key ,
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
-                                data: JSON.stringify({
-                                    IDAction: data[i].key,
-                                    PharmacyName: data[i].entityDTO.pharmacyName,
-                                    ActionName: data[i].entityDTO.actionName,
-                                    BeginDate: getYYYYMMDD(data[i].entityDTO.beginDate),
-                                    EndDate: getYYYYMMDD(data[i].entityDTO.endDate),
-                                    OldCost: parseFloat(data[i].entityDTO.oldCost),
-                                    NewCost: parseFloat(data[i].entityDTO.newCost),
-                                    IsApproved: "true"
+                                data:{
+                                    id: data[i].key                                 
 
-                                }),
+                                },
                                 success: function (result) {
 
                                     alert("Successefully approved action!");

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MQuince.Integration.Entities;
+using MQuince.Integration.Repository.MySQL.PersistenceEntities;
 using MQuince.Integration.Services.Constracts.DTO;
 using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Services.Contracts.Exceptions;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
@@ -19,62 +21,74 @@ namespace MQuince.Integration.HospitalApp.Controllers
             _actionAndBenefitsService = actionAndBenefitsService;
         }
 
-
         [HttpGet]
-        public IEnumerable<IdentifiableDTO<ActionAndBenefitsDTO>> GetAll()
+        public IActionResult GetAll()
         {
-            return _actionAndBenefitsService.GetAll();
+            try
+            {
+                return Ok(_actionAndBenefitsService.GetAll());
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
         }
-               
+
+
 
         [HttpPost]
         public IActionResult Add(ActionAndBenefitsDTO dto)
         {
             try
             {
-                _actionAndBenefitsService.Create(dto);
-                return Ok(dto);
+                return Ok(_actionAndBenefitsService.Create(dto));
 
             }
             catch(Exception e)
             {
-                return BadRequest(dto);
+                return BadRequest();
             }
                                          
 
         }
-        [HttpPut]
-        public IActionResult Update(ActionsAndBenefits action)
+        [HttpPut("{id}")]
+        public IActionResult Update(Guid id)
         {
+            IdentifiableDTO<ActionAndBenefitsDTO> actionAndBenefits = _actionAndBenefitsService.GetByID(id);            
             try
               {
                   _actionAndBenefitsService.Update(new ActionAndBenefitsDTO()
                   {
-                      PharmacyName = action.PharmacyName,
-                      ActionName = action.ActionName,
-                      BeginDate = action.BeginDate,
-                      EndDate = action.EndDate,
-                      OldCost = action.OldCost,
-                      NewCost = action.NewCost
-                  }, action.IDAction, true);
-                  return Ok(action);
+                      PharmacyName = actionAndBenefits.EntityDTO.PharmacyName,
+                      ActionName = actionAndBenefits.EntityDTO.ActionName,
+                      BeginDate = actionAndBenefits.EntityDTO.BeginDate,
+                      EndDate = actionAndBenefits.EntityDTO.EndDate,
+                      OldCost = actionAndBenefits.EntityDTO.OldCost,
+                      NewCost = actionAndBenefits.EntityDTO.NewCost
+                  }, actionAndBenefits.Key, true);
+
+                  return Ok(actionAndBenefits.Key);
               }
               catch(Exception e)
               {
                   return BadRequest(e.Message);
               }
-            //return Ok(action);
+            
              
             
         }
 
-        [HttpDelete]
-        public IActionResult Delete(ActionsAndBenefits action)
-        {           
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
              try
              {
-                 _actionAndBenefitsService.Delete(action.IDAction);
-                 return Ok(action);
+                 _actionAndBenefitsService.Delete(id);
+                 return Ok(id);
              }catch(Exception e)
              {
                  return BadRequest(e.Message);

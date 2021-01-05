@@ -40,6 +40,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Integration.Entities\MQuince.Integration.Entities.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
+    <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\model.proto" GrpcServices="None" />
