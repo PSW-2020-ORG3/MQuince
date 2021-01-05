@@ -33,7 +33,7 @@ var app = new Vue({
                         </div>    
                         <br />
                         <div id="success"></div>
-                        <div class="form-group"><button v-on:click="submit" style="width: 20%; margin-left: 40%;" class="btn btn-primary btn-xl" id="sendMessageButton">Login</button></div>
+                        <div class="form-group"><button v-on:click="submit" style="background:#1977cc; margin-left: 40%;" class="btn btn-primary btn-xl" id="sendMessageButton">Login</button></div>
                     </form> 
                 </div>
             </div>
