@@ -75,24 +75,44 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Contracts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Contracts", "MQuince.Review.Contracts\MQuince.Review.Contracts.csproj", "{53F199FD-F47A-4221-BE45-635232DBAA9C}"
 EndProject
-<<<<<<< HEAD
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.APIGateway", "MQuince.APIGateway\MQuince.APIGateway.csproj", "{0B069653-3938-46E0-ACDE-2D0378513D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Application", "MQuince.Autentication.Application\MQuince.Autentication.Application.csproj", "{5E390251-EA7F-4581-A814-467FFBDE64E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Application", "MQuince.Autentication.Application\MQuince.Autentication.Application.csproj", "{5E390251-EA7F-4581-A814-467FFBDE64E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Contracts", "MQuince.Autentication.Contracts\MQuince.Autentication.Contracts.csproj", "{72E9A5BA-0E4D-49EB-B7BD-805FF1648545}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Contracts", "MQuince.Autentication.Contracts\MQuince.Autentication.Contracts.csproj", "{72E9A5BA-0E4D-49EB-B7BD-805FF1648545}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Domain", "MQuince.Autentication.Domain\MQuince.Autentication.Domain.csproj", "{EC722D2E-1A17-48AA-B846-FF3CAE44F545}"
-=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Domain", "MQuince.Autentication.Domain\MQuince.Autentication.Domain.csproj", "{EC722D2E-1A17-48AA-B846-FF3CAE44F545}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Domain", "MQuince.StaffManagement.Domain\MQuince.StaffManagement.Domain.csproj", "{3852B93C-4F84-4F00-9367-21ED33841B4C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Contracts", "MQuince.StaffManagement.Contracts\MQuince.StaffManagement.Contracts.csproj", "{B81A909D-C375-415A-9982-340FC61AF81E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Application", "MQuince.StaffManagement.Application\MQuince.StaffManagement.Application.csproj", "{0AF1663D-0E07-47BF-A089-080DA6DD8594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Application", "MQuince.StaffManagement.Application\MQuince.StaffManagement.Application.csproj", "{0AF1663D-0E07-47BF-A089-080DA6DD8594}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3852B93C-4F84-4F00-9367-21ED33841B4C} = {3852B93C-4F84-4F00-9367-21ED33841B4C}
 	EndProjectSection
->>>>>>> feature/refactor-following-ddd
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2C0387C7-2DEF-49C5-B5EF-808763221DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Unit.Tests", "MQuince.Autentication.UnitTests\MQuince.Autentication.Unit.Tests.csproj", "{D40AC9A0-8469-41E7-A907-19F06371F887}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6D8F6126-A662-4479-9014-BEAD2EB2AA73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Infrastructure.Unit.Tests", "MQuince.Infrastructure.Unit.Tests\MQuince.Infrastructure.Unit.Tests.csproj", "{C19C0684-26F2-4B37-80B5-10615F4CDAC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Integration.Testing", "MQuince.Autentication.Integration.Testing\MQuince.Autentication.Integration.Testing.csproj", "{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{00C39033-8354-417C-92B6-693433DD9D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Unit.Tests", "MQuince.Scheduler.Unit.Tests\MQuince.Scheduler.Unit.Tests.csproj", "{68CBF6B4-DBBD-4182-9EE2-36F63B294863}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Integration.Testing", "MQuince.Scheduler.Integration.Testing\MQuince.Scheduler.Integration.Testing.csproj", "{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B54190DC-1C60-4B9E-A739-A9AD355D298A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Unit.Tests", "MQuince.StaffManagement.Unit.Tests\MQuince.StaffManagement.Unit.Tests.csproj", "{159793FE-4EB3-4B1B-B0DE-89EC8E91557C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Integration.Testing", "MQuince.StaffManagement.Integration.Testing\MQuince.StaffManagement.Integration.Testing.csproj", "{EFCB77EB-F7D4-408F-8930-9910104661F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -208,7 +228,6 @@ Global
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53F199FD-F47A-4221-BE45-635232DBAA9C}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B069653-3938-46E0-ACDE-2D0378513D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -225,7 +244,6 @@ Global
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
 		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3852B93C-4F84-4F00-9367-21ED33841B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -238,7 +256,34 @@ Global
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> feature/refactor-following-ddd
+		{D40AC9A0-8469-41E7-A907-19F06371F887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40AC9A0-8469-41E7-A907-19F06371F887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40AC9A0-8469-41E7-A907-19F06371F887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40AC9A0-8469-41E7-A907-19F06371F887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C19C0684-26F2-4B37-80B5-10615F4CDAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C19C0684-26F2-4B37-80B5-10615F4CDAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C19C0684-26F2-4B37-80B5-10615F4CDAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C19C0684-26F2-4B37-80B5-10615F4CDAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68CBF6B4-DBBD-4182-9EE2-36F63B294863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CBF6B4-DBBD-4182-9EE2-36F63B294863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68CBF6B4-DBBD-4182-9EE2-36F63B294863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CBF6B4-DBBD-4182-9EE2-36F63B294863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159793FE-4EB3-4B1B-B0DE-89EC8E91557C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159793FE-4EB3-4B1B-B0DE-89EC8E91557C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159793FE-4EB3-4B1B-B0DE-89EC8E91557C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159793FE-4EB3-4B1B-B0DE-89EC8E91557C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFCB77EB-F7D4-408F-8930-9910104661F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFCB77EB-F7D4-408F-8930-9910104661F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFCB77EB-F7D4-408F-8930-9910104661F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFCB77EB-F7D4-408F-8930-9910104661F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -252,15 +297,23 @@ Global
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {5B0E3DB6-B1D3-4F3E-A19E-C81CD1A1DB03}
 		{C78C83A0-E95F-42D8-A19C-D385445268E0} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{53F199FD-F47A-4221-BE45-635232DBAA9C} = {2BBD0BE8-2559-4485-B442-12DB4ED5FA48}
-<<<<<<< HEAD
 		{5E390251-EA7F-4581-A814-467FFBDE64E6} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
 		{72E9A5BA-0E4D-49EB-B7BD-805FF1648545} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
 		{EC722D2E-1A17-48AA-B846-FF3CAE44F545} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
-=======
 		{3852B93C-4F84-4F00-9367-21ED33841B4C} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{B81A909D-C375-415A-9982-340FC61AF81E} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
->>>>>>> feature/refactor-following-ddd
+		{2C0387C7-2DEF-49C5-B5EF-808763221DA1} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
+		{D40AC9A0-8469-41E7-A907-19F06371F887} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
+		{6D8F6126-A662-4479-9014-BEAD2EB2AA73} = {5AF715FA-7B0C-49DD-914B-5A3C5F4965F7}
+		{C19C0684-26F2-4B37-80B5-10615F4CDAC5} = {6D8F6126-A662-4479-9014-BEAD2EB2AA73}
+		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
+		{00C39033-8354-417C-92B6-693433DD9D4A} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
+		{68CBF6B4-DBBD-4182-9EE2-36F63B294863} = {00C39033-8354-417C-92B6-693433DD9D4A}
+		{19AAE8A7-FDCA-47DA-A118-8C1BF0E93136} = {00C39033-8354-417C-92B6-693433DD9D4A}
+		{B54190DC-1C60-4B9E-A739-A9AD355D298A} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
+		{159793FE-4EB3-4B1B-B0DE-89EC8E91557C} = {B54190DC-1C60-4B9E-A739-A9AD355D298A}
+		{EFCB77EB-F7D4-408F-8930-9910104661F7} = {B54190DC-1C60-4B9E-A739-A9AD355D298A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

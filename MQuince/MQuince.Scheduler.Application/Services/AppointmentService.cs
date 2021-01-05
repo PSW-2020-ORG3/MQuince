@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace MQuince.Scheduler.Application.Services
 {
-	public class AppointmentService : IAppointmentService
-	{
+    public class AppointmentService : IAppointmentService
+    {
         private IAppointmentRepository _appointmentRepository;
-        private EventRepository _eventRepository;
-        public AppointmentService(IAppointmentRepository appointmentRepository, EventRepository eventRepository)
+        private IEventRepository _eventRepository;
+        public AppointmentService(IAppointmentRepository appointmentRepository, IEventRepository eventRepository)
         {
             _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
             _eventRepository = eventRepository == null ? throw new ArgumentNullException(nameof(eventRepository) + "is set to null") : eventRepository;
@@ -155,19 +155,19 @@ namespace MQuince.Scheduler.Application.Services
             }
         }
 
-		public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date)
-		{
+        public IEnumerable<IdentifiableDTO<AppointmentDTO>> GetFreeAppointments(Guid patientId, Guid doctorId, DateTime date)
+        {
             DateRange workHours = GetWorkHours(doctorId, date).Result;
             IEnumerable<Appointment> scheduledAppointments = _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date);
             //DateTime startWorkHour = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
             //DateTime endWorkHour = new DateTime(date.Year, date.Month, date.Day, 17, 0, 0);
             //DateRange workHours = new DateRange(startWorkHour, endWorkHour);
-			Domain.Scheduler scheduler = new Domain.Scheduler(scheduledAppointments, workHours);
+            Domain.Scheduler scheduler = new Domain.Scheduler(scheduledAppointments, workHours);
             return scheduler.GetFreeAppointments().Select(c => InitializeAppointments(c, patientId, doctorId));
-		}
+        }
 
         private IdentifiableDTO<AppointmentDTO> InitializeAppointments(Appointment appointment, Guid patientId, Guid doctorId)
-		{
+        {
             IdentifiableDTO<AppointmentDTO> appointmentDTO = AppointmentMapper.MapAppointmentEntityToAppointmentIdentifierDTO(appointment);
             appointmentDTO.EntityDTO.PatientId = patientId;
             appointmentDTO.EntityDTO.DoctorId = doctorId;
@@ -180,13 +180,13 @@ namespace MQuince.Scheduler.Application.Services
             HttpClient client = new HttpClient();
             HttpResponseMessage res = await client.GetAsync(URL);
             HttpContent content = res.Content;
-			string data = await content.ReadAsStringAsync();
+            string data = await content.ReadAsStringAsync();
             DateRange workHours = JsonConvert.DeserializeObject<DateRange>(data);
             if (data != null)
-			{
-				Console.WriteLine(data);
-			}
+            {
+                Console.WriteLine(data);
+            }
             return workHours;
-		}
+        }
     }
 }

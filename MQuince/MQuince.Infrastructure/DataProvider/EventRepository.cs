@@ -9,7 +9,7 @@ using System.Text;
 
 namespace MQuince.Infrastructure.DataProvider
 {
-    public class EventRepository
+    public class EventRepository : IEventRepository
     {
         private readonly DbContextOptions _dbContext;
 
