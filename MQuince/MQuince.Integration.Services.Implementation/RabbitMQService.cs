@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MQuince.Integration.Entities;
-using MQuince.Integration.HospitalApp.Controllers;
-using MQuince.Integration.Repository.Contracts;
 using MQuince.Integration.Repository.MySQL.DataAccess;
 using MQuince.Integration.Repository.MySQL.DataProvider.Util;
 using MQuince.Integration.Services.Constracts.DTO;
@@ -12,19 +10,24 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MQuince.Integration.HospitalApp
+namespace MQuince.Integration.Services.Implementation
 {
     public class RabbitMQService : BackgroundService
     {
         IConnection connection;
         IModel channel;
-        private readonly DbContextOptions _dbContext;
-               
+        
+        private readonly IActionAndBenefitsService _actionAndBenefitsService;
+
+        public RabbitMQService(IActionAndBenefitsService actionAndBenefitsService)
+        {
+            this._actionAndBenefitsService = actionAndBenefitsService;
+        }
+
         public override Task StartAsync(CancellationToken cancellationToken)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -44,24 +47,24 @@ namespace MQuince.Integration.HospitalApp
                 ActionsAndBenefits message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
                 try
                 {
-                    using (DataContext _context = new DataContext())
-                    {
-                        _context.ActionAndBenefits.Add(ActionAndBenefitsMapper.MapActionsAndBenefitsEntityToActionsAndBenefitsPersistance(new ActionsAndBenefits(
-                                                message.PharmacyName,
-                                                message.ActionName,
-                                                new DateTime(message.BeginDate.Year, message.BeginDate.Month, message.BeginDate.Day),
-                                                new DateTime(message.EndDate.Year, message.EndDate.Month, message.EndDate.Day),
-                                                Convert.ToDouble(message.OldCost),
-                                                Convert.ToDouble(message.NewCost))));
-                        _context.SaveChanges();
-                    }
+                    ActionAndBenefitsDTO newAction = new ActionAndBenefitsDTO(
+                        message.PharmacyName,
+                        message.ActionName,
+                        new DateTime(message.BeginDate.Year, message.BeginDate.Month, message.BeginDate.Day),
+                        new DateTime(message.EndDate.Year, message.EndDate.Month, message.EndDate.Day),
+                        Convert.ToDouble(message.OldCost),
+                        Convert.ToDouble(message.NewCost)
+                        );
+                   
+                   _actionAndBenefitsService.Create(newAction);
+
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
 
-                 };
+            };
             channel.BasicConsume(queue: "nina.queue",
                                     autoAck: true,
                                     consumer: consumer);
@@ -81,5 +84,4 @@ namespace MQuince.Integration.HospitalApp
             return Task.CompletedTask;
         }
     }
-
 }
