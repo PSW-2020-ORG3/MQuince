@@ -13,7 +13,6 @@ namespace MQuince.Integration.Services.Implementation
     public class TenderService : ITenderService
     {
         private readonly ITenderRepository _tenderRepository;
-        IEnumerable<IdentifiableDTO<TenderDTO>> listMedicationsByDate = new List<IdentifiableDTO<TenderDTO>>();
 
         public TenderService(ITenderRepository tenderRepository)
         {

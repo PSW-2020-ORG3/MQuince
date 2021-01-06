@@ -22,4 +22,7 @@ function urgentMessage() {
 function tender() {
     window.location.replace("http://localhost:49544/home/tender");
 }
+function ViewTender() {
+    window.location.replace("http://localhost:49544/home/ViewTender");
+}
 /*document.location.href=*/

@@ -77,5 +77,10 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return View();
         }
+        
+        public IActionResult ViewTender()
+        {
+            return View();
+        }
     }
 }
