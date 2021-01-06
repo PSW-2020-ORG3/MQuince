@@ -1,5 +1,4 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Infrastructure.DataProvider;
 using MQuince.Review.Application.Services.Util;
 using MQuince.Review.Contracts.DTO;
 using MQuince.Review.Contracts.Repository;
@@ -15,8 +14,8 @@ namespace MQuince.Review.Application.Services
     public class FeedbackService : IFeedbackService
     {
         private IFeedbackRepository _feedbackRepository;
-        private EventRepository _eventRepository;
-        public FeedbackService(IFeedbackRepository feedbackRepository, EventRepository eventRepository)
+        private IEventRepository _eventRepository;
+        public FeedbackService(IFeedbackRepository feedbackRepository, IEventRepository eventRepository)
         {
             _feedbackRepository = feedbackRepository;
             _eventRepository = eventRepository;

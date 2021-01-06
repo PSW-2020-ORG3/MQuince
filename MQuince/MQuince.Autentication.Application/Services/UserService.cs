@@ -32,7 +32,7 @@ namespace MQuince.Autentication.Application.Services
 
                 return new AuthenticateResponseDTO(user, token);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -59,7 +59,7 @@ namespace MQuince.Autentication.Application.Services
             {
                 return _userRepository.GetAllAdmins().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -71,7 +71,7 @@ namespace MQuince.Autentication.Application.Services
             {
                 return _userRepository.GetAllPatients().SingleOrDefault(x => x.Username == loginDTO.Username && x.Password == loginDTO.Password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MQuince.Autentication.Application.Services;
 using MQuince.Autentication.Contracts.Service;
-using MQuince.Infrastructure.DataProvider;
+using MQuince.Autentication.Infrastructure;
 
 namespace MQuince.Autentication.Application
 {

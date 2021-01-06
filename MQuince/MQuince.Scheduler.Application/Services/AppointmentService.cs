@@ -1,5 +1,4 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Infrastructure.DataProvider;
 using MQuince.Scheduler.Application.Services.Util;
 using MQuince.Scheduler.Contracts.DTO;
 using MQuince.Scheduler.Contracts.Exceptions;
@@ -145,7 +144,7 @@ namespace MQuince.Scheduler.Application.Services
                 }
                 return false;
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }

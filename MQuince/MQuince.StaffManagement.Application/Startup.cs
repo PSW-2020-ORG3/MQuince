@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MQuince.Infrastructure.DataProvider;
+using MQuince.StaffManagement.Infrastructure;
 using MQuince.StafManagement.Application.Service;
 using MQuince.StafManagement.Contracts.Interfaces;
 

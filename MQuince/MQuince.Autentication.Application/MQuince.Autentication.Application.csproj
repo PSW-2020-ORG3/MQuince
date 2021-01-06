@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Autentication.Contracts\MQuince.Autentication.Contracts.csproj" />
-    <ProjectReference Include="..\MQuince.Infrastructure\MQuince.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Autentication.Infrastructure\MQuince.Autentication.Infrastructure.csproj" />
   </ItemGroup>
 
 

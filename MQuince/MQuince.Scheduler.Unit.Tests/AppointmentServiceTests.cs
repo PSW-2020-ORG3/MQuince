@@ -1,5 +1,4 @@
 ﻿using MQuince.Core.IdentifiableDTO;
-using MQuince.Infrastructure.DataProvider;
 using MQuince.Scheduler.Application.Services;
 using MQuince.Scheduler.Contracts.DTO;
 using MQuince.Scheduler.Contracts.Exceptions;
@@ -10,7 +9,6 @@ using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace MQuince.Scheduler.Unit.Tests
@@ -19,7 +17,7 @@ namespace MQuince.Scheduler.Unit.Tests
     {
         IAppointmentService appointmentService;
         IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
-        Infrastructure.DataProvider.IEventRepository eventRepository = Substitute.For<Infrastructure.DataProvider.IEventRepository>();
+        IEventRepository eventRepository = Substitute.For<IEventRepository>();
 
         public AppointmentServiceTests()
         {
@@ -303,11 +301,11 @@ namespace MQuince.Scheduler.Unit.Tests
 
 
         private Appointment GetExpiredAppointment()
-            => new Appointment(Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"), new DateRange(new DateTime(2010, 12, 12, 12, 30, 00), new DateTime(2010, 12, 12, 13, 00, 00)), Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), false); 
+            => new Appointment(Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"), new DateRange(new DateTime(2010, 12, 12, 12, 30, 00), new DateTime(2010, 12, 12, 13, 00, 00)), Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), false);
 
         private Appointment GetAppointmentWhichIsSoon()
                 => new Appointment(Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"), new DateRange(DateTime.Now.AddHours(47), DateTime.Now.AddHours(47).AddMinutes(30)), Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), false);
-           
+
 
         private bool CompareAppointmentsDTO(IEnumerable<Appointment> output, IEnumerable<AppointmentDTO> appointments)
         {

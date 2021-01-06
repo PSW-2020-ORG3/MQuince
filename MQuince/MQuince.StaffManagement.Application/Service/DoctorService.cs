@@ -24,11 +24,11 @@ namespace MQuince.StafManagement.Application.Service
             {
                 return _userRepository.GetAllDoctors().Select(c => DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(c));
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -40,10 +40,12 @@ namespace MQuince.StafManagement.Application.Service
             try
             {
                 return DoctorMapper.MapDoctorEntityToIdentifierDoctorDTO(_userRepository.GetDoctorById(id));
-            }catch(ArgumentNullException e)
+            }
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }
@@ -54,10 +56,12 @@ namespace MQuince.StafManagement.Application.Service
             try
             {
                 return DoctorMapper.MapDoctorEntityCollectionToIdentifierDoctorDTOCollection(_userRepository.GetDoctorsPerSpecialization(specializationId));
-            }catch (ArgumentNullException e)
+            }
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
-            }catch (Exception e)
+            }
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }

@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Scheduler.Contracts.Exceptions;
+using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MQuince.StaffManagement.Application.Controllers
 {
@@ -26,11 +23,11 @@ namespace MQuince.StaffManagement.Application.Controllers
             {
                 return Ok(_workTimeService.GetWorkHoursForDoctorForDate(doctorId, date));
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }

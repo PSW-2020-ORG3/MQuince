@@ -6,7 +6,6 @@ using MQuince.StafManagement.Contracts.Interfaces;
 using MQuince.StafManagement.Contracts.Repository;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MQuince.StafManagement.Application.Service
 {
@@ -23,11 +22,11 @@ namespace MQuince.StafManagement.Application.Service
             {
                 return SpecializationMapper.MapSpecializationEntityCollectionToSpecializationIdentifierDTOCollection(_specializationRepository.GetAll());
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 throw new NotFoundEntityException();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new InternalServerErrorException();
             }

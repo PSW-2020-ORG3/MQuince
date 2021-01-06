@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MQuince.Infrastructure.DataProvider;
 using MQuince.Scheduler.Application.Services;
 using MQuince.Scheduler.Contracts.Service;
+using MQuince.Scheduler.Infrastructure;
 
 namespace MQuince.Scheduler.Application
 {
