@@ -101,7 +101,12 @@
 				alert("You don't have access this page! Kako_");
 				window.location.href = "/public/index.html";
 			}
-		});
+		});,
+		logOut: function () {
+			localStorage.removeItem('keyToken');
+			localStorage.removeItem('keyRole');
+			window.location.href = "/public/index.html";
+		}
 
 	}
 })
