@@ -40,19 +40,6 @@
 		}
 	},
 	methods: {
-		logIn: function () {
-			axios
-				.post("/api/User", {
-					Username: "admin",
-					Password: "admin"
-				}).then((response) => {
-					console.log('test')
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-					}, (error) => {
-						console.log(error);
-					});
-		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole')
