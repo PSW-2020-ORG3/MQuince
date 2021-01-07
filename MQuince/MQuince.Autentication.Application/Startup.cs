@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using MQuince.Autentication.Application.Services;
 using MQuince.Autentication.Contracts.Service;
 using MQuince.Autentication.Infrastructure;
+using System;
 
 namespace MQuince.Autentication.Application
 {
@@ -15,8 +16,18 @@ namespace MQuince.Autentication.Application
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            if (String.Equals(Environment.GetEnvironmentVariable("SHOW_ENV"), "TRUE"))
+                ShowConfig(configuration);
         }
 
+        private void ShowConfig(IConfiguration config)
+        {
+            foreach (var pair in config.GetChildren())
+            {
+                Console.WriteLine($"{pair.Path} - {pair.Value}");
+                ShowConfig(pair);
+            }
+        }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,7 +36,16 @@ namespace MQuince.Autentication.Application
             services.AddControllers();
 
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            stage = ExtractArgument(stage);
+
+            if (stage == "dev")
+            {
+                dbContextOptionsBuilder.UseMySql(CreateConnectionStringFromEnvironment());
+            } else
+            {
+                dbContextOptionsBuilder.UseNpgsql(CreateConnectionStringFromEnvironment());
+            }
             services.AddTransient(typeof(IUserService), s => new UserService(new UserRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();
@@ -52,6 +72,39 @@ namespace MQuince.Autentication.Application
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_DOMAIN") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+
+            stage = ExtractArgument(stage);
+            server = ExtractArgument(server);
+            port = ExtractArgument(port);
+            database = ExtractArgument(database);
+            user = ExtractArgument(user);
+            password = ExtractArgument(password);
+
+            if (stage == "dev")
+            {
+                Console.WriteLine($"server={server};port={port};database={database};user={user};password={password};");
+                return $"server={server};port={port};database={database};user={user};password={password};";
+            }
+            else
+            {
+                return $"Server={server};Port={port};Database={database};Username={user};Password={password};";
+            }
+        }
+
+        private string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using MQuince.StaffManagement.Infrastructure;
 using MQuince.StafManagement.Application.Service;
 using MQuince.StafManagement.Contracts.Interfaces;
+using System;
 
 namespace MQuince.StaffManagement.Application
 {
@@ -17,6 +18,17 @@ namespace MQuince.StaffManagement.Application
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			if (String.Equals(Environment.GetEnvironmentVariable("SHOW_ENV"), "TRUE"))
+				ShowConfig(configuration);
+		}
+
+		private void ShowConfig(IConfiguration config)
+		{
+			foreach (var pair in config.GetChildren())
+			{
+				Console.WriteLine($"{pair.Path} - {pair.Value}");
+				ShowConfig(pair);
+			}
 		}
 
 		public IConfiguration Configuration { get; }
@@ -25,7 +37,17 @@ namespace MQuince.StaffManagement.Application
 		public void ConfigureServices(IServiceCollection services)
 		{
 			DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-			dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
+			string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+			stage = ExtractArgument(stage);
+
+			if (stage == "dev")
+			{
+				dbContextOptionsBuilder.UseMySql(CreateConnectionStringFromEnvironment());
+			}
+			else
+			{
+				dbContextOptionsBuilder.UseNpgsql(CreateConnectionStringFromEnvironment());
+			}
 			services.AddTransient(typeof(IDoctorService), s => new DoctorService(new UserRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(ISpecializationService), s => new SpecializationService(new SpecializationRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(IWorkTimeService), s => new WorkTimeService(new WorkTimeRepository(dbContextOptionsBuilder)));
@@ -49,6 +71,39 @@ namespace MQuince.StaffManagement.Application
 			{
 				endpoints.MapControllers();
 			});
+		}
+
+		private string CreateConnectionStringFromEnvironment()
+		{
+			string server = Environment.GetEnvironmentVariable("DATABASE_DOMAIN") ?? "localhost";
+			string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+			string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "mquince";
+			string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+			string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+			string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+
+			stage = ExtractArgument(stage);
+			server = ExtractArgument(server);
+			port = ExtractArgument(port);
+			database = ExtractArgument(database);
+			user = ExtractArgument(user);
+			password = ExtractArgument(password);
+
+			if (stage == "dev")
+			{
+				Console.WriteLine($"server={server};port={port};database={database};user={user};password={password};");
+				return $"server={server};port={port};database={database};user={user};password={password};";
+			}
+			else
+			{
+				return $"Server={server};Port={port};Database={database};Username={user};Password={password};";
+			}
+		}
+
+		private string ExtractArgument(string argument)
+		{
+			string retVal = argument.Replace("=", "");
+			return retVal.Trim();
 		}
 	}
 }

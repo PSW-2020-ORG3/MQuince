@@ -142,7 +142,7 @@
                         params: {
                             patientId: "6459c216-1770-41eb-a56a-7f4524728546",
                             doctorId: this.selectedDoctor,
-                            date: this.dateForAppointment
+                            date: new Date(Date.UTC(this.dateForAppointment.getFullYear(), this.dateForAppointment.getMonth(), this.dateForAppointment.getDate()))
                         }
                     }).then(response => {
                         this.appointments = response.data

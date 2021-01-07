@@ -26,11 +26,11 @@ namespace MQuince.StafManagement.Controllers
             {
                 return Ok(_specializationService.GetAll());
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(500);
             }

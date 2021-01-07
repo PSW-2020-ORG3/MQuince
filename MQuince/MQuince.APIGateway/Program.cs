@@ -16,14 +16,23 @@ namespace MQuince.APIGateway
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            string stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            stage = ExtractArgument(stage);
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureAppConfiguration(config =>
-                     config.AddJsonFile($"ocelot.{env}.json"));
+                     config.AddJsonFile($"ocelot.{stage}.json"));
                 });
+        }
+            
+        private static string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
+        }
     }
 }

@@ -72,8 +72,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.App
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2C0387C7-2DEF-49C5-B5EF-808763221DA1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Unit.Tests", "MQuince.Autentication.UnitTests\MQuince.Autentication.Unit.Tests.csproj", "{D40AC9A0-8469-41E7-A907-19F06371F887}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Integration.Testing", "MQuince.Autentication.Integration.Testing\MQuince.Autentication.Integration.Testing.csproj", "{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{00C39033-8354-417C-92B6-693433DD9D4A}"
@@ -88,13 +86,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Integration.Testing", "MQuince.StaffManagement.Integration.Testing\MQuince.StaffManagement.Integration.Testing.csproj", "{EFCB77EB-F7D4-408F-8930-9910104661F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Review.Infrastructure", "MQuince.Review.Infrastructure\MQuince.Review.Infrastructure.csproj", "{84A39827-BB3A-468C-A2C5-DA53BF5C072A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Review.Infrastructure", "MQuince.Review.Infrastructure\MQuince.Review.Infrastructure.csproj", "{84A39827-BB3A-468C-A2C5-DA53BF5C072A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Scheduler.Infrastructure", "MQuince.Scheduler.Infrastructure\MQuince.Scheduler.Infrastructure.csproj", "{BACA57FF-6FEF-4E2A-9CE4-2ED351895EB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Scheduler.Infrastructure", "MQuince.Scheduler.Infrastructure\MQuince.Scheduler.Infrastructure.csproj", "{BACA57FF-6FEF-4E2A-9CE4-2ED351895EB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.StaffManagement.Infrastructure", "MQuince.StaffManagement.Infrastructure\MQuince.StaffManagement.Infrastructure.csproj", "{83E2DDE8-BF44-4817-A355-40B72D7F221A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Infrastructure", "MQuince.StaffManagement.Infrastructure\MQuince.StaffManagement.Infrastructure.csproj", "{83E2DDE8-BF44-4817-A355-40B72D7F221A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Infrastructure", "MQuince.Autentication.Infrastructure\MQuince.Autentication.Infrastructure.csproj", "{749F7956-3D40-4A22-A8E9-748F4802E84B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Infrastructure", "MQuince.Autentication.Infrastructure\MQuince.Autentication.Infrastructure.csproj", "{749F7956-3D40-4A22-A8E9-748F4802E84B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Unit.Tests", "MQuince.Autentication.Unit.Tests\MQuince.Autentication.Unit.Tests.csproj", "{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,10 +194,6 @@ Global
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D40AC9A0-8469-41E7-A907-19F06371F887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D40AC9A0-8469-41E7-A907-19F06371F887}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D40AC9A0-8469-41E7-A907-19F06371F887}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D40AC9A0-8469-41E7-A907-19F06371F887}.Release|Any CPU.Build.0 = Release|Any CPU
 		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -234,6 +230,10 @@ Global
 		{749F7956-3D40-4A22-A8E9-748F4802E84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749F7956-3D40-4A22-A8E9-748F4802E84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749F7956-3D40-4A22-A8E9-748F4802E84B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -254,7 +254,6 @@ Global
 		{B81A909D-C375-415A-9982-340FC61AF81E} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{0AF1663D-0E07-47BF-A089-080DA6DD8594} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{2C0387C7-2DEF-49C5-B5EF-808763221DA1} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
-		{D40AC9A0-8469-41E7-A907-19F06371F887} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
 		{129CC1DB-9EC4-4FD9-9456-44C9C8031CF3} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
 		{00C39033-8354-417C-92B6-693433DD9D4A} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{68CBF6B4-DBBD-4182-9EE2-36F63B294863} = {00C39033-8354-417C-92B6-693433DD9D4A}
@@ -266,6 +265,7 @@ Global
 		{BACA57FF-6FEF-4E2A-9CE4-2ED351895EB3} = {C1FCCC3E-267B-4ECE-BA0B-C742F97D0800}
 		{83E2DDE8-BF44-4817-A355-40B72D7F221A} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{749F7956-3D40-4A22-A8E9-748F4802E84B} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
+		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

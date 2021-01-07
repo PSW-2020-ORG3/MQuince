@@ -25,11 +25,11 @@ namespace MQuince.Autentication.Application.Controllers
 
                 return Ok(response);
             }
-            catch (EntityNotFoundException e)
+            catch (EntityNotFoundException)
             {
                 return BadRequest(new { message = "Username or password is incorrect" });
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }

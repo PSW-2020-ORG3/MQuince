@@ -122,8 +122,8 @@ namespace MQuince.Infrastructure.DataAccess
             modelBuilder.Entity<WorkTimePersistence>().HasData(new WorkTimePersistence[] {
                 new WorkTimePersistence{
                     Id= Guid.Parse("3296719d-0ca5-40c6-9370-90e50df28539"),
-                    StartDate=new DateTime(2020,12,1),
-                    EndDate=new DateTime(2020,12,25),
+                    StartDate=new DateTime(2021,1,1),
+                    EndDate=new DateTime(2021,3,25),
                     StartTime=8,
                     EndTime=16,
                     DoctorId=Guid.Parse("6dd84745-8fcb-4a4b-84da-fe215ebd2f85")
@@ -189,10 +189,5 @@ namespace MQuince.Infrastructure.DataAccess
                 }
             });
         }
-
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=mquince");
-        }*/
     }
 }

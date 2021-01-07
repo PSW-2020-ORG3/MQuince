@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MQuince.Scheduler.Domain\MQuince.Scheduler.Domain.csproj" />
     <ProjectReference Include="..\MQuince.Scheduler.Infrastructure\MQuince.Scheduler.Infrastructure.csproj" />
   </ItemGroup>

@@ -175,17 +175,23 @@ namespace MQuince.Scheduler.Application.Services
 
         private async Task<DateRange> GetWorkHours(Guid doctorId, DateTime date)
         {
-            var URL = $"http://localhost:5003/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
+            var stage = Environment.GetEnvironmentVariable("STAGE") ?? "dev";
+            stage = ExtractArgument(stage);
+            string URL = $"http://localhost:5003/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
+            if (stage == "test")
+                URL = $"https://mquince-staff.herokuapp.com/api/worktime/GetWorkHours?doctorId={doctorId}&date={date}";
             HttpClient client = new HttpClient();
             HttpResponseMessage res = await client.GetAsync(URL);
             HttpContent content = res.Content;
             string data = await content.ReadAsStringAsync();
             DateRange workHours = JsonConvert.DeserializeObject<DateRange>(data);
-            if (data != null)
-            {
-                Console.WriteLine(data);
-            }
             return workHours;
+        }
+
+        private string ExtractArgument(string argument)
+        {
+            string retVal = argument.Replace("=", "");
+            return retVal.Trim();
         }
     }
 }

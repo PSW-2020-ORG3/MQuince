@@ -35,7 +35,7 @@ namespace MQuince.StafManagement.Application.Service
             {
                 if (date.Date >= workTime.StartDate.Date && date.Date <= workTime.EndDate.Date)
                 {
-                    return new WorkTime(date, date, workTime.StartTime, workTime.EndTime, doctorId);
+                    return new WorkTime(date.Date, date.Date, workTime.StartTime, workTime.EndTime, doctorId);
                 }
             }
             return null;

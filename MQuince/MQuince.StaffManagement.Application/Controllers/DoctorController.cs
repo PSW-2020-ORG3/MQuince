@@ -25,10 +25,10 @@ namespace MQuince.StafManagement.Controllers
             try
             {
                 return Ok(_doctorService.GetById(id));
-            }catch(NotFoundEntityException e)
+            }catch(NotFoundEntityException)
             {
                 return StatusCode(404);
-            }catch(InternalServerErrorException e)
+            }catch(InternalServerErrorException)
             {
                 return StatusCode(500);
             }
@@ -41,11 +41,11 @@ namespace MQuince.StafManagement.Controllers
             {
                 return Ok(_doctorService.GetAll());
             }
-            catch (NotFoundEntityException e)
+            catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }
@@ -57,11 +57,11 @@ namespace MQuince.StafManagement.Controllers
             try
             {
                 return Ok(_doctorService.GetDoctorsPerSpecialization(id));
-            }catch (NotFoundEntityException e)
+            }catch (NotFoundEntityException)
             {
                 return StatusCode(404);
             }
-            catch (InternalServerErrorException e)
+            catch (InternalServerErrorException)
             {
                 return StatusCode(500);
             }
