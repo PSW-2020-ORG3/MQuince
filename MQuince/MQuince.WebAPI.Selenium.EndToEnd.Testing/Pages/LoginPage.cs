@@ -22,7 +22,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         [Obsolete]
         private IWebElement lnkLogin()
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
             return wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Log in")));
         }
 
@@ -39,6 +39,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         {
             var usernameMessageBox = this.UsernameMessageBox();
             Assert.That(usernameMessageBox.Displayed);
+            Thread.Sleep(2000);
             usernameMessageBox.SendKeys(username);
         }
 
@@ -55,6 +56,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         {
             var passwordMessageBox = this.PasswordMessageBox();
             Assert.That(passwordMessageBox.Displayed);
+            Thread.Sleep(1000);
             passwordMessageBox.SendKeys(password);
         }
 

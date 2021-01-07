@@ -15,7 +15,7 @@ var app = new Vue({
 						<input type="text" name="" id="username" placeholder="Enter Username" v-model="username">
 						<p>Password</p>
 						<input type="password" name="" id="password" placeholder="Enter Password" v-model="password">
-						<input type="button" name="" id="submitId" value="Login" v-on:click="submit">
+						<input type="button" name="" id="sendMessageButton" value="Login" v-on:click="submit">
 					</form>
 		</div>
 
