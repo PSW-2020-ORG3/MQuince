@@ -1,8 +1,8 @@
 services:
-
   servers:
-    build: 
+    build:
       context: ./MQuince
+      dockerfile: Dockerfile
       args:
         #DATABASE_USERNAME: postgres
         #DATABASE_PASSWORD: root
@@ -27,6 +27,87 @@ services:
       DATABASE_PORT: 5432
       STAGE: test
 
+  review:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Review
+      args:
+        DATABASE_USERNAME: dyjeaadgecsqjv
+        DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+        DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+        DATABASE_SCHEMA: d52d2dq2jfttam
+        DATABASE_PORT: 5432
+        STAGE: test
+    image: mquince-review-microservice
+    container_name: review
+    environment:
+      DATABASE_USERNAME: dyjeaadgecsqjv
+      DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+      DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+      DATABASE_SCHEMA: d52d2dq2jfttam
+      DATABASE_PORT: 5432
+      STAGE: test
+
+  autentication:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Autentication
+      args:
+        DATABASE_USERNAME: dyjeaadgecsqjv
+        DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+        DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+        DATABASE_SCHEMA: d52d2dq2jfttam
+        DATABASE_PORT: 5432
+        STAGE: test
+    image: mquince-autentication-microservice
+    environment:
+      DATABASE_USERNAME: dyjeaadgecsqjv
+      DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+      DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+      DATABASE_SCHEMA: d52d2dq2jfttam
+      DATABASE_PORT: 5432
+      STAGE: test
+
+  scheduler:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Scheduler
+      args:
+        DATABASE_USERNAME: dyjeaadgecsqjv
+        DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+        DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+        DATABASE_SCHEMA: d52d2dq2jfttam
+        DATABASE_PORT: 5432
+        STAGE: test
+    image: mquince-scheduler-microservice
+    environment:
+      DATABASE_USERNAME: dyjeaadgecsqjv
+      DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+      DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+      DATABASE_SCHEMA: d52d2dq2jfttam
+      DATABASE_PORT: 5432
+      STAGE: test
+
+  staff:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.StaffManagement
+      args:
+        DATABASE_USERNAME: dyjeaadgecsqjv
+        DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+        DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+        DATABASE_SCHEMA: d52d2dq2jfttam
+        DATABASE_PORT: 5432
+        STAGE: test
+    image: mquince-staff-microservice
+    environment:
+      DATABASE_USERNAME: dyjeaadgecsqjv
+      DATABASE_PASSWORD: 165b137875bc04c7129635f2da6ab3944cd8cccc555be51ded952cf9a08e1fad
+      DATABASE_DOMAIN: ec2-52-30-161-203.eu-west-1.compute.amazonaws.com
+      DATABASE_SCHEMA: d52d2dq2jfttam
+      DATABASE_PORT: 5432
+      STAGE: test
+
   mysql:
     image: fintrace/postgres-uuid
     container_name: mysql
@@ -39,5 +120,3 @@ services:
 
 volumes:
   postgres-data:
-
-   
