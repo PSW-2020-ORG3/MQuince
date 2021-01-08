@@ -1,47 +1,45 @@
+using MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
 {
     public class FeedBackTest
     {
         private IWebDriver webDriver;
+
         [SetUp]
         public void Setup()
         {
             webDriver = new ChromeDriver(@"C:\Web");
-            webDriver.Manage().Window.Maximize();
-            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
+            webDriver.Manage().Window.Maximize(); 
+            //webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
+            webDriver.Navigate().GoToUrl("http://localhost:63424/public/index.html");
         }
 
         [Test]
         [Obsolete]
         public void Add_Feedback()
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
-            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Feedback")));
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
 
-            Actions action = new Actions(webDriver);
-            action.MoveToElement(element).Perform();
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.Login();
 
-            IWebElement lnkAddFeedback = webDriver.FindElement(By.LinkText("Add feedback"));
-            lnkAddFeedback.Click();
+            HomePage homePage = new HomePage(webDriver);
+            homePage.ClickAddFeedback();
 
-            IWebElement txtMessageBox = webDriver.FindElement(By.Id("name"));
+            AddFeedbackPage addFeedbackPage = new AddFeedbackPage(webDriver);
+            addFeedbackPage.TypeFeedbackMessage("Some simple text");
+            
+            addFeedbackPage.CheckAnonymousCheckBox();
 
-            Assert.That(txtMessageBox.Displayed);
-
-            txtMessageBox.SendKeys(Keys.Tab);
-            txtMessageBox.Clear();
-            txtMessageBox.SendKeys("Some Sample Text Here");
-
-            var lnkSubmitButton = webDriver.FindElement(By.Id("sendMessageButton"));
-
-            lnkSubmitButton.Click();
+            addFeedbackPage.ClickSubmitButton();
         }
     }
 }
