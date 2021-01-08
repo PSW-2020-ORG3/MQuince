@@ -2,6 +2,7 @@ services:
   servers:
     build:
       context: ./MQuince
+      dockerfile: Dockerfile
       args:
         DATABASE_USERNAME: postgres
         DATABASE_PASSWORD: root
@@ -16,6 +17,110 @@ services:
       DATABASE_PORT: 5432
       STAGE: test
       PORT: 5000
+
+  review:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Review
+      args:
+        DATABASE_USERNAME: postgres
+        DATABASE_PASSWORD: root
+        DATABASE_PORT: 5432
+        STAGE: test
+        PORT: 5002
+    image: mquince-review-microservice
+    container_name: review
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - 5002:5002
+    environment:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_PORT: 5432
+      STAGE: test
+      PORT: 5002
+    depends_on:
+      - mysql
+
+  autentication:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Autentication
+      args:
+        DATABASE_USERNAME: postgres
+        DATABASE_PASSWORD: root
+        DATABASE_PORT: 5432
+        STAGE: test
+        PORT: 5001
+    image: mquince-autentication-microservice
+    container_name: autentication
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - 5001:5001
+    environment:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_PORT: 5432
+      STAGE: test
+      PORT: 5001
+    depends_on:
+      - mysql
+
+  scheduler:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.Scheduler
+      args:
+        DATABASE_USERNAME: postgres
+        DATABASE_PASSWORD: root
+        DATABASE_PORT: 5432
+        STAGE: test
+        PORT: 5004
+    image: mquince-scheduler-microservice
+    container_name: scheduler
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - 5004:5004
+    environment:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_PORT: 5432
+      STAGE: test
+      PORT: 5004
+    depends_on:
+      - mysql
+
+  staff:
+    build:
+      context: ./MQuince
+      dockerfile: Dockerfile.StaffManagement
+      args:
+        DATABASE_USERNAME: postgres
+        DATABASE_PASSWORD: root
+        DATABASE_PORT: 5432
+        STAGE: test
+        PORT: 5003
+    image: mquince-staff-microservice
+    container_name: staff
+    restart: on-failure
+    networks:
+      - demo
+    ports:
+      - 5003:5003
+    environment:
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: root
+      DATABASE_PORT: 5432
+      STAGE: test
+      PORT: 5003
+    depends_on:
+      - mysql
 
   mysql:
     image: fintrace/postgres-uuid
