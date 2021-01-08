@@ -33,16 +33,6 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
             publishFeedbackPage.SelectOptionForPublishFeedback();
             publishFeedbackPage.FindFeedbackForPublish();
             publishFeedbackPage.SubmitFeedbackForPublish();
-            /*try
-            {
-                new WebDriverWait(webDriver, TimeSpan.FromSeconds(2)).Until(ExpectedConditions.AlertIsPresent());
-                IAlert alert = webDriver.SwitchTo().Alert();
-                alert.Accept();
-            }
-            catch (Exception e)
-            {
-                //exception handling
-            }*/
         }
     }
 }

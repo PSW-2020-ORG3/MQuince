@@ -78,9 +78,9 @@
 	methods: {
 		logIn: function () {
 			axios
-				.post("/api/User", {
-					Username: "patient2",
-					Password: "patient2"
+				.post("/gateway/User", {
+					Username: "admin",
+					Password: "admin"
 				}).then((response) => {
 					window.location.href = "/public/index.html";
 					localStorage.setItem('keyToken', response.data.token)
