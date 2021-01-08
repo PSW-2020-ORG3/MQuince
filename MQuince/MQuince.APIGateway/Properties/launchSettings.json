@@ -9,21 +9,21 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "dev"
-      }
+        "commandName": "IISExpress",
+        "launchBrowser": true,
+        "launchUrl": "/",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "dev"
+        }
     },
     "MQuince.APIGateway": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "public/index.html",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "dev"
-      },
-      "applicationUrl": "http://localhost:5000"
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "public/index.html",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "dev"
+        },
+        "applicationUrl": "http://localhost:5000"
     }
   }
 }
