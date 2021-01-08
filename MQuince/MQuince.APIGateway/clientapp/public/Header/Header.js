@@ -5,7 +5,7 @@
             showLogIn: true,
             showLogOut: false,
             showCreateAppointment: false,
-            showAddFeedback: false,
+            showAddFeedback: true,
 			showFeedback: true,
             showObserveFeedback: true,
             showObserveAppointment: false
@@ -36,7 +36,7 @@
                             <li><a href="#">Recommended appointment</a></li>
                         </ul>
                     </li>
-                    <li v-on:click="logIn" v-bind:hidden="!showLogIn"><a href="#">Log in</a></li>
+                    <li v-bind:hidden="!showLogIn"><a href="../public/Login/LoginUser.html">Log in</a></li>
                     <li v-on:click="logOut" v-bind:hidden="!showLogOut"><a href="#">Log out</a></li>
 
                 </ul>
@@ -76,20 +76,6 @@
 		}
 	},
 	methods: {
-		logIn: function () {
-			axios
-				.post("/api/User", {
-					Username: "patient2",
-					Password: "patient2"
-				}).then((response) => {
-					window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-					
-				}, (error) => {
-					console.log(error);
-				});
-		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole');

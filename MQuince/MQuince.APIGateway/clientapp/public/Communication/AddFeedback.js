@@ -41,6 +41,7 @@
 			this.showObserveFeedback = false;
 			this.showObserveAppointment = false;
 		}
+		
 
 	},
 	methods: {
@@ -51,7 +52,12 @@
 						Comment: this.Comment,
 						Anonymous: this.Anonymous,
 						Publish: this.Publish
-					}).then(response => {
+					}, {
+                            headers: {
+                                'Authorization': localStorage.getItem('keyToken')
+                        }
+					
+                    }).then(response => {
 						//JSAlert.alert("Your feedback has been saved!");
 						alert("Your feedback has been saved!")
 
@@ -74,5 +80,33 @@
 			localStorage.removeItem('keyRole');
 			window.location.href = "/public/index.html";
 		}
+	},
+	mounted() {
+		localStorage.getItem('keyToken');
+		localStorage.getItem('keyRole');
+		axios
+			.post("/gateway/Feedback", {
+						Comment: this.Comment,
+						Anonymous: this.Anonymous,
+						Publish: this.Publish
+			}, {
+				headers: {
+						'Authorization': localStorage.getItem('keyToken')
+					}
+			}
+		).then(response => {
+			alert("Your feedback has been saved!")
+		}).catch(error => {
+			if (error.response.status === 400 || error.response.status === 403) {
+				alert("You don't have access this page! Kako_");
+				window.location.href = "/public/index.html";
+			}
+		});,
+		logOut: function () {
+			localStorage.removeItem('keyToken');
+			localStorage.removeItem('keyRole');
+			window.location.href = "/public/index.html";
+		}
+
 	}
 })

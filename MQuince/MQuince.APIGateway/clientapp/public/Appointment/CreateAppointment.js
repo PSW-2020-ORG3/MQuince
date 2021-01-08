@@ -79,12 +79,12 @@
                                 <br/>
                                 <label  style="margin-left: 14%;display: block; width: 100%;text-indent: 1%;">Select termin</label>
                                 <select class="form-control"  style="text-indent: 1%" v-model="selectedAppointment">
-					                <option v-for="(app, index) in appointments" class="option" v-bind:value="app"  :value="app">{{app.entityDTO.startDateTime.substr(11, 5) + ' - '+  app.entityDTO.endDateTime.substr(11, 5)}}</option>
+					                <option v-for="(app, index) in appointments" class="option" v-bind:value="app"  :value="app">{{app.startDateTime.substr(11, 5) + ' - '+  app.endDateTime.substr(11, 5)}}</option>
 				                </select>
                             </div>
                         </div>  
 
-          
+                
 
                         <br />
 
@@ -106,10 +106,10 @@
         vuejsDatepicker
     },
     mounted() {
-
+		localStorage.getItem('keyToken');
+		localStorage.getItem('keyRole');
         axios
-            .get('/gateway/specialization')
-            .then(response => (this.specializations = response.data));
+            .get('/gateway/specialization').then(response => (this.specializations = response.data));
     },
     methods: {
         next: function () {
@@ -142,7 +142,7 @@
                         params: {
                             patientId: "6459c216-1770-41eb-a56a-7f4524728546",
                             doctorId: this.selectedDoctor,
-                            date: new Date(Date.UTC(this.dateForAppointment.getFullYear(), this.dateForAppointment.getMonth(), this.dateForAppointment.getDate()))
+                            date: this.dateForAppointment
                         }
                     }).then(response => {
                         this.appointments = response.data
@@ -181,8 +181,8 @@
             if (this.selectedAppointment != '') {
                 axios
                     .post("/gateway/appointment", {
-                        StartDateTime: this.selectedAppointment.entityDTO.startDateTime,
-                        EndDateTime: this.selectedAppointment.entityDTO.endDateTime,
+                        StartDateTime: this.selectedAppointment.startDateTime,
+                        EndDateTime: this.selectedAppointment.endDateTime,
                         DoctorId: this.selectedDoctor,
                         PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
                     }, {
