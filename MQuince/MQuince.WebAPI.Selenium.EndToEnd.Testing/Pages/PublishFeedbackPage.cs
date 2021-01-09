@@ -20,20 +20,23 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         [Obsolete]
         public void FindOptionForPublishFeedback()
         {
+            this.WaitForOptionForPublishFeedback();
             IWebElement feedback = webDriver.FindElement(By.Id("feedbackOption"));
             Assert.That(feedback.Displayed, Is.True);
             feedback.Click();
         }
 
         [Obsolete]
-        public void NavigateToPublishFeedback()
+        public void WaitForOptionForPublishFeedback()
         {
-            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Communication/AdminFeedback.html");
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.Id("feedbackOption")));
         }
 
         [Obsolete]
         public void SelectOptionForPublishFeedback()
         {
+            this.FindFeedbackForPublish();
             IWebElement pending = webDriver.FindElement(By.XPath("//select[@name='feedbackOption']/option[text()='Pending']"));
             Assert.That(pending.Displayed, Is.True);
             pending.Click();
@@ -41,10 +44,17 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         }
 
         [Obsolete]
+        private void FindSelectOptionForPublishFeedback()
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//select[@name='feedbackOption']/option[text()='Pending']")));
+        }
+
+        [Obsolete]
         public void FindFeedbackForPublish()
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
-            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='btn']")));
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//select[@name='feedbackOption']/option[text()='Pending']")));
         }
 
         [Obsolete]

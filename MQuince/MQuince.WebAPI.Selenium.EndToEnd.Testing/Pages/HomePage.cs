@@ -44,5 +44,12 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             lnkAddFeedback.Click();
         }
 
+        [Obsolete]
+        public void OpenAdminFeedback()
+        {
+            IWebElement lnkfeedback = webDriver.FindElement(By.LinkText("Feedbacks"));
+            Assert.That(lnkfeedback.Displayed);
+            lnkfeedback.Click();
+        }
     }
 }
