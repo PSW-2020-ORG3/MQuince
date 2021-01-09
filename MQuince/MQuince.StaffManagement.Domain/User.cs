@@ -41,9 +41,5 @@ namespace MQuince.StafManagement.Domain
             }
         }
 
-        public static implicit operator string(User v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

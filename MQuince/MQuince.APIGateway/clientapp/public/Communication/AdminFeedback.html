@@ -143,7 +143,7 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li><a href="/public/index.html">Home</a></li>
-                    <li><a style="text-align: center; display: block" v-bind:hidden="!showAdminFeedbacks" href="/public/Communication/AdminFeedback.html">Feedbacks</a></li>               
+                    <li><a style="text-align: center; display: block" v-bind:hidden="!showFeedbackAdmin" href="/public/Communication/AdminFeedback.html">Feedbacks</a></li>               
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul class="drop-down-menu">
@@ -192,8 +192,8 @@
                                     </td>
                                     <td>
                                         <div style="margin-left:30px;margin-bottom:30px">
-                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
-                                             <div class="short-info2" v-else>By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous || feedback.entityDTO.user == null"><i>Anonymus&nbsp</i></div>
+                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous && feedback.entityDTO.user == null">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
                                             <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
                                         </div>
                                     </td>
