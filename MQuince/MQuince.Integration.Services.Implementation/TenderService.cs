@@ -34,7 +34,7 @@ namespace MQuince.Integration.Services.Implementation
              => _tenderRepository.GetAll().Select(c => CreateDTOFromTender(c));
 
 
-        public IdentifiableDTO<TenderDTO> GetByApi(Guid id) => CreateDTOFromTender(_tenderRepository.GetById(id));
+        public IdentifiableDTO<TenderDTO> GetById(Guid id) => CreateDTOFromTender(_tenderRepository.GetById(id));
 
         public void Update(TenderDTO entityDTO, Guid id)
         {
