@@ -54,7 +54,7 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
         {
             medicationRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(this.GetFirstMedication());
 
-            IdentifiableDTO<MedicationsConsumptionDTO> medication = medicationService.GetByApi(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526"));
+            IdentifiableDTO<MedicationsConsumptionDTO> medication = medicationService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526"));
 
             Assert.True(this.CompareMedicationAndIdentifierMedication(this.GetFirstMedication(), medication));
         }

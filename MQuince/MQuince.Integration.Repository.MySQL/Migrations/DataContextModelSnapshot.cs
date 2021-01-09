@@ -38,6 +38,40 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.ToTable("MedicationsConsumption");
                 });
 
+            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyOffersPersistance", b =>
+                {
+                    b.Property<Guid>("IdOffer")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("IdTender")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Medicationes")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("PharmacyEmail")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("PharmacyName")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("IdOffer");
+
+                    b.ToTable("PharmacyOffersPersistance");
+                });
+
             modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
                 {
                     b.Property<Guid>("ApiKey")
