@@ -25,10 +25,11 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         [Obsolete]
         public void Publish_Feedback()
         {
+            LoginPage loginPage = new LoginPage(webDriver);
+            loginPage.Login();
+
             PublishFeedbackPage publishFeedbackPage = new PublishFeedbackPage(webDriver);
-
-            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Communication/AdminFeedback.html");
-
+            publishFeedbackPage.NavigateToPublishFeedback();
             publishFeedbackPage.FindOptionForPublishFeedback();
             publishFeedbackPage.SelectOptionForPublishFeedback();
             publishFeedbackPage.FindFeedbackForPublish();

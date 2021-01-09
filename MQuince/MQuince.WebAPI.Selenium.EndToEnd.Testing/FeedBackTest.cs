@@ -16,7 +16,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         [SetUp]
         public void Setup()
         {
-            webDriver = new ChromeDriver(@"C:\Web");
+            webDriver = new ChromeDriver();
             webDriver.Manage().Window.Maximize(); 
             //webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
             webDriver.Navigate().GoToUrl("http://localhost:63424/public/index.html");

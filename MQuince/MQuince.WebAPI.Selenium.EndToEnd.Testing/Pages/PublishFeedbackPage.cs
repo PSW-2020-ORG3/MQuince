@@ -26,6 +26,12 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         }
 
         [Obsolete]
+        public void NavigateToPublishFeedback()
+        {
+            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Communication/AdminFeedback.html");
+        }
+
+        [Obsolete]
         public void SelectOptionForPublishFeedback()
         {
             IWebElement pending = webDriver.FindElement(By.XPath("//select[@name='feedbackOption']/option[text()='Pending']"));
