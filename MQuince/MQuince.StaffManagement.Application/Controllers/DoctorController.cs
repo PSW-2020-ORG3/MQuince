@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MQuince.StaffManagement.Application.Controllers.Util;
+using MQuince.StaffManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
 using System;
@@ -22,6 +24,10 @@ namespace MQuince.StafManagement.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
             try
             {
                 return Ok(_doctorService.GetById(id));
@@ -37,6 +43,10 @@ namespace MQuince.StafManagement.Controllers
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
             try
             {
                 return Ok(_doctorService.GetAll());
@@ -54,6 +64,11 @@ namespace MQuince.StafManagement.Controllers
         [HttpGet("specialization/{id}")]
         public IActionResult GetSpec(Guid id)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_doctorService.GetDoctorsPerSpecialization(id));
@@ -64,6 +79,28 @@ namespace MQuince.StafManagement.Controllers
             catch (InternalServerErrorException)
             {
                 return StatusCode(500);
+            }
+        }
+
+        private bool IsValidAuthenticationRole(string role)
+        {
+            try
+            {
+                var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
+
+                if (String.IsNullOrEmpty(outToken))
+                    return false;
+
+                string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
+
+                if (userRole.Equals(role))
+                    return true;
+
+                return false;
+            }
+            catch (InvalidJWTTokenException)
+            {
+                return false;
             }
         }
     }
