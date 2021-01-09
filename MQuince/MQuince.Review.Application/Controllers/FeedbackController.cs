@@ -32,12 +32,10 @@ namespace MQuince.Review.Application.Controllers
             {
                 Guid id = _feedbackService.Create(dto);
                 return Created("/api/feedback", id);
-            }
-            catch (FeedbackCommentEmptyException)
+            }catch (FeedbackCommentEmptyException)
             {
                 return BadRequest();
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -54,8 +52,7 @@ namespace MQuince.Review.Application.Controllers
             try
             {
                 return Ok(_feedbackService.GetById(id));
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return NotFound();
             }
@@ -67,8 +64,7 @@ namespace MQuince.Review.Application.Controllers
             try
             {
                 return Ok(_feedbackService.GetAll());
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -80,8 +76,7 @@ namespace MQuince.Review.Application.Controllers
             try
             {
                 return Ok(_feedbackService.GetByStatus(publish, approved));
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -94,13 +89,13 @@ namespace MQuince.Review.Application.Controllers
             {
                 return StatusCode(403);
             }
+
             try
             {
                 _feedbackService.ApproveFeedback(feedbackId);
                 return Ok();
 
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return BadRequest();
             }
@@ -121,10 +116,12 @@ namespace MQuince.Review.Application.Controllers
                     return true;
 
                 return false;
-            }
-            catch (InvalidJWTTokenException)
+            }catch (InvalidJWTTokenException)
             {
                 return false;
+            }catch (Exception)
+            {
+                throw new Exception();
             }
         }
 

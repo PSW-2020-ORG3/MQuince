@@ -28,6 +28,7 @@ namespace MQuince.StafManagement.Controllers
             {
                 return StatusCode(403);
             }
+
             try
             {
                 return Ok(_doctorService.GetById(id));
@@ -47,6 +48,7 @@ namespace MQuince.StafManagement.Controllers
             {
                 return StatusCode(403);
             }
+
             try
             {
                 return Ok(_doctorService.GetAll());
@@ -82,25 +84,27 @@ namespace MQuince.StafManagement.Controllers
             }
         }
 
-        private bool IsValidAuthenticationRole(string role)
+        private bool IsValidAuthenticationRole(string requiredRole)
         {
             try
             {
-                var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
+                Request.Headers.TryGetValue("Authorization", out var outToken);
 
                 if (String.IsNullOrEmpty(outToken))
                     return false;
 
                 string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
 
-                if (userRole.Equals(role))
+                if (userRole.Equals(requiredRole))
                     return true;
 
                 return false;
-            }
-            catch (InvalidJWTTokenException)
+            }catch (InvalidJWTTokenException)
             {
                 return false;
+            }catch (Exception)
+            {
+                throw new InternalServerErrorException();
             }
         }
     }

@@ -148,7 +148,7 @@ namespace MQuince.Scheduler.Application.Controllers
             }
         }
 
-        private bool IsValidAuthenticationRole(string role)
+        private bool IsValidAuthenticationRole(string requiredRole)
         {
             try
             {
@@ -159,14 +159,16 @@ namespace MQuince.Scheduler.Application.Controllers
 
                 string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
 
-                if (userRole.Equals(role))
+                if (userRole.Equals(requiredRole))
                     return true;
 
                 return false;
-            }
-            catch (InvalidJWTTokenException)
+            }catch (InvalidJWTTokenException)
             {
                 return false;
+            }catch (Exception)
+            {
+                throw new InternalServerErrorException();
             }
         }
     }

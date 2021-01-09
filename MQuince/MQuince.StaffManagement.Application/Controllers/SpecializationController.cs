@@ -28,6 +28,7 @@ namespace MQuince.StafManagement.Controllers
             {
                 return StatusCode(403);
             }
+            
             try
             {
                 return Ok(_specializationService.GetAll());
@@ -43,7 +44,7 @@ namespace MQuince.StafManagement.Controllers
 
         }
 
-        private bool IsValidAuthenticationRole(string role)
+        private bool IsValidAuthenticationRole(string requiredRole)
         {
             try
             {
@@ -54,14 +55,16 @@ namespace MQuince.StafManagement.Controllers
 
                 string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
 
-                if (userRole.Equals(role))
+                if (userRole.Equals(requiredRole))
                     return true;
 
                 return false;
-            }
-            catch (InvalidJWTTokenException)
+            }catch (InvalidJWTTokenException)
             {
                 return false;
+            }catch (Exception)
+            {
+                throw new InternalServerErrorException();
             }
         }
     }
