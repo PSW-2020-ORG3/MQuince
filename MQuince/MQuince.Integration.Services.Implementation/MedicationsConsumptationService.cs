@@ -36,7 +36,7 @@ namespace MQuince.Integration.Services.Implementation
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetAll()
             => _medicationsConsumptionRepository.GetAll().Select(c => CreateDTOFromMedicationsConsumption(c));
 
-        public IdentifiableDTO<MedicationsConsumptionDTO> GetByApi(Guid id) => CreateDTOFromMedicationsConsumption(_medicationsConsumptionRepository.GetById(id));
+        public IdentifiableDTO<MedicationsConsumptionDTO> GetByID(Guid id) => CreateDTOFromMedicationsConsumption(_medicationsConsumptionRepository.GetById(id));
 
 
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetConsumptionBetweenDates(DateTime from, DateTime to)

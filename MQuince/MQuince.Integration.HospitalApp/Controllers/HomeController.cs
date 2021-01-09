@@ -1,21 +1,8 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using Microsoft.AspNetCore.Mvc;
-using QRCoder;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Syncfusion.Pdf.Barcode;
-using System.IO;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using Syncfusion.Pdf.Graphics;
-using PdfSharp.Drawing;
-using MQuince.Integration.Services.Constracts.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Integration.Services.Implementation;
 using MQuince.Integration.Entities;
 using System.Collections.Generic;
+using MQuince.Integration.Services.Constracts.DTO;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
@@ -23,7 +10,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
     {
 
         List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
-        List<ActionsAndBenefits> action = Program.ActionAndBenefitMessage;
+        
 
         public IActionResult Index()
         {
@@ -35,37 +22,40 @@ namespace MQuince.Integration.HospitalApp.Controllers
             return "This is Welcome action method";
         }
 
-        public IActionResult Add()
+        public IActionResult AddPharmacy()
         {
             return View();
         }
-        public IActionResult Reports()
-        {
-            return View();
-        }
-
-        public IActionResult getSpecification()
+        public IActionResult SendReports()
         {
             return View();
         }
 
-        public IActionResult Therapy()
+        public IActionResult GetSpecification()
         {
             return View();
         }
+
+        public IActionResult PrescribeTherapy()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Therapy(string name, string jmbg, string medication, string description)
         {
             HomeService.generateQRCode(name, jmbg, medication, description);
             return View();
         }
-        public IActionResult sendMessageGrpc()
+        public IActionResult SendMessageGrpc()
         {
             return View(messageGrpc);
         }
+
         public IActionResult ActionAndBenefits()
         {
-            return View(action);
-        }
+            return View();
+        }        
+        
     }
 }

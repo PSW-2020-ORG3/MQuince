@@ -1,10 +1,12 @@
-﻿const uri = 'http://localhost:49544/api/GrpcController'
+const uri = '/api/sftpController'
 
-function sendName() {
-    const name = document.getElementById('name');
+function postDate() {
+    const from = document.getElementById('from');
+    const to = document.getElementById('to');
 
     const item = {
-        name: name.value
+        from: from.value,
+        to: to.value
     };
 
     fetch(uri, {
@@ -13,14 +15,16 @@ function sendName() {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(item)
+        body: JSON.stringify(item)       
     })
         .then(response => response.json())
         .then(() => {
-            name.value = '';
-
+            from.value = '';
+            to.value = '';
+            
         })
         .catch(error => console.error('Unable to add item.', error));
 
 
 } 
+
