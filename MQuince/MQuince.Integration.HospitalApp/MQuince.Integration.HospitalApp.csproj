@@ -40,7 +40,9 @@
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Integration.Entities\MQuince.Integration.Entities.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
-    <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\model.proto" GrpcServices="None" />

@@ -1,38 +1,31 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using MQuince.Integration.Entities;
 using MQuince.Integration.Services.Implementation;
 
 namespace MQuince.Integration.HospitalApp
 {
-    public class Program
-    {       
-        public static void Main(string[] args)
-        {           
-            CreateHostBuilder(args).Build().Run();
-        }
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			CreateHostBuilder(args).Build().Run();
+		}
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                 .UseWindowsService()
-                .ConfigureServices((hostContext, services) =>
+		public static IHostBuilder CreateHostBuilder(string[] args) =>
+			Host.CreateDefaultBuilder(args)
+				 .UseWindowsService()
+				.ConfigureServices((hostContext, services) =>
 
-                {
-                    services.AddHostedService<ClientScheduledService>();
-                    services.AddHostedService<RabbitMQService>();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
+				{
+					services.AddHostedService<ClientScheduledService>();
+					services.AddHostedService<RabbitMQService>();
+				})
+				.ConfigureWebHostDefaults(webBuilder =>
 
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-       
-    }
+				{
+					webBuilder.UseStartup<Startup>();
+				});
+
+	}
 }

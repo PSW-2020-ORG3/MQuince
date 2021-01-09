@@ -1,103 +1,105 @@
-using System.Globalization;
-using System.IO;
+using Grpc.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using MQuince.Integration.HospitalApp.Protos;
 using MQuince.Integration.Repository.MySQL.DataProvider;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
-
-using Microsoft.EntityFrameworkCore;
-using Grpc.Core;
-using MQuince.Integration.HospitalApp.Protos;
+using MQuince.Pharmacy.Contracts.Services;
+using MQuince.Pharmacy.Infrastructure;
+using MQuince.Pharmacy.Services;
+using System.Globalization;
+using System.IO;
 
 
 namespace MQuince.Integration.HospitalApp
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        } 
-        public IConfiguration Configuration { get; }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
+		public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            
-            DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
-            services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
-            services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
-            services.AddTransient(typeof(ISftpService), s => new SftpService());
+		public void ConfigureServices(IServiceCollection services)
+		{
 
-            services.AddTransient(typeof(IActionAndBenefitsService), s => new ActionAndBenefitsService(new ActionAndBenefitsRepository(dbContextOptionsBuilder)));
-            services.AddMvc().AddNewtonsoftJson(option =>
-            {
-                option.SerializerSettings.Culture = new CultureInfo("tr-TR");
-            });
-            services.AddControllers(options =>
-            {
-                options.EnableEndpointRouting = false;
+			DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
+			dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb2");
+			services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
+			services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
+			services.AddTransient(typeof(ISftpService), s => new SftpService());
 
-            }).AddNewtonsoftJson();
-        }
-        private Server server;
+			services.AddTransient(typeof(IActionAndBenefitsService), s => new ActionAndBenefitsService(new ActionAndBenefitsRepository(dbContextOptionsBuilder)));
+			services.AddMvc().AddNewtonsoftJson(option =>
+			{
+				option.SerializerSettings.Culture = new CultureInfo("tr-TR");
+			});
+			services.AddControllers(options =>
+			{
+				options.EnableEndpointRouting = false;
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+			}).AddNewtonsoftJson();
+		}
+		private Server server;
 
-            app.UseCors(builder =>
-                builder.AllowAnyHeader()
-                .AllowAnyOrigin()
-                .AllowAnyMethod());
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "Views")),
-                RequestPath = "/Views"
-            });
+			app.UseCors(builder =>
+				builder.AllowAnyHeader()
+				.AllowAnyOrigin()
+				.AllowAnyMethod());
 
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            });
-
-            server = new Server
-            {
-                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
-                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
-            };
-            server.Start();
-
-            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				FileProvider = new PhysicalFileProvider(
+				Path.Combine(Directory.GetCurrentDirectory(), "Views")),
+				RequestPath = "/Views"
+			});
 
 
-        }
-        private void OnShutdown()
-        {
-            if (server != null)
-            {
-                server.ShutdownAsync().Wait();
-            }
+			app.UseRouting();
 
-        }
-    }
+			app.UseAuthorization();
+
+			app.UseEndpoints(endpoints =>
+
+			{
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			});
+
+			server = new Server
+			{
+				Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+				Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+			};
+			server.Start();
+
+			applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
+
+		}
+		private void OnShutdown()
+		{
+			if (server != null)
+			{
+				server.ShutdownAsync().Wait();
+			}
+
+		}
+	}
 }

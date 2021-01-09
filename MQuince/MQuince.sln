@@ -94,7 +94,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.StaffManagement.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Infrastructure", "MQuince.Autentication.Infrastructure\MQuince.Autentication.Infrastructure.csproj", "{749F7956-3D40-4A22-A8E9-748F4802E84B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Autentication.Unit.Tests", "MQuince.Autentication.Unit.Tests\MQuince.Autentication.Unit.Tests.csproj", "{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Unit.Tests", "MQuince.Autentication.Unit.Tests\MQuince.Autentication.Unit.Tests.csproj", "{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pharmacy", "Pharmacy", "{711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Contracts", "MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj", "{BD853BF2-B909-4C56-BEEC-DE12C21517AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {537F14C2-0C1A-4A61-BF6C-2210D45B7A29}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Domain", "MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj", "{170C428D-D7E9-42F6-9041-42DD89C981BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Infrastructure", "MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj", "{7833320E-BE87-46C4-96B5-A3D575472D79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Services", "MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj", "{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration.Infrastructure", "Integration.Infrastructure", "{1E91DDCB-ADF8-412C-AEE8-C6203B4F3682}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Integration.Infrastructure", "MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj", "{98018434-9DE6-40FF-89BE-1CDBE343E2DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,6 +251,26 @@ Global
 		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD853BF2-B909-4C56-BEEC-DE12C21517AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD853BF2-B909-4C56-BEEC-DE12C21517AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD853BF2-B909-4C56-BEEC-DE12C21517AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD853BF2-B909-4C56-BEEC-DE12C21517AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170C428D-D7E9-42F6-9041-42DD89C981BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170C428D-D7E9-42F6-9041-42DD89C981BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170C428D-D7E9-42F6-9041-42DD89C981BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170C428D-D7E9-42F6-9041-42DD89C981BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7833320E-BE87-46C4-96B5-A3D575472D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7833320E-BE87-46C4-96B5-A3D575472D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7833320E-BE87-46C4-96B5-A3D575472D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7833320E-BE87-46C4-96B5-A3D575472D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -266,6 +303,11 @@ Global
 		{83E2DDE8-BF44-4817-A355-40B72D7F221A} = {063816A9-01D2-460C-8FA6-ED1A6F5B688B}
 		{749F7956-3D40-4A22-A8E9-748F4802E84B} = {A5356A5A-56E6-41C0-A696-00BA77E5FCD0}
 		{C0841C9D-DD8A-4607-B311-A5A328E2DE2A} = {2C0387C7-2DEF-49C5-B5EF-808763221DA1}
+		{BD853BF2-B909-4C56-BEEC-DE12C21517AF} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
+		{170C428D-D7E9-42F6-9041-42DD89C981BE} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
+		{7833320E-BE87-46C4-96B5-A3D575472D79} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
+		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
+		{98018434-9DE6-40FF-89BE-1CDBE343E2DB} = {1E91DDCB-ADF8-412C-AEE8-C6203B4F3682}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

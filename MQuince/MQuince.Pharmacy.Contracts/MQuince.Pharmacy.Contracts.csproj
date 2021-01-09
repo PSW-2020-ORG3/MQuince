@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MQuince.Core\MQuince.Core.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

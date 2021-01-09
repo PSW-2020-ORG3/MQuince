@@ -13,8 +13,12 @@ namespace MQuince.Integration.Entities
         public DateTime EndDate { get; set; }
         public double OldCost { get; set; }
         public double NewCost { get; set; }
-        public Boolean IsApproved { get; set; }
+        public Boolean IsApproved { get; private set; }
 
+        public void Approve()
+		{
+            IsApproved = true;
+		}
         public ActionsAndBenefits(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost,Boolean isApproved)
         {
             _actionKey = actionKey;

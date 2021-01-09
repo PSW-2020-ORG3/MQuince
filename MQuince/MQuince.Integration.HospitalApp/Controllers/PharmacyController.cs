@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Pharmacy.Contracts.DTO;
+using MQuince.Pharmacy.Contracts.Services;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {

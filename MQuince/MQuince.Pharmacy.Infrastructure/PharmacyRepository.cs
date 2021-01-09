@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Repository.MySQL.DataAccess;
-using MQuince.Integration.Repository.MySQL.DataProvider.Util;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
+using MQuince.Integration.Infrastructure.DataAccess;
+using MQuince.Integration.Infrastructure.PersistenceEntities;
+using MQuince.Pharmacy.Contracts.Repository;
+using MQuince.Pharmacy.Domain;
+using MQuince.Pharmacy.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider
+namespace MQuince.Pharmacy.Infrastructure
 {
     public class PharmacyRepository : IPharmacyRepository
     {

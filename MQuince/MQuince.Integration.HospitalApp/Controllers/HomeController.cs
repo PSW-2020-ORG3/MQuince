@@ -1,61 +1,60 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Implementation;
 using MQuince.Integration.Entities;
+using MQuince.Integration.Services.Implementation;
 using System.Collections.Generic;
-using MQuince.Integration.Services.Constracts.DTO;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
-    public class HomeController : Controller
-    {
+	public class HomeController : Controller
+	{
 
-        List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
-        
+		List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public string Welcome()
-        {
-            return "This is Welcome action method";
-        }
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-        public IActionResult AddPharmacy()
-        {
-            return View();
-        }
-        public IActionResult SendReports()
-        {
-            return View();
-        }
+		public string Welcome()
+		{
+			return "This is Welcome action method";
+		}
 
-        public IActionResult GetSpecification()
-        {
-            return View();
-        }
+		public IActionResult AddPharmacy()
+		{
+			return View();
+		}
+		public IActionResult SendReports()
+		{
+			return View();
+		}
 
-        public IActionResult PrescribeTherapy()
-        {
-            return View();
-        }
+		public IActionResult GetSpecification()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public IActionResult Therapy(string name, string jmbg, string medication, string description)
-        {
-            HomeService.generateQRCode(name, jmbg, medication, description);
-            return View();
-        }
-        public IActionResult SendMessageGrpc()
-        {
-            return View(messageGrpc);
-        }
+		public IActionResult PrescribeTherapy()
+		{
+			return View();
+		}
 
-        public IActionResult ActionAndBenefits()
-        {
-            return View();
-        }        
-        
-    }
+		[HttpPost]
+		public IActionResult Therapy(string name, string jmbg, string medication, string description)
+		{
+			HomeService.generateQRCode(name, jmbg, medication, description);
+			return View();
+		}
+		public IActionResult SendMessageGrpc()
+		{
+			return View(messageGrpc);
+		}
+
+		public IActionResult ActionAndBenefits()
+		{
+			return View();
+		}
+
+	}
 }
