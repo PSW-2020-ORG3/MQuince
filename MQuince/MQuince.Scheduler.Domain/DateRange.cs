@@ -18,7 +18,7 @@ namespace MQuince.Scheduler.Domain
 
         private void Validate()
         {
-            if (StartDateTime >= EndDateTime)
+            if (StartDateTime > EndDateTime)
             {
                 throw new ArgumentException("Invalid argument", nameof(StartDateTime));
             }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MQuince.Scheduler.Application.Controllers.Util;
 using MQuince.Scheduler.Contracts.DTO;
 using MQuince.Scheduler.Contracts.Exceptions;
 using MQuince.Scheduler.Contracts.Service;
@@ -20,6 +21,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpPost]
         public IActionResult Create(AppointmentDTO dto)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             if (ModelState.IsValid)
             {
                 _appointmentService.Create(dto);
@@ -30,6 +36,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_appointmentService.GetAll());
@@ -48,6 +59,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_appointmentService.GetById(id));
@@ -65,6 +81,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet("GetFreeApp")]
         public IActionResult GetFreeApp(Guid patientId, Guid doctorId, DateTime date)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_appointmentService.GetFreeAppointments(patientId, doctorId, date));
@@ -82,6 +103,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet("GetForPatient")]
         public IActionResult GetForPatient(Guid patientId)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_appointmentService.GetForPatient(patientId));
@@ -99,6 +125,11 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpPut("CancelAppointment/{appointmentId}")]
         public IActionResult CancelAppointment(Guid appointmentId)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 bool isCanceled = _appointmentService.CancelAppointment(appointmentId);
@@ -115,6 +146,21 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        private bool IsValidAuthenticationRole(string role)
+        {
+            var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
+
+            if (String.IsNullOrEmpty(outToken))
+                return false;
+
+            string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
+
+            if (userRole.Equals(role))
+                return true;
+
+            return false;
         }
     }
 }
