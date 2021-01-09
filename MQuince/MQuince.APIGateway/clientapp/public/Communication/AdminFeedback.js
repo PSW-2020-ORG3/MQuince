@@ -2,7 +2,59 @@
 	el: '#adminFeedback',
 	data: {
 		status: "Published",
-		feedbacks: []
+		feedbacks: [],
+		showLogIn: false,
+        showLogOut: true,
+        showCreateAppointment: false,
+        showAddFeedback: false,
+		showFeedback: false,
+        showObserveFeedback: false,
+        showObserveAppointment: false,
+		showFeedbackAdmin: true
+	},
+	created() {
+		var role = localStorage.getItem('keyRole');
+		
+		console.log("rolaaa",role);
+		//role=2
+		if (role == null) {
+			this.showLogIn = true;
+			this.showLogOut = false;
+			this.showCreateAppointment = false;
+			this.showAddFeedback = false;
+			this.showFeedback = true;
+			this.showObserveFeedback = true;
+			this.showObserveAppointment = false;
+			this.showFeedbackAdmin = false;
+		}
+		if (role == 0) { // patient
+			this.showLogIn = false;
+			this.showLogOut = true;
+			this.showCreateAppointment = true;
+			this.showAddFeedback = true;
+			this.showFeedback = true;
+			this.showObserveFeedback = true;
+			this.showObserveAppointment = true;
+			this.showFeedbackAdmin = false;
+		} else if (role == 1) { // admin
+			this.showLogIn = false;
+			this.showLogOut = true;
+			this.showCreateAppointment = false;
+			this.showAddFeedback = false;
+			this.showFeedback = false;
+			this.showObserveFeedback = false;
+			this.showObserveAppointment = false;
+			this.showFeedbackAdmin = true;
+		}
+		axios
+			.get('/gateway/Feedback/GetByStatus', {
+				params: {
+					publish: true,
+					approved: true
+				}
+			}).then(response => {
+				this.feedbacks = response.data
+			})
 	},
 	methods: {
 		statusChanged() {
@@ -59,18 +111,25 @@
 						JSAlert.alert("Success!");
 					})
 			})
-        }
-	},
-	created() {
-		axios
-			.get('/gateway/Feedback/GetByStatus', {
-				params: {
-					publish: true,
-					approved: true
-				}
-			}).then(response => {
-				this.feedbacks = response.data
-			})
+        },
+		logIn: function () {
+			axios
+				.post("/gateway/User", {
+					Username: "admin",
+					Password: "admin"
+				}).then((response) => {
+					window.location.href = "/public/index.html";
+					localStorage.setItem('keyToken', response.data.token)
+					localStorage.setItem('keyRole', response.data.userRole)
 
-    }
+				}, (error) => {
+					console.log(error);
+				});
+		},
+		logOut: function () {
+			localStorage.removeItem('keyToken');
+			localStorage.removeItem('keyRole');
+			window.location.href = "/public/index.html";
+		}
+	}
 })

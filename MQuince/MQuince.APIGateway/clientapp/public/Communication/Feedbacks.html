@@ -153,43 +153,61 @@
         </div>
     </header>
 
+    <!-- Contact Section-->
     <section class="page-section" id="contact">
-        <div>
-            <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Your feedbacks</h5>
-
-        </div>
-    </section>
-
-    <div style="margin-top:-45px">
-        <!-- Contact Section-->
-        <div class="container">
-            <!-- Contact Section Heading-->                <!-- Icon Divider-->
+       <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedbacks</h4>
+    
+       <div class="container" id="feedbacks">
+            <!-- Icon Divider-->
             <!-- Contact Section Form-->
-            <div style=" margin-top: 15px">
+            <br/>
+            <div class="col-lg-8 mx-auto">
+                <select name="feedbackOption" id="feedbackOption" v-model="status" @change="onChange" style="width:200px; margin-left: 520px; margin-top: 20px;">
+                    <option value="AllFeedbacks" selected="selected">AllFeedbacks</option>
+                    <option v-bind:hidden="showLogIn" value="MyFeedbacks">MyFeedbacks</option>
+                </select>
+            </div>
 
-                <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+            <div v-if="status == 'AllFeedbacks' " style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
                     <div style="display: inline-block">
-                        <table>
+                        <table >
                             <tr>
                                 <td colspan="2">
                                     <img src="../static/feedbackIcon.png" height="100" width="100">
                                 </td>
                                 <td>
                                     <div style="margin-left:30px;margin-bottom:30px">
-                                        <div class="short-info2">By Helena:</div>
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous || feedback.entityDTO.user == null"><i>Anonymus&nbsp</i></div>
+                                        <div class="short-info2" v-if="feedback.entityDTO.user != null ">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
                                         <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                </div>
-
-
-
             </div>
+
+            <div v-if="status == 'MyFeedbacks' && feedback.entityDTO.user == 'Helena'" style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+                    <div style="display: inline-block">
+                        <table >
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../static/feedbackIcon.png" height="100" width="100">
+                                </td>
+                                <td>
+                                    <div style="margin-left:30px;margin-bottom:30px">
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
+                                        <div class="short-info2" v-else>By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                        <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            </div>
+
         </div>
-    </div>
+    </section>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

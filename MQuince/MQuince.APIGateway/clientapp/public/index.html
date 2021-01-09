@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -69,8 +69,6 @@
                             </ul>
                         </li>
                         <li v-bind:hidden="!showObserveAppointment"><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
-
-
                         <li v-bind:hidden="!showCreateAppointment" class="drop-down">
                             <a href="" class="appointment-btn scrollto" style="text-align: center; display: block; color:white">Create appointment</a>
                             <ul>
@@ -80,19 +78,19 @@
                         </li>
                         <li v-on:click="logIn" v-bind:hidden="!showLogIn"><a href="#">Log in</a></li>
                         <li v-on:click="logOut" v-bind:hidden="!showLogOut"><a href="#">Log out</a></li>
-
                     </ul>
                 </nav>
             </div>
-
         </header>-->
-
-    <div>
+        
+    
+    <div >
         <section style="margin-top: 30px; max-height: 450px; object-fit: fill;" id="hero" class="d-flex align-items-center">
             <div class="container">
             </div>
         </section>
     </div>
+    
 
     <script src="scripts/vue.js"></script>
     <script src="scripts/vue-router.js"></script>
