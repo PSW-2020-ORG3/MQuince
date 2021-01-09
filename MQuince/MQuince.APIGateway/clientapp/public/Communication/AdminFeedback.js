@@ -94,9 +94,8 @@
 		},
 		approve: function (fdb) {
 			var self = this
-			JSAlert.confirm("Are you sure you want to approve this feedback?").then(function (result) {
-				if (!result)
-					return;
+
+			alert("You  have successfully published a feedback!")
 				fdb.entityDTO.approved = true
 				axios
 					.put("/gateway/Feedback/Approve/" + fdb.id
@@ -110,7 +109,6 @@
 						}
 						JSAlert.alert("Success!");
 					})
-			})
         },
 		logIn: function () {
 			axios
