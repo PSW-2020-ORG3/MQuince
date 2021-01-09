@@ -6,7 +6,6 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>MQuince Health</title>
-    <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../../favicon.ico.png" />
 
     <link href="../../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -25,99 +24,86 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="styles.css" rel="stylesheet" />
     <link href="../../src/assets/style.css" rel="stylesheet">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="styles.css" rel="stylesheet" />
-</head>
-<style>
-    input[type=text], select, input[type=time] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-        input[type=submit]:hover {
-            background-color: #45a049;
+    <style>
+        input[type=text], select, input[type=time] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
 
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    .apartment-name2 {
-        position: relative;
-        top: 30px;
-        max-height: 50px;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        font-weight: 400;
-        color: rgb(34, 34, 34);
-        font-size: 18px;
-        line-height: 24px;
-        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    }
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
 
-    .short-info2 {
-        position: relative;
-        top: 0px;
-        margin-top: 9px;
-        color: rgb(113, 113, 113);
-        font-weight: 400;
-        min-height: 18px;
-        font-size: 14px;
-        line-height: 18px;
-        max-height: 22px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
 
-    .btn {
-        background-color: transparent;
-        border: none;
-        padding: 6px 16px;
-        font-size: 16px;
-        cursor: pointer;
-    }
+        .apartment-name2 {
+            position: relative;
+            top: 15px;
+            max-height: 50px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            font-weight: 400;
+            color: rgb(34, 34, 34);
+            font-size: 18px;
+            line-height: 24px;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+        }
 
-        /* Darker background on mouse-over */
-        .btn:hover {
+        .short-info2 {
+            position: relative;
+            top: 0px;
+            margin-top: 9px;
+            color: rgb(113, 113, 113);
+            font-weight: 400;
+            min-height: 18px;
+            font-size: 14px;
+            line-height: 18px;
+            max-height: 22px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn {
             background-color: transparent;
+            border: none;
+            padding: 6px 16px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
-    .commentBox {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        margin: auto;
-        width: 70%;
-        margin-top: 10px;
-        height: 200px;
-    }
-</style>
+            /* Darker background on mouse-over */
+            .btn:hover {
+                background-color: transparent;
+            }
+
+        .commentBox {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: auto;
+            width: 70%;
+            margin-top: 10px;
+            height: 240px;
+        }
+    </style>
+</head>
 
 <body id="feedbacks">
     <!-- Navigation-->
@@ -141,21 +127,12 @@
             <h1 class="logo mr-auto"><a href="/public/index.html">MQUINCE Medic</a></h1>
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-<<<<<<< HEAD:MQuince/MQuince.WebAPI/clientapp/public/Communication/Feedbacks.html
-                    <li><a href="../index.html">Home</a></li>
-                    <li class="drop-down active">
-                        <a href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
-                        <ul>
-                            <li><a href="#/">Add feedback</a></li>
-                            <li><a href="../Communication/Feedbacks.html">Observe feedbacks</a></li>
-=======
                     <li><a href="/public/index.html">Home</a></li>
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul class="drop-down-menu">
                             <li v-bind:hidden="!showAddFeedback"><a id="addFeedback" href="/public/Communication/AddFeedback.html">Add feedback</a></li>
                             <li v-bind:hidden="!showObserveFeedback"><a href="/public/Communication/Feedbacks.html">Observe feedbacks</a></li>
->>>>>>> develop:MQuince/MQuince.APIGateway/clientapp/public/Communication/Feedbacks.html
                         </ul>
                     </li>
                     <li v-bind:hidden="!showObserveAppointment"><a href="/public/Appointment/Appointment.html">Observe appointment</a></li>
@@ -178,7 +155,6 @@
 
     <!-- Contact Section-->
     <section class="page-section" id="contact">
-<<<<<<< HEAD:MQuince/MQuince.WebAPI/clientapp/public/Communication/Feedbacks.html
        <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedbacks</h4>
     
        <div class="container" id="feedbacks">
@@ -187,51 +163,28 @@
             <br/>
             <div class="col-lg-8 mx-auto">
                 <select name="feedbackOption" id="feedbackOption" v-model="status" @change="onChange" style="width:200px; margin-left: 520px; margin-top: 20px;">
-                    <option value="AllFeedbacks">AllFeedbacks</option>
-                    <option value="MyFeedbacks">MyFeedbacks</option>
+                    <option value="AllFeedbacks" selected="selected">AllFeedbacks</option>
+                    <option v-bind:hidden="showLogIn" value="MyFeedbacks">MyFeedbacks</option>
                 </select>
             </div>
 
             <div v-if="status == 'AllFeedbacks' " style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
                     <div style="display: inline-block">
                         <table >
-=======
-        <div>
-            <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Your feedbacks</h5>
-
-        </div>
-    </section>
-
-    <div style="margin-top:-45px">
-        <!-- Contact Section-->
-        <div class="container">
-            <!-- Contact Section Heading-->                <!-- Icon Divider-->
-            <!-- Contact Section Form-->
-            <div style=" margin-top: 15px">
-
-                <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
-                    <div style="display: inline-block">
-                        <table>
->>>>>>> develop:MQuince/MQuince.APIGateway/clientapp/public/Communication/Feedbacks.html
                             <tr>
                                 <td colspan="2">
                                     <img src="../static/feedbackIcon.png" height="100" width="100">
                                 </td>
                                 <td>
                                     <div style="margin-left:30px;margin-bottom:30px">
-<<<<<<< HEAD:MQuince/MQuince.WebAPI/clientapp/public/Communication/Feedbacks.html
-                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous"><i>Anonymus&nbsp</i></div>
-                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous ===  false ">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
-=======
-                                        <div class="short-info2">By Helena:</div>
->>>>>>> develop:MQuince/MQuince.APIGateway/clientapp/public/Communication/Feedbacks.html
+                                        <div class="short-info2" v-if="feedback.entityDTO.anonymous || feedback.entityDTO.user == null"><i>Anonymus&nbsp</i></div>
+                                        <div class="short-info2" v-if="feedback.entityDTO.user != null ">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
                                         <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </div>
-<<<<<<< HEAD:MQuince/MQuince.WebAPI/clientapp/public/Communication/Feedbacks.html
             </div>
 
             <div v-if="status == 'MyFeedbacks' && feedback.entityDTO.user == 'Helena'" style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
@@ -252,20 +205,10 @@
                         </table>
                     </div>
             </div>
-=======
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
->>>>>>> develop:MQuince/MQuince.APIGateway/clientapp/public/Communication/Feedbacks.html
 
         </div>
     </section>
 
-    
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -275,11 +218,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <!-- Core theme JS-->
     <script src="../axios.js"></script>
-<<<<<<< HEAD:MQuince/MQuince.WebAPI/clientapp/public/Communication/Feedbacks.html
-    <script src="js/scripts.js"></script>
-    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
-=======
->>>>>>> develop:MQuince/MQuince.APIGateway/clientapp/public/Communication/Feedbacks.html
     <script src="Feedbacks.js"></script>
     <script src="../Header/Header.js"></script>
 
