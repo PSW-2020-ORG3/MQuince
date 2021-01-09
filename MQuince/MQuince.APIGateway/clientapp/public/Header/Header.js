@@ -69,7 +69,7 @@
 			this.showLogIn = false;
 			this.showLogOut = true;
 			this.showCreateAppointment = false;
-			this.showAddFeedback = true;
+			this.showAddFeedback = false;
 			this.showFeedback = false;
 			this.showObserveFeedback = false;
 			this.showObserveAppointment = false;
