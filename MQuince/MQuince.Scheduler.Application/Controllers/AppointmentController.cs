@@ -150,17 +150,24 @@ namespace MQuince.Scheduler.Application.Controllers
 
         private bool IsValidAuthenticationRole(string role)
         {
-            var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
+            try
+            {
+                var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
 
-            if (String.IsNullOrEmpty(outToken))
+                if (String.IsNullOrEmpty(outToken))
+                    return false;
+
+                string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
+
+                if (userRole.Equals(role))
+                    return true;
+
                 return false;
-
-            string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
-
-            if (userRole.Equals(role))
-                return true;
-
-            return false;
+            }
+            catch (InvalidJWTTokenException)
+            {
+                return false;
+            }
         }
     }
 }

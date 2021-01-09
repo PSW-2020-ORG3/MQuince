@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Primitives;
-using Microsoft.IdentityModel.Tokens;
-using MQuince.Scheduler.Contracts.Exceptions;
+﻿using Microsoft.IdentityModel.Tokens;
+using MQuince.Review.Contracts.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -9,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MQuince.Scheduler.Application.Controllers.Util
+namespace MQuince.Review.Application.Controllers.Util
 {
     public class JWTRoleDecoder
     {
