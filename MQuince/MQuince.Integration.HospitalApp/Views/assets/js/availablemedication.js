@@ -1,4 +1,4 @@
-﻿const uri = 'http://localhost:49544/api/Grpc'
+﻿const uri = 'api/GrpcController'
 
 function sendName() {
     setInterval(function () {

@@ -1,18 +1,20 @@
-using System.Globalization;
-using System.IO;
+using Grpc.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using MQuince.Integration.HospitalApp.Protos;
 using MQuince.Integration.Repository.MySQL.DataProvider;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
-
-using Microsoft.EntityFrameworkCore;
-using Grpc.Core;
-using MQuince.Integration.HospitalApp.Protos;
+using MQuince.Pharmacy.Contracts.Services;
+using MQuince.Pharmacy.Infrastructure;
+using MQuince.Pharmacy.Services;
+using System.Globalization;
+using System.IO;
 
 
 namespace MQuince.Integration.HospitalApp
@@ -33,7 +35,7 @@ namespace MQuince.Integration.HospitalApp
             services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsService), s => new MedicationsService(new MedicationsRepository(dbContextOptionsBuilder)));
-
+			services.AddTransient(typeof(IActionAndBenefitsService), s => new ActionAndBenefitsService(new ActionAndBenefitsRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(ISftpService), s => new SftpService());
             services.AddTransient(typeof(ITenderService), s => new TenderService(new TenderRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IPharmacyOffersService), s => new PharmacyOffersService(new PharmacyOffersRepository(dbContextOptionsBuilder)));

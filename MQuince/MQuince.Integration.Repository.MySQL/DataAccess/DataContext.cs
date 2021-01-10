@@ -21,11 +21,10 @@ namespace MQuince.Integration.Repository.MySQL.DataAccess
 
         public DbSet<PharmacyPersistence> Pharmacies { get; set; }
         public DbSet<MedicationsConsumptionPersistance> MedicationsConsumptions { get; set; }
+        public DbSet<ActionAndBenefitsPersistance> ActionAndBenefits { get; set; }
         public DbSet<MedicationsPersistence> Medications{ get; set; }
-
         public DbSet<TenderPersistance> Tenders { get; set; }
         public DbSet<PharmacyOffersPersistance> PharmacyOffers { get; set; }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

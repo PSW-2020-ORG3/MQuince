@@ -1,4 +1,4 @@
-﻿const uri = 'http://localhost:49544/api/Grpc'
+﻿const uri = '/api/Grpc'
 
 function sendName() {
     const name = document.getElementById('name');

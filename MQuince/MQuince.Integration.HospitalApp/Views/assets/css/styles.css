@@ -1,14 +1,14 @@
 body
 {
     background-image: url('back.jpg');
-    background-position: fixed;
     background-repeat: repeat;
-    background-size: cover;
+    background-size: 100%;
+    background-position: fixed;
     margin: 0 auto;
 }
 .nav-bar
 {
-    width: 100%;
+    width: auto;
     height: 60px;
    
     display: block;
@@ -46,8 +46,8 @@ button {
 .container
 {
     position: absolute;
-    top: 100px;
-    left: 2%;
+    
+    
     width: 100%;
 }
 #buttons {
@@ -106,13 +106,14 @@ button {
 
 .reportsDiv
 {   margin-left: 300px;
-    margin-top: -220px;
+   
     width: 100%;
     height: 100%;
 }
 
 td
 {
+    
     padding: 20px;
 }
 
@@ -121,7 +122,19 @@ td
     margin-top: -500px;
     font-size: 22px;
 }
+#action-div {
+    position: absolute;
+    top: 100px;
+    left: 2%;
+    width: 100%;
+}
 
+.tabelActionClass {
+    width: 60%;
+    border: none;
+    padding: 5px;
+    text-align: center;
+}
 
 #urgentMesssage-container {
     position: absolute;

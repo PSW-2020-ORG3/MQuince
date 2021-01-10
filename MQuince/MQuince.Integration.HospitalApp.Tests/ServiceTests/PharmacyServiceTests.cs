@@ -1,9 +1,10 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
+﻿
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Pharmacy.Contracts.DTO;
+using MQuince.Pharmacy.Contracts.Repository;
+using MQuince.Pharmacy.Contracts.Services;
+using MQuince.Pharmacy.Domain;
+using MQuince.Pharmacy.Services;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -54,8 +55,8 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
         public void Get_by_id_returns_pharmacy()
         {
             pharmacyRepository.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(this.GetFirstPharmacy());
+            
             IdentifiableDTO<PharmacyDTO> pharmacy = pharmacyService.GetById(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526"));
-
 
             Assert.True(this.ComparePharmacyAndIdentifierPharmacy(this.GetFirstPharmacy(), pharmacy));
         }

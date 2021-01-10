@@ -4,15 +4,9 @@ using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
-
-
     [Route("api/[controller]")]
     [ApiController]
     public class GrpcController : ControllerBase
@@ -36,3 +30,4 @@ namespace MQuince.Integration.HospitalApp.Controllers
         }
     }
 }
+

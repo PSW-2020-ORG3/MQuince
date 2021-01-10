@@ -6,9 +6,8 @@ using System.Text;
 
 namespace MQuince.Integration.Services.Constracts.Interfaces
 {
-    public interface IPharmacyService : IService<PharmacyDTO, IdentifiableDTO<PharmacyDTO>>
+    public interface IActionAndBenefitsService : IService<ActionAndBenefitsDTO, IdentifiableDTO<ActionAndBenefitsDTO>>
     {
-        IEnumerable<IdentifiableDTO<PharmacyDTO>> GetByAllParams(string name, string url, Guid api);
-
+        void Update(ActionAndBenefitsDTO entityDTO, Guid id, Boolean isApproved);
     }
 }

@@ -1,13 +1,12 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities;
+using MQuince.Pharmacy.Contracts.DTO;
+using MQuince.Pharmacy.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.Pharmacy.Infrastructure.Util
 {
     public class PharmacyMapper
     {

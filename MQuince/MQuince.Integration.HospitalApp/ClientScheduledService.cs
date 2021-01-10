@@ -68,5 +68,4 @@ namespace MQuince.Integration.HospitalApp
             return Task.CompletedTask;
         }
     }
-
 }

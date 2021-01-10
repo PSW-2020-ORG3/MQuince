@@ -1,4 +1,4 @@
-const uri = 'http://localhost:49544/api/sftpController'
+const uri = '/api/sftpController'
 
 function postDate() {
     const from = document.getElementById('from');

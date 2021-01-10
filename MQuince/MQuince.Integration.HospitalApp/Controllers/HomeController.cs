@@ -1,8 +1,8 @@
+﻿using Microsoft.AspNetCore.Mvc;
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
 using QRCoder;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -17,37 +17,52 @@ using System.Collections.Generic;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
-    public class HomeController : Controller
-    {
+	public class HomeController : Controller
+	{
 
-        List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
+		List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
         List<GrpcMessage> messageForUrgentProcurement = ClientScheduledService.MessageForUrgentProcurement;
 
-        List<ActionsAndBenefits> action = Program.ActionAndBenefitMessage;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-        public string Welcome()
-        {
-            return "This is Welcome action method";
-        }
+		public string Welcome()
+		{
+			return "This is Welcome action method";
+		}
 
-        public IActionResult Add()
-        {
-            return View();
-        }
-        public IActionResult Reports()
-        {
-            return View();
-        }
+		public IActionResult AddPharmacy()
+		{
+			return View();
+		}
+		public IActionResult SendReports()
+		{
+			return View();
+		}
 
-        public IActionResult getSpecification()
-        {
-            return View();
-        }
+		public IActionResult GetSpecification()
+		{
+			return View();
+		}
+
+		public IActionResult PrescribeTherapy()
+		{
+			return View();
+		}
+
+		public IActionResult SendMessageGrpc()
+		{
+			return View(messageGrpc);
+		}
+
+		public IActionResult ActionAndBenefits()
+		{
+			return View();
+		}
+
 
         public IActionResult Therapy()
         {
@@ -59,18 +74,12 @@ namespace MQuince.Integration.HospitalApp.Controllers
             HomeService.generateQRCode(name, jmbg, medication, description);
             return View();
         }
-        public IActionResult sendMessageGrpc()
-        {
-            return View(messageGrpc);
-        }
-        public IActionResult ActionAndBenefits()
-        {
-            return View(action);
-        }
+
         public IActionResult urgentMessage()
         {
             return View(messageForUrgentProcurement);
         }
+        
         public IActionResult tender()
         {
             return View();

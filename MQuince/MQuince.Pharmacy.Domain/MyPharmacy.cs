@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.DTO
+namespace MQuince.Pharmacy.Domain
 {
-    public class PharmacyDTO
+    public class MyPharmacy
     {
         public Guid ApiKey { get; set; }
         public string Name { get; set; }
 
         public string Url { get; set; }
-        public PharmacyDTO(Guid apiKey,string name, string url)
+
+        public MyPharmacy()
         {
 
+        }
+
+        public MyPharmacy(Guid apiKey, string name, string url)
+        {
             if (apiKey == Guid.Empty)
             {
                 throw new ArgumentException("Argument can not be Guid.Empty");
@@ -23,12 +26,7 @@ namespace MQuince.Integration.Services.Constracts.DTO
                 Name = name;
                 Url = url;
             }
-            
-        }
-        public PharmacyDTO()
-        {
 
         }
-
     }
 }
