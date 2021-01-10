@@ -21,15 +21,13 @@ namespace MQuince.Integration.Services.Implementation
 
         }
 
-
-
         public bool Delete(Guid id) => _pharmacyRepository.Delete(id);
 
         public IEnumerable<IdentifiableDTO<PharmacyDTO>> GetByAllParams()
             => _pharmacyRepository.GetAll().Select(c => CreateDTOFromPharmacy(c));
 
 
-        public IdentifiableDTO<PharmacyDTO> GetByApi(Guid api) => CreateDTOFromPharmacy(_pharmacyRepository.GetById(api));
+        public IdentifiableDTO<PharmacyDTO> GetByID(Guid api) => CreateDTOFromPharmacy(_pharmacyRepository.GetById(api));
 
 
         private IdentifiableDTO<PharmacyDTO> CreateDTOFromPharmacy(MyPharmacy pharmacy)

@@ -38,6 +38,24 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.ToTable("MedicationsConsumption");
                 });
 
+            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
+                {
+                    b.Property<Guid>("KeyMedication")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("KeyMedication");
+
+                    b.ToTable("Medications");
+                });
+
             modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
                 {
                     b.Property<Guid>("ApiKey")
