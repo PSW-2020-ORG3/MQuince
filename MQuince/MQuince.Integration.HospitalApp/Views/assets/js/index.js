@@ -23,8 +23,16 @@ function goToAction() {
 function urgentMessage() {
     window.location.replace("http://localhost:49544/home/urgentMessage");
 }
+function tender() {
+    window.location.replace("http://localhost:49544/home/tender");
+}
+function ViewTender() {
+    window.location.replace("http://localhost:49544/home/ViewTender");
+}
+function ShowAllOffers() {
+    window.location.replace("http://localhost:49544/home/ShowAllOffers");
 
 function requestForDirector() {
     window.location.replace("http://localhost:49544/home/requestForDirector");
+
 }
-/*document.location.href=*/

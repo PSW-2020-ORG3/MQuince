@@ -1,5 +1,4 @@
-﻿
-using MQuince.Integration.Entities;
+﻿using MQuince.Integration.Entities;
 using MQuince.Integration.Repository.Contracts;
 using MQuince.Integration.Services.Constracts.DTO;
 using MQuince.Integration.Services.Constracts.IdentifiableDTO;
@@ -36,9 +35,8 @@ namespace MQuince.Integration.Services.Implementation
            
         }      
 
-        public IdentifiableDTO<ActionAndBenefitsDTO> GetByID(Guid id) => CreateDTOFromActionAndBenefits(_actionAndBenefitsRepository.GetById(id));
+        public IdentifiableDTO<ActionAndBenefitsDTO> GetById(Guid id) => CreateDTOFromActionAndBenefits(_actionAndBenefitsRepository.GetById(id));
 
-        public ActionsAndBenefits GetById(Guid id) => _actionAndBenefitsRepository.GetById(id);
         private IdentifiableDTO<ActionAndBenefitsDTO> CreateDTOFromActionAndBenefits(ActionsAndBenefits actionAndBenefits)
         {
             if (actionAndBenefits == null) return null;

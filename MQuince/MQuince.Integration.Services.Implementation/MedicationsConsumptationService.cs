@@ -37,7 +37,8 @@ namespace MQuince.Integration.Services.Implementation
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetAll()
             => _medicationsConsumptionRepository.GetAll().Select(c => CreateDTOFromMedicationsConsumption(c));
 
-        public IdentifiableDTO<MedicationsConsumptionDTO> GetByID(Guid id) => CreateDTOFromMedicationsConsumption(_medicationsConsumptionRepository.GetById(id));
+        public IdentifiableDTO<MedicationsConsumptionDTO> GetById(Guid id) => CreateDTOFromMedicationsConsumption(_medicationsConsumptionRepository.GetById(id));
+
 
 
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetConsumptionBetweenDates(DateTime from, DateTime to)
@@ -81,7 +82,7 @@ namespace MQuince.Integration.Services.Implementation
 
         public void Update(MedicationsConsumptionDTO entityDTO, Guid id)
         {
-            throw new NotImplementedException();
+            _medicationsConsumptionRepository.Update(CreateMedicationsConsumptionFromDTO(entityDTO));
         }
 
         private IdentifiableDTO<MedicationsConsumptionDTO> CreateDTOFromMedicationsConsumption(MedicationsConsumption medicationsConsumptation)

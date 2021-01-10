@@ -1,6 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Entities;
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using QRCoder;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Syncfusion.Pdf.Barcode;
+using System.Drawing.Drawing2D;
+using Syncfusion.Pdf.Graphics;
+using PdfSharp.Drawing;
+using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
+using MQuince.Integration.Entities;
 using System.Collections.Generic;
 
 namespace MQuince.Integration.HospitalApp.Controllers
@@ -67,6 +79,27 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return View(messageForUrgentProcurement);
         }
+        
+        public IActionResult tender()
+        {
+            return View();
+        }
+        
+        public IActionResult ViewTender()
+        {
+            return View();
+        }
+
+        public IActionResult Form()
+        {
+            return View();
+        }
+
+        public IActionResult ShowAllOffers()
+        {
+            return View();
+        }
+
         public IActionResult requestForDirector()
         {
             return View(messageForUrgentProcurement);

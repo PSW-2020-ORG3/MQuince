@@ -37,6 +37,8 @@ namespace MQuince.Integration.HospitalApp
             services.AddTransient(typeof(IMedicationsService), s => new MedicationsService(new MedicationsRepository(dbContextOptionsBuilder)));
 			services.AddTransient(typeof(IActionAndBenefitsService), s => new ActionAndBenefitsService(new ActionAndBenefitsRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(ISftpService), s => new SftpService());
+            services.AddTransient(typeof(ITenderService), s => new TenderService(new TenderRepository(dbContextOptionsBuilder)));
+            services.AddTransient(typeof(IPharmacyOffersService), s => new PharmacyOffersService(new PharmacyOffersRepository(dbContextOptionsBuilder)));
 
             services.AddMvc().AddNewtonsoftJson(option =>
             {
@@ -72,7 +74,9 @@ namespace MQuince.Integration.HospitalApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
 

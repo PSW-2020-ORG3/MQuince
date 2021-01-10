@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="~/Views/assets/bootstrap/css/bootstrap.min.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="~/Views/assets/js/vue.js"></script>
@@ -13,34 +14,30 @@
     <script>
         function home() {
             window.location.replace("http://localhost:49544/home");
-        }
-    </script>
-    <link rel="stylesheet" type="text/css" href="~/Views/assets/css/PharmacyOffersStyle.css">
-    <link rel="stylesheet" href="~/Views/assets/css/addPharamcy.css" type="text/css" runat="server">
+        }</script>
 
-    <link rel="stylesheet" href="~/Views/assets/css/PharmacyOffersStyle.css" type="text/css" runat="server">
-    
-    <title> MQUINCE MEDIC </title>
+    <link rel="stylesheet" href="~/Views/assets/css/AllOffersStyle.css" type="text/css" runat="server">
+
+    <script src="~/Views/assets/js/ShowAllOffers.js"></script>
+    <title> HOSPITAL SERVER </title>
 </head>
 
 <body>
     <div id="root">
-        @*  *@
         <div class="nav-bar">
-            <div class="hsp_server"> MQUINCE MEDIC </div>
+            <div class="hsp_server"> HOSPITAL  SERVER </div>
             <div class="navButton">
                 <button asp-controller="Home" onclick="home()"> HOME </button>
             </div>
 
         </div>
         <div class="container">
-            @RenderBody()
+            <div class="offers" id="offers">
+               
+            </div>
 
         </div>
     </div>
-
-    @RenderSection("Scripts", required: false)
-    
 </body>
 
 

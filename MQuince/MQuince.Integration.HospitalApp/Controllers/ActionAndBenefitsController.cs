@@ -55,7 +55,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 		[HttpPut("{id}")]
 		public IActionResult Update(Guid id)
 		{
-			IdentifiableDTO<ActionAndBenefitsDTO> actionAndBenefits = _actionAndBenefitsService.GetByID(id);
+			IdentifiableDTO<ActionAndBenefitsDTO> actionAndBenefits = _actionAndBenefitsService.GetById(id);
 			try
 			{
 				_actionAndBenefitsService.Update(new ActionAndBenefitsDTO()

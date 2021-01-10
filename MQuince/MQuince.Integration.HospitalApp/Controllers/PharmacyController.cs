@@ -24,9 +24,10 @@ namespace MQuince.Integration.HospitalApp.Controllers
             return _pharmacyService.GetAll();
         }
 
-        [HttpPost]
+        
         public IActionResult Add(PharmacyDTO dto)
         {
+
             try
             {
                 _pharmacyService.Create(dto);

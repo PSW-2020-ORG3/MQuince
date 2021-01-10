@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="~/Views/assets/css/PharmacyOffersStyle.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type='text/javascript'></script>
+    <!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js" type='text/javascript'></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type='text/javascript'></script>
+    <script src="~/Views/assets/js/PharmacyOffers.js" type='text/javascript'></script>
+</head>
+<body>
+    <div class="container-inform">
+        <form>
+
+
+            <table id="offers" class="offers">
+                <tr>
+                    <td> <label> Tender name: </label> </td>
+                    <td><p id="tenderName"></p></td>
+                </tr>
+                <tr>
+                    <td> <label> Pharmacy name: </label> </td>
+                    <td> <input type="text" id="pharmacyName" /></td>
+                </tr>
+                <tr>
+                    <td> <label>Pharmacy email: </label> </td>
+                    <td> <input type="text" id="pharmacyEmail" /></label></td>
+                </tr>
+            </table>
+            <table id="drugs" class="drugs">
+                <tr>
+                    <td>  <label> Medication name: </label> </td>
+                    <td> <input type="text" /> </td>
+                    <td>   <label> Quantity: </label> </td>
+                    <td> <input type="text" />  </td>
+                    <td>   <label> Price: </label> </td>
+                    <td> <input type="text" />  </td>
+                </tr>
+                <br />
+            </table>
+
+        </form>
+
+        <div class="buttonsNew">
+            <button id="add" onclick="addRow(); return false;"><span>ADD NEW MEDICATION  </span> </button>
+            <button id="submit" onclick="sendOffer(); return false;"> SUBMIT OFER </button>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

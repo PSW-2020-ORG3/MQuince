@@ -37,7 +37,7 @@ namespace MQuince.Integration.HospitalApp
 
         {
             try
-            {  
+            {
                 MessagePharmacyResponse response = await client.communicateAsync(new MessagePharmacy() { Name = name, Quantity = quantity });
                 GrpcMessage message = new GrpcMessage(response.Name, response.Status);
                 MessageForUrgentProcurement.Add(message);
