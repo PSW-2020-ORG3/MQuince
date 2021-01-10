@@ -1,4 +1,4 @@
-﻿var app = new Vue({
+﻿﻿var app = new Vue({
 	el: '#index',
 	data: {
 		showLogIn: true,
@@ -7,7 +7,8 @@
 		showAddFeedback: false,
 		showFeedback: false,
 		showObserveFeedback: false,
-		showObserveAppointment: false
+		showObserveAppointment: false,
+		isAdmin: false
 	},
 	mounted() {
 		var role = localStorage.getItem('keyRole');
@@ -19,7 +20,8 @@
 			this.showAddFeedback = false;
 			this.showFeedback = true;
 			this.showObserveFeedback = true;
-			this.showObserveAppointment = false
+			this.showObserveAppointment = false;
+			this.isAdmin = false;
         }
 		if (role == 0) { // patient
 			this.showLogIn = false;
@@ -29,6 +31,7 @@
 			this.showFeedback = true;
 			this.showObserveFeedback = true;
 			this.showObserveAppointment = true;
+			this.isAdmin = false;
 		} else if (role == 1) { // admin
 			this.showLogIn = false;
 			this.showLogOut = true;
@@ -37,12 +40,13 @@
 			this.showFeedback = false;
 			this.showObserveFeedback = false;
 			this.showObserveAppointment = false;
+			this.isAdmin = true;
 		}
 	},
 	methods: {
 		logIn: function () {
 			axios
-				.post("/api/User", {
+				.post("/gateway/User", {
 					Username: "admin",
 					Password: "admin"
 				}).then((response) => {
@@ -57,6 +61,6 @@
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole')
         }
-		}
+	}
 	
 })

@@ -33,6 +33,7 @@ namespace MQuince.Integration.Services.Implementation
 
         public bool Delete(Guid id) => _medicationsConsumptionRepository.Delete(id);
 
+
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetAll()
             => _medicationsConsumptionRepository.GetAll().Select(c => CreateDTOFromMedicationsConsumption(c));
 

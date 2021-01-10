@@ -24,18 +24,34 @@ namespace MQuince.Integration.HospitalApp.Controllers
 			return _medicationsConsumptionService.GetAll();
 		}
 
-		[HttpPost]
-		public IActionResult Add([FromBody] MedicationsConsumptionDTO dto)
-		{
-			try
-			{
-				_medicationsConsumptionService.Create(dto);
-				return Ok(dto);
-			}
-			catch (Exception e)
-			{
-				return BadRequest(e.Message);
-			}
-		}
-	}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _medicationsConsumptionService.Delete(id);
+                return Ok(id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
+
+
+        [HttpPost]
+        public IActionResult Add([FromBody] MedicationsConsumptionDTO dto)
+        {
+            try
+            {
+                _medicationsConsumptionService.Create(dto);
+                return Ok(dto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+    }
 }

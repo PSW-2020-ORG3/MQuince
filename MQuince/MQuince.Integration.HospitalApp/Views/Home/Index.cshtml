@@ -8,7 +8,10 @@
         <button id="btn" onclick="addReports()" asp-controller="Home" asp-action="http://localhost:49544/SendReports"> Reports    </button>
         <button id="btn" onclick="getSpecification()" asp-controller="Home" asp-action="http://localhost:49544/GetSpecification"> Get Medications Specification    </button>
         <button id="btn" onclick="therapy()" asp-controller="Home" asp-action="Therapy"> Prescribe therapy  </button>
-        <button id="btn" onclick="exists()" asp-controller="Home"  asp-action="sendMessageGrpc"> Ask for medicatons </button>
+        <button id="btn" onclick="exists()" asp-controller="Home" asp-action="sendMessageGrpc"> Ask for medicatons </button>
+        <button id="btn" onclick="urgentMessage()" asp-controller="Home" asp-action="http://localhost:49544/api/urgentMessage"> Urgent Mediaction </button>
+        <button id="btn" onclick="requestForDirector()" asp-controller="Home" asp-action="http://localhost:49544/api/requestForDirector"> Request For Director </button>
+
 
     </div>
 

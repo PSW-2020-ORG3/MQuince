@@ -1,29 +1,40 @@
-﻿﻿var app = new Vue({
+﻿var app = new Vue({
 	el: '#appointments',
 	data: {
 		appointments: [],
 		doctors: []
 	},
-    mounted() {
+	mounted() {
 
-       axios
+		axios
 			.get('/gateway/Appointment/GetForPatient', {
 				params: {
 					patientId: "6459c216-1770-41eb-a56a-7f4524728546"
+				},
+				headers: {
+					'Authorization': localStorage.getItem('keyToken')
 				}
-				}).then(response => {
-					this.appointments = response.data
+			}).then(response => {
+				this.appointments = response.data
 			})
 		axios
-			.get('/gateway/Doctor/GetAll').then(response => {
-                this.doctors = response.data
+			.get('/gateway/Doctor/GetAll', {
+				headers: {
+					'Authorization': localStorage.getItem('keyToken')
+				}
+			}).then(response => {
+				this.doctors = response.data
 			})
-		
-		
+
+
 	},
-    methods: {
+	methods: {
 		cancelAppointment: function (appointmentId) {
-			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId
+			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId, null , {
+				headers: {
+					"Authorization": localStorage.getItem('keyToken')
+				}
+			}
 			).then((response) => {
 				if (response.status === 200) {
 					alert("Successful cancellation!");

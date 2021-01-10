@@ -9,6 +9,8 @@ namespace MQuince.Integration.Entities
         public string Name { get; set; }
         public string Status { get; set; }
 
+        public string Quantity { get; set; }
+
         public GrpcMessage(string name, string status)
         {
             this.Name = name;

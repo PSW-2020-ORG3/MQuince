@@ -28,7 +28,7 @@ namespace MQuince.Scheduler.Application.Services
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
-            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id);
+            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id, appointment.PatientId);
 
             _appointmentRepository.Create(appointment);
             _eventRepository.Create(scheduleEvent);
@@ -133,7 +133,7 @@ namespace MQuince.Scheduler.Application.Services
             try
             {
                 Appointment appointment = _appointmentRepository.GetById(appointmentId);
-                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id);
+                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id, appointment.PatientId);
 
                 if (appointment.IsCancelable())
                 {
@@ -158,9 +158,6 @@ namespace MQuince.Scheduler.Application.Services
         {
             DateRange workHours = GetWorkHours(doctorId, date).Result;
             IEnumerable<Appointment> scheduledAppointments = _appointmentRepository.GetAppointmentForDoctorForDate(doctorId, date);
-            //DateTime startWorkHour = new DateTime(date.Year, date.Month, date.Day, 8, 0, 0);
-            //DateTime endWorkHour = new DateTime(date.Year, date.Month, date.Day, 17, 0, 0);
-            //DateRange workHours = new DateRange(startWorkHour, endWorkHour);
             Domain.Scheduler scheduler = new Domain.Scheduler(scheduledAppointments, workHours);
             return scheduler.GetFreeAppointments().Select(c => InitializeAppointments(c, patientId, doctorId));
         }

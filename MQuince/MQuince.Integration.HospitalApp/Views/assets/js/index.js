@@ -20,4 +20,11 @@ function exists() {
 function goToAction() {
     document.location.href = "http://localhost:49544/home/ActionAndBenefits";
 }
+function urgentMessage() {
+    window.location.replace("http://localhost:49544/home/urgentMessage");
+}
+
+function requestForDirector() {
+    window.location.replace("http://localhost:49544/home/requestForDirector");
+}
 /*document.location.href=*/

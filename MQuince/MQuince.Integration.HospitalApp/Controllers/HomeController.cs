@@ -9,6 +9,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 	{
 
 		List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
+        List<GrpcMessage> messageForUrgentProcurement = ClientScheduledService.MessageForUrgentProcurement;
 
 
 		public IActionResult Index()
@@ -56,5 +57,25 @@ namespace MQuince.Integration.HospitalApp.Controllers
 			return View();
 		}
 
-	}
+
+        public IActionResult Therapy()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Therapy(string name, string jmbg, string medication, string description)
+        {
+            HomeService.generateQRCode(name, jmbg, medication, description);
+            return View();
+        }
+
+        public IActionResult urgentMessage()
+        {
+            return View(messageForUrgentProcurement);
+        }
+        public IActionResult requestForDirector()
+        {
+            return View(messageForUrgentProcurement);
+        }
+    }
 }
