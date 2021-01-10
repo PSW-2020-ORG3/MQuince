@@ -38,7 +38,7 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.ToTable("MedicationsConsumption");
                 });
 
-<<<<<<< HEAD
+
             modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyOffersPersistance", b =>
                 {
                     b.Property<Guid>("IdOffer")
@@ -71,77 +71,76 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.HasKey("IdOffer");
 
                     b.ToTable("PharmacyOffersPersistance");
-=======
-            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
-                {
-                    b.Property<Guid>("KeyMedication")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
+                        {
+                            b.Property<Guid>("KeyMedication")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("KeyMedication");
+                            b.Property<int>("Quantity")
+                                .HasColumnType("int");
 
-                    b.ToTable("Medications");
->>>>>>> develop
-                });
+                            b.HasKey("KeyMedication");
 
-            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
-                {
-                    b.Property<Guid>("ApiKey")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                            b.ToTable("Medications");
+                        });
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
+                        {
+                            b.Property<Guid>("ApiKey")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
 
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("ApiKey");
+                            b.Property<string>("Url")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.ToTable("Pharmacy");
-                });
+                            b.HasKey("ApiKey");
 
-            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.TenderPersistance", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                            b.ToTable("Pharmacy");
+                        });
 
-                    b.Property<string>("Descritpion")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.TenderPersistance", b =>
+                        {
+                            b.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)");
+                            b.Property<string>("Descritpion")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("FormLink")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                            b.Property<DateTime>("EndDate")
+                                .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                            b.Property<string>("FormLink")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<bool>("Opened")
-                        .HasColumnType("tinyint(1)");
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime(6)");
+                            b.Property<bool>("Opened")
+                                .HasColumnType("tinyint(1)");
 
-                    b.HasKey("Id");
+                            b.Property<DateTime>("StartDate")
+                                .HasColumnType("datetime(6)");
 
-                    b.ToTable("Tender");
-                });
+                            b.HasKey("Id");
+
+                            b.ToTable("Tender");
+                        });
 #pragma warning restore 612, 618
-        }
-    }
-}
+                });
+    } } }
+

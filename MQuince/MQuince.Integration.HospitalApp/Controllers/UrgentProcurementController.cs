@@ -52,7 +52,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         public IActionResult Update(String data)
         {
             string[] parts= _medicationsService.GetData(data);
-            IdentifiableDTO<MedicationsDTO> medications = _medicationsService.GetByID(new Guid(parts[0]));
+            IdentifiableDTO<MedicationsDTO> medications = _medicationsService.GetById(new Guid(parts[0]));
             service.SendUrgentMessage(medications.EntityDTO.Name, medications.EntityDTO.Quantity.ToString());
             _medicationsService.Delete(new Guid(parts[0]));
 
