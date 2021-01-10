@@ -86,8 +86,8 @@
 		logIn: function () {
 			axios
 				.post("/gateway/User", {
-					Username: "admin",
-					Password: "admin"
+					Username: "patient2",
+					Password: "patient2"
 				}).then((response) => {
 					window.location.href = "/public/index.html";
 					localStorage.setItem('keyToken', response.data.token)

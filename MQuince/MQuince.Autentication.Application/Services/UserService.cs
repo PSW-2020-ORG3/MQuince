@@ -82,15 +82,26 @@ namespace MQuince.Autentication.Application.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SECURITASKEYINMQUINCEALLIANCETEST123 phase"));
 
+            UserRole userRole = GetUserRole(user);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Sid, user.Id.ToString()), new Claim(ClaimTypes.Role, userRole.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private UserRole GetUserRole(User user)
+        {
+            if (user.GetType() == typeof(Admin))
+                return UserRole.Admin;
+            else
+                return UserRole.Patient;
+
         }
 
         private string DecodeJWTToken(string token)
