@@ -45,7 +45,7 @@
     <ProjectReference Include="..\MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
-    <ProjectReference Include="..\MQuince.Services.Contracts\MQuince.Services.Contracts.csproj" />
+   
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\model.proto" GrpcServices="None" />
