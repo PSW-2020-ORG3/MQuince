@@ -41,5 +41,6 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
 
             addFeedbackPage.ClickSubmitButton();
         }
+
     }
 }

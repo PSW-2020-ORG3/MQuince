@@ -1,4 +1,4 @@
-﻿var app = new Vue({
+﻿﻿var app = new Vue({
 	el: '#feedbacks',
 	data: {
 		feedbacks: [],
@@ -8,10 +8,16 @@
 		showAddFeedback: false,
 		showFeedback: true,
 		showObserveFeedback: true,
-		showObserveAppointment: false
+		showObserveAppointment: false,
+		userName: ''
 	},
 	created() {
 		var role = localStorage.getItem('keyRole');
+		var token = localStorage.getItem('keyToken');
+
+		console.log("token",token);
+		
+		console.log("Username",this.userName);
 		//role=2
 		if (role == null) {
 			this.showLogIn = true;
@@ -69,6 +75,32 @@
 			localStorage.removeItem('keyToken');
 			localStorage.removeItem('keyRole');
 			window.location.href = "/public/index.html";
+		},onChange() {
+
+
+			console.log(event.target.value)
+				axios
+					.get('/gateway/Feedback/GetByStatus', {
+						params: {
+							publish: true,
+							approved: true
+						}
+					}).then(response => {
+						this.feedbacks = response.data
+					})
+			
+		},
+		created() {
+			axios
+				.get('/gateway/Feedback/GetByStatus', {
+					params: {
+						publish: true,
+						approved: true
+					}
+				}).then(response => {
+					this.feedbacks = response.data
+				})
+
 		}
 	}
 })

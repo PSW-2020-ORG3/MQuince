@@ -40,5 +40,6 @@ namespace MQuince.StafManagement.Domain
                 _id = value == Guid.Empty ? throw new ArgumentException("Argument can not be Guid.Empty", nameof(Id)) : value;
             }
         }
+
     }
 }
