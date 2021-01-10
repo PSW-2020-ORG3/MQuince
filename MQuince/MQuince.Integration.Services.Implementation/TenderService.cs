@@ -63,9 +63,9 @@ namespace MQuince.Integration.Services.Implementation
 
         private Tender CreateTenderFromDTO(TenderDTO tender, Guid? id = null)
           => id == null ? new Tender(tender.Name,tender.Descritpion,tender.FormLink,
-                    tender.StartDate,tender.EndDate,tender.Opened)
+                    tender.StartDate,tender.EndDate)
                         : new Tender(id.Value, tender.Name, tender.Descritpion, tender.FormLink,
-                    tender.StartDate, tender.EndDate, tender.Opened);
+                    tender.StartDate, tender.EndDate);
 
 
     }

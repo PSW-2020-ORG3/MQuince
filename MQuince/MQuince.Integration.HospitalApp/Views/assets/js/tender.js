@@ -7,7 +7,7 @@ function sendName() {
     const startDate = document.getElementById('startDate');
     const endDate = document.getElementById('endDate');
 
-
+    
     const item = {
         name: name.value,
         descritpion: descritpion.value,

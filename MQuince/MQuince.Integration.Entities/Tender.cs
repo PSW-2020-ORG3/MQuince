@@ -37,7 +37,7 @@ namespace MQuince.Integration.Entities
             }
 
         }
-        public Tender(Guid id,string name, string descritpion, string formLink, DateTime startDate, DateTime endDate,Boolean opened)
+        public Tender(Guid id, string name, string descritpion, string formLink, DateTime startDate, DateTime endDate,Boolean opened)
         {
 
                 _id = id;
@@ -50,11 +50,41 @@ namespace MQuince.Integration.Entities
             
 
         }
+        public Tender(Guid id,string name, string descritpion, string formLink, DateTime startDate, DateTime endDate)
+        {
+            if (endDate > DateTime.Now && startDate < DateTime.Now)
+            {
+                _id = id;
+                Name = name;
+                Descritpion = descritpion;
+                FormLink = formLink;
+                StartDate = startDate;
+                EndDate = endDate;
+                Opened = true;
+            }
+            else
+            {
+
+                _id = id;
+                Name = name;
+                Descritpion = descritpion;
+                FormLink = formLink;
+                StartDate = startDate;
+                EndDate = endDate;
+                Opened = false;
+            }
+
+        }
         public Tender(string name, string descritpion, string formLink, DateTime startDate, DateTime endDate)
         {
-            if (string.IsNullOrEmpty(name))
+            if (endDate > DateTime.Now && startDate< DateTime.Now)
             {
-                throw new ArgumentException("Name can not be empty");
+                Name = name;
+                Descritpion = descritpion;
+                FormLink = formLink;
+                StartDate = startDate;
+                EndDate = endDate;
+                Opened = true;
             }
             else
             {
@@ -63,6 +93,7 @@ namespace MQuince.Integration.Entities
                 FormLink = formLink;
                 StartDate = startDate;
                 EndDate = endDate;
+                Opened = false;
             }
 
         }

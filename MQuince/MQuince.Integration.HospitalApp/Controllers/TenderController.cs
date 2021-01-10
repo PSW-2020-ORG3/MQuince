@@ -40,6 +40,32 @@ namespace MQuince.Integration.HospitalApp.Controllers
             }
         }
 
+        [HttpPut]
+        public IActionResult Update([FromQuery] Guid id,Boolean opened)
+        {
+            IdentifiableDTO<TenderDTO> tender = _tenderService.GetByApi(id);
+
+            try
+            {
+                _tenderService.Update(new TenderDTO()
+                {
+                    Name= tender.EntityDTO.Name,
+                    Descritpion=tender.EntityDTO.Descritpion,
+                    EndDate=tender.EntityDTO.EndDate,
+                    StartDate=tender.EntityDTO.StartDate,
+                    FormLink=tender.EntityDTO.FormLink,
+                    Opened=opened
+                },tender.Key);
+                _tenderService.Delete(id);
+                return Ok(tender.Key);
+                
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 
 }

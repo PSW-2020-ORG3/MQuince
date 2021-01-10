@@ -41,7 +41,6 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 EndDate = tender.EndDate,
                 Opened= tender.Opened
             };
-            Console.WriteLine("doslo tu");
             return retVal;
         }
 
