@@ -28,7 +28,7 @@ namespace MQuince.Scheduler.Application.Services
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
-            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id);
+            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id, appointment.PatientId);
 
             _appointmentRepository.Create(appointment);
             _eventRepository.Create(scheduleEvent);
@@ -133,7 +133,7 @@ namespace MQuince.Scheduler.Application.Services
             try
             {
                 Appointment appointment = _appointmentRepository.GetById(appointmentId);
-                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id);
+                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id, appointment.PatientId);
 
                 if (appointment.IsCancelable())
                 {

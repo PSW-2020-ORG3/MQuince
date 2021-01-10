@@ -1,4 +1,5 @@
 ﻿using MQuince.Infrastructure.PersistenceEntities.Communication;
+using MQuince.Infrastructure.PersistenceEntities.Users;
 using MQuince.Review.Domain.Events;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
