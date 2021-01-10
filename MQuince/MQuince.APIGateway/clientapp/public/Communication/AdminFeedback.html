@@ -142,8 +142,7 @@
             <h1 class="logo mr-auto"><a href="/public/index.html">MQUINCE Medic</a></h1>
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li><a href="/public/index.html">Home</a></li>
-                    <li><a style="text-align: center; display: block" v-bind:hidden="!showFeedbackAdmin" href="/public/Communication/AdminFeedback.html">Feedbacks</a></li>               
+                    <li><a v-bind:hidden="showFeedbackAdmin" href="/public/index.html">Home</a></li>
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul class="drop-down-menu">
@@ -175,6 +174,7 @@
         <div class="container" id="adminFeedback">
             <!-- Icon Divider-->
             <!-- Contact Section Form-->
+            <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedback</h4>
             <br/>
             <div class="col-lg-8 mx-auto">
                 <select name="feedbackOption" id="feedbackOption" v-model="status" v-on:change="statusChanged" style="width:200px; margin-left: 520px; margin-top: 20px;">
@@ -183,7 +183,7 @@
                     <option value="Private">Private</option>
                 </select>
             </div>
-            <div style="height:150px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
+            <div style="height:170px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
                         <div style="display: inline-block">
                             <table >
                                 <tr>
@@ -198,16 +198,18 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div style=" float: right; margin-top: 50px; margin-right: -340%;" v-if="feedback.entityDTO.publish == true && feedback.entityDTO.approved == false">
-                                            <div>
-                                                <button class="btn" @click="approve(feedback)">
-                                                    <i class="fa fa-check"></i>&nbsp&nbspApprove
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
                                     </td>
                                 </tr>
                             </table>
+                            
+                            <div  v-if="feedback.entityDTO.publish == true && feedback.entityDTO.approved == false">
+                                            
+                                    <button style="margin-left:600px"  class="btn" @click="approve(feedback)">
+                                        <i class="fa fa-check"></i>&nbsp&nbspApprove
+                                    </button>
+                                            
+                            </div>
                         </div>
             </div>
         </div>

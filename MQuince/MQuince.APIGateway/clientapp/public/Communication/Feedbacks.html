@@ -146,6 +146,7 @@
                         </ul>
                     </li>
                     <li v-on:click="logIn" v-bind:hidden="!showLogIn"><a href="#">Log in</a></li>
+                    <li v-on:click="logInAdmin" v-bind:hidden="!showLogIn"><a href="#">Log in admin</a></li>
                     <li v-on:click="logOut" v-bind:hidden="!showLogOut"><a href="#">Log out</a></li>
 
                 </ul>
@@ -155,14 +156,14 @@
 
     <!-- Contact Section-->
     <section class="page-section" id="contact">
-       <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedbacks</h4>
+       <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedback</h4>
     
        <div class="container" id="feedbacks">
             <!-- Icon Divider-->
             <!-- Contact Section Form-->
             <br/>
             <div class="col-lg-8 mx-auto">
-                <select name="feedbackOption" id="feedbackOption" v-model="status" @change="onChange" style="width:200px; margin-left: 520px; margin-top: 20px;">
+                <select v-bind:hidden="showLogIn" name="feedbackOption" id="feedbackOption" v-model="status" @change="onChange" style="width:200px; margin-left: 520px; margin-top: 20px;">
                     <option value="AllFeedbacks" selected="selected">AllFeedbacks</option>
                     <option v-bind:hidden="showLogIn" value="MyFeedbacks">MyFeedbacks</option>
                 </select>
