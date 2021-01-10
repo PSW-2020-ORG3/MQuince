@@ -19,4 +19,8 @@ function exists() {
 function urgentMessage() {
     window.location.replace("http://localhost:49544/home/urgentMessage");
 }
+
+function requestForDirector() {
+    window.location.replace("http://localhost:49544/home/requestForDirector");
+}
 /*document.location.href=*/
