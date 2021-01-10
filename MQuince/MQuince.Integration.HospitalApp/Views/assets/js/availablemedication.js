@@ -1,6 +1,9 @@
-﻿const uri = 'http://localhost:49544/api/GrpcController'
+﻿const uri = 'http://localhost:49544/api/Grpc'
 
 function sendName() {
+    setInterval(function () {
+        cache_clear()
+    }, 5000);
     const name = document.getElementById('name'); 
     const quantity = document.getElementById('quantity');
 
@@ -26,3 +29,7 @@ function sendName() {
         })
         .catch(error => console.error('Unable to add item.', error));
 } 
+function cache_clear() {
+    window.location.reload(true);
+}
+
