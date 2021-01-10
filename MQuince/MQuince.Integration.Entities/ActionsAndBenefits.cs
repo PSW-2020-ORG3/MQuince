@@ -13,7 +13,6 @@ namespace MQuince.Integration.Entities
         {
             this.Action = _action;
             this.Date = _date;
-
         }
 
     }

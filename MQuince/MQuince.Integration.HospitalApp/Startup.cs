@@ -32,6 +32,8 @@ namespace MQuince.Integration.HospitalApp
             dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
             services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
+            services.AddTransient(typeof(IMedicationsService), s => new MedicationsService(new MedicationsRepository(dbContextOptionsBuilder)));
+
             services.AddTransient(typeof(ISftpService), s => new SftpService());
             services.AddTransient(typeof(ITenderService), s => new TenderService(new TenderRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IPharmacyOffersService), s => new PharmacyOffersService(new PharmacyOffersRepository(dbContextOptionsBuilder)));
@@ -82,6 +84,8 @@ namespace MQuince.Integration.HospitalApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
+            
 
             server = new Server
             {

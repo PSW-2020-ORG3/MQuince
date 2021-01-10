@@ -38,6 +38,7 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.ToTable("MedicationsConsumption");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyOffersPersistance", b =>
                 {
                     b.Property<Guid>("IdOffer")
@@ -70,6 +71,24 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.HasKey("IdOffer");
 
                     b.ToTable("PharmacyOffersPersistance");
+=======
+            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
+                {
+                    b.Property<Guid>("KeyMedication")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("KeyMedication");
+
+                    b.ToTable("Medications");
+>>>>>>> develop
                 });
 
             modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>

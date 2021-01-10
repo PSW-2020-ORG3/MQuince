@@ -7,8 +7,6 @@ using QRCoder;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Syncfusion.Pdf.Barcode;
-using System.IO;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using Syncfusion.Pdf.Graphics;
 using PdfSharp.Drawing;
@@ -93,5 +91,9 @@ namespace MQuince.Integration.HospitalApp.Controllers
             return View();
         }
 
+        public IActionResult requestForDirector()
+        {
+            return View(messageForUrgentProcurement);
+        }
     }
 }
