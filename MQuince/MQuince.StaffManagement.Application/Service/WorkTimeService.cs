@@ -1,4 +1,5 @@
-﻿using MQuince.StafManagement.Contracts.Exceptions;
+﻿using MQuince.StaffManagement.Contracts.Exceptions;
+using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
 using MQuince.StafManagement.Contracts.Repository;
 using MQuince.StafManagement.Domain;
@@ -38,7 +39,8 @@ namespace MQuince.StafManagement.Application.Service
                     return new WorkTime(date.Date, date.Date, workTime.StartTime, workTime.EndTime, doctorId);
                 }
             }
-            return null;
+
+            throw new NotFoundWorkTimeException();
         }
 
         public DateRange GetWorkHoursForDoctorForDate(Guid doctorId, DateTime date)
@@ -46,6 +48,10 @@ namespace MQuince.StafManagement.Application.Service
             try
             {
                 return GetWorkTimeForDoctorForDate(doctorId, date).GetWorkHour(date);
+            }
+            catch (NotFoundWorkTimeException)
+            {
+                throw new NotFoundWorkTimeException();
             }
             catch (Exception)
             {

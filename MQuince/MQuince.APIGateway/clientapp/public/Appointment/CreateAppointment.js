@@ -108,7 +108,11 @@
     mounted() {
 
         axios
-            .get('/gateway/specialization')
+            .get('/gateway/specialization', {
+                headers: {
+                    'Authorization': localStorage.getItem('keyToken')
+                }
+            })
             .then(response => (this.specializations = response.data));
     },
     methods: {
@@ -119,7 +123,11 @@
                 this.visibleSpecialization = false;
 
                 axios
-                    .get('/gateway/doctor/specialization/' + this.selectedSpecialization).then(response => {
+                    .get('/gateway/doctor/specialization/' + this.selectedSpecialization, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
+                    }).then(response => {
                         this.doctors = response.data
                     })
 
@@ -143,6 +151,9 @@
                             patientId: "6459c216-1770-41eb-a56a-7f4524728546",
                             doctorId: this.selectedDoctor,
                             date: new Date(Date.UTC(this.dateForAppointment.getFullYear(), this.dateForAppointment.getMonth(), this.dateForAppointment.getDate()))
+                        },
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
                         }
                     }).then(response => {
                         this.appointments = response.data

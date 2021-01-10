@@ -51,6 +51,10 @@
 						Comment: this.Comment,
 						Anonymous: this.Anonymous,
 						Publish: this.Publish
+					}, {
+						headers: {
+							'Authorization': localStorage.getItem('keyToken')
+						}
 					}).then(response => {
 						//JSAlert.alert("Your feedback has been saved!");
 						alert("Your feedback has been saved!")

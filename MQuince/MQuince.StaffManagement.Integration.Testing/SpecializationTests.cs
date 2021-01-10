@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -23,6 +24,8 @@ namespace MQuince.StaffManagement.Integration.Testing
         public async Task Get_all_specializations()
         {
             HttpClient client = _factory.CreateClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiJiNzA1NmZjYy00OGZhLTRkZjUtOWU5My0zMzRhYjc1OTVkYWEiLCJyb2xlIjoiUGF0aWVudCIsIm5iZiI6MTYxMDIyMjEzNSwiZXhwIjoxNjEwMzA4NTM1LCJpYXQiOjE2MTAyMjIxMzV9.5yIUtErsOjQNWQGyDdpgaJ8GxZGwImFeJ2vMbn8UEDM");
 
             HttpResponseMessage response = await client.GetAsync("api/specialization");
 
