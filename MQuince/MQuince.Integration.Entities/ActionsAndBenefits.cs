@@ -13,7 +13,7 @@ namespace MQuince.Integration.Entities
         public DateTime EndDate { get; set; }
         public double OldCost { get; set; }
         public double NewCost { get; set; }
-        public Boolean IsApproved { get; private set; }
+        public Boolean IsApproved { get; set; }
 
         public void Approve()
 		{

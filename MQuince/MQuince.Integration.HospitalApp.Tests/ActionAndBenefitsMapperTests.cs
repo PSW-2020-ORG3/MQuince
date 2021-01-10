@@ -113,8 +113,6 @@ namespace MQuince.Integration.HospitalApp.Tests
                  OldCost = 320,
                  NewCost = 200,
                  IsApproved = true
-
-
              };
      }
     }

@@ -1,11 +1,9 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.DataProvider.Util;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
+﻿using MQuince.Integration.Infrastructure.PersistenceEntities;
 using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+using MQuince.Pharmacy.Contracts.DTO;
+using MQuince.Pharmacy.Domain;
+using MQuince.Pharmacy.Infrastructure.Util;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace MQuince.HospitalAppTests

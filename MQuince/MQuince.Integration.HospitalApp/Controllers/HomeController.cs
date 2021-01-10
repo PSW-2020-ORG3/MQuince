@@ -41,12 +41,6 @@ namespace MQuince.Integration.HospitalApp.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public IActionResult Therapy(string name, string jmbg, string medication, string description)
-		{
-			HomeService.generateQRCode(name, jmbg, medication, description);
-			return View();
-		}
 		public IActionResult SendMessageGrpc()
 		{
 			return View(messageGrpc);

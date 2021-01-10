@@ -22,6 +22,7 @@
     <ProjectReference Include="..\MQuince.Integration.Repository.Contracts\MQuince.Integration.Repository.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
