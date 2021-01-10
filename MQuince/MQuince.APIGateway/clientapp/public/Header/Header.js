@@ -91,24 +91,7 @@
 					Password: "patient2"
 				}).then((response) => {
 					if (response.data.userRole == 1) 
-						window.location.href = "http://localhost:5000/public/Communication/AdminFeedback.html";
-					else
-						window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-					
-				}, (error) => {
-					console.log(error);
-				});
-		},
-		logIn: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "patient2",
-					Password: "patient2"
-				}).then((response) => {
-					if (response.data.userRole == 1) 
-						window.location.href = "http://localhost:5000/public/Communication/AdminFeedback.html";
+						window.location.href = "/public/Communication/AdminFeedback.html";
 					else
 						window.location.href = "/public/index.html";
 					localStorage.setItem('keyToken', response.data.token)
@@ -125,7 +108,7 @@
 					Password: "admin"
 				}).then((response) => {
 					if (response.data.userRole == 1) 
-						window.location.href = "http://localhost:5000/public/Communication/AdminFeedback.html";
+						window.location.href = "/public/Communication/AdminFeedback.html";
 					else
 						window.location.href = "/public/index.html";
 					localStorage.setItem('keyToken', response.data.token)
