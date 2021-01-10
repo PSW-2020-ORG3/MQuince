@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MQuince.Integration.Services.Constracts.DTO;
+using MQuince.Integration.Services.Constracts.Exceptions;
 using MQuince.Integration.Services.Constracts.Interfaces;
 
 namespace MQuince.Integration.HospitalApp.Controllers
@@ -20,15 +21,20 @@ namespace MQuince.Integration.HospitalApp.Controllers
         }
 
         [HttpGet]
+
         public IActionResult GetAll()
         {
-            try
+           try
             {
                 return Ok(_pharmacyOfferssService.GetAll());
             }
-            catch (Exception e)
+            catch (NotFoundEntityException e)
             {
-                return BadRequest(e.Message);
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
             }
         }
 

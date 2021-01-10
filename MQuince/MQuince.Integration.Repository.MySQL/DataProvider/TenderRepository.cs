@@ -25,7 +25,6 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
             {
                 _context.Tenders.Add(TenderMapper.MapTenderEntityToTenderPersistance(entity));
                 _context.SaveChanges();
-                Console.WriteLine("uslo tu");
             }
         }
 

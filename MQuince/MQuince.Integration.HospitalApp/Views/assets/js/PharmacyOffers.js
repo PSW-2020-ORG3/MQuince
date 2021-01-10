@@ -1,5 +1,4 @@
 var id = localStorage.getItem("object_name");
-console.log("GLOVALNA: " + id);
 
 $(document).ready(function () {
 var tabel = document.getElementById('drugs')
@@ -7,7 +6,6 @@ var count = document.getElementById("drugs").rows.length;
     
 
     var idTender = localStorage.getItem("object_name");
-    //localStorage.clear(); //clean the localstorage
     var value1 = JSON.parse(idTender);
         
 
@@ -24,7 +22,6 @@ var count = document.getElementById("drugs").rows.length;
             
             if (data[i].key == result)
                 {
-                console.log("STA " + data[i].entityDTO.name);
                 document.getElementById("tenderName").textContent = "" + data[i].entityDTO.name;
                 
                 }
@@ -69,8 +66,6 @@ function sendOffer() {
     var pharmacyName = document.getElementById("offers").rows[1].getElementsByTagName('input')[0].value;
     var phamracyEmail = document.getElementById("offers").rows[2].getElementsByTagName('input')[0].value;
 
-    console.log("PHARMACI NAME " + pharmacyName);
-    console.log(phamracyEmail);
 
     var table = document.getElementById('drugs'),
         rows = table.getElementsByTagName('tr'),
@@ -91,7 +86,6 @@ function sendOffer() {
     allMed = allMed.slice(0, -1);
     allQuantity = allQuantity.slice(0, -1);
     allPrice = allPrice.slice(0, -1);
-    console.log(allMed);
 
 
     $.ajax({

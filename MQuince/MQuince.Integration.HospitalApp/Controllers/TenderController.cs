@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Integration.Services.Constracts.DTO;
+using MQuince.Integration.Services.Constracts.Exceptions;
 using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using System;
@@ -21,9 +22,21 @@ namespace MQuince.Integration.HospitalApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<IdentifiableDTO<TenderDTO>> GetAll()
+        public IActionResult GetAll()
         {
-            return _tenderService.GetAll();
+            try
+            {
+                return Ok(_tenderService.GetAll());
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
+
         }
 
         [HttpPost]
