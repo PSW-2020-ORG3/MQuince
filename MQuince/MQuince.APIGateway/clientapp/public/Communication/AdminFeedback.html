@@ -193,7 +193,7 @@
                                     <td>
                                         <div style="margin-left:30px;margin-bottom:30px">
                                              <div class="short-info2" v-if="feedback.entityDTO.anonymous || feedback.entityDTO.user == null"><i>Anonymus&nbsp</i></div>
-                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous && feedback.entityDTO.user != null">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
+                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous == false && feedback.entityDTO.user != null">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
                                             <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
                                         </div>
                                     </td>
