@@ -23,6 +23,8 @@ namespace MQuince.Integration.HospitalApp.Controllers
     {
 
         List<GrpcMessage> messageGrpc = ClientScheduledService.MessageGrpc;
+        List<GrpcMessage> messageForUrgentProcurement = ClientScheduledService.MessageForUrgentProcurement;
+
         List<ActionsAndBenefits> action = Program.ActionAndBenefitMessage;
 
         public IActionResult Index()
@@ -66,6 +68,16 @@ namespace MQuince.Integration.HospitalApp.Controllers
         public IActionResult ActionAndBenefits()
         {
             return View(action);
+        }
+        public IActionResult urgentMessage()
+        {
+            return View(messageForUrgentProcurement);
+        }
+
+
+        public IActionResult requestForDirector()
+        {
+            return View(messageForUrgentProcurement);
         }
     }
 }

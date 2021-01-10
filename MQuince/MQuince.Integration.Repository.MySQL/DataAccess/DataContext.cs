@@ -12,7 +12,6 @@ namespace MQuince.Integration.Repository.MySQL.DataAccess
 
         public DataContext()
         {
-
         }
 
         public DataContext(DbContextOptions options)
@@ -22,11 +21,12 @@ namespace MQuince.Integration.Repository.MySQL.DataAccess
 
         public DbSet<PharmacyPersistence> Pharmacies { get; set; }
         public DbSet<MedicationsConsumptionPersistance> MedicationsConsumptions { get; set; }
+        public DbSet<MedicationsPersistence> Medications{ get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
+            optionsBuilder.UseMySql(@"server=localhost;user=root;password=Mucibabic*1;database=pharmacydb1");
         }
     }
 }

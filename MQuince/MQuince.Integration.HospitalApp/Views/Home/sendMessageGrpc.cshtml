@@ -4,21 +4,38 @@
 }
 
 @model IEnumerable<MQuince.Integration.Entities.GrpcMessage>
-<div id="availablemedication-container">
-<h3> Send message to pharmacy: </h3>
-<form onsubmit="sendName()" action="javascript:void(0);">
-    <table>
-        <tr> <td><label> Medication name: </label></td></tr>
-        <tr> <td> <input type="text" id="name" /></td></tr>
-        <tr> <td> <input id="send" type="submit" value="Send"></td></tr>
-    </table>
-    <script src="~/Views/assets/js/availablemedication.js"></script>
-</form>
-@foreach (var a in Model)
-{
-    <p>  Medication: @Html.DisplayFor(modelItem => a.Name)  @Html.DisplayFor(modelItem => a.Status) </p>
-}
+    <div id="urgentMesssage-container">
+        <h3> Enter the medicine: </h3>
+        <form onsubmit="sendName()" action="javascript:void(0);">
+            <table style="margin-top: 0px; padding: -5px;" border="1px">
+                <tr style="margin-top: -5px;">
+                    <td><label> Medication name: </label></td>
+                </tr>
+                <tr> <td> <input type="text" id="name" /></td></tr>
 
-<script src="~/Views/assets/js/availablemedication.js"></script>
-</div>
+                <tr> <td><label> Quantity: </label></td></tr>
+                <tr> <td> <input type="text" id="quantity" /></td></tr>
 
+            </table>
+            <input id="btn2" type="submit" value="Send" onclick="alert('Medication was successefully send to pharmacy!')">
+
+            <script src="~/Views/assets/js/availablemedication.js"></script>
+        </form>
+        @foreach (var a in Model)
+        {<p>  
+              Medication @Html.DisplayFor(modelItem => a.Name) @Html.DisplayFor(modelItem => a.Status) 
+        </p>           
+        }
+        </div>
+    <style>
+
+        table {
+            background-color: deepskyblue;
+            
+        }
+        p {
+            font-size: 20px;
+            color: red;
+        }
+        </style
+    

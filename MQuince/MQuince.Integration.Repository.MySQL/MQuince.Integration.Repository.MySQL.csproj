@@ -18,8 +18,4 @@
     <ProjectReference Include="..\MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

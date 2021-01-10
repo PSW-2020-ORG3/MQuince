@@ -7,7 +7,7 @@ namespace MQuince.Integration.Services.Constracts.Interfaces
     public interface IService<T, IdentifiableT> where T : class where IdentifiableT : class
     {
         IEnumerable<IdentifiableT> GetAll();
-        IdentifiableT GetByApi(Guid id);
+        IdentifiableT GetByID(Guid id);
         Guid Create(T entityDTO);
         void Update(T entityDTO, Guid id);
         bool Delete(Guid id);

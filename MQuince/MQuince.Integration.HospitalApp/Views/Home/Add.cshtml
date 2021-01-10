@@ -5,9 +5,10 @@
 
 <div class="phamracyContainer">
     <div class="containsForm">
-        <form action="javascript:void(0);" onsubmit="addItem()">
-            <table>
-                <tr> <td><label> API-KEY </label></td></tr>
+        <form onsubmit="addItem()" action="javascript:void(0);" >
+            <table style="margin-top: 5px; padding: -10px;" border="1px">
+                <tr style="margin-top: -10px;">
+                <td><label> API-KEY </label></td></tr>
                 <tr> <td> <input type="text" id="apiKey" v-model="apiKey"></input></td></tr>
                 <tr> <td> <label> NAME </label></td></tr>
                 <tr> <td> <input v-model="name" id="name"></input> </td></tr>
@@ -15,14 +16,6 @@
                 <tr><td><input type="text" v-model="url" id="url"></input> </td></tr>
                 <tr> <td> <input id="btn" type="submit" value="Save" onclick="alert('Successefully saved!')"></td></tr>
             </table>
-
-
-
-
-
-
-
-            <script src="~/Views/assets/js/addPharmacy.js"></script>
             <script src="~/Views/assets/js/site.js"></script>
         </form>
     </div>
