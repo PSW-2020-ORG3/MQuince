@@ -2,6 +2,7 @@
 	el: '#feedbacks',
 	data: {
 		feedbacks: [],
+		privateFeedbacks: [],
 		showLogIn: true,
 		showLogOut: false,
 		showCreateAppointment: false,
@@ -55,6 +56,16 @@
 				this.feedbacks = response.data
 			})
 
+		axios
+			.get('/gateway/Feedback/GetByStatus', {
+				params: {
+					publish: false,
+					approved: false
+				}
+			}).then(response => {
+				this.privateFeedbacks = response.data
+			})
+
 	},
 	methods: {
 		logIn: function () {
@@ -79,6 +90,7 @@
 
 
 			console.log(event.target.value)
+			if(event.target.value == 'AllFeedbacks'){
 				axios
 					.get('/gateway/Feedback/GetByStatus', {
 						params: {
@@ -88,18 +100,41 @@
 					}).then(response => {
 						this.feedbacks = response.data
 					})
+			}else {
+				axios
+					.get('/gateway/Feedback/GetByStatus', {
+						params: {
+							publish: false,
+							approved: false
+						}
+					}).then(response => {
+						this.privateFeedbacks = response.data
+					})
+			}
 			
 		},
 		created() {
-			axios
-				.get('/gateway/Feedback/GetByStatus', {
-					params: {
-						publish: true,
-						approved: true
-					}
-				}).then(response => {
-					this.feedbacks = response.data
-				})
+			if(event.target.value == 'AllFeedbacks'){
+				axios
+					.get('/gateway/Feedback/GetByStatus', {
+						params: {
+							publish: true,
+							approved: true
+						}
+					}).then(response => {
+						this.feedbacks = response.data
+					})
+			}else {
+				axios
+					.get('/gateway/Feedback/GetByStatus', {
+						params: {
+							publish: false,
+							approved: false
+						}
+					}).then(response => {
+						this.privateFeedbacks = response.data
+					})
+			}
 
 		}
 	}
