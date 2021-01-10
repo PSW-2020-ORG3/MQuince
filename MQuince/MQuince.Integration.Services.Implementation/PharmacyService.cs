@@ -27,7 +27,8 @@ namespace MQuince.Integration.Services.Implementation
             => _pharmacyRepository.GetAll().Select(c => CreateDTOFromPharmacy(c));
 
 
-        public IdentifiableDTO<PharmacyDTO> GetByID(Guid api) => CreateDTOFromPharmacy(_pharmacyRepository.GetById(api));
+        public IdentifiableDTO<PharmacyDTO> GetById(Guid api) => CreateDTOFromPharmacy(_pharmacyRepository.GetById(api));
+
 
 
         private IdentifiableDTO<PharmacyDTO> CreateDTOFromPharmacy(MyPharmacy pharmacy)

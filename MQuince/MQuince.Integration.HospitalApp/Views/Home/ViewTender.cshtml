@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "view Tender";
+    Layout = "_Layout";
+}
+@model IEnumerable<MQuince.Integration.Entities.Tender>
+<div class="action-div">
+    <h3>Tenders: </h3>
+    <table  id="tenderTable" class="tenderTable" border="1px">
+        
+            <tr>
+                <td colspan="5">Opened tenders:</td>
+            </tr>
+            <tr>
+
+                <td>Name</td>
+                <td>Description</td>
+                <td>Begin date</td>
+                <td>End date</td>
+                <td>Form link</td>
+            </tr>
+       
+
+    </table>
+    <script src="~/Views/assets/js/ViewTender.js"></script>
+    <script src="~/Views/assets/js/jquery.min.js"></script>
+</div>

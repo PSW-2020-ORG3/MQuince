@@ -38,43 +38,109 @@ namespace MQuince.Integration.Repository.MySQL.Migrations
                     b.ToTable("MedicationsConsumption");
                 });
 
-            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
+
+            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyOffersPersistance", b =>
                 {
-                    b.Property<Guid>("KeyMedication")
+                    b.Property<Guid>("IdOffer")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("KeyMedication");
-
-                    b.ToTable("Medications");
-                });
-
-            modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
-                {
-                    b.Property<Guid>("ApiKey")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("IdTender")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Medicationes")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Url")
+                    b.Property<string>("PharmacyEmail")
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("ApiKey");
+                    b.Property<string>("PharmacyName")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.ToTable("Pharmacy");
-                });
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("IdOffer");
+
+                    b.ToTable("PharmacyOffersPersistance");
+
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.MedicationsPersistence", b =>
+                        {
+                            b.Property<Guid>("KeyMedication")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
+
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.Property<int>("Quantity")
+                                .HasColumnType("int");
+
+                            b.HasKey("KeyMedication");
+
+                            b.ToTable("Medications");
+                        });
+
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.PharmacyPersistence", b =>
+                        {
+                            b.Property<Guid>("ApiKey")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
+
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.Property<string>("Url")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.HasKey("ApiKey");
+
+                            b.ToTable("Pharmacy");
+                        });
+
+                    modelBuilder.Entity("MQuince.Integration.Repository.MySQL.PersistenceEntities.TenderPersistance", b =>
+                        {
+                            b.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("char(36)");
+
+                            b.Property<string>("Descritpion")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.Property<DateTime>("EndDate")
+                                .HasColumnType("datetime(6)");
+
+                            b.Property<string>("FormLink")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                            b.Property<bool>("Opened")
+                                .HasColumnType("tinyint(1)");
+
+                            b.Property<DateTime>("StartDate")
+                                .HasColumnType("datetime(6)");
+
+                            b.HasKey("Id");
+
+                            b.ToTable("Tender");
+                        });
 #pragma warning restore 612, 618
-        }
-    }
-}
+                });
+    } } }
+

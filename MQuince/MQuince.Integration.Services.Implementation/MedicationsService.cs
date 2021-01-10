@@ -45,7 +45,7 @@ namespace MQuince.Integration.Services.Implementation
             => _medicationsRepository.GetAll().Select(c => CreateDTOFromMedications(c));
 
 
-        public IdentifiableDTO<MedicationsDTO> GetByID(Guid id) => CreateDTOFromMedications(_medicationsRepository.GetById(id));
+        public IdentifiableDTO<MedicationsDTO> GetById(Guid id) => CreateDTOFromMedications(_medicationsRepository.GetById(id));
 
         public IdentifiableDTO<MedicationsDTO> GetByName(String name) => CreateDTOFromMedications(_medicationsRepository.GetByName(name));
 
@@ -72,6 +72,7 @@ namespace MQuince.Integration.Services.Implementation
 
         private Medications CreateMedicationsFromDTO(MedicationsDTO medication)
           => new Medications(medication.Name, medication.Quantity);
+
     }
 }
 

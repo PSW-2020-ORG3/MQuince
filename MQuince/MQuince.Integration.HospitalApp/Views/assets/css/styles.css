@@ -2,8 +2,9 @@ body
 {
     background-image: url('back.jpg');
     background-position: fixed;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
+    margin: 0 auto;
 }
 .nav-bar
 {
@@ -120,6 +121,7 @@ td
     margin-top: -500px;
     font-size: 22px;
 }
+
 
 #urgentMesssage-container {
     position: absolute;

@@ -1,0 +1,53 @@
+﻿.oneOffer {
+    background-color: white;
+    width: 500px;
+    height: fit-content + 20;
+    position: relative;
+    margin: 0 auto;
+    display: inline-table;
+    margin: 5px;
+}
+
+h2 {
+    font-family: "Garamond";
+    margin-left:20px;
+    
+}
+td
+{
+    width: 50px;
+    height: 10px;
+}
+th
+{
+    background-color: aqua;
+}
+table,th,td {
+    font-size:18px;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+
+#buttons {
+    position: fixed;
+    display: inline-block;
+    width: 50%;
+}
+
+.btn {
+    background-color: cornflowerblue;
+    border-radius: 12px;
+    margin: 0 auto;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 20%;
+    width: 60%;
+    display: block;
+}
+
+    .btn:hover {
+        background-color: thistle;
+        opacity: 0.8;
+        color: black;
+    }
