@@ -1,0 +1,183 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>MQuince Health</title>
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico.png" />
+
+    <link href="../../src/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../src/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Favicon-->
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="styles.css" rel="stylesheet" />
+    <link href="../../src/assets/style.css" rel="stylesheet">
+
+    <style>
+        input[type=text], select, input[type=time] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+
+        .apartment-name2 {
+            position: relative;
+            top: 15px;
+            max-height: 50px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            font-weight: 400;
+            color: rgb(34, 34, 34);
+            font-size: 18px;
+            line-height: 24px;
+            font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        .short-info2 {
+            position: relative;
+            top: 0px;
+            margin-top: 9px;
+            color: rgb(113, 113, 113);
+            font-weight: 400;
+            min-height: 18px;
+            font-size: 14px;
+            line-height: 18px;
+            max-height: 22px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn {
+            background-color: transparent;
+            border: none;
+            padding: 6px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            /* Darker background on mouse-over */
+            .btn:hover {
+                background-color: transparent;
+            }
+
+        .commentBox {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: auto;
+            width: 70%;
+            margin-top: 10px;
+            height: 240px;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+        <div class="container d-flex">
+            <div class="contact-info mr-auto">
+                <i class="icofont-envelope"></i> <a href="mailto:contact@example.com">contact@mquince.com</a>
+                <i class="icofont-phone"></i> +381 62432132
+                <i class="icofont-google-map"></i> Beogradska 15, Beograd
+            </div>
+            <div class="social-links">
+                <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+                <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+                <a href="#" class="skype"><i class="icofont-skype"></i></a>
+            </div>
+        </div>
+    </div>
+    <div id="headerMain">
+
+    </div>
+    <!-- Contact Section-->
+    <section class="page-section" id="contact">
+        <div>
+            <h5 class=" text-center  mb-0 text-uppercase" style="margin-top: 2rem;">Your appointment</h5>
+
+        </div>
+    </section>
+
+    <div style="margin-top:-45px" id="appointments">
+        <div class="container">
+            <div style="height:190px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="appointment in appointments">
+                <div>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <img src="../static/appointment-icon.jpg" height="100" width="100">
+                            </td>
+
+                            <td style="padding-left:50px;" disabled>
+                                <div>
+                                    <div class="apartment-name2"><b>Date:</b> {{appointment.entityDTO.startDateTime.substr(0, 10)}}</div>
+                                    <div class="apartment-name2"><b>Time from:</b> {{appointment.entityDTO.startDateTime.substr(11, 5)}}</div>
+                                    <div class="apartment-name2"><b>Time to:</b> {{appointment.entityDTO.endDateTime.substr(11, 5)}}</div>
+                                    <div v-for="doctor in doctors" v-if="appointment.entityDTO.doctorId == doctor.id" class="apartment-name2"><b>Doctor:</b> {{doctor.entityDTO.name + ' ' + doctor.entityDTO.surname}}</div>
+                                    <div v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" class="apartment-name2">
+                                        <div><b>Appointment status:</b>Pending</div>
+                                    </div>
+                                    <div v-else class="apartment-name2"><b>Appointment status:</b>Finished</div>
+                                </div>
+                            </td>
+                            <td style="padding-left:150px;">
+                                <button v-on:click="cancelAppointment(appointment.id)" v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" type="button">Cancel appointment</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+
+    <script src="js/scripts.js"></script>
+    <script src="../scripts/vue.js"></script>
+    <script src="../scripts/axios.js"></script>
+    <script src="../scripts/vue-router.js"></script>
+    <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
+    <script src="../Appointment/Appointment.js"></script>
+    <script src="../Header/Header.js"></script>
+
+</body>
+</html>
