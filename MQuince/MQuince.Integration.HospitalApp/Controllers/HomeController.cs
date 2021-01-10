@@ -82,5 +82,16 @@ namespace MQuince.Integration.HospitalApp.Controllers
         {
             return View();
         }
+
+        public IActionResult Form()
+        {
+            return View();
+        }
+
+        public IActionResult ShowAllOffers()
+        {
+            return View();
+        }
+
     }
 }

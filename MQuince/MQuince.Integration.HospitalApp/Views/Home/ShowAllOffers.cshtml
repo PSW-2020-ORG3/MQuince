@@ -10,22 +10,20 @@
     <script src="~/Views/assets/js/vue.js"></script>
 
     <script src="~/Views/assets/js/jquery.min.js"></script>
-    <script src="~/Views/assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/Views/assets/css/styles.css" type="text/css" runat="server">
     <script>
         function home() {
             window.location.replace("http://localhost:49544/home");
-        }
-    </script>
-    <link rel="stylesheet" type="text/css" href="~/Views/assets/css/PharmacyOffersStyle.css">
-    <link rel="stylesheet" href="~/Views/assets/css/addPharamcy.css" type="text/css" runat="server">
-    <link rel="stylesheet" href="~/Views/assets/css/PharmacyOffersStyle.css" type="text/css" runat="server">
+        }</script>
+
+    <link rel="stylesheet" href="~/Views/assets/css/AllOffersStyle.css" type="text/css" runat="server">
+
+    <script src="~/Views/assets/js/ShowAllOffers.js"></script>
     <title> HOSPITAL SERVER </title>
 </head>
 
 <body>
     <div id="root">
-        @*  *@
         <div class="nav-bar">
             <div class="hsp_server"> HOSPITAL  SERVER </div>
             <div class="navButton">
@@ -34,13 +32,12 @@
 
         </div>
         <div class="container">
-            @RenderBody()
+            <div class="offers" id="offers">
+               
+            </div>
 
         </div>
     </div>
-
-    @RenderSection("Scripts", required: false)
-    
 </body>
 
 

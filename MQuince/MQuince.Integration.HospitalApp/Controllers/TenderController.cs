@@ -43,7 +43,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPut]
         public IActionResult Update([FromQuery] Guid id,Boolean opened)
         {
-            IdentifiableDTO<TenderDTO> tender = _tenderService.GetByApi(id);
+            IdentifiableDTO<TenderDTO> tender = _tenderService.GetById(id);
 
             try
             {

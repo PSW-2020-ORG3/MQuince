@@ -1,5 +1,4 @@
-﻿$(document).ready(function () {
-   
+﻿$(document).ready(function () {  
 
     $.ajax({
         url: "/api/Tender",
@@ -10,13 +9,16 @@
     }).then(function (data) {
         for (i = 0; i < data.length; i++) {
             
+
             if (parse(data[i].entityDTO.endDate) > parse(Date.now()) && parse(data[i].entityDTO.startDate) < parse(Date.now())) {
-                document.getElementById("tenderTable").insertRow(-1)
-                    .innerHTML = '<tr><td id="">' + data[i].entityDTO.name + '</td><td id="" >'
-                    + data[i].entityDTO.descritpion + '</td><td>'
-                    + parse(data[i].entityDTO.startDate) + '</td><td>'
-                    + parse(data[i].entityDTO.endDate) + '</td><td><a href="'
-                    + data[i].entityDTO.formLink + '">Check in</a></td></tr >'
+                    var key = data[i].key;
+                    document.getElementById("tenderTable").insertRow(-1)
+                        .innerHTML = '<tr><td>' + data[i].entityDTO.name + '</td><td>'
+                        + data[i].entityDTO.descritpion + '</td><td>'
+                        + parse(data[i].entityDTO.startDate) + '</td><td>'
+                        + parse(data[i].entityDTO.endDate) + '</td><td>' +
+                        '<button onclick="saveData(this); return false;" id="' + data[i].key + '"class="saveData">Check in</button></td></tr> '
+
             }
             if (parse(data[i].entityDTO.endDate) > parse(Date.now()) && parse(data[i].entityDTO.startDate) < parse(Date.now())) {
                 if (data[i].entityDTO.opened == false) {
@@ -65,12 +67,32 @@
                             }
                         });
 
+                   
+               
+
+
                 }
             }
 
         }
     });
+
 });
+
+
+
+function saveData(data){
+    $('.tenderTable tbody').on('click', '.saveData', function () {
+        var row = $(this).closest("tr");
+        var rowIndex = row.index();
+        localStorage.setItem("object_name", JSON.stringify(data.id));
+        document.location.href = "http://localhost:49544/home/form";
+    });
+
+
+
+}
+
 
 function parse(date) {
     const d = new Date(date)
