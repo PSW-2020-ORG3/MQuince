@@ -98,7 +98,11 @@
 			alert("You  have successfully published a feedback!")
 				fdb.entityDTO.approved = true
 				axios
-					.put("/gateway/Feedback/Approve/" + fdb.id
+					.put("/gateway/Feedback/Approve/" + fdb.id, null, {
+						headers: {
+							"Authorization": localStorage.getItem('keyToken')
+						}
+					}
 					)
 					.then(response => {
 						for (i = 0; i < self.feedbacks.length; i++) {

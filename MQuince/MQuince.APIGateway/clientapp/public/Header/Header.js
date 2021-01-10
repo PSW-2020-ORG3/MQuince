@@ -86,8 +86,8 @@
 		logIn: function () {
 			axios
 				.post("/gateway/User", {
-					Username: "admin",
-					Password: "admin"
+					Username: "patient2",
+					Password: "patient2"
 				}).then((response) => {
 					if (response.data.userRole == 1) 
 						window.location.href = "http://localhost:5000/public/Communication/AdminFeedback.html";

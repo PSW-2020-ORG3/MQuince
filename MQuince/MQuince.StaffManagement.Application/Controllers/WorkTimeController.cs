@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MQuince.StaffManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
 using System;
@@ -30,6 +31,9 @@ namespace MQuince.StaffManagement.Application.Controllers
             catch (InternalServerErrorException)
             {
                 return StatusCode(500);
+            }catch (NotFoundWorkTimeException)
+            {
+                return StatusCode(404);
             }
         }
     }

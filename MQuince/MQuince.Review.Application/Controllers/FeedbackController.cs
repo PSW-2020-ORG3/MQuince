@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Core.IdentifiableDTO;
+using MQuince.Review.Application.Controllers.Util;
 using MQuince.Review.Contracts.DTO;
 using MQuince.Review.Contracts.Exceptions;
 using MQuince.Review.Contracts.Service;
@@ -22,16 +23,19 @@ namespace MQuince.Review.Application.Controllers
         [HttpPost]
         public IActionResult Add(FeedbackDTO dto)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 Guid id = _feedbackService.Create(dto);
                 return Created("/api/feedback", id);
-            }
-            catch (FeedbackCommentEmptyException)
+            }catch (FeedbackCommentEmptyException)
             {
                 return BadRequest();
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -40,11 +44,15 @@ namespace MQuince.Review.Application.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 return Ok(_feedbackService.GetById(id));
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return NotFound();
             }
@@ -56,22 +64,7 @@ namespace MQuince.Review.Application.Controllers
             try
             {
                 return Ok(_feedbackService.GetAll());
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-
-        }
-
-        [HttpGet("GetByParams")]
-        public IActionResult GetByParams(bool anonymous, bool approved)
-        {
-            try
-            {
-                return Ok(_feedbackService.GetByParams(anonymous, approved));
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -83,8 +76,7 @@ namespace MQuince.Review.Application.Controllers
             try
             {
                 return Ok(_feedbackService.GetByStatus(publish, approved));
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return StatusCode(500);
             }
@@ -93,15 +85,43 @@ namespace MQuince.Review.Application.Controllers
         [HttpPut("Approve/{feedbackId}")]
         public IActionResult ApproveFeedback(Guid feedbackId)
         {
+            if (!IsValidAuthenticationRole("Admin"))
+            {
+                return StatusCode(403);
+            }
+
             try
             {
                 _feedbackService.ApproveFeedback(feedbackId);
                 return Ok();
 
-            }
-            catch (Exception)
+            }catch (Exception)
             {
                 return BadRequest();
+            }
+        }
+
+        private bool IsValidAuthenticationRole(string role)
+        {
+            try
+            {
+                var Authorization = Request.Headers.TryGetValue("Authorization", out var outToken);
+
+                if (String.IsNullOrEmpty(outToken))
+                    return false;
+
+                string userRole = JWTRoleDecoder.DecodeJWTToken(outToken);
+
+                if (userRole.Equals(role))
+                    return true;
+
+                return false;
+            }catch (InvalidJWTTokenException)
+            {
+                return false;
+            }catch (Exception)
+            {
+                throw new Exception();
             }
         }
 

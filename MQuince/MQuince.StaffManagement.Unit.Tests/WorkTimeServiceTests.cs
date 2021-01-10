@@ -1,4 +1,5 @@
-﻿using MQuince.StafManagement.Application.Service;
+﻿using MQuince.StaffManagement.Contracts.Exceptions;
+using MQuince.StafManagement.Application.Service;
 using MQuince.StafManagement.Contracts.Exceptions;
 using MQuince.StafManagement.Contracts.Interfaces;
 using MQuince.StafManagement.Contracts.Repository;
@@ -92,9 +93,7 @@ namespace MQuince.StaffManagement.Unit.Tests
             workTimeRepository.GetWorkTimesForDoctor(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba")).Returns(this.GetListOfWorkTimes());
             DateTime date = new DateTime(2020, 11, 05);
 
-            WorkTime workTime = workTimeService.GetWorkTimeForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date);
-
-            Assert.Null(workTime);
+            Assert.Throws<NotFoundWorkTimeException>(() => workTimeService.GetWorkTimeForDoctorForDate(Guid.Parse("7bb28807-f41e-4bf4-b699-6a478051adba"), date));
         }
 
         [Fact]
