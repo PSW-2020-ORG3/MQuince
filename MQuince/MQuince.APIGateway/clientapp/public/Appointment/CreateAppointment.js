@@ -106,6 +106,13 @@
         vuejsDatepicker
     },
     mounted() {
+        var role = localStorage.getItem('keyRole');
+
+        if (role == 1) {
+            window.location.href = "/public/index.html";
+        } else if (role == null) {
+            window.location.href = "/public/Login/Login.html";
+        }
 
         axios
             .get('/gateway/specialization', {
@@ -195,7 +202,7 @@
                         StartDateTime: this.selectedAppointment.entityDTO.startDateTime,
                         EndDateTime: this.selectedAppointment.entityDTO.endDateTime,
                         DoctorId: this.selectedDoctor,
-                        PatientId: "6459c216-1770-41eb-a56a-7f4524728546" 
+                        PatientId: localStorage.getItem('keyGuid')
                     }, {
                             headers: {
                                 'Authorization': localStorage.getItem('keyToken')

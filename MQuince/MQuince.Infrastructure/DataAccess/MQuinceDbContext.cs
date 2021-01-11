@@ -29,6 +29,7 @@ namespace MQuince.Infrastructure.DataAccess
         public DbSet<ScheduleEventPersistence> ScheduleEvents { get; set; }
         public DbSet<FeedbackEventPersistence> FeedbackEvents { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppointmentPersistence>().OwnsOne(e => e.DateRange);

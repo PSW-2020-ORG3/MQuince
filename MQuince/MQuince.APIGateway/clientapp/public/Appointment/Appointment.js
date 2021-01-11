@@ -5,11 +5,19 @@
 		doctors: []
 	},
 	mounted() {
+		var role = localStorage.getItem('keyRole');
+
+		if (role == 1) {
+			window.location.href = "/public/index.html";
+		} else if (role == null) {
+			window.location.href = "/public/Login/Login.html";
+        }
+
 
 		axios
 			.get('/gateway/Appointment/GetForPatient', {
 				params: {
-					patientId: "6459c216-1770-41eb-a56a-7f4524728546"
+					patientId: localStorage.getItem('keyGuid')
 				},
 				headers: {
 					'Authorization': localStorage.getItem('keyToken')
