@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
+namespace MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement
 {
     [Table("PharmacyOffersPersistance")]
     public class PharmacyOffersPersistance
@@ -12,7 +12,7 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
         [Key]
         public Guid IdOffer { get; set; }
         [Required]
-        public Guid IdTender { get; set; }        
+        public Guid IdTender { get; set; }
         [Required]
         public string PharmacyName { get; set; }
         [Required]

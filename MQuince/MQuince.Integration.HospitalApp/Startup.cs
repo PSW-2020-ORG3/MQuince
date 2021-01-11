@@ -13,6 +13,9 @@ using MQuince.Integration.Services.Implementation;
 using MQuince.Pharmacy.Contracts.Services;
 using MQuince.Pharmacy.Infrastructure;
 using MQuince.Pharmacy.Services;
+using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Infrastructure;
+using MQuince.TenderProcurement.Services;
 using System.Globalization;
 using System.IO;
 

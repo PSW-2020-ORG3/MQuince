@@ -1,13 +1,13 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.TenderProcurement.Infrastructure.Util
 {
     public class PharmacyOffersMapper
     {
@@ -46,12 +46,11 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 => pharmacyOffers == null ? throw new ArgumentNullException()
                                             : new IdentifiableDTO<PharmacyOffersDTO>()
                                             {
-                                                Key = pharmacyOffers.IDOffer,
-                                                
-                                                //IDTender = pharmacyOffers.IdTender,
+                                                Id = pharmacyOffers.IDOffer,
+
                                                 EntityDTO = new PharmacyOffersDTO()
                                                 {
-                                                    TenderID = pharmacyOffers.IdTender,
+                                                    IdTender = pharmacyOffers.IdTender,
                                                     PharmacyName = pharmacyOffers.PharmacyName,
                                                     PharmacyEmail = pharmacyOffers.PharmacyEmail,
                                                     Medicationes = pharmacyOffers.Medicationes,

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Integration.Infrastructure.PersistenceEntities;
+using MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement;
 
 namespace MQuince.Integration.Infrastructure.DataAccess
 {
@@ -17,10 +18,12 @@ namespace MQuince.Integration.Infrastructure.DataAccess
 		}
 
 		public DbSet<PharmacyPersistence> Pharmacies { get; set; }
+		public DbSet<TenderPersistance> Tenders { get; set; }
+		public DbSet<PharmacyOffersPersistance> PharmacyOffers { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb2");
+			optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
 		}
 	}
 }

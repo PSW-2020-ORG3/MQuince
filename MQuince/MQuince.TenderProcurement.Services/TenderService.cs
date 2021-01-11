@@ -1,14 +1,14 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Contracts.Repository;
+using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.TenderProcurement.Services
 {
     public class TenderService : ITenderService
     {
@@ -47,7 +47,7 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<TenderDTO>()
             {
-                Key = tender.Id,
+                Id = tender.Id,
                 EntityDTO = new TenderDTO()
                 {
                     Name = tender.Name,
@@ -62,12 +62,11 @@ namespace MQuince.Integration.Services.Implementation
         }
 
         private Tender CreateTenderFromDTO(TenderDTO tender, Guid? id = null)
-          => id == null ? new Tender(tender.Name,tender.Descritpion,tender.FormLink,
-                    tender.StartDate,tender.EndDate)
+          => id == null ? new Tender(tender.Name, tender.Descritpion, tender.FormLink,
+                    tender.StartDate, tender.EndDate)
                         : new Tender(id.Value, tender.Name, tender.Descritpion, tender.FormLink,
                     tender.StartDate, tender.EndDate);
 
 
     }
 }
-

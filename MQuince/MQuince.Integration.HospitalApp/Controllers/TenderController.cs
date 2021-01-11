@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
+using MQuince.Core.IdentifiableDTO;
 using MQuince.Integration.Services.Constracts.Exceptions;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,15 +68,30 @@ namespace MQuince.Integration.HospitalApp.Controllers
                     StartDate=tender.EntityDTO.StartDate,
                     FormLink=tender.EntityDTO.FormLink,
                     Opened=opened
-                },tender.Key);
+                },tender.Id);
                 _tenderService.Delete(id);
-                return Ok(tender.Key);
+                return Ok(tender.Id);
                 
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete([FromQuery] Guid id)
+        {
+            try
+            {
+                _tenderService.Delete(id);
+                return Ok(id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
 
     }
