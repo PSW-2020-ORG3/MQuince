@@ -40,6 +40,23 @@
             </div>
         </div>
 `,
+    created() {
+        var role = localStorage.getItem('keyRole');
+
+        if (role == 1) {
+            window.location.href = "/public/index.html";
+        } else if (role == 0) {
+            window.location.href = "/public/index.html";
+        }
+
+        axios
+            .get('/gateway/specialization', {
+                headers: {
+                    'Authorization': localStorage.getItem('keyToken')
+                }
+            })
+            .then(response => (this.specializations = response.data));
+    },
     methods: {
         login: function () {
             axios
