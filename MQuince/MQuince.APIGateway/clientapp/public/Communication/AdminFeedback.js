@@ -14,8 +14,13 @@
 	},
 	created() {
 		var role = localStorage.getItem('keyRole');
-		
-		console.log("rolaaa",role);
+
+		if (role == 0) {
+			window.location.href = "/public/index.html";
+		} else if (role == null) {
+			window.location.href = "/public/Login/Login.html";
+		}
+
 		//role=2
 		if (role == null) {
 			this.showLogIn = true;
@@ -115,18 +120,7 @@
 					})
         },
 		logIn: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "admin",
-					Password: "admin"
-				}).then((response) => {
-					window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-
-				}, (error) => {
-					console.log(error);
-				});
+			window.location.href = "/public/Login/Login.html";
 		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');

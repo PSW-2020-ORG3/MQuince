@@ -12,13 +12,15 @@
 		showObserveAppointment: false,
 		userName: ''
 	},
-	created() {
+	 created() {
+
 		var role = localStorage.getItem('keyRole');
 		var token = localStorage.getItem('keyToken');
 
-		console.log("token",token);
+		if (role == 1) {
+			window.location.href = "/public/index.html";
+		}
 		
-		console.log("Username",this.userName);
 		//role=2
 		if (role == null) {
 			this.showLogIn = true;
@@ -69,32 +71,7 @@
 	},
 	methods: {
 		logIn: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "patient2",
-					Password: "patient2"
-				}).then((response) => {
-					window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-
-				}, (error) => {
-					console.log(error);
-				});
-		},
-		logInAdmin: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "admin",
-					Password: "admin"
-				}).then((response) => {
-					window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-
-				}, (error) => {
-					console.log(error);
-				});
+			window.location.href = "/public/Login/Login.html";
 		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');
