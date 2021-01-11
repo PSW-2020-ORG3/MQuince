@@ -1,10 +1,9 @@
-﻿using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.ActionAndBenefits.Contracts.DTO;
+using MQuince.Core.Contracts;
+using MQuince.Core.IdentifiableDTO;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.Interfaces
+namespace MQuince.ActionAndBenefits.Contracts.Service
 {
     public interface IActionAndBenefitsService : IService<ActionAndBenefitsDTO, IdentifiableDTO<ActionAndBenefitsDTO>>
     {

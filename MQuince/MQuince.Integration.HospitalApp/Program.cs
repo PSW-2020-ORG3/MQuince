@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MQuince.Integration.Services.Implementation;
+using MQuince.ActionAndBenefits.Services;
 
 namespace MQuince.Integration.HospitalApp
 {

@@ -1,13 +1,14 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.ActionAndBenefits.Contracts.DTO;
+using MQuince.ActionAndBenefits.Domain;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities.ActionAndBenefits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.ActionAndBenefits.Infrastructure.Util
 {
     public class ActionAndBenefitsMapper
     {
@@ -48,10 +49,11 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                => actionsAndBenefits == null ? throw new ArgumentNullException()
                                            : new IdentifiableDTO<ActionAndBenefitsDTO>()
                                            {
-                                               Key = actionsAndBenefits.IDAction,
-                                               IsApproved = actionsAndBenefits.IsApproved,
+                                               Id = actionsAndBenefits.IDAction,
+                                              
                                                EntityDTO = new ActionAndBenefitsDTO()
                                                {
+                                                   IsApproved = actionsAndBenefits.IsApproved,
                                                    PharmacyName = actionsAndBenefits.PharmacyName,
                                                    ActionName = actionsAndBenefits.ActionName,
                                                    BeginDate = actionsAndBenefits.BeginDate,

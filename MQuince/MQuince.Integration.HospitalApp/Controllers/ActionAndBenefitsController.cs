@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Repository.Contracts.Exceptions;
+using MQuince.ActionAndBenefits.Constracts.Exceptions;
+using MQuince.ActionAndBenefits.Contracts.DTO;
+using MQuince.ActionAndBenefits.Contracts.Service;
+using MQuince.Core.IdentifiableDTO;
 using System;
 
 namespace MQuince.Integration.HospitalApp.Controllers
@@ -55,20 +55,23 @@ namespace MQuince.Integration.HospitalApp.Controllers
 		[HttpPut("{id}")]
 		public IActionResult Update(Guid id)
 		{
+			
 			IdentifiableDTO<ActionAndBenefitsDTO> actionAndBenefits = _actionAndBenefitsService.GetById(id);
 			try
 			{
 				_actionAndBenefitsService.Update(new ActionAndBenefitsDTO()
 				{
+					IsApproved = true,
 					PharmacyName = actionAndBenefits.EntityDTO.PharmacyName,
 					ActionName = actionAndBenefits.EntityDTO.ActionName,
 					BeginDate = actionAndBenefits.EntityDTO.BeginDate,
 					EndDate = actionAndBenefits.EntityDTO.EndDate,
 					OldCost = actionAndBenefits.EntityDTO.OldCost,
 					NewCost = actionAndBenefits.EntityDTO.NewCost
-				}, actionAndBenefits.Key, true);
+				
+				}, actionAndBenefits.Id,true);
 
-				return Ok(actionAndBenefits.Key);
+				return Ok(actionAndBenefits.Id);
 			}
 			catch (Exception e)
 			{

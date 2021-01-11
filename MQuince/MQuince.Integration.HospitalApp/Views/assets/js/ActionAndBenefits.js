@@ -2,17 +2,17 @@
         setInterval(function () {
             cache_clear()
         }, 5000);
-
-    $.ajax({
+   $.ajax({
         url: "/api/ActionAndBenefits",
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({})
-    }).then(function (data) {
+   }).then(function (data) {
         for (i = 0; i < data.length; i++) {
-            if (data[i].isApproved == false) {
-                document.getElementById("tabelAction").insertRow(1)
+           
+            if (data[i].entityDTO.isApproved == false) {
+                document.getElementById("tabelAction").insertRow(-1)
                     .innerHTML = '<tr><td id="pharmacyName">' + data[i].entityDTO.pharmacyName + '</td><td id="actionName" >'
                 + data[i].entityDTO.actionName + '</td><td id="beginDate">'
                 + data[i].entityDTO.beginDate + '</td><td id="endDate">'
@@ -45,17 +45,17 @@
             data: JSON.stringify({})
         }).then(function (data) {
             for (i = 0; i < data.length; i++) {
-                if (data[i].isApproved == false) {
+                if (data[i].entityDTO.isApproved == false) {
                     if (pharmacyName == data[i].entityDTO.pharmacyName &&
                         actionName == data[i].entityDTO.actionName &&
                         beginDate == data[i].entityDTO.beginDate &&
                         endDate == data[i].entityDTO.endDate) {
-                        alert(data[i].key);
+                        
                         $.ajax(
                             {
                                 type: "DELETE",
-                                url: "/api/ActionAndBenefits/" + data[i].key,                                
-                                data: { id: data[i].key },
+                                url: "/api/ActionAndBenefits/" + data[i].id,                                
+                                data: { id: data[i].id },
                                    
                                 success: function (result) {                                    
                                     alert("Successefully deleted action!");
@@ -86,7 +86,7 @@
         var actionName = row.children('#actionName').text();
         var beginDate = row.children('#beginDate').text();
         var endDate = row.children('#endDate').text();
-        
+        console.log(pharmacyName);
        
         console.log(rowIndex)
         $.ajax({
@@ -97,8 +97,7 @@
             data: JSON.stringify({})
         }).then(function (data) {
             for (i = 0; i < data.length; i++) {
-                
-                if (data[i].isApproved == false) {
+                if (data[i].entityDTO.isApproved == false) {
                     if (pharmacyName == data[i].entityDTO.pharmacyName &&
                         actionName == data[i].entityDTO.actionName &&
                         beginDate == data[i].entityDTO.beginDate &&
@@ -108,11 +107,11 @@
                        $.ajax(
                             {
                                 type: "PUT",
-                               url: "/api/ActionAndBenefits/" + data[i].key ,
+                               url: "/api/ActionAndBenefits/" + data[i].id ,
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 data:{
-                                    id: data[i].key                                 
+                                    id: data[i].id                                 
 
                                 },
                                 success: function (result) {

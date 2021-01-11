@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
+namespace MQuince.Integration.Infrastructure.PersistenceEntities.ActionAndBenefits
 {
     [Table("ActionAndBenefits")]
     public class ActionAndBenefitsPersistance
@@ -27,7 +27,7 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
         public Boolean IsApproved { get; set; }
 
         public ActionAndBenefitsPersistance() { }
-        public ActionAndBenefitsPersistance(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost,Boolean isApproved)
+        public ActionAndBenefitsPersistance(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost, Boolean isApproved)
         {
             ActionKey = actionKey;
             PharmacyName = pharmacyName;

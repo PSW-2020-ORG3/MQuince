@@ -1,9 +1,9 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
+﻿using MQuince.ActionAndBenefits.Contracts.DTO;
+using MQuince.ActionAndBenefits.Contracts.Repository;
+using MQuince.ActionAndBenefits.Contracts.Service;
+using MQuince.ActionAndBenefits.Domain;
+using MQuince.ActionAndBenefits.Services;
+using MQuince.Core.IdentifiableDTO;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -50,7 +50,7 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTests
 
 		private bool CompareActionAndBenefitsAndIdentifierActionAndBenefits(ActionsAndBenefits actionAndBenefits, IdentifiableDTO<ActionAndBenefitsDTO> actionAndBenefitsDTO)
 		{
-			if (actionAndBenefits.IDAction != actionAndBenefitsDTO.Key)
+			if (actionAndBenefits.IDAction != actionAndBenefitsDTO.Id)
 				return false;
 
 			if (!actionAndBenefits.PharmacyName.Equals(actionAndBenefitsDTO.EntityDTO.PharmacyName))
@@ -70,7 +70,7 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTests
 
 			if (actionAndBenefits.NewCost != actionAndBenefitsDTO.EntityDTO.NewCost)
 				return false;
-			if (actionAndBenefits.IsApproved != actionAndBenefitsDTO.IsApproved)
+			if (actionAndBenefits.IsApproved != actionAndBenefitsDTO.EntityDTO.IsApproved)
 				return false;
 
 			return true;
