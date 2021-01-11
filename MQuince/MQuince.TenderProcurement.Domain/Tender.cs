@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Entities
+namespace MQuince.TenderProcurement.Domain
 {
     public class Tender
     {
@@ -11,7 +11,7 @@ namespace MQuince.Integration.Entities
         public string Name { get; set; }
 
         public string Descritpion { get; set; }
-        
+
         public string FormLink { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -20,7 +20,7 @@ namespace MQuince.Integration.Entities
 
         public Boolean Opened { get; set; }
 
-        public Tender(string name, string descritpion, string formLink, DateTime startDate, DateTime endDate,Boolean opened)
+        public Tender(string name, string descritpion, string formLink, DateTime startDate, DateTime endDate, Boolean opened)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -37,20 +37,20 @@ namespace MQuince.Integration.Entities
             }
 
         }
-        public Tender(Guid id, string name, string descritpion, string formLink, DateTime startDate, DateTime endDate,Boolean opened)
+        public Tender(Guid id, string name, string descritpion, string formLink, DateTime startDate, DateTime endDate, Boolean opened)
         {
 
-                _id = id;
-                Name = name;
-                Descritpion = descritpion;
-                FormLink = formLink;
-                StartDate = startDate;
-                EndDate = endDate;
-                Opened = opened;
-            
+            _id = id;
+            Name = name;
+            Descritpion = descritpion;
+            FormLink = formLink;
+            StartDate = startDate;
+            EndDate = endDate;
+            Opened = opened;
+
 
         }
-        public Tender(Guid id,string name, string descritpion, string formLink, DateTime startDate, DateTime endDate)
+        public Tender(Guid id, string name, string descritpion, string formLink, DateTime startDate, DateTime endDate)
         {
             if (endDate > DateTime.Now && startDate < DateTime.Now)
             {
@@ -77,7 +77,7 @@ namespace MQuince.Integration.Entities
         }
         public Tender(string name, string descritpion, string formLink, DateTime startDate, DateTime endDate)
         {
-            if (endDate > DateTime.Now && startDate< DateTime.Now)
+            if (endDate > DateTime.Now && startDate < DateTime.Now)
             {
                 Name = name;
                 Descritpion = descritpion;

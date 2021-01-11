@@ -98,20 +98,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Autentication.Unit.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pharmacy", "Pharmacy", "{711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Contracts", "MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj", "{BD853BF2-B909-4C56-BEEC-DE12C21517AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Pharmacy.Contracts", "MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj", "{BD853BF2-B909-4C56-BEEC-DE12C21517AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{537F14C2-0C1A-4A61-BF6C-2210D45B7A29} = {537F14C2-0C1A-4A61-BF6C-2210D45B7A29}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Domain", "MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj", "{170C428D-D7E9-42F6-9041-42DD89C981BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Pharmacy.Domain", "MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj", "{170C428D-D7E9-42F6-9041-42DD89C981BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Infrastructure", "MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj", "{7833320E-BE87-46C4-96B5-A3D575472D79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Pharmacy.Infrastructure", "MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj", "{7833320E-BE87-46C4-96B5-A3D575472D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Pharmacy.Services", "MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj", "{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Pharmacy.Services", "MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj", "{C6B72CDF-12C6-4F4E-827B-16A7D82103E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration.Infrastructure", "Integration.Infrastructure", "{1E91DDCB-ADF8-412C-AEE8-C6203B4F3682}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Integration.Infrastructure", "MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj", "{98018434-9DE6-40FF-89BE-1CDBE343E2DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Infrastructure", "MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj", "{98018434-9DE6-40FF-89BE-1CDBE343E2DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TenderProcurement", "TenderProcurement", "{69EA719F-9052-4465-B4F4-035A66D183FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Contracts", "MQuince.TenderProcurement.Contracts\MQuince.TenderProcurement.Contracts.csproj", "{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Domain", "MQuince.TenderProcurement.Domain\MQuince.TenderProcurement.Domain.csproj", "{B45170F5-3362-47C7-AADB-5C67D9F04945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Infrastructure", "MQuince.TenderProcurement.Infrastructure\MQuince.TenderProcurement.Infrastructure.csproj", "{3BB2A714-C16E-4807-B028-CF967F2AC7D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Services", "MQuince.TenderProcurement.Services\MQuince.TenderProcurement.Services.csproj", "{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -271,6 +281,22 @@ Global
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B45170F5-3362-47C7-AADB-5C67D9F04945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B45170F5-3362-47C7-AADB-5C67D9F04945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B45170F5-3362-47C7-AADB-5C67D9F04945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B45170F5-3362-47C7-AADB-5C67D9F04945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB2A714-C16E-4807-B028-CF967F2AC7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB2A714-C16E-4807-B028-CF967F2AC7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB2A714-C16E-4807-B028-CF967F2AC7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB2A714-C16E-4807-B028-CF967F2AC7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -308,6 +334,10 @@ Global
 		{7833320E-BE87-46C4-96B5-A3D575472D79} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
 		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB} = {1E91DDCB-ADF8-412C-AEE8-C6203B4F3682}
+		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA} = {69EA719F-9052-4465-B4F4-035A66D183FA}
+		{B45170F5-3362-47C7-AADB-5C67D9F04945} = {69EA719F-9052-4465-B4F4-035A66D183FA}
+		{3BB2A714-C16E-4807-B028-CF967F2AC7D8} = {69EA719F-9052-4465-B4F4-035A66D183FA}
+		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6} = {69EA719F-9052-4465-B4F4-035A66D183FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

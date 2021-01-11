@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MQuince.Core\MQuince.Core.csproj" />
+    <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.TenderProcurement.Contracts\MQuince.TenderProcurement.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.TenderProcurement.Domain\MQuince.TenderProcurement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

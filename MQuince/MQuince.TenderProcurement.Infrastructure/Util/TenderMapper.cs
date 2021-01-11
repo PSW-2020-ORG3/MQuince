@@ -1,20 +1,20 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.TenderProcurement.Infrastructure.Util
 {
     public class TenderMapper
     {
         public static Tender MapTenderPersistenceToTenderEntity(TenderPersistance tenderPersistance)
         {
             if (tenderPersistance == null) throw new ArgumentNullException();
-          
+
             return new Tender(tenderPersistance.Id,
                                                 tenderPersistance.Name,
                                                 tenderPersistance.Descritpion,
@@ -23,12 +23,12 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                                                 tenderPersistance.EndDate,
 
                                                 tenderPersistance.Opened);
-           
+
         }
 
         public static TenderPersistance MapTenderEntityToTenderPersistance(Tender tender)
         {
-            
+
             if (tender == null) return null;
 
             TenderPersistance retVal = new TenderPersistance()
@@ -39,7 +39,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 FormLink = tender.FormLink,
                 StartDate = tender.StartDate,
                 EndDate = tender.EndDate,
-                Opened= tender.Opened
+                Opened = tender.Opened
             };
             return retVal;
         }
@@ -49,7 +49,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 => tender == null ? throw new ArgumentNullException()
                                             : new IdentifiableDTO<TenderDTO>()
                                             {
-                                                Key = tender.Id,
+                                                Id = tender.Id,
                                                 EntityDTO = new TenderDTO()
                                                 {
                                                     Name = tender.Name,
@@ -66,4 +66,3 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
 
     }
 }
-
