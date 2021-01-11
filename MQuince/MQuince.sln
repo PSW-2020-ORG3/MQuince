@@ -126,10 +126,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.ActionAndBenefits.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.ActionAndBenefits.Services", "MQuince.ActionAndBenefits.Services\MQuince.ActionAndBenefits.Services.csproj", "{C7342C19-D303-4370-B26C-B3BB904D9117}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sftp", "Sftp", "{F04819F4-5E67-4514-B441-84CD46400F99}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.Stfp.Contracts", "MQuince.Stfp.Contracts\MQuince.Stfp.Contracts.csproj", "{E1EC4882-C13D-4968-8EAF-3D857B081A7D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -304,10 +300,6 @@ Global
 		{C7342C19-D303-4370-B26C-B3BB904D9117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7342C19-D303-4370-B26C-B3BB904D9117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7342C19-D303-4370-B26C-B3BB904D9117}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E1EC4882-C13D-4968-8EAF-3D857B081A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1EC4882-C13D-4968-8EAF-3D857B081A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1EC4882-C13D-4968-8EAF-3D857B081A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1EC4882-C13D-4968-8EAF-3D857B081A7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -349,7 +341,6 @@ Global
 		{F25186FC-923A-4323-83B2-DC065FCC5E86} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
 		{E782FF15-499F-4259-8C4B-3DBC7FF81A6C} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
 		{C7342C19-D303-4370-B26C-B3BB904D9117} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
-		{E1EC4882-C13D-4968-8EAF-3D857B081A7D} = {F04819F4-5E67-4514-B441-84CD46400F99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}
