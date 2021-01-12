@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using Microsoft.Extensions.Hosting;
-using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.DataAccess;
-using MQuince.Integration.Repository.MySQL.DataProvider.Util;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.ActionAndBenefits.Contracts.DTO;
+using MQuince.ActionAndBenefits.Contracts.Service;
+using MQuince.ActionAndBenefits.Domain;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -14,7 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.ActionAndBenefits.Services
 {
     public class RabbitMQService : BackgroundService
     {
@@ -47,13 +45,14 @@ namespace MQuince.Integration.Services.Implementation
                 ActionsAndBenefits message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
                 try
                 {
-                    ActionAndBenefitsDTO newAction = new ActionAndBenefitsDTO(
+                    ActionAndBenefitsDTO newAction = new ActionAndBenefitsDTO(                        
                         message.PharmacyName,
                         message.ActionName,
                         new DateTime(message.BeginDate.Year, message.BeginDate.Month, message.BeginDate.Day),
                         new DateTime(message.EndDate.Year, message.EndDate.Month, message.EndDate.Day),
                         Convert.ToDouble(message.OldCost),
-                        Convert.ToDouble(message.NewCost)
+                        Convert.ToDouble(message.NewCost),
+                        false
                         );
                    
                    _actionAndBenefitsService.Create(newAction);

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MQuince.Integration.Infrastructure.PersistenceEntities;
-using MQuince.Integration.Infrastructure.PersistenceEntities.UrgentProcurement;
+using MQuince.Integration.Infrastructure.PersistenceEntities.ActionAndBenefits;
 using MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement;
-
+using MQuince.Integration.Infrastructure.PersistenceEntities.UrgentProcurement;
 
 namespace MQuince.Integration.Infrastructure.DataAccess
 {
@@ -23,10 +23,15 @@ namespace MQuince.Integration.Infrastructure.DataAccess
 		public DbSet<MedicationsPersistence> Medications { get; set; }
 		public DbSet<TenderPersistance> Tenders { get; set; }
 		public DbSet<PharmacyOffersPersistance> PharmacyOffers { get; set; }
+
+		public DbSet<ActionAndBenefitsPersistance> ActionAndBenefits { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySql(@"server=localhost;user=root;password=Mucibabic*1;database=pharmacydb1");
-
+			optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
 		}
+		
+
+	
 	}
 }

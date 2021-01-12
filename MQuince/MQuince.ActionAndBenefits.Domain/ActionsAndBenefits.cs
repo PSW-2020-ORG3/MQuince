@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Entities
+namespace MQuince.ActionAndBenefits.Domain
 {
     public class ActionsAndBenefits
     {
@@ -16,10 +16,10 @@ namespace MQuince.Integration.Entities
         public Boolean IsApproved { get; set; }
 
         public void Approve()
-		{
+        {
             IsApproved = true;
-		}
-        public ActionsAndBenefits(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost,Boolean isApproved)
+        }
+        public ActionsAndBenefits(Guid actionKey, string pharmacyName, string actionName, DateTime beginDate, DateTime endDate, double oldCost, double newCost, Boolean isApproved)
         {
             _actionKey = actionKey;
             PharmacyName = pharmacyName;
