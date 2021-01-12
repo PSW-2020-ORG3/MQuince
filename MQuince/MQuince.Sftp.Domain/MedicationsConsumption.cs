@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Entities
+namespace MQuince.Sftp.Domain
 {
     public class MedicationsConsumption
     {

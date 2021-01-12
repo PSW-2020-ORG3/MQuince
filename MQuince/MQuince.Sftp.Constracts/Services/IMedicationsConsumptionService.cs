@@ -1,10 +1,11 @@
-﻿using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.Contracts;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Sftp.Constracts.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.Interfaces
+namespace MQuince.Sftp.Constracts.Services
 {
     public interface IMedicationsConsumptionService : IService<MedicationsConsumptionDTO, IdentifiableDTO<MedicationsConsumptionDTO>>
     {

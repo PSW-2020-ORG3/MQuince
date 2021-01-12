@@ -1,21 +1,22 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Constracts.Repository;
+using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Domain;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.Sftp.Services
 {
     public class MedicationsConsumptationService : IMedicationsConsumptionService
     {
         private readonly IMedicationsConsumptionRepository _medicationsConsumptionRepository;
-        IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> listMedicationsByDate= new List<IdentifiableDTO<MedicationsConsumptionDTO>>();
+        IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> listMedicationsByDate = new List<IdentifiableDTO<MedicationsConsumptionDTO>>();
 
         public MedicationsConsumptationService(IMedicationsConsumptionRepository medicationsConsumptionReposotiry)
         {
@@ -43,7 +44,7 @@ namespace MQuince.Integration.Services.Implementation
 
         public IEnumerable<IdentifiableDTO<MedicationsConsumptionDTO>> GetConsumptionBetweenDates(DateTime from, DateTime to)
         {
-            
+
             foreach (IdentifiableDTO<MedicationsConsumptionDTO> medication in GetAll().ToList())
             {
                 if (medication.EntityDTO.DateOfConsumtion >= from && medication.EntityDTO.DateOfConsumtion <= to)
@@ -51,17 +52,17 @@ namespace MQuince.Integration.Services.Implementation
                     listMedicationsByDate.Append(medication);
                 }
             }
-            
+
             return listMedicationsByDate;
 
 
         }
-        
+
         public void GeneratePdf(DateDTO dto)
         {
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
-            PdfWriter wr = PdfWriter.GetInstance(doc, new FileStream("izvjestaj.pdf", FileMode.Create));
+            PdfWriter wr = PdfWriter.GetInstance(doc, new FileStream("Report_in_"+dto.To+"_"+dto.From +".pdf", FileMode.Create));
             doc.Open();
 
             iTextSharp.text.Paragraph p = new iTextSharp.text.Paragraph("\t\t Medications consumption records \n");
@@ -77,7 +78,7 @@ namespace MQuince.Integration.Services.Implementation
                 }
             }
             doc.Close();
-            
+
         }
 
         public void Update(MedicationsConsumptionDTO entityDTO, Guid id)
@@ -91,7 +92,7 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<MedicationsConsumptionDTO>()
             {
-                Key = medicationsConsumptation.KeyConsumtion,
+                Id = medicationsConsumptation.KeyConsumtion,
                 EntityDTO = new MedicationsConsumptionDTO()
                 {
                     Name = medicationsConsumptation.Name,

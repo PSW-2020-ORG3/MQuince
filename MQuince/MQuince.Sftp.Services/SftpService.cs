@@ -1,12 +1,10 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Services.Constracts.Interfaces;
+﻿using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Domain;
 using Renci.SshNet;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.Sftp.Services
 {
     public class SftpService : ISftpService
     {
@@ -14,7 +12,7 @@ namespace MQuince.Integration.Services.Implementation
         {
             SftpConfig config = new SftpConfig
             {
-                Host = "192.168.1.12",
+                Host = "192.168.1.11",
                 Port = 22,
                 UserName = "tester",
                 Password = "password"
@@ -45,7 +43,7 @@ namespace MQuince.Integration.Services.Implementation
         {
             SftpConfig config = new SftpConfig
             {
-                Host = "192.168.1.12",
+                Host = "192.168.1.11",
                 Port = 22,
                 UserName = "tester",
                 Password = "password"
@@ -55,7 +53,7 @@ namespace MQuince.Integration.Services.Implementation
                 // connect and log in
                 client.Connect();
 
-                if(!client.IsConnected)
+                if (!client.IsConnected)
                 {
                     Console.WriteLine("It's not connected!");
                     return false;
@@ -70,5 +68,5 @@ namespace MQuince.Integration.Services.Implementation
                 return true;
             }
         }
-        }
+    }
 }

@@ -1,15 +1,13 @@
 ﻿
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.qrcode;
-using MQuince.Integration.Services.Constracts.Interfaces;
 using QRCoder;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.Sftp.Services
 {
     public class HomeService 
     {       

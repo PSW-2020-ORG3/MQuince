@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.Interfaces
+namespace MQuince.Sftp.Constracts.Services
 {
     public interface ISftpService
     {

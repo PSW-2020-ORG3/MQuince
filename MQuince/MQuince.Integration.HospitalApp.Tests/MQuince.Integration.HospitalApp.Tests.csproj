@@ -19,9 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Domain\MQuince.Sftp.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Infrastructure\MQuince.Sftp.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Services\MQuince.Sftp.Services.csproj" />
   </ItemGroup>
 
 </Project>

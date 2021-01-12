@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.DTO
+namespace MQuince.Sftp.Constracts.DTO
 {
     public class DateDTO
     {

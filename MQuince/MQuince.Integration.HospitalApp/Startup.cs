@@ -13,6 +13,9 @@ using MQuince.Integration.Services.Implementation;
 using MQuince.Pharmacy.Contracts.Services;
 using MQuince.Pharmacy.Infrastructure;
 using MQuince.Pharmacy.Services;
+using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Infrastructure;
+using MQuince.Sftp.Services;
 using System.Globalization;
 using System.IO;
 

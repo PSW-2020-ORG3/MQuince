@@ -30,19 +30,6 @@ body
     margin-left: 300px;
     margin-top: 10px;
 }
-
-    
-}
-#add
-{
-    /*position: relative;
-    display: inline;
-    margin: 0 auto;*/
-    
-}
-
-
-
  td
 {
   padding-left: 10px;
@@ -66,9 +53,4 @@ button:hover
     opacity: 0.8;
     color: black;
 
-}
-
-button span {
-
-    
 }

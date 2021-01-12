@@ -46,6 +46,9 @@
     <ProjectReference Include="..\MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Constracts\MQuince.Sftp.Constracts.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Infrastructure\MQuince.Sftp.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Services\MQuince.Sftp.Services.csproj" />
 
   </ItemGroup>
   <ItemGroup>

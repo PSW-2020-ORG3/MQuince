@@ -14,6 +14,7 @@ using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
 using MQuince.Integration.Entities;
 using System.Collections.Generic;
+using MQuince.Sftp.Services;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {

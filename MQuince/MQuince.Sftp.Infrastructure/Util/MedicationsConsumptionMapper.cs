@@ -1,16 +1,16 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.Sftp.Infrastructure.Util
 {
-    public class MedicationsConsumptionMapper
-    {
+    public class MedicationsConsumptionMapper    {
 
         public static MedicationsConsumption MapMedicationsConsumptionPersistenceToMedicationsConsumptionEntity(MedicationsConsumptionPersistance medicationsConsumptionPersistance)
         {
@@ -42,7 +42,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 => medicationsConsumption == null ? throw new ArgumentNullException()
                                             : new IdentifiableDTO<MedicationsConsumptionDTO>()
                                             {
-                                                Key = medicationsConsumption.KeyConsumtion,
+                                                Id = medicationsConsumption.KeyConsumtion,
                                                 EntityDTO = new MedicationsConsumptionDTO()
                                                 {
                                                     Name = medicationsConsumption.Name,

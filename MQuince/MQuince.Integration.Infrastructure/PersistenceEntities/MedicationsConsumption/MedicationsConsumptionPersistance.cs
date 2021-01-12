@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
+namespace MQuince.Integration.Infrastructure.PersistenceEntities
 {
     [Table("MedicationsConsumption")]
     public class MedicationsConsumptionPersistance
