@@ -32,6 +32,7 @@ function ViewTender() {
 function ShowAllOffers() {
     window.location.replace("http://localhost:49544/home/ShowAllOffers");
 }
+
 function requestForDirector() {
     window.location.replace("http://localhost:49544/home/requestForDirector");
 

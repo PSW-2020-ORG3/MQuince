@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package isa1.isaProject1.grpc;
-option csharp_namespace = "MQuince.Integration.HospitalApp.Protos";
+option csharp_namespace = "MQuince.UrgentProcurement.Services.Protos";
 
 message MessagePharmacy{
   string name=1;

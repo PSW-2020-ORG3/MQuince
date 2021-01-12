@@ -1,18 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Repository.MySQL.DataAccess;
-using MQuince.Integration.Repository.MySQL.DataProvider.Util;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Integration.Infrastructure.DataAccess;
+using MQuince.Integration.Infrastructure.PersistenceEntities.UrgentProcurement;
+using MQuince.UrgentProcurement.Contracts.Repository;
+using MQuince.UrgentProcurement.Domain;
+using MQuince.UrgentProcurement.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider
+namespace MQuince.UrgentProcurement.Infrastructure
 {
     public class MedicationsRepository : IMedicationsRepository
     {
@@ -34,7 +31,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
             }
         }
 
-        
+
         public bool Delete(Guid id)
         {
             using (DataContext _context = new DataContext())
@@ -71,7 +68,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
             }
         }
 
-        
+
         public Medications GetById(Guid id)
         {
 
@@ -99,7 +96,8 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider
             }
         }
 
-        
+
 
     }
+
 }

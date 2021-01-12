@@ -11,9 +11,9 @@ using System.Drawing.Drawing2D;
 using Syncfusion.Pdf.Graphics;
 using PdfSharp.Drawing;
 using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
-using MQuince.Integration.Entities;
 using System.Collections.Generic;
+using MQuince.UrgentProcurement.Services;
+using MQuince.UrgentProcurement.Domain;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
@@ -71,7 +71,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPost]
         public IActionResult Therapy(string name, string jmbg, string medication, string description)
         {
-            HomeService.generateQRCode(name, jmbg, medication, description);
+            //HomeService.generateQRCode(name, jmbg, medication, description);
             return View();
         }
 

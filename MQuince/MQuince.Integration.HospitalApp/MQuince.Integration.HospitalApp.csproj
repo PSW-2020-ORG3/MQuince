@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.33.1" />
-    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.33.1" />
-    <PackageReference Include="Grpc.Core" Version="2.34.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.34.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -46,15 +38,15 @@
     <ProjectReference Include="..\MQuince.Pharmacy.Contracts\MQuince.Pharmacy.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />
+
+    <ProjectReference Include="..\MQuince.UrgentProcurement.Contracts\MQuince.UrgentProcurement.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.UrgentProcurement.Infrastructure\MQuince.UrgentProcurement.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.UrgentProcurement.Services\MQuince.UrgentProcurement.Services.csproj" />
+
     <ProjectReference Include="..\MQuince.TenderProcurement.Contracts\MQuince.TenderProcurement.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.TenderProcurement.Infrastructure\MQuince.TenderProcurement.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.TenderProcurement.Services\MQuince.TenderProcurement.Services.csproj" />
 
-  </ItemGroup>
-  <ItemGroup>
-    <Protobuf Include="Protos\model.proto" GrpcServices="None" />
-    <Protobuf Include="Protos\netGrpcService.proto" GrpcServices="Server" />
-    <Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
+namespace MQuince.Integration.Infrastructure.PersistenceEntities.UrgentProcurement
 {
     public class MedicationsPersistence
     {
@@ -12,7 +12,7 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
         [Required]
         public string Name { get; set; }
         [Required]
-       
+
         public int Quantity { get; set; }
 
         public MedicationsPersistence() { }
@@ -24,4 +24,5 @@ namespace MQuince.Integration.Repository.MySQL.PersistenceEntities
             this.Quantity = quantity;
         }
     }
+
 }

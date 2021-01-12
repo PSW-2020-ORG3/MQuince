@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.DTO
+namespace MQuince.UrgentProcurement.Contracts.DTO
 {
     public class MedicationsDTO
     {
@@ -14,11 +14,9 @@ namespace MQuince.Integration.Services.Constracts.DTO
 
         public MedicationsDTO(string name, int quantity)
         {
-                Name = name;
-                Quantity = quantity;
+            Name = name;
+            Quantity = quantity;
         }
 
     }
-
-    
 }

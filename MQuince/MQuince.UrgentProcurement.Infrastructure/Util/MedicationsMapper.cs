@@ -1,13 +1,13 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities.UrgentProcurement;
+using MQuince.UrgentProcurement.Contracts.DTO;
+using MQuince.UrgentProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
+namespace MQuince.UrgentProcurement.Infrastructure.Util
 {
     public class MedicationsMapper
     {
@@ -39,7 +39,7 @@ namespace MQuince.Integration.Repository.MySQL.DataProvider.Util
                 => medications == null ? throw new ArgumentNullException()
                                             : new IdentifiableDTO<MedicationsDTO>()
                                             {
-                                                Key = medications.KeyMedication,
+                                                Id = medications.KeyMedication,
                                                 EntityDTO = new MedicationsDTO()
                                                 {
                                                     Name = medications.Name,
