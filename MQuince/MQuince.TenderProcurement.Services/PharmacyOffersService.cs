@@ -1,11 +1,8 @@
-﻿using MailKit.Security;
-using MimeKit;
-using MimeKit.Text;
-using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Contracts.Repository;
+using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +10,11 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.TenderProcurement.Services
 {
     public class PharmacyOffersService : IPharmacyOffersService
     {
-        private readonly IPharmacyOffersRepository _pharmacyOffersRepository;        
+        private readonly IPharmacyOffersRepository _pharmacyOffersRepository;
 
         public PharmacyOffersService(IPharmacyOffersRepository pharmacyOffersRepository)
         {
@@ -43,7 +40,7 @@ namespace MQuince.Integration.Services.Implementation
         public IdentifiableDTO<PharmacyOffersDTO> GetById(Guid id)
             => CreateDTOFromPharmacyOffers(_pharmacyOffersRepository.GetById(id));
 
-       
+
         public void Update(PharmacyOffersDTO entityDTO, Guid id)
         => _pharmacyOffersRepository.Update(CreatePharmacyOffersFromDTO(entityDTO));
 
@@ -53,10 +50,10 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<PharmacyOffersDTO>()
             {
-                Key = pharmacyOffers.IDOffer,
+                Id = pharmacyOffers.IDOffer,
                 EntityDTO = new PharmacyOffersDTO()
                 {
-                    TenderID = pharmacyOffers.IdTender,
+                    IdTender = pharmacyOffers.IdTender,
                     PharmacyName = pharmacyOffers.PharmacyName,
                     PharmacyEmail = pharmacyOffers.PharmacyEmail,
                     Medicationes = pharmacyOffers.Medicationes,
@@ -69,9 +66,9 @@ namespace MQuince.Integration.Services.Implementation
         }
 
         private PharmacyOffers CreatePharmacyOffersFromDTO(PharmacyOffersDTO pharmacyOffers, Guid? idOffer = null)
-          => idOffer == null ? new PharmacyOffers(pharmacyOffers.TenderID, pharmacyOffers.PharmacyName,pharmacyOffers.PharmacyEmail , pharmacyOffers.Medicationes, pharmacyOffers.Quantity, pharmacyOffers.Price)
-                        : new PharmacyOffers(idOffer.Value,pharmacyOffers.TenderID, pharmacyOffers.PharmacyName, pharmacyOffers.PharmacyEmail, pharmacyOffers.Medicationes, pharmacyOffers.Quantity, pharmacyOffers.Price);
-        public Guid sendOffers(Guid id,Boolean approve)
+          => idOffer == null ? new PharmacyOffers(pharmacyOffers.IdTender, pharmacyOffers.PharmacyName, pharmacyOffers.PharmacyEmail, pharmacyOffers.Medicationes, pharmacyOffers.Quantity, pharmacyOffers.Price)
+                        : new PharmacyOffers(idOffer.Value, pharmacyOffers.IdTender, pharmacyOffers.PharmacyName, pharmacyOffers.PharmacyEmail, pharmacyOffers.Medicationes, pharmacyOffers.Quantity, pharmacyOffers.Price);
+        public Guid sendOffers(Guid id, Boolean approve)
         {
             IdentifiableDTO<PharmacyOffersDTO> offer = GetById(id);
             sendEmail(approve, offer);
@@ -85,24 +82,24 @@ namespace MQuince.Integration.Services.Implementation
             {
                 mail.From = new MailAddress("mquince.medic@gmail.com");
                 mail.To.Add(offer.EntityDTO.PharmacyEmail);
-                mail.Subject = "TENDER " + offer.EntityDTO.TenderID;
+                mail.Subject = "TENDER " + offer.EntityDTO.IdTender;
 
-                if (value) 
-                   mail.Body = textForBody(offer); 
-                  
-                else           
-                   mail.Body = "<h1>We didnt choose your offer!</h1><p>Hospital MQuince Medic. More luck next time. :) </p>";
-                                   
+                if (value)
+                    mail.Body = textForBody(offer);
+
+                else
+                    mail.Body = "<h1>We didnt choose your offer!</h1><p>Hospital MQuince Medic. More luck next time. :) </p>";
+
 
                 mail.IsBodyHtml = true;
                 using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                 {
                     smtp.UseDefaultCredentials = false;
                     smtp.Credentials = new NetworkCredential("mquince.medic@gmail.com", "mucibabic123");
-                    smtp.EnableSsl = true;                   
+                    smtp.EnableSsl = true;
                     smtp.Send(mail);
                 }
-            
+
             }
         }
 
@@ -116,11 +113,10 @@ namespace MQuince.Integration.Services.Implementation
                     + "<h2> MQuince Medic </h2>";
         }
 
-           
-                             
-        
+
+
+
 
 
     }
-
 }

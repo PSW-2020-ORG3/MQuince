@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MQuince.Integration.Infrastructure.PersistenceEntities.TenderProcurement;
 using MQuince.Integration.Repository.MySQL.PersistenceEntities;
 using System;
 using System.Collections.Generic;

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Entities
+namespace MQuince.TenderProcurement.Domain
 {
     public class PharmacyOffers
     {
 
-        private Guid _idOffer;        
+        private Guid _idOffer;
         public Guid IdTender { get; set; }
-        public string PharmacyName { get; set; }       
-        public string PharmacyEmail { get; set; }        
-        public string Medicationes { get; set; }     
-        public string Quantity { get; set; }        
+        public string PharmacyName { get; set; }
+        public string PharmacyEmail { get; set; }
+        public string Medicationes { get; set; }
+        public string Quantity { get; set; }
         public string Price { get; set; }
 
         public PharmacyOffers() { }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Services.Constracts.DTO
+namespace MQuince.TenderProcurement.Contracts.DTO
 {
     public class PharmacyOffersDTO
     {
-        public Guid TenderID { get; set; }
+        public Guid IdTender { get; set; }
         public string PharmacyName { get; set; }
         public string PharmacyEmail { get; set; }
         public string Medicationes { get; set; }

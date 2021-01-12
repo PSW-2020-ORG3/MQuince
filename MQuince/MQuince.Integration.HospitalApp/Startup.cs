@@ -16,6 +16,9 @@ using MQuince.UrgentProcurement.Contracts.Services;
 using MQuince.UrgentProcurement.Infrastructure;
 using MQuince.UrgentProcurement.Services;
 using MQuince.UrgentProcurement.Services.Protos;
+using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Infrastructure;
+using MQuince.TenderProcurement.Services;
 using System.Globalization;
 using System.IO;
 
