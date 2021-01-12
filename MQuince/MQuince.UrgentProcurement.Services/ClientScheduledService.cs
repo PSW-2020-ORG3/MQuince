@@ -1,14 +1,13 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.Hosting;
-using MQuince.Integration.Entities;
-using MQuince.Integration.HospitalApp.Protos;
+using MQuince.UrgentProcurement.Domain;
+using MQuince.UrgentProcurement.Services.Protos;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-
-namespace MQuince.Integration.HospitalApp
+namespace MQuince.UrgentProcurement.Services
 {
     public class ClientScheduledService : IHostedService
     {
@@ -22,7 +21,7 @@ namespace MQuince.Integration.HospitalApp
         {
             channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
             client = new Protos.SpringGrpcService.SpringGrpcServiceClient(channel);
-            
+
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -32,7 +31,7 @@ namespace MQuince.Integration.HospitalApp
             return Task.CompletedTask;
         }
 
-        
+
         public async void SendUrgentMessage(string name, string quantity)
 
         {

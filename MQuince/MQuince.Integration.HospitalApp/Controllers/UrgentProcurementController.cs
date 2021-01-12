@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using Newtonsoft.Json.Linq;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.UrgentProcurement.Contracts.DTO;
+using MQuince.UrgentProcurement.Contracts.Services;
+using MQuince.UrgentProcurement.Services;
 using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
@@ -19,7 +15,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 
         ClientScheduledService service;
         private readonly IMedicationsService _medicationsService;
-        
+
         public UrgentProcurementController([FromServices] IMedicationsService medicationsService)
         {
             this._medicationsService = medicationsService;
@@ -40,7 +36,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
             {
                 _medicationsService.Create(dto);
                 return Ok(dto);
-               
+
             }
             catch (Exception e)
             {
@@ -51,33 +47,32 @@ namespace MQuince.Integration.HospitalApp.Controllers
         [HttpPut("{data}")]
         public IActionResult Update(String data)
         {
-            string[] parts= _medicationsService.GetData(data);
+            string[] parts = _medicationsService.GetData(data);
             IdentifiableDTO<MedicationsDTO> medications = _medicationsService.GetById(new Guid(parts[0]));
             service.SendUrgentMessage(medications.EntityDTO.Name, medications.EntityDTO.Quantity.ToString());
             _medicationsService.Delete(new Guid(parts[0]));
-
             try
             {
                 _medicationsService.Update(new MedicationsDTO()
                 {
                     Name = medications.EntityDTO.Name,
                     Quantity = (medications.EntityDTO.Quantity + Int32.Parse(parts[1]))
-                }, medications.Key);
-                return Ok(medications.Key);
-                
+                }, medications.Id);
+                return Ok(medications.Id);
+
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-           
+
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             try
             {
-                _medicationsService.Delete(id);  
+                _medicationsService.Delete(id);
                 return Ok(id);
             }
             catch (Exception e)

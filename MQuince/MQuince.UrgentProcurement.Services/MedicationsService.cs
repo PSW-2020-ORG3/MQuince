@@ -1,15 +1,14 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Repository.MySQL.DataProvider;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.UrgentProcurement.Contracts.DTO;
+using MQuince.UrgentProcurement.Contracts.Repository;
+using MQuince.UrgentProcurement.Contracts.Services;
+using MQuince.UrgentProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MQuince.Integration.Services.Implementation
+namespace MQuince.UrgentProcurement.Services
 {
     public class MedicationsService : IMedicationsService
     {
@@ -20,8 +19,9 @@ namespace MQuince.Integration.Services.Implementation
             _medicationsRepository = medicationsReposotiry == null ? throw new ArgumentNullException(nameof(medicationsReposotiry) + "is set to null") : medicationsReposotiry;
         }
 
-        public string[] GetData(string data) {
-            return  data.Split("|");
+        public string[] GetData(string data)
+        {
+            return data.Split("|");
 
         }
         public Guid Create(MedicationsDTO entityDTO)
@@ -60,7 +60,7 @@ namespace MQuince.Integration.Services.Implementation
 
             return new IdentifiableDTO<MedicationsDTO>()
             {
-                Key = medications.KeyMedication,
+                Id = medications.KeyMedication,
                 EntityDTO = new MedicationsDTO()
                 {
                     Name = medications.Name,
@@ -74,5 +74,5 @@ namespace MQuince.Integration.Services.Implementation
           => new Medications(medication.Name, medication.Quantity);
 
     }
-}
 
+}

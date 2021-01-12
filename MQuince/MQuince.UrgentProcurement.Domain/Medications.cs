@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Entities
+namespace MQuince.UrgentProcurement.Domain
 {
     public class Medications
     {
@@ -44,4 +44,5 @@ namespace MQuince.Integration.Entities
             }
         }
     }
+
 }

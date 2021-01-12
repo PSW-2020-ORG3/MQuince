@@ -1,11 +1,11 @@
-﻿using MQuince.Integration.Entities;
+﻿using MQuince.Core.Contracts;
+using MQuince.UrgentProcurement.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MQuince.Integration.Repository.Contracts
+namespace MQuince.UrgentProcurement.Contracts.Repository
 {
-
     public interface IMedicationsRepository : IRepository<Medications>
     {
         Medications GetByName(string Name);
