@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Integration.Entities\MQuince.Integration.Entities.csproj" />
+    <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Repository.Contracts\MQuince.Integration.Repository.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj" />
   </ItemGroup>

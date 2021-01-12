@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package isa1.isaProject1.grpc;
+option csharp_namespace = "MQuince.UrgentProcurement.Services.Protos";
+import "Protos/model.proto";
+
+service SpringGrpcService{
+  rpc communicate (MessagePharmacy) returns (MessagePharmacyResponse);
+}

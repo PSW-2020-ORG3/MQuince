@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
 using MQuince.Integration.Services.Constracts.Exceptions;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Contracts.Services;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {

@@ -14,6 +14,13 @@
 	},
 	created() {
 		var role = localStorage.getItem('keyRole');
+
+		if (role == 1) {
+			window.location.href = "/public/index.html";
+		} else if (role == null) {
+			window.location.href = "/public/Login/Login.html";
+		}
+
 		//role=2
 		if (role == null) {
 			this.showLogIn = true;

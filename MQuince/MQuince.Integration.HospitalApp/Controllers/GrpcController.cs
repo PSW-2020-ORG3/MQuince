@@ -3,6 +3,7 @@ using MQuince.Integration.Services.Constracts.DTO;
 using MQuince.Integration.Services.Constracts.IdentifiableDTO;
 using MQuince.Integration.Services.Constracts.Interfaces;
 using MQuince.Integration.Services.Implementation;
+using MQuince.UrgentProcurement.Services;
 using Newtonsoft.Json.Linq;
 
 namespace MQuince.Integration.HospitalApp.Controllers
