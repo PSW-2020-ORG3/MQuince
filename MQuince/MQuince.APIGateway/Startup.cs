@@ -87,6 +87,21 @@ namespace MQuince.APIGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/");
+            }
+
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/public/ErrorPage/ErrorPage.html";
+                    await next();
+                }
+            });
 
             app.UseCors(builder =>
                 builder.AllowAnyHeader()
