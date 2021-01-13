@@ -42,7 +42,6 @@
 `,
     created() {
         var role = localStorage.getItem('keyRole');
-
         if (role == 1) {
             window.location.href = "/public/index.html";
         } else if (role == 0) {
@@ -64,7 +63,11 @@
                     Username: this.username,
                     Password: this.password
                 }).then((response) => {
-                    window.location.href = "/public/index.html";
+                    if (response.data.userRole == 1) {
+                        window.location.href = "/public/Communication/AdminFeedback.html";
+                    } else {
+                        window.location.href = "/public/index.html";
+                    }
                     localStorage.setItem('keyToken', response.data.token)
                     localStorage.setItem('keyRole', response.data.userRole)
                     localStorage.setItem('keyGuid', response.data.id)
