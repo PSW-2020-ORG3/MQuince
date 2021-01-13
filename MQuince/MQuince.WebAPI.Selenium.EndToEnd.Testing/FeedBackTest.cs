@@ -16,7 +16,14 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         [SetUp]
         public void Setup()
         {
-            webDriver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.AddArguments("--disable-extensions");
+            options.AddArguments("--disable-gpu");
+            options.AddArguments("--disable-dev-shm-usage");
+            options.AddArguments("--no-sandbox");
+            options.AddArguments("--disable-notifications");
+
+            webDriver = new ChromeDriver(options);
             webDriver.Manage().Window.Maximize(); 
             webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
         }
@@ -25,20 +32,28 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         [Obsolete]
         public void Add_Feedback()
         {
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-
             LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.Login();
+            loginPage.Navigate();
+            loginPage.TypeUsername("patient2");
+            loginPage.TypePassword("patient2");
+            loginPage.ClickLogin();
 
             HomePage homePage = new HomePage(webDriver);
             homePage.ClickAddFeedback();
 
             AddFeedbackPage addFeedbackPage = new AddFeedbackPage(webDriver);
+
             addFeedbackPage.TypeFeedbackMessage("Some simple text");
             
             addFeedbackPage.CheckAnonymousCheckBox();
 
+            addFeedbackPage.CheckPrivateCheckBox();
+
             addFeedbackPage.ClickSubmitButton();
+
+            addFeedbackPage.ClickOkOnAlert();
+
+            addFeedbackPage.NavigateToHomePage();
         }
 
     }

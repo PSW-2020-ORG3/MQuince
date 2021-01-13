@@ -26,7 +26,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         public void Publish_Feedback()
         {
             LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.Login();
+            //loginPage.Login("admin","admin");
            
             PublishFeedbackPage publishFeedbackPage = new PublishFeedbackPage(webDriver);
             publishFeedbackPage.FindOptionForPublishFeedback();
