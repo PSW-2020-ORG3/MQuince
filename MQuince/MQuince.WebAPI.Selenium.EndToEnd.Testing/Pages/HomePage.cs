@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
 {
@@ -42,6 +43,8 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             IWebElement lnkAddFeedback = webDriver.FindElement(By.LinkText("Add feedback"));
             Assert.That(lnkAddFeedback.Displayed);
             lnkAddFeedback.Click();
+
+            Thread.Sleep(500);
         }
 
     }
