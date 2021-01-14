@@ -47,5 +47,14 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             Thread.Sleep(500);
         }
 
+        [Obsolete]
+        public void ClickObserveAppointment()
+        {
+            this.PerformFeedbackLink();
+
+            IWebElement lnkObserveAppointmnet = webDriver.FindElement(By.LinkText("Observe appointment"));
+            Assert.That(lnkObserveAppointmnet.Displayed);
+            lnkObserveAppointmnet.Click();
+        }
     }
 }
