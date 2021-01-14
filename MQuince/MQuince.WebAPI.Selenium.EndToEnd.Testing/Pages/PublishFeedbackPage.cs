@@ -65,5 +65,19 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             button.Click();
         }
 
+        [Obsolete]
+        public void ClickOkOnAlert()
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.AlertIsPresent());
+            element.Accept();
+        }
+
+        public void NavigateToHomePage()
+        {
+            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
+            Assert.IsTrue(webDriver.Url.Equals("https://mquince.herokuapp.com/public/index.html"));
+        }
+
     }
 }

@@ -26,13 +26,18 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         public void Publish_Feedback()
         {
             LoginPage loginPage = new LoginPage(webDriver);
-            //loginPage.Login("admin","admin");
+            loginPage.Navigate();
+            loginPage.TypeUsername("admin");
+            loginPage.TypePassword("admin");
+            loginPage.ClickLogin(); 
            
             PublishFeedbackPage publishFeedbackPage = new PublishFeedbackPage(webDriver);
             publishFeedbackPage.FindOptionForPublishFeedback();
             publishFeedbackPage.SelectOptionForPublishFeedback();
             publishFeedbackPage.FindFeedbackForPublish();
             publishFeedbackPage.SubmitFeedbackForPublish();
+            publishFeedbackPage.ClickOkOnAlert();
+            publishFeedbackPage.NavigateToHomePage();
         }
     }
 }
