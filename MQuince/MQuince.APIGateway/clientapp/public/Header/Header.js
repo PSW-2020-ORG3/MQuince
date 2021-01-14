@@ -21,7 +21,6 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul id="index">
                     <li><a href="/public/index.html">Home</a></li>
-                    <li><a style="text-align: center; display: block" v-bind:hidden="!showAdminFeedbacks" href="/public/Communication/AdminFeedback.html">Feedbacks</a></li>
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: left; display: block">Feedback</a>
                         <ul class="drop-down-menu">

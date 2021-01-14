@@ -55,14 +55,20 @@
     <div id="headerMain">
 
     </div>
-    
-    <div >
-        <section style="margin-top: 30px; max-height: 550px; object-fit: fill;" id="hero" class="d-flex align-items-center">
-            <div style="margin-left: 10%" class="container">
-                <h1 >Welcome to MQuince</h1>
-                <a href="/public/Login/Login.html" class="btn-get-started scrollto">Login</a>
-            </div>
-        </section>
+    <div id="index">
+        <div v-bind:hidden="currentRole!=null">
+            <section style="margin-top: 30px; max-height: 550px; object-fit: fill;" id="hero" class="d-flex align-items-center">
+                <div style="margin-left: 10%" class="container">
+                    <h1>Welcome to MQuince</h1>
+                    <a href="/public/Login/Login.html" class="btn-get-started scrollto">Login</a>
+                </div>
+            </section>
+        </div>
+
+        <div v-bind:hidden="currentRole==0">
+            <!-- patient slajder-->
+        </div>
+
     </div>
     <script src="scripts/vue.js"></script>
     <script src="scripts/vue-router.js"></script>
