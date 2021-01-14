@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -55,6 +55,7 @@
     <div id="headerMain">
 
     </div>
+
     <div id="index">
         <div v-bind:hidden="currentRole!=null">
             <section style="margin-top: 30px; max-height: 550px; object-fit: fill;" id="hero" class="d-flex align-items-center">
@@ -70,12 +71,14 @@
         </div>
 
     </div>
+    
+
     <script src="scripts/vue.js"></script>
     <script src="scripts/vue-router.js"></script>
     <script src="scripts/axios.js"></script>
 
     <script src="scripts/vuejs-datepicker.min.js"></script>
-    <script  v-bind:hidden="!showLogIn" src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
     <script src="../public/index.js"></script>
     <script src="../public/Header/Header.js"></script>
 

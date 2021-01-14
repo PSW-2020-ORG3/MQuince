@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,7 +24,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="styles.css" rel="stylesheet" />
     <link href="../../src/assets/style.css" rel="stylesheet">
-   
+
     <style>
         input[type=text], select, input[type=time] {
             width: 100%;
@@ -47,9 +47,10 @@
             cursor: pointer;
         }
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
 
         .apartment-name2 {
             position: relative;
@@ -87,6 +88,21 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+            /* Darker background on mouse-over */
+            .btn:hover {
+                background-color: transparent;
+            }
+
+        .commentBox {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: auto;
+            width: 70%;
+            margin-top: 10px;
+            height: 240px;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -108,7 +124,6 @@
     <div id="headerMain">
 
     </div>
-
     <!-- Contact Section-->
     <section class="page-section" id="contact">
         <div>
@@ -116,7 +131,7 @@
 
         </div>
     </section>
-    
+
     <div style="margin-top:-45px" id="appointments">
         <div class="container">
             <div style="height:190px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="appointment in appointments">
@@ -148,7 +163,6 @@
             </div>
         </div>
     </div>
-   
     <!-- Footer-->
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
