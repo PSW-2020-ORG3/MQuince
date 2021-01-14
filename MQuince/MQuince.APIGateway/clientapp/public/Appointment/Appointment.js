@@ -2,7 +2,9 @@
 	el: '#appointments',
 	data: {
 		appointments: [],
-		doctors: []
+		doctors: [],
+		slides: 5,
+		active: 1
 	},
 	mounted() {
 		var role = localStorage.getItem('keyRole');
@@ -37,6 +39,22 @@
 
 	},
 	methods: {
+		move: function(amount) {
+		  let newActive
+		  const newIndex = this.active + amount
+		  if (newIndex > this.slides) newActive = 1
+		  if (newIndex === 0) newActive = this.slides
+		  this.active = newActive || newIndex
+		},
+		jump: function(index) {
+		  this.active = index
+		},
+		addSlide: function() {
+		  this.slides = this.slides + 1
+		},
+		removeSlide: function() {
+		  this.slides = this.slides - 1 
+		},
 		cancelAppointment: function (appointmentId) {
 			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId, null , {
 				headers: {
