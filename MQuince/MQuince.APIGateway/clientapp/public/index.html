@@ -35,7 +35,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+    .mySlides {display:none;}
+    </style>
 </head>
 <body>
     <div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
@@ -55,7 +59,6 @@
     <div id="headerMain">
 
     </div>
-
     <div id="index">
         <div v-bind:hidden="currentRole!=null">
             <section style="margin-top: 30px; max-height: 550px; object-fit: fill;" id="hero" class="d-flex align-items-center">
@@ -66,13 +69,60 @@
             </section>
         </div>
 
-        <div v-bind:hidden="currentRole==0">
-            <!-- patient slajder-->
+       
+
+    <div v-bind:hidden="currentRole==null">
+        <div class="w3-container">
+          <h2>Slideshow Caption</h2>
+          <p>Add a caption text for each image slide with the w3-display-* classes (topleft, topmiddle, topright, bottomleft, bottommiddle, bottomright or middle).</p>
         </div>
 
-    </div>
-    
+        <div class="w3-content w3-display-container">
 
+        <div class="w3-display-container mySlides">
+          <img src="../public/static/slider1.png" style="width:100%">
+          <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-gray">
+            COVID-19 symptoms include cough, fever or chills, shortness of breath or difficulty breathing, muscle or body aches,
+            sore throat, new loss of taste or smell, diarrhea, headache, new fatigue, nausea or vomiting and congestion or runny nose.
+            COVID-19 can be severe, and some cases have caused death.
+          </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+          <img src="../public/static/slider2.jpg" style="width:100%">
+          <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-gray">
+            The healthcare sector is increasingly bombarded with new medical equipment. It is extremely important to maintain equipment 
+            efficiency to provide quality care and cut costs. Read on to learn about the equipment concerns of the healthcare sector and
+            how important equipment efficiency can be!
+          </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+          <img src="../public/static/slider3.jpg" style="width:100%">
+          <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-gray">
+            This gave hospitals a greater incentive to improve quality and resulted in lower mortality rates. In short – the introduction 
+            of choice and competition saved lives.
+          </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+          <img src="../public/static/slider5.jpg" style="width:100%">
+          <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-gray">
+            Five new drugs are to be trialled in 30 hospitals across the country in the race to find a treatment for Covid-19,
+            it has emerged. 
+          </div>
+        </div>
+
+        <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+
+        </div>
+
+        
+         </div>
+
+         
+    </div>
     <script src="scripts/vue.js"></script>
     <script src="scripts/vue-router.js"></script>
     <script src="scripts/axios.js"></script>
@@ -81,7 +131,25 @@
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
     <script src="../public/index.js"></script>
     <script src="../public/Header/Header.js"></script>
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
 
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+        }
+        </script>
 
 </body>
     </html>
