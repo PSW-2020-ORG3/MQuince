@@ -44,13 +44,6 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         }
 
         [Obsolete]
-        private void FindSelectOptionForPublishFeedback()
-        {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
-            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//select[@name='feedbackOption']/option[text()='Pending']")));
-        }
-
-        [Obsolete]
         public void FindFeedbackForPublish()
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
@@ -60,9 +53,17 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         [Obsolete]
         public void SubmitFeedbackForPublish()
         {
+            this.WaitForSubmitButton();
             IWebElement button = webDriver.FindElement(By.CssSelector("button[class='btn']"));
             Assert.That(button.Displayed, Is.True);
             button.Click();
+        }
+
+        [Obsolete]
+        private void WaitForSubmitButton()
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("button[class='btn']")));
         }
 
         [Obsolete]
@@ -76,7 +77,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         public void NavigateToHomePage()
         {
             webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
-            Assert.IsTrue(webDriver.Url.Equals("https://mquince.herokuapp.com/public/index.html"));
+            Assert.IsTrue(webDriver.Url.Equals("https://mquince.herokuapp.com/public/Communication/AdminFeedback.html"));
         }
 
     }

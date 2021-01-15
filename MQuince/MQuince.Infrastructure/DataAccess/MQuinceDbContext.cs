@@ -189,6 +189,22 @@ namespace MQuince.Infrastructure.DataAccess
                     DoctorPersistanceId=Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151")
                 }
             });
+            /*
+            modelBuilder.Entity<ReportPersistence>().HasData(new ReportPersistence[] {
+                new ReportPersistence{
+                    Id= Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                    Report="Ovo je prvi report",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692344bfca09"),
+                },new ReportPersistence{
+                    Id= Guid.Parse("b7056fcc-48fa-4df5-9e93-388ab7595daa"),
+                    Report="Ovo je drugi report",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692223bfca09"),
+                },new ReportPersistence{
+                    Id= Guid.Parse("6459c216-2270-41eb-a56a-7f4524728546"),
+                    Report="Ovo je treci report",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a990-692223bfca09"),
+                }
+            });*/
         }
     }
 }

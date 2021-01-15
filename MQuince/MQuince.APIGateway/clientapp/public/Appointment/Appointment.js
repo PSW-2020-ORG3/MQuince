@@ -2,11 +2,11 @@
 	el: '#appointments',
 	data: {
 		appointments: [],
-		doctors: []
+		doctors: [],
+		reportText: 'This is some report text'
 	},
 	mounted() {
 		var role = localStorage.getItem('keyRole');
-
 		if (role == 1) {
 			window.location.href = "/public/index.html";
 		} else if (role == null) {
@@ -37,6 +37,19 @@
 
 	},
 	methods: {
+		report: function (appointment) {
+			
+			var modal = document.getElementById("myModal");
+			modal.style.display = "block";
+
+        
+		},
+		close: function () {
+			 
+			var modal = document.getElementById("myModal");
+			modal.style.display = "none";
+        
+		},
 		cancelAppointment: function (appointmentId) {
 			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId, null , {
 				headers: {
