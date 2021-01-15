@@ -9,18 +9,18 @@ namespace MQuince.Scheduler.Domain.Events
     {
         public ScheduleEventType EventType { get; private set; }
 
-        public Guid PatientId { get; private set; }
+        public Guid SessionId { get; private set; }
 
-        public ScheduleEvent(ScheduleEventType eventType, Guid baseEntityId, Guid patientId) : base(baseEntityId)
+        public ScheduleEvent(ScheduleEventType eventType, Guid baseEntityId, Guid sessionId) : base(baseEntityId)
         {
             EventType = eventType;
-            PatientId = patientId;
+            SessionId = sessionId;
         }
 
-        public ScheduleEvent(ScheduleEventType eventType, DateTime dateTime, Guid baseEntityId, Guid patientId) : base(dateTime, baseEntityId)
+        public ScheduleEvent(ScheduleEventType eventType, DateTime dateTime, Guid baseEntityId, Guid sessionId) : base(dateTime, baseEntityId)
         {
             EventType = eventType;
-            PatientId = patientId;
+            SessionId = sessionId;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MQuince.Scheduler.Infrastructure.Util
     public class EventMapper
     {
         public static ScheduleEventPersistence MapScheduleEventEntityToScheduleEventPersistence(ScheduleEvent entity)
-            => entity == null ? null : new ScheduleEventPersistence() { Id = Guid.NewGuid(), EventType = entity.EventType, TimeStamp = entity.TimeStamp, AppointmentId = entity.BaseEntityId, PatientId = entity.PatientId };
+            => entity == null ? null : new ScheduleEventPersistence() { Id= entity.BaseEntityId, EventType = entity.EventType, TimeStamp = entity.TimeStamp, SessionId=entity.SessionId};
 
     }
 }
