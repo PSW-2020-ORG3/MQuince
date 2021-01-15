@@ -124,12 +124,7 @@ namespace MQuince.Scheduler.Application.Controllers
 
         [HttpGet("GetReportForAppointment")]
         public IActionResult GetReportForAppointment(Guid id)
-        {/*
-            if (!IsValidAuthenticationRole("Patient"))
-            {
-                return StatusCode(403);
-            }
-            */
+        {
             try
             {
                 return Ok(_appointmentService.GetReportForAppointment(id));
