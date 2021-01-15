@@ -32,7 +32,8 @@ namespace MQuince.Scheduler.Application.Controllers
         [HttpGet]
         public IActionResult GetStatistics()
         {
-            return Ok();
+            return Ok(_scheduleEventService.GetScheduleStatistics());
+
         }
     }
 }

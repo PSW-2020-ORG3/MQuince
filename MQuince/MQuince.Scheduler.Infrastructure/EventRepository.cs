@@ -5,6 +5,7 @@ using MQuince.Scheduler.Domain.Events;
 using MQuince.Scheduler.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MQuince.Scheduler.Infrastructure
 {
@@ -27,7 +28,10 @@ namespace MQuince.Scheduler.Infrastructure
 
         public IEnumerable<ScheduleEvent> GetAll()
         {
-            throw new NotImplementedException();
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                return EventMapper.MapSchedulesPersistenceCollectionTSchedulesEntityCollection(_context.ScheduleEvents.ToList());
+            }
         }
     }
 }
