@@ -10,11 +10,11 @@ namespace MQuince.Infrastructure.PersistenceEntities.Appointments
         [Key]
         public Guid Id { get; set; }
 
-        public string Report;
+        public string Report { get; set; }
 
         [ForeignKey("AppointmentPersistanceId")]
-        public AppointmentPersistence AppointmentPersistance { get; set; }
         public Guid AppointmentPersistanceId { get; set; }
+        public AppointmentPersistence AppointmentPersistance { get; set; }
 
     }
 }

@@ -122,6 +122,28 @@ namespace MQuince.Scheduler.Application.Controllers
             }
         }
 
+        [HttpGet("GetReportForAppointment")]
+        public IActionResult GetReportForAppointment(Guid id)
+        {/*
+            if (!IsValidAuthenticationRole("Patient"))
+            {
+                return StatusCode(403);
+            }
+            */
+            try
+            {
+                return Ok(_appointmentService.GetReportForAppointment(id));
+            }
+            catch (NotFoundEntityException)
+            {
+                return StatusCode(404);
+            }
+            catch (InternalServerErrorException)
+            {
+                return StatusCode(500);
+            }
+        }
+
         [HttpPut("CancelAppointment/{appointmentId}")]
         public IActionResult CancelAppointment(Guid appointmentId)
         {

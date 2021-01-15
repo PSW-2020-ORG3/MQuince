@@ -17,25 +17,29 @@ namespace MQuince.Scheduler.Unit.Tests
     {
         IAppointmentService appointmentService;
         IAppointmentRepository appointmentRepository = Substitute.For<IAppointmentRepository>();
+        IReportRepository reportRepository = Substitute.For<IReportRepository>();
         IEventRepository eventRepository = Substitute.For<IEventRepository>();
 
         public AppointmentServiceTests()
         {
-            appointmentService = new AppointmentService(appointmentRepository, eventRepository);
+            appointmentService = new AppointmentService(appointmentRepository, reportRepository, eventRepository);
         }
 
         [Fact]
         public void Constructor_when_given_argumet_as_null()
         {
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null));
-            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository,null, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, reportRepository, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, reportRepository, null));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(null, reportRepository, eventRepository));
+            Assert.Throws<ArgumentNullException>(() => new AppointmentService(appointmentRepository, null, eventRepository));
         }
 
         [Fact]
         public void Constructor_when_give_correctly_repository()
         {
-            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, eventRepository);
+            IAppointmentService appointmentService = new AppointmentService(appointmentRepository, reportRepository, eventRepository);
 
             Assert.IsType<AppointmentService>(appointmentService);
         }
@@ -296,6 +300,43 @@ namespace MQuince.Scheduler.Unit.Tests
             Assert.Throws<InternalServerErrorException>(() => appointmentService.CancelAppointment(appointmentId));
         }
 
+
+        [Fact]
+        public void GetReportForAppointment_returns_appointment()
+        {
+            reportRepository.GetReportForAppointment(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32")).Returns(this.GetFirstReport());
+
+            IdentifiableDTO<ReportDTO> report = appointmentService.GetReportForAppointment(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"));
+
+            Assert.True(this.CompareReportAndIdentifierReport(this.GetFirstReport(), report));
+        }
+        private Report GetFirstReport()
+          => new Report(Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea1"), "Tekst" , Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"));
+
+        [Fact]
+        public void GetReportForAppointment_returns_null()
+        {
+            Report report = null;
+            reportRepository.GetReportForAppointment(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32")).Returns(report);
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetReportForAppointment(Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32")));
+        }
+        [Fact]
+        public void GetReportForAppointment_returns_any_argument_null_exception()
+        {
+            reportRepository.GetReportForAppointment(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new ArgumentNullException(); });
+
+            Assert.Throws<NotFoundEntityException>(() => appointmentService.GetReportForAppointment(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
+        }
+
+        [Fact]
+        public void GetReportForAppointment_returns_any_other_exception()
+        {
+            reportRepository.GetReportForAppointment(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")).Returns(x => { throw new Exception(); });
+
+            Assert.Throws<InternalServerErrorException>(() => appointmentService.GetReportForAppointment(Guid.Parse("51d5a046-bc14-4cce-9ab0-222565f50526")));
+        }
+
         private Appointment GetAppointmentForCancelSuccesfull()
                 => new Appointment(Guid.Parse("54455a55-054f-4081-89b3-757cafbd5ea2"), new DateRange(DateTime.Now.AddHours(72), DateTime.Now.AddHours(72).AddMinutes(30)), Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b72"), Guid.Parse("b7056fcc-48fa-4df5-9e93-334ab7595dca"), false);
 
@@ -352,6 +393,20 @@ namespace MQuince.Scheduler.Unit.Tests
                 return false;
 
             if (appointment.IsCanceled != identifierAppointment.EntityDTO.IsCanceled)
+                return false;
+
+            return true;
+        }
+
+        private bool CompareReportAndIdentifierReport(Report appointment, IdentifiableDTO<ReportDTO> identifierReport)
+        {
+            if (appointment.Id != identifierReport.Id)
+                return false;
+
+            if (!appointment.ReportText.Equals(identifierReport.EntityDTO.ReportText))
+                return false;
+
+            if (!appointment.AppointmentId.Equals(identifierReport.EntityDTO.AppointmentId))
                 return false;
 
             return true;

@@ -28,11 +28,28 @@ namespace MQuince.Infrastructure.DataAccess
         public DbSet<AdminPersistence> Admin { get; set; }
         public DbSet<ScheduleEventPersistence> ScheduleEvents { get; set; }
         public DbSet<FeedbackEventPersistence> FeedbackEvents { get; set; }
+        public DbSet<ReportPersistence> Reports { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AppointmentPersistence>().OwnsOne(e => e.DateRange);
+            modelBuilder.Entity<AppointmentPersistence>(b =>
+            {
+                b.HasData(new
+                {
+                    Id = Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                    DoctorPersistanceId = Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151"),
+                    PatientPersistanceId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
+                    IsCanceled = false
+                });
+
+                b.OwnsOne(e => e.DateRange).HasData(new
+                {
+                    AppointmentPersistenceId = Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                    StartDateTime = new DateTime(2021, 1, 10, 7, 30, 0),
+                    EndDateTime = new DateTime(2021, 1, 10, 8, 0, 0),
+                });
+            });
 
             modelBuilder.Entity<AdminPersistence>().HasData(new AdminPersistence[] {
                 new AdminPersistence{
@@ -190,21 +207,25 @@ namespace MQuince.Infrastructure.DataAccess
                 }
             });
             /*
-            modelBuilder.Entity<ReportPersistence>().HasData(new ReportPersistence[] {
-                new ReportPersistence{
+            modelBuilder.Entity<AppointmentPersistence>().HasData(new AppointmentPersistence[] {
+                new AppointmentPersistence{
                     Id= Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
-                    Report="Ovo je prvi report",
-                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692344bfca09"),
-                },new ReportPersistence{
-                    Id= Guid.Parse("b7056fcc-48fa-4df5-9e93-388ab7595daa"),
-                    Report="Ovo je drugi report",
-                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692223bfca09"),
-                },new ReportPersistence{
-                    Id= Guid.Parse("6459c216-2270-41eb-a56a-7f4524728546"),
-                    Report="Ovo je treci report",
-                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a990-692223bfca09"),
+                    DateRange= new DateRangePersistence{
+                        StartDateTime =new DateTime(2021,1,10,7,30,0),
+                        EndDateTime =new DateTime(2021,1,10,8,0,0),
+                    },
+                    DoctorPersistanceId=Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151"),
+                    PatientPersistanceId=Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546")
                 }
             });*/
+
+            modelBuilder.Entity<ReportPersistence>().HasData(new ReportPersistence[] {
+                new ReportPersistence{
+                    Id= Guid.Parse("c1d9ae05-81aa-4203-a830-694443bfca09"),
+                    Report="Ovo je prvi report",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                }
+            });
         }
     }
 }

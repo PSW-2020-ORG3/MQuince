@@ -3,7 +3,8 @@
 	data: {
 		appointments: [],
 		doctors: [],
-		reportText: 'This is some report text'
+		reportEntity: null,
+		reportText: ''
 	},
 	mounted() {
 		var role = localStorage.getItem('keyRole');
@@ -37,11 +38,20 @@
 
 	},
 	methods: {
-		report: function (appointment) {
-			
+		report: function (appointmentId) {
+		
 			var modal = document.getElementById("myModal");
-			modal.style.display = "block";
+			modal.style.display = "block";	
 
+			axios
+				.get('/gateway/Appointment/GetReportForAppointment', {
+					params: {
+						id: appointmentId
+					}
+				}).then(response => {
+					this.reportEntity = response.data
+					this.reportText = this.reportEntity.entityDTO.reportText
+				})
         
 		},
 		close: function () {
