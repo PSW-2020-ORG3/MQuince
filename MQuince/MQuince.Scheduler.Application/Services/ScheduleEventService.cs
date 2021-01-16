@@ -1,4 +1,5 @@
 ﻿using MQuince.Scheduler.Contracts.DTO;
+using MQuince.Scheduler.Contracts.Exceptions;
 using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Contracts.Service;
 using MQuince.Scheduler.Domain.Events;
@@ -12,29 +13,212 @@ namespace MQuince.Scheduler.Application.Services
     public class ScheduleEventService : IScheduleEventService
     {
         private IEventRepository _eventRepository;
+        private object sumOfPojavljivanja;
+
         public ScheduleEventService(IEventRepository eventRepository)
         {
             _eventRepository = eventRepository == null ? throw new ArgumentNullException(nameof(eventRepository) + "is set to null") : eventRepository;
         }
         public Guid Create(ScheduleEventDTO entityDTO)
         {
-            ScheduleEvent scheduleEvent = new ScheduleEvent(entityDTO.EventType, Guid.NewGuid(), entityDTO.SessionId);
-            _eventRepository.Create(scheduleEvent);
-            return Guid.NewGuid();
+            try
+            {
+                ScheduleEvent scheduleEvent = new ScheduleEvent(entityDTO.EventType, Guid.NewGuid(), entityDTO.SessionId);
+                _eventRepository.Create(scheduleEvent);
+                return scheduleEvent.BaseEntityId;
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public ScheduleEventStatisticsResponseDTO GetScheduleStatistics()
         {
-            List<ScheduleEvent> listOfEvents = _eventRepository.GetAll().ToList();
+            try
+            {
+                List<ScheduleEvent> listOfEvents = _eventRepository.GetAll().ToList();
 
-            Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession = this.GenerateDictionaryPerSession(listOfEvents);
+                Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession = this.GenerateDictionaryPerSession(listOfEvents);
 
-            ScheduleEventStatisticsResponseDTO scheduleStatisticsResponseDTO = new ScheduleEventStatisticsResponseDTO();
-            scheduleStatisticsResponseDTO.PercentOfSuccessfulCreating = this.GetPercentOfSuccessfulCreating(mapOfEventsPerSession);
-            scheduleStatisticsResponseDTO.AverageCreatingTime = this.GetAverageCreatingTime(mapOfEventsPerSession);
-            scheduleStatisticsResponseDTO.StepWherePatientsQuit = this.GetStepWherePatientsMostQuit(mapOfEventsPerSession);
+                ScheduleEventStatisticsResponseDTO scheduleStatisticsResponseDTO = new ScheduleEventStatisticsResponseDTO();
+                scheduleStatisticsResponseDTO.PercentOfSuccessfulCreating = this.GetPercentOfSuccessfulCreating(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageCreatingTime = this.GetAverageCreatingTime(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.StepWherePatientsQuit = this.GetStepWherePatientsMostQuit(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.NumberOfCreatedAppointment = this.GetNumberOfCreatedAppoitment(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageTimeOnSpecialization = this.GetAverageTimeOnSpecialization(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageTimeOnDoctors = this.GetAverageTimeOnDoctors(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageTimeOnChooseDate = this.GetAverageTimeOnChooseDate(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageTimeOnChoosePeriod = this.GetAverageTimeOnChoosePeriod(mapOfEventsPerSession);
 
-            return scheduleStatisticsResponseDTO;
+                return scheduleStatisticsResponseDTO;
+            }catch(Exception e)
+            {
+                throw new InternalServerErrorException();
+            }
+        }
+
+        private Tuple<double, double> GetAverageTimeOnPageAtDateChoose(List<ScheduleEvent> scheduleEventsInSession)
+        {
+            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
+
+            double sumOfTimesOnDateChoosePage = 0;
+            double numberOfTimesDateChoosePage = 0;
+
+            for (int i = 0; i < scheduleEventsInSession.Count; i++)
+            {
+                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
+                    break;
+
+                if (scheduleEventsInSession[i].EventType == ScheduleEventType.FROMDATEPICKERTOPERIOD)
+                {
+                    sumOfTimesOnDateChoosePage += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
+                    numberOfTimesDateChoosePage++;
+                }
+            }
+
+            return Tuple.Create(sumOfTimesOnDateChoosePage, numberOfTimesDateChoosePage);
+        }
+
+        private double GetAverageTimeOnChoosePeriod(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            double sumOfTimesOnChoosePeriod = 0;
+            double numberOfLocatedOnChoosePeriod = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                Tuple<double, double> averageTimesOnChoosePeriod = GetAverageTimeOnPageAtDateChoose(sessionEvent.Value);
+                sumOfTimesOnChoosePeriod += averageTimesOnChoosePeriod.Item1;
+                numberOfLocatedOnChoosePeriod += averageTimesOnChoosePeriod.Item2;
+            }
+
+            return sumOfTimesOnChoosePeriod / numberOfLocatedOnChoosePeriod;
+        }
+
+        private double GetAverageTimeOnChooseDate(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            double sumOfTimesOnChooseDate = 0;
+            double numberOfLocatedOnChooseDate = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                Tuple<double, double> averageTimesOnChooseDate = GetAverageTimeOnPageAtOneSession(sessionEvent.Value, ScheduleEventType.FROMDOCTORTODATEPICKER, ScheduleEventType.FROMPERIODTODATEPICKER);
+                sumOfTimesOnChooseDate += averageTimesOnChooseDate.Item1;
+                numberOfLocatedOnChooseDate += averageTimesOnChooseDate.Item2;
+            }
+
+            return sumOfTimesOnChooseDate / numberOfLocatedOnChooseDate;
+        }
+
+        private double GetAverageTimeOnSpecialization(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            double sumOfTimesOnSpecialization = 0;
+            double numberOfLocatedOnSpecialization = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                Tuple<double, double> averageTimesOnSpecializations = GetAverageTimeOnPageAtOneSession(sessionEvent.Value, ScheduleEventType.JOIN, ScheduleEventType.FROMDOCTORTOSPEC);
+                sumOfTimesOnSpecialization += averageTimesOnSpecializations.Item1;
+                numberOfLocatedOnSpecialization += averageTimesOnSpecializations.Item2;
+            }
+
+            return sumOfTimesOnSpecialization / numberOfLocatedOnSpecialization;
+        }
+
+        private double GetAverageTimeOnDoctors(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            double sumOfTimesOnDoctors = 0;
+            double numberOfTimesDoctors = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                Tuple<double, double> averageTimesOnDoctors = GetAverageTimeOnPageAtOneSession(sessionEvent.Value, ScheduleEventType.FROMSPECTODOCTOR, ScheduleEventType.FROMDATEPICKERTODOCTOR);
+                sumOfTimesOnDoctors += averageTimesOnDoctors.Item1;
+                numberOfTimesDoctors += averageTimesOnDoctors.Item2;
+            }
+
+            return sumOfTimesOnDoctors / numberOfTimesDoctors;
+        }
+
+        private Tuple<double, double> GetAverageTimeOnPageAtOneSession(List<ScheduleEvent> scheduleEventsInSession, ScheduleEventType toJoin, ScheduleEventType toComeBack)
+        {
+            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
+
+            double sumOfTimesOnPage = 0;
+            double numberOfTimesOnPage = 0;
+
+            for (int i = 0; i < scheduleEventsInSession.Count; i++)
+            {
+                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
+                    break;
+
+                if (scheduleEventsInSession[i].EventType == toJoin || scheduleEventsInSession[i].EventType == toComeBack)
+                {
+                    sumOfTimesOnPage += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
+                    numberOfTimesOnPage++;
+                }
+            }
+
+            return Tuple.Create(sumOfTimesOnPage, numberOfTimesOnPage);
+        }
+
+        private Tuple<double, double> GetAverageTimeOnDoctorsAtOneSession(List<ScheduleEvent> scheduleEventsInSession)
+        {
+            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
+
+            double sumOfTimesOnDoctors = 0;
+            double numberOfTimesOnDoctors = 0;
+
+            for (int i = 0; i < scheduleEventsInSession.Count; i++)
+            {
+                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
+                    break;
+
+                if (scheduleEventsInSession[i].EventType == ScheduleEventType.FROMSPECTODOCTOR || scheduleEventsInSession[i].EventType == ScheduleEventType.FROMDATEPICKERTODOCTOR)
+                {
+                    sumOfTimesOnDoctors += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
+                    numberOfTimesOnDoctors++;
+                }
+            }
+
+            return Tuple.Create(sumOfTimesOnDoctors, numberOfTimesOnDoctors);
+        }
+
+        private Tuple<double, double> GetAverageTimeOnSpecificationAtOneSession(List<ScheduleEvent> scheduleEventsInSession)
+        {
+            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
+
+            double sumOfTimesOnSpecialization = 0;
+            double numberOfTimesOnSpecialization = 0;
+
+            for(int i=0; i < scheduleEventsInSession.Count; i++)
+            {
+                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
+                    break;
+
+                if (scheduleEventsInSession[i].EventType == ScheduleEventType.JOIN || scheduleEventsInSession[i].EventType == ScheduleEventType.FROMDOCTORTOSPEC)
+                {
+                    sumOfTimesOnSpecialization += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
+                    numberOfTimesOnSpecialization++;
+                }
+            }
+
+            return Tuple.Create(sumOfTimesOnSpecialization, numberOfTimesOnSpecialization);
+        }
+
+        private double GetTimeBeetwenTwoEvents(DateTime endDate, DateTime startDate)
+             => endDate.Subtract(startDate).TotalSeconds;
+
+        private int GetNumberOfCreatedAppoitment(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            int numberOFCreatedAppointment = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                if (this.IsCreatedAppointmentInThisSession(sessionEvent.Value))
+                    numberOFCreatedAppointment++;
+            }
+
+            return numberOFCreatedAppointment;
         }
 
         private int GetStepWherePatientsMostQuit(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
@@ -61,6 +245,9 @@ namespace MQuince.Scheduler.Application.Services
         {
             scheduleEventsInSession.Sort((x, y) => DateTime.Compare(y.TimeStamp, x.TimeStamp));
 
+            if (scheduleEventsInSession.ElementAtOrDefault(1) == null)
+                return 0;
+
             ScheduleEventType typeEventBeforeQuit = scheduleEventsInSession[1].EventType;
 
             if (typeEventBeforeQuit == ScheduleEventType.JOIN || typeEventBeforeQuit == ScheduleEventType.FROMDOCTORTOSPEC)
@@ -83,14 +270,14 @@ namespace MQuince.Scheduler.Application.Services
                 if (this.IsCreatedAppointmentInThisSession(sessionEvent.Value))
                 {
                     numberOfCreatedAppointment++;
-                    sumMinutesForCreate += GetMinutesForCreateAppointment(sessionEvent.Value);
+                    sumMinutesForCreate += GetTimeForCreateAppointment(sessionEvent.Value);
                 }
             }
 
             return sumMinutesForCreate / numberOfCreatedAppointment;
         }
 
-        private double GetMinutesForCreateAppointment(List<ScheduleEvent> scheduleEventsInSession)
+        private double GetTimeForCreateAppointment(List<ScheduleEvent> scheduleEventsInSession)
         {
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
@@ -103,7 +290,7 @@ namespace MQuince.Scheduler.Application.Services
                     startDate = scheduleEvent.TimeStamp;
             }
 
-            return endDate.Subtract(startDate).TotalMinutes;
+            return endDate.Subtract(startDate).TotalSeconds;
         }
 
         private double GetPercentOfSuccessfulCreating(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
