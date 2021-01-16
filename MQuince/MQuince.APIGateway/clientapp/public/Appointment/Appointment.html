@@ -186,6 +186,13 @@
           from {opacity: 0} 
           to {opacity: 1}
         }
+
+        .borderexample {
+             border-style:solid;
+             border-color:#708090;
+             height: 250px;
+        }   
+
     </style>
 </head>
 <body id="page-top">
@@ -257,7 +264,11 @@
         </div>
         <div class="modal-body">
             <p><h4 style="text-align:center">Appointment report</h4></p>
-            <p>{{reportText}}</p>
+            <p><b>Date: {{dateTime}}</b></p>
+            <p><b>Time from: {{timeFrom}}</b></p>
+            <p><b>Time to: {{timeTo}}</b></p>
+            <p><b>Doctor: {{doctorName}}</b></p>
+            <p class="borderexample">{{reportText}}</p>
         </div>
         <div class="modal-footer">
          <h3></h3>
