@@ -58,6 +58,7 @@ namespace MQuince.Scheduler.Infrastructure
             }
         }
 
+
         public IEnumerable<Appointment> GetForDoctor(Guid doctorId)
         {
             using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))

@@ -134,6 +134,18 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/Appointment/GetReportForAppointment",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "mquince-scheduler.herokuapp.com",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Appointment/GetReportForAppointment",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/Appointment/GetFreeApp?patientId={patientId}&doctorId={doctorId}&date={date}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
