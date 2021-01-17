@@ -56,7 +56,6 @@
 				
 			}).then(response => {
 				this.event = response.data
-				console.log("AAAA", this.event)
 			})
 	},
 	methods: {
