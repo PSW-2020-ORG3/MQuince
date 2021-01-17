@@ -116,7 +116,6 @@
 								break;
 							}
 						}
-						JSAlert.alert("Success!");
 					})
         },
 		logIn: function () {
