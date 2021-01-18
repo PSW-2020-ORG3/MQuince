@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="styles.css" rel="stylesheet" />
+    <link href="../Communication/styles.css" rel="stylesheet" />
     <link href="../../src/assets/style.css" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -118,6 +118,28 @@
         margin-top: 10px;
         height: 200px;
     }
+    table {
+        width:100%;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+    #t01 tr:nth-child(even) {
+        background-color: #eee;
+    }
+    #t01 tr:nth-child(odd) {
+        background-color: #fff;
+    }
+    #t01 th {
+        background-color: black;
+        color: white;
+    }
+
 </style>
 
 <body id="adminFeedback">
@@ -143,7 +165,7 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li><a href="/public/Communication/AdminFeedback.html">Home</a></li>
-                    <li><a v-bind:hidden="!showFeedbackAdmin" href="/public/Statistics/Statistics.html">Statistics</a></li>
+                     <li><a v-bind:hidden="!showFeedbackAdmin" href="/public/Statistics/Statistics.html">Statistics</a></li>
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: center; display: block">Feedback</a>
                         <ul class="drop-down-menu">
@@ -172,47 +194,49 @@
 
     <!-- Contact Section-->
     <section class="page-section" id="contact">
-        <div class="container" id="adminFeedback">
+        <div class="container" id="statistics">
             <!-- Icon Divider-->
             <!-- Contact Section Form-->
-            <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Feedback</h4>
-            <br/>
-            <div class="col-lg-8 mx-auto">
-                <select name="feedbackOption" id="feedbackOption" v-model="status" v-on:change="statusChanged" style="width:200px; margin-left: 520px; margin-top: 20px;">
-                    <option value="Published">Published</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Private">Private</option>
-                </select>
-            </div>
-            <div style="height:170px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="feedback in feedbacks">
-                        <div style="display: inline-block">
-                            <table >
-                                <tr>
-                                    <td colspan="2">
-                                        <img src="../static/feedbackIcon.png" height="100" width="100">
-                                    </td>
-                                    <td>
-                                        <div style="margin-left:30px;margin-bottom:30px">
-                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous || feedback.entityDTO.user == null"><i>Anonymus&nbsp</i></div>
-                                             <div class="short-info2" v-if="feedback.entityDTO.anonymous == false && feedback.entityDTO.user != null">By &nbsp<i>{{feedback.entityDTO.user}}</i></div>
-                                            <div class="apartment-name2">{{feedback.entityDTO.comment}}</div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <div  v-if="feedback.entityDTO.publish == true && feedback.entityDTO.approved == false">
-                                            
-                                    <button style="margin-left:600px"  class="btn" @click="approve(feedback)">
-                                        <i class="fa fa-check"></i>&nbsp&nbspApprove
-                                    </button>
-                                            
-                            </div>
-                        </div>
-            </div>
+            <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Appointment statistics</h4>
+           </br></br>
+            <table id="t01">
+              <tr>
+                <td>Percent of successfully made appointments</td>
+                <td>{{event.percentOfSuccessfulCreating}}%</td> 
+              </tr>
+              <tr>
+                <td>Average time for making an appointment</td>
+                <td>{{event.averageCreatingTime}}s</td>
+              </tr>
+              <tr>
+                <td>Step where patients quit the most</td>
+                <td v-if="event.stepWherePatientsQuit == 0">Choosing specialization</td>
+                <td v-if="event.stepWherePatientsQuit == 1">Choosing doctor</td>
+                <td v-if="event.stepWherePatientsQuit == 2">Choosing date</td>
+                <td v-if="event.stepWherePatientsQuit == 3">Choosing period</td>
+              </tr>
+              <tr>
+                <td>Number of created appointments</td>
+                <td>{{event.numberOfCreatedAppointment}}</td>
+              </tr>
+              <tr>
+                <td>Average time spent on choosing specialization</td>
+                <td>{{event.averageTimeOnSpecialization}}s</td>
+              </tr>
+              <tr>
+                <td>Average time spent on choosing doctor</td>
+                <td>{{event.averageTimeOnDoctors}}s</td>
+              </tr>
+              <tr>
+                <td>Average time spent on choosing date</td>
+                <td>{{event.averageTimeOnChooseDate}}s</td>
+              </tr>
+              <tr>
+                <td>Average time spent on choosing period</td>
+                <td>{{event.averageTimeOnChoosePeriod}}s</td>
+              </tr>
+            </table>
+
         </div>
     </section>
 
@@ -226,9 +250,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <!-- Core theme JS-->
     <script src="../axios.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="../Appointment/js/scripts.js"></script>
     <script src="https://npmcdn.com/js-alert/dist/jsalert.min.js"></script>
-    <script src="AdminFeedback.js"></script>
-    <script src="../Header/Header.js"></script>
+    <script src="Statistics.js"></script>
+    <script src="../Communication/AdminFeedback.js"></script>
 </body>
 </html>
