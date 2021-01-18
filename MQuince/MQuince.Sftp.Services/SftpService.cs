@@ -12,7 +12,7 @@ namespace MQuince.Sftp.Services
         {
             SftpConfig config = new SftpConfig
             {
-                Host = "192.168.1.11",
+                Host = "192.168.2.102",
                 Port = 22,
                 UserName = "tester",
                 Password = "password"
@@ -43,7 +43,7 @@ namespace MQuince.Sftp.Services
         {
             SftpConfig config = new SftpConfig
             {
-                Host = "192.168.1.11",
+                Host = "192.168.2.102",
                 Port = 22,
                 UserName = "tester",
                 Password = "password"

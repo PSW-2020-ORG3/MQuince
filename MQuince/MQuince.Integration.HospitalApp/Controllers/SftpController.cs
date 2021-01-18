@@ -26,7 +26,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 		{
 			_medicationsConsumptionService.GeneratePdf(dto);
 
-			if (_sftpService.SendFile("Report_in_" + dto.To + "_" + dto.From + ".pdf"))
+			if (_sftpService.SendFile("izvjestaj.pdf"))
 				return Ok();
 			else
 				return BadRequest();
