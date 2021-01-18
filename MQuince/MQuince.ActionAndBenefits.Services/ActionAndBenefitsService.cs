@@ -50,10 +50,10 @@ namespace MQuince.ActionAndBenefits.Services
                     IsApproved = actionAndBenefits.IsApproved,
                     PharmacyName = actionAndBenefits.PharmacyName,
                     ActionName = actionAndBenefits.ActionName,
-                    BeginDate = actionAndBenefits.BeginDate,
-                    EndDate = actionAndBenefits.EndDate,
-                    OldCost = actionAndBenefits.OldCost,
-                    NewCost = actionAndBenefits.NewCost
+                    BeginDate = actionAndBenefits.DateRange.StartDateTime,
+                    EndDate = actionAndBenefits.DateRange.EndDateTime,
+                    OldCost = actionAndBenefits.Price.OldPrice,
+                    NewCost = actionAndBenefits.Price.NewPrice
                 }
 
             };

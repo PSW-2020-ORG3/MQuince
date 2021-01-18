@@ -48,10 +48,10 @@ namespace MQuince.ActionAndBenefits.Services
                     ActionAndBenefitsDTO newAction = new ActionAndBenefitsDTO(                        
                         message.PharmacyName,
                         message.ActionName,
-                        new DateTime(message.BeginDate.Year, message.BeginDate.Month, message.BeginDate.Day),
-                        new DateTime(message.EndDate.Year, message.EndDate.Month, message.EndDate.Day),
-                        Convert.ToDouble(message.OldCost),
-                        Convert.ToDouble(message.NewCost),
+                        new DateTime(message.DateRange.StartDateTime.Year , message.DateRange.StartDateTime.Month, message.DateRange.StartDateTime.Day),
+                        new DateTime(message.DateRange.EndDateTime.Year, message.DateRange.EndDateTime.Month, message.DateRange.EndDateTime.Day),
+                        Convert.ToDouble(message.Price.OldPrice),
+                        Convert.ToDouble(message.Price.NewPrice),
                         false
                         );
                    

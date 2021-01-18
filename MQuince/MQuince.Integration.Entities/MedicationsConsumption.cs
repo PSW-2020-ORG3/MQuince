@@ -21,6 +21,8 @@ namespace MQuince.Integration.Entities
         }
         public MedicationsConsumption(Guid keyConsumtion, string name, DateTime dateOfConsumtion, int quantity)
         {
+            if (quantity < 0)
+                throw new ArgumentOutOfRangeException();
             _keyConsumtion = keyConsumtion;
             Name = name;
             DateOfConsumtion = dateOfConsumtion;
@@ -28,7 +30,9 @@ namespace MQuince.Integration.Entities
         }
         public MedicationsConsumption(string name, DateTime dateOfConsumtion, int quantity)
         {
-            if (string.IsNullOrEmpty(name))
+            if (quantity < 0)
+                throw new ArgumentOutOfRangeException();
+            else if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Name can not be empty");
             }

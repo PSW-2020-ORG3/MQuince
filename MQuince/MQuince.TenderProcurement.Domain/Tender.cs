@@ -20,6 +20,14 @@ namespace MQuince.TenderProcurement.Domain
 
         public Boolean Opened { get; set; }
 
+        public bool IsOpened()
+		{
+            if (EndDate > DateTime.Now && StartDate < DateTime.Now)
+                return true;
+            else
+                return false;
+		}
+
         public Tender(string name, string descritpion, string formLink, DateTime startDate, DateTime endDate, Boolean opened)
         {
             if (string.IsNullOrEmpty(name))
