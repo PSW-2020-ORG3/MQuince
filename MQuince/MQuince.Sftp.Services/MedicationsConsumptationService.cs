@@ -62,7 +62,9 @@ namespace MQuince.Sftp.Services
         {
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
-            PdfWriter wr = PdfWriter.GetInstance(doc, new FileStream("izvjestaj.pdf", FileMode.Create));
+            PdfWriter wr = PdfWriter.GetInstance(doc, new FileStream("Report_" + dto.From.Day.ToString() + "." + dto.From.Month.ToString() + "." + dto.From.Year.ToString() +"-"+ dto.To.Day.ToString() + "." + dto.To.Month.ToString() + "." + dto.To.Year.ToString() + ".pdf", FileMode.Create));
+            
+
             doc.Open();
 
             iTextSharp.text.Paragraph p = new iTextSharp.text.Paragraph("\t\t Medications consumption records \n");
