@@ -20,8 +20,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Domain\MQuince.ActionAndBenefits.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Infrastructure\MQuince.ActionAndBenefits.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Services\MQuince.ActionAndBenefits.Services.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
     <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />

@@ -1,6 +1,6 @@
 ﻿var tenderName = "";
 var pharmacyEmail = "";
-var tenderID = "";
+var idTender = "";
 var offerID = "";
 
 var tenders = $.ajax({
@@ -20,16 +20,17 @@ $(document).ready(function () {
         dataType: "json",
         method: 'GET',
         data: JSON.stringify({})
-    }).then(function (data) {
+    }).then(function (data) { 
         for (i = 0; i < data.length; i++) {
             var d = JSON.parse(tenders.responseText);
 
             for (j = 0; j < parseInt(d.length); j++) {
-                if (d[j].key == data[i].entityDTO.tenderID) {
+                console.log()
+                if (d[j].id == data[i].entityDTO.idTender) {
 
-                    offerID = data[i].key;
+                    offerID = data[i].id;
                     tenderName = d[j].entityDTO.name;
-                    tenderID = data[j].entityDTO.tenderID;
+                    idTender = data[i].entityDTO.idTender;
                     pharmacyEmail = data[i].entityDTO.pharmacyEmail;
                     
                     
@@ -127,6 +128,7 @@ $(document).ready(function () {
             var button = document.createElement("button");
             var text = document.createTextNode("Approve");
             button.id = offerID;
+            
             button.className = "btn";
             button.value = pharmacyEmail;
             button.onclick = function () {
@@ -160,22 +162,22 @@ function submitOffer(email, idOffer) {
    }).then(function (data) {
 
        for (i = 0; i < data.length; i++) {
-           if (data[i].key == idOffer) {
-               tender = data[i].entityDTO.tenderID;
+           if (data[i].id == idOffer) {
+               tender = data[i].entityDTO.idTender;
                break;
            }
        }
 
        for (j = 0; j < data.length; j++) {
-           if (data[j].entityDTO.tenderID == tender) {               
+           if (data[j].entityDTO.idTender == tender) {               
                count++;
-               if (data[j].key != idOffer) {
+               if (data[j].id != idOffer) {
                    $.ajax(
                        {
                            type: "DELETE",
-                           url: "/api/PharmacyOffers?id=" + data[j].key+"&approve=false",
+                           url: "/api/PharmacyOffers?id=" + data[j].id+"&approve=false",
                            data: {
-                               id: data[j].key,
+                               id: data[j].id,
                                approve:false
                            },
 
@@ -192,21 +194,44 @@ function submitOffer(email, idOffer) {
                        });                   
 
                }
-
-               if (data[j].key == idOffer) {
+               var idTendera = data[j].entityDTO.idTender
+               if (data[j].id == idOffer) {
 
                    $.ajax(
                        {
                            type: "DELETE",
-                           url: "/api/PharmacyOffers?id=" + data[j].key + "&approve=true",
+                           url: "/api/PharmacyOffers?id=" + data[j].id + "&approve=true",
                            data: {
-                               id: data[j].key,
+                               id: data[j].id,
                                approve:true
                            },
 
                            success: function (result) {
                                alert("Succeseffuly done!");
+                               
+                               $.ajax(
+                                   {
+                                       type: "DELETE",
+                                       url: "/api/Tender?id=" + idTendera,
+                                       data: {
+                                           id: idTendera
+                                       },
+
+                                       success: function (result) {
+                                           location.reload();
+                                       },
+                                       error: function (data, ajaxOptions, thrownError) {
+                                           console.log('Error:', data);
+                                           alert("Cant be sent!");
+                                           location.reload();
+                                       }
+
+                                   });
+                               
+
+                               alert("Tender closed!");
                                location.reload();
+                               
                            },
                            error: function (data, ajaxOptions, thrownError) {
                                console.log('Error:', data);

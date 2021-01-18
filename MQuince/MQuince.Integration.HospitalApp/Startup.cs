@@ -6,16 +6,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using MQuince.Integration.HospitalApp.Protos;
-using MQuince.Integration.Repository.MySQL.DataProvider;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
+using MQuince.ActionAndBenefits.Contracts.Service;
+using MQuince.ActionAndBenefits.Infrastructure;
+using MQuince.ActionAndBenefits.Services;
 using MQuince.Pharmacy.Contracts.Services;
 using MQuince.Pharmacy.Infrastructure;
 using MQuince.Pharmacy.Services;
+
 using MQuince.Sftp.Constracts.Services;
 using MQuince.Sftp.Infrastructure;
 using MQuince.Sftp.Services;
+
+using MQuince.UrgentProcurement.Contracts.Services;
+using MQuince.UrgentProcurement.Infrastructure;
+using MQuince.UrgentProcurement.Services;
+using MQuince.UrgentProcurement.Services.Protos;
+using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Infrastructure;
+using MQuince.TenderProcurement.Services;
 using System.Globalization;
 using System.IO;
 

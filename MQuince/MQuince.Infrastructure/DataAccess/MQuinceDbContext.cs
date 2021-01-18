@@ -28,10 +28,66 @@ namespace MQuince.Infrastructure.DataAccess
         public DbSet<AdminPersistence> Admin { get; set; }
         public DbSet<ScheduleEventPersistence> ScheduleEvents { get; set; }
         public DbSet<FeedbackEventPersistence> FeedbackEvents { get; set; }
+        public DbSet<ReportPersistence> Reports { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AppointmentPersistence>().OwnsOne(e => e.DateRange);
+            modelBuilder.Entity<AppointmentPersistence>(b =>
+            {
+                b.HasData(new
+                {
+                    Id = Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                    DoctorPersistanceId = Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151"),
+                    PatientPersistanceId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
+                    IsCanceled = false
+                });
+
+                b.OwnsOne(e => e.DateRange).HasData(new
+                {
+                    AppointmentPersistenceId = Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                    StartDateTime = new DateTime(2021, 1, 10, 7, 30, 0),
+                    EndDateTime = new DateTime(2021, 1, 10, 8, 0, 0),
+                });
+            });
+
+            modelBuilder.Entity<AppointmentPersistence>(b =>
+            {
+                b.HasData(new
+                {
+                    Id = Guid.Parse("87eed5dc-5413-4d2e-a392-54fa742fadcf"),
+                    DoctorPersistanceId = Guid.Parse("0d619cf3-25d6-49b2-b4c4-1f70d3121b32"),
+                    PatientPersistanceId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
+                    IsCanceled = false
+                });
+
+                b.OwnsOne(e => e.DateRange).HasData(new
+                {
+                    AppointmentPersistenceId = Guid.Parse("87eed5dc-5413-4d2e-a392-54fa742fadcf"),
+                    StartDateTime = new DateTime(2020, 10, 10, 9, 0, 0),
+                    EndDateTime = new DateTime(2020, 10, 10, 9, 30, 0),
+                });
+            });
+
+
+            modelBuilder.Entity<AppointmentPersistence>(b =>
+            {
+                b.HasData(new
+                {
+                    Id = Guid.Parse("c1d9ae05-81aa-4203-a830-633373bfca09"),
+                    DoctorPersistanceId = Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151"),
+                    PatientPersistanceId = Guid.Parse("6459c216-1770-41eb-a56a-7f4524728546"),
+                    IsCanceled = false
+                });
+
+                b.OwnsOne(e => e.DateRange).HasData(new
+                {
+                    AppointmentPersistenceId = Guid.Parse("c1d9ae05-81aa-4203-a830-633373bfca09"),
+                    StartDateTime = new DateTime(2021, 1, 12, 10, 30, 0),
+                    EndDateTime = new DateTime(2021, 1, 12, 11, 0, 0),
+                });
+            });
+
 
             modelBuilder.Entity<AdminPersistence>().HasData(new AdminPersistence[] {
                 new AdminPersistence{
@@ -186,6 +242,24 @@ namespace MQuince.Infrastructure.DataAccess
                     Surname="Mirkovic",
                     Guest=false,
                     DoctorPersistanceId=Guid.Parse("90450920-986a-42f4-89c2-a8a4e1a25151")
+                }
+            });
+
+            modelBuilder.Entity<ReportPersistence>().HasData(new ReportPersistence[] {
+                new ReportPersistence{
+                    Id= Guid.Parse("c1d9ae05-81aa-4203-a830-694443bfca09"),
+                    Report="Pacijent se oseca mnogo bolje od proslog puta.",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-633373bfca09"),
+                },
+                new ReportPersistence{
+                    Id= Guid.Parse("c1d9ae05-81aa-4203-a830-694443bfca12"),
+                    Report="Pacijent ima blagu temperaturu. Kontrola za mesec dana.",
+                    AppointmentPersistanceId=Guid.Parse("c1d9ae05-81aa-4203-a830-692773bfca09"),
+                },
+                new ReportPersistence{
+                    Id= Guid.Parse("c1d9ae05-81aa-4203-a830-695553bfca12"),
+                    Report="Zali se na bol u grlu. Krv i stolica su dobro. Ako se simptomi nastave da dodje ponovo.",
+                    AppointmentPersistanceId=Guid.Parse("87eed5dc-5413-4d2e-a392-54fa742fadcf"),
                 }
             });
         }

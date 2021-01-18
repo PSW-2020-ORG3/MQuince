@@ -1,5 +1,5 @@
 var id = localStorage.getItem("object_name");
-
+console.log("pojs: " + id);
 $(document).ready(function () {
 var tabel = document.getElementById('drugs')
 var count = document.getElementById("drugs").rows.length; 
@@ -20,7 +20,7 @@ var count = document.getElementById("drugs").rows.length;
             
             var result = idTender.substring(1, idTender.length - 1);
             
-            if (data[i].key == result)
+            if (data[i].id == result)
                 {
                 document.getElementById("tenderName").textContent = "" + data[i].entityDTO.name;
                 
@@ -86,7 +86,7 @@ function sendOffer() {
     allMed = allMed.slice(0, -1);
     allQuantity = allQuantity.slice(0, -1);
     allPrice = allPrice.slice(0, -1);
-
+    
 
     $.ajax({
         url: "/api/PharmacyOffers",
@@ -94,7 +94,7 @@ function sendOffer() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         data: JSON.stringify({
-            TenderID: id.substring(1, id.length - 1),
+            IdTender: id.substring(1, id.length - 1),
             PharmacyName: pharmacyName,
             PharmacyEmail: phamracyEmail,
             Medicationes: allMed,

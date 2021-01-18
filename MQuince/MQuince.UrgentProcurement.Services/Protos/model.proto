@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package isa1.isaProject1.grpc;
+option csharp_namespace = "MQuince.UrgentProcurement.Services.Protos";
+
+message MessagePharmacy{
+  string name=1;
+  string quantity=2;
+}
+
+message MessagePharmacyResponse {
+  string name=1;
+  string status = 2;
+}
+

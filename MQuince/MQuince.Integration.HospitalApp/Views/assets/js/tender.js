@@ -1,4 +1,4 @@
-﻿const uri = 'http://localhost:49544/api/Tender'
+﻿const uri = '/api/Tender'
 
 function sendName() {
     const name = document.getElementById('name');

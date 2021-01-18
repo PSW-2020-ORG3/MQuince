@@ -21,7 +21,6 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul id="index">
                     <li><a href="/public/index.html">Home</a></li>
-                    <li><a style="text-align: center; display: block" v-bind:hidden="!showAdminFeedbacks" href="/public/Communication/AdminFeedback.html">Feedbacks</a></li>
                     <li v-bind:hidden="!showFeedback" class="drop-down">
                         <a id="feedback" href="" class="feedback-btn" style="text-align: left; display: block">Feedback</a>
                         <ul class="drop-down-menu">
@@ -38,7 +37,6 @@
                         </ul>
                     </li>
                     <li v-on:click="logIn" v-bind:hidden="!showLogIn"><a href="#">Log in</a></li>
-                    <li v-on:click="logInAdmin" v-bind:hidden="!showLogIn"><a href="#">Log in admin</a></li>
                     <li v-on:click="logOut" v-bind:hidden="!showLogOut"><a href="#">Log out</a></li>
                 </ul>
             </nav>
@@ -85,38 +83,7 @@
 	},
 	methods: {
 		logIn: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "patient2",
-					Password: "patient2"
-				}).then((response) => {
-					if (response.data.userRole == 1) 
-						window.location.href = "/public/Communication/AdminFeedback.html";
-					else
-						window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-					
-				}, (error) => {
-					console.log(error);
-				});
-		},
-		logInAdmin: function () {
-			axios
-				.post("/gateway/User", {
-					Username: "admin",
-					Password: "admin"
-				}).then((response) => {
-					if (response.data.userRole == 1) 
-						window.location.href = "/public/Communication/AdminFeedback.html";
-					else
-						window.location.href = "/public/index.html";
-					localStorage.setItem('keyToken', response.data.token)
-					localStorage.setItem('keyRole', response.data.userRole)
-					
-				}, (error) => {
-					console.log(error);
-				});
+			window.location.href = "/public/Login/Login.html";
 		},
 		logOut: function () {
 			localStorage.removeItem('keyToken');

@@ -10,11 +10,10 @@ using Syncfusion.Pdf.Barcode;
 using System.Drawing.Drawing2D;
 using Syncfusion.Pdf.Graphics;
 using PdfSharp.Drawing;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
-using MQuince.Integration.Entities;
 using System.Collections.Generic;
 using MQuince.Sftp.Services;
+using MQuince.UrgentProcurement.Services;
+using MQuince.UrgentProcurement.Domain;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {

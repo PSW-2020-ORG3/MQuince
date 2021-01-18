@@ -1,15 +1,31 @@
-﻿var app = new Vue({
+﻿﻿var app = new Vue({
 	el: '#appointments',
 	data: {
 		appointments: [],
-		doctors: []
+		doctors: [],
+		reportEntity: null,
+		reportText: '',
+		doctor: null,
+		doctorName: '',
+		dateTime: '',
+		appointment: null,
+		timeFrom: '',
+		timeTo: '',
+		doctorID: null
 	},
 	mounted() {
+		var role = localStorage.getItem('keyRole');
+		if (role == 1) {
+			window.location.href = "/public/index.html";
+		} else if (role == null) {
+			window.location.href = "/public/Login/Login.html";
+        }
+
 
 		axios
 			.get('/gateway/Appointment/GetForPatient', {
 				params: {
-					patientId: "6459c216-1770-41eb-a56a-7f4524728546"
+					patientId: localStorage.getItem('keyGuid')
 				},
 				headers: {
 					'Authorization': localStorage.getItem('keyToken')
@@ -29,6 +45,53 @@
 
 	},
 	methods: {
+		report: function (appointmentId) {
+			var modal = document.getElementById("myModal");
+			modal.style.display = "block";	
+			
+			axios
+				.get('/gateway/Appointment/GetReportForAppointment', {
+					params: {
+						id: appointmentId
+					}
+				}).then(response => {
+					console.log("report poziv",this.doctorID)
+					this.reportEntity = response.data
+					this.reportText = this.reportEntity.entityDTO.reportText
+				})
+				
+			axios
+				.get('/gateway/Appointment/'+ appointmentId, {
+					headers: {
+                       'Authorization': localStorage.getItem('keyToken')
+                    }
+				}).then(response => {
+					this.doctorID = response.data.entityDTO.doctorId
+					this.dateTime = response.data.entityDTO.endDateTime.substr(0, 10);
+					this.timeFrom = response.data.entityDTO.startDateTime.substr(11, 5);
+					this.timeTo = response.data.entityDTO.endDateTime.substr(11, 5);
+
+					axios
+						.get('/gateway/Doctor/'+ this.doctorID, {
+							headers: {
+							   'Authorization': localStorage.getItem('keyToken')
+							}
+						}).then(response => {
+							console.log("Doc poziv",response.data)
+							this.doctorName = response.data.entityDTO.name + ' ' + response.data.entityDTO.surname;
+						})
+
+				})
+
+
+        
+		},
+		close: function () {
+			 
+			var modal = document.getElementById("myModal");
+			modal.style.display = "none";
+        
+		},
 		cancelAppointment: function (appointmentId) {
 			axios.put('/gateway/Appointment/CancelAppointment/' + appointmentId, null , {
 				headers: {

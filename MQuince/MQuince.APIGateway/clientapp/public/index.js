@@ -8,10 +8,13 @@
 		showFeedback: false,
 		showObserveFeedback: false,
 		showObserveAppointment: false,
-		isAdmin: false
+		isAdmin: false,
+		currentRole: null
+
 	},
 	mounted() {
 		var role = localStorage.getItem('keyRole');
+		this.currentRole = role;
 		//role=2
 		if (role == null) {
 			this.showLogIn = true;
@@ -33,6 +36,7 @@
 			this.showObserveAppointment = true;
 			this.isAdmin = false;
 		} else if (role == 1) { // admin
+			window.location.href = "/public/Communication/AdminFeedback.html";
 			this.showLogIn = false;
 			this.showLogOut = true;
 			this.showCreateAppointment = false;

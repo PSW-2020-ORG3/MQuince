@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,7 +24,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="styles.css" rel="stylesheet" />
     <link href="../../src/assets/style.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         input[type=text], select, input[type=time] {
             width: 100%;
@@ -103,6 +103,96 @@
             margin-top: 10px;
             height: 240px;
         }
+        
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+          -webkit-animation-name: fadeIn; /* Fade in the background */
+          -webkit-animation-duration: 0.4s;
+          animation-name: fadeIn;
+          animation-duration: 0.4s
+        }
+
+        /* Modal Content */
+        .modal-content {
+          position: fixed;
+          bottom: 20%;
+          right: 30%;
+          background-color: #fefefe;
+          width: 40%;
+          height: 60%;
+          -webkit-animation-name: slideIn;
+          -webkit-animation-duration: 0.4s;
+          animation-name: slideIn;
+          animation-duration: 0.4s
+        }
+
+        /* The Close Button */
+        .close {
+          color: white;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+          color: #000;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .modal-header {
+          padding: 2px 16px;
+          background-color: #4169E1;
+          color: white;
+          text-align: center;
+        }
+
+        .modal-body {padding: 2px 16px;}
+
+        .modal-footer {
+          padding: 2px 16px;
+          background-color: #4169E1;
+          color: white;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+          from {bottom: -300px; opacity: 0} 
+          to {bottom: 0; opacity: 1}
+        }
+
+        @keyframes slideIn {
+          from {bottom: -300px; opacity: 0}
+          to {bottom: 0; opacity: 1}
+        }
+
+        @-webkit-keyframes fadeIn {
+          from {opacity: 0} 
+          to {opacity: 1}
+        }
+
+        @keyframes fadeIn {
+          from {opacity: 0} 
+          to {opacity: 1}
+        }
+
+        .borderexample {
+             border-style:solid;
+             border-color:#708090;
+             height: 250px;
+        }   
+
     </style>
 </head>
 <body id="page-top">
@@ -131,7 +221,6 @@
 
         </div>
     </section>
-
     <div style="margin-top:-45px" id="appointments">
         <div class="container">
             <div style="height:190px; margin-left:auto;margin-right:auto;margin-bottom:25px;border: solid 1px rgb(22, 106, 181);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;" class="commentBox" v-for="appointment in appointments">
@@ -156,12 +245,36 @@
                             </td>
                             <td style="padding-left:150px;">
                                 <button v-on:click="cancelAppointment(appointment.id)" v-if="Date.now() < new Date(appointment.entityDTO.endDateTime)" style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" type="button">Cancel appointment</button>
+                                <button id="myBtn" v-on:click="report(appointment.id)" v-else style="background: #1977cc;margin-top:100px;margin-bottom:-15px" class="btn btn-primary btn-xl" type="button">View report</button>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+   
+     <!-- The Modal -->
+    <div id="myModal" class="modal">
+   
+        <!-- Modal content -->
+        <div class="modal-content">
+        <div class="modal-header">
+            <span v-on:click="close()" class="close">&times;</span>
+            <h2></h2>
+        </div>
+        <div class="modal-body">
+            <p><h4 style="text-align:center">Appointment report</h4></p>
+            <p><b>Date: {{dateTime}}</b></p>
+            <p><b>Time from: {{timeFrom}}</b></p>
+            <p><b>Time to: {{timeTo}}</b></p>
+            <p><b>Doctor: {{doctorName}}</b></p>
+            <p class="borderexample">{{reportText}}</p>
+        </div>
+        <div class="modal-footer">
+         <h3></h3>
+        </div>
+        </div>
+    </div>
     </div>
     <!-- Footer-->
     <!-- Bootstrap core JS-->
@@ -170,7 +283,24 @@
     <!-- Third party plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- Contact form JS-->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+       
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
 
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
     <script src="js/scripts.js"></script>
     <script src="../scripts/vue.js"></script>
     <script src="../scripts/axios.js"></script>

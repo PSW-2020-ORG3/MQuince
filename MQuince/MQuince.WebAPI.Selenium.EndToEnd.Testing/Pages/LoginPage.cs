@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -16,17 +17,30 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             this.webDriver = _webdriver;
         }
 
-        [Obsolete]
-        private IWebElement lnkLogin()
+        public void Navigate()
         {
-            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
-            return wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText("Log in")));
+            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Login/Login.html");
         }
 
-        [Obsolete]
-        public void Login()
+        public void TypeUsername(string username)
         {
-            this.lnkLogin().Click();
+            IWebElement usernameBox = webDriver.FindElement(By.Id("name"));
+            usernameBox.SendKeys(username);
+            Assert.True(usernameBox.Displayed);
+        }
+
+        public void TypePassword(string password)
+        {
+            IWebElement usernameBox = webDriver.FindElement(By.Id("password"));
+            usernameBox.SendKeys(password);
+            Assert.True(usernameBox.Displayed);
+        }
+
+        public void ClickLogin()
+        {
+            IWebElement loginButton = webDriver.FindElement(By.Id("sendMessageButton"));
+            Assert.True(loginButton.Displayed);
+            loginButton.Click();
         }
     }
 }

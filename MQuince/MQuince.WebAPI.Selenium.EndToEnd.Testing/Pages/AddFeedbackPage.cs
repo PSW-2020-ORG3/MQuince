@@ -28,10 +28,10 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         [Obsolete]
         public void TypeFeedbackMessage(string message)
         {
-            var txtMessageBox = this.TxtMessageBox();
-            Assert.That(txtMessageBox.Displayed);
-            Thread.Sleep(1000);
-            txtMessageBox.SendKeys(message);
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var el =  wait.Until(ExpectedConditions.ElementIsVisible(By.Id("name")));
+            Assert.True(el.Displayed);
+            el.SendKeys(message);
         }
 
         [Obsolete]
@@ -42,12 +42,31 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
             cbForSignAnonymous.Click();
         }
 
+        public void CheckPrivateCheckBox()
+        {
+            IWebElement cbForSignPrivate = webDriver.FindElement(By.Id("Private"));
+            Assert.That(cbForSignPrivate.Displayed);
+            cbForSignPrivate.Click();
+        }
         [Obsolete]
         public void ClickSubmitButton()
         {
             var lnkSubmitButton = webDriver.FindElement(By.Id("sendMessageButton"));
             Assert.That(lnkSubmitButton.Displayed);
             lnkSubmitButton.Click();
+        }
+
+        [Obsolete]
+        public void ClickOkOnAlert()
+        {
+            WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(15));
+            var element = wait.Until(ExpectedConditions.AlertIsPresent());
+            element.Accept();
+        }
+        public void NavigateToHomePage()
+        {
+            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
+            Assert.IsTrue(webDriver.Url.Equals("https://mquince.herokuapp.com/public/index.html"));
         }
 
     }

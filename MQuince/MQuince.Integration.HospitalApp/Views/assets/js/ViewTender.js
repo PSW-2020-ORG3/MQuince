@@ -8,28 +8,31 @@
         data: JSON.stringify({})
     }).then(function (data) {
         for (i = 0; i < data.length; i++) {
-            
+            console.log(data[i].entityDTO.name)
 
-            if (parse(data[i].entityDTO.endDate) > parse(Date.now()) && parse(data[i].entityDTO.startDate) < parse(Date.now())) {
-                    var key = data[i].key;
+            if (parse(data[i].entityDTO.endDate) >= parse(Date.now()) && parse(data[i].entityDTO.startDate) <= parse(Date.now())) {
+                var key = data[i].id;
+                console.log(key);
+
                     document.getElementById("tenderTable").insertRow(-1)
                         .innerHTML = '<tr><td>' + data[i].entityDTO.name + '</td><td>'
                         + data[i].entityDTO.descritpion + '</td><td>'
                         + parse(data[i].entityDTO.startDate) + '</td><td>'
                         + parse(data[i].entityDTO.endDate) + '</td><td>' +
-                        '<button onclick="saveData(this); return false;" id="' + data[i].key + '"class="saveData">Check in</button></td></tr> '
+                        '<button onclick="saveData(this); return false;" id="' + data[i].id + '"class="saveData">Check in</button></td></tr> '
 
+                
             }
             if (parse(data[i].entityDTO.endDate) > parse(Date.now()) && parse(data[i].entityDTO.startDate) < parse(Date.now())) {
                 if (data[i].entityDTO.opened == false) {
                     $.ajax(
                         {
                             type: "PUT",
-                            url: "/api/Tender?id="+data[i].key+"&opened="+true,
+                            url: "/api/Tender?id="+data[i].id+"&opened="+true,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             data: {
-                                id: data[i].key,
+                                id: data[i].id,
                                 opened:true
 
                             },
@@ -50,11 +53,11 @@
                     $.ajax(
                         {
                             type: "PUT",
-                            url: "/api/Tender?id=" + data[i].key + "&opened=" + false,
+                            url: "/api/Tender?id=" + data[i].id + "&opened=" + false,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             data: {
-                                id: data[i].key,
+                                id: data[i].id,
                                 opened: false
 
                             },

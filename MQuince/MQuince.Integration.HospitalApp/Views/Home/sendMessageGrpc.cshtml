@@ -3,38 +3,39 @@
     Layout = "_Layout";
 }
 
-@model IEnumerable<MQuince.Integration.Entities.GrpcMessage>
-    <div id="urgentMesssage-container">
-        <h3> Enter the medicine: </h3>
-        <form onsubmit="sendName()" action="javascript:void(0);">
-            <table style="margin-top: 0px; padding: -5px;" border="1px">
-                <tr style="margin-top: -5px;">
-                    <td><label> Medication name: </label></td>
-                </tr>
-                <tr> <td> <input type="text" id="name" /></td></tr>
+@model IEnumerable<MQuince.UrgentProcurement.Domain.GrpcMessage>
+<div id="urgentMesssage-container">
+    <h3> Enter the medicine: </h3>
+    <form onsubmit="sendName()" action="javascript:void(0);">
+        <table style="margin-top: 0px; padding: -5px;" border="1px">
+            <tr style="margin-top: -5px;">
+                <td><label> Medication name: </label></td>
+            </tr>
+            <tr> <td> <input type="text" id="name" /></td></tr>
 
-                <tr> <td><label> Quantity: </label></td></tr>
-                <tr> <td> <input type="text" id="quantity" /></td></tr>
+            <tr> <td><label> Quantity: </label></td></tr>
+            <tr> <td> <input type="text" id="quantity" /></td></tr>
 
-            </table>
-            <input id="btn2" type="submit" value="Send" onclick="alert('Medication was successefully send to pharmacy!')">
-            <script src="~/Views/assets/js/availablemedication.js"></script>
-        </form>
-        @foreach (var a in Model)
-        {<p>  
-              Medication @Html.DisplayFor(modelItem => a.Name) @Html.DisplayFor(modelItem => a.Status) 
-        </p>           
-        }
-        </div>
-    <style>
+        </table>
+        <input id="btn2" type="submit" value="Send" onclick="alert('Medication was successefully send to pharmacy!')">
 
-        table {
-            background-color: deepskyblue;
-            
-        }
-        p {
-            font-size: 20px;
-            color: red;
-        }
-    </style>
-    
+        <script src="~/Views/assets/js/availablemedication.js"></script>
+    </form>
+    @foreach (var a in Model)
+    {<p>
+            Medication @Html.DisplayFor(modelItem => a.Name) @Html.DisplayFor(modelItem => a.Status)
+        </p>
+    }
+</div>
+<style>
+
+    table {
+        background-color: deepskyblue;
+        margin-left: 20;
+    }
+
+    p {
+        font-size: 20px;
+        color: red;
+    }
+</style>

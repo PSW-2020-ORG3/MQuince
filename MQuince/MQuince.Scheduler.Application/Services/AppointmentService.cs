@@ -18,20 +18,35 @@ namespace MQuince.Scheduler.Application.Services
     public class AppointmentService : IAppointmentService
     {
         private IAppointmentRepository _appointmentRepository;
+        private IReportRepository _reportRepository;
         private IEventRepository _eventRepository;
-        public AppointmentService(IAppointmentRepository appointmentRepository, IEventRepository eventRepository)
+        public AppointmentService(IAppointmentRepository appointmentRepository, IReportRepository reportRepository, IEventRepository eventRepository)
         {
             _appointmentRepository = appointmentRepository == null ? throw new ArgumentNullException(nameof(appointmentRepository) + "is set to null") : appointmentRepository;
+            _reportRepository = reportRepository == null ? throw new ArgumentNullException(nameof(reportRepository) + "is set to null") : reportRepository;
             _eventRepository = eventRepository == null ? throw new ArgumentNullException(nameof(eventRepository) + "is set to null") : eventRepository;
+        }
+        public IdentifiableDTO<ReportDTO> GetReportForAppointment(Guid id)
+        {
+            try
+            {
+                return ReportMapper.MapReportEntityToReportIdentifierDTO(_reportRepository.GetReportForAppointment(id));
+            }
+            catch (ArgumentNullException)
+            {
+                throw new NotFoundEntityException();
+            }
+            catch (Exception)
+            {
+                throw new InternalServerErrorException();
+            }
         }
 
         public Guid Create(AppointmentDTO entityDTO)
         {
             Appointment appointment = CreateAppointmentFromDTO(entityDTO);
-            ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CREATED, appointment.Id, appointment.PatientId);
 
             _appointmentRepository.Create(appointment);
-            _eventRepository.Create(scheduleEvent);
 
             return appointment.Id;
         }
@@ -133,13 +148,11 @@ namespace MQuince.Scheduler.Application.Services
             try
             {
                 Appointment appointment = _appointmentRepository.GetById(appointmentId);
-                ScheduleEvent scheduleEvent = new ScheduleEvent(ScheduleEventType.CANCELED, appointment.Id, appointment.PatientId);
 
                 if (appointment.IsCancelable())
                 {
                     appointment.Cancel();
                     _appointmentRepository.Update(appointment);
-                    _eventRepository.Create(scheduleEvent);
                     return true;
                 }
                 return false;

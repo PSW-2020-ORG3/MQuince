@@ -18,7 +18,7 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         {
             webDriver = new ChromeDriver();
             webDriver.Manage().Window.Maximize();
-            webDriver.Navigate().GoToUrl("http://localhost:5000/public/index.html");
+            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
         }
 
         [Test]
@@ -26,13 +26,18 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
         public void Publish_Feedback()
         {
             LoginPage loginPage = new LoginPage(webDriver);
-            loginPage.Login();
+            loginPage.Navigate();
+            loginPage.TypeUsername("admin");
+            loginPage.TypePassword("admin");
+            loginPage.ClickLogin(); 
            
             PublishFeedbackPage publishFeedbackPage = new PublishFeedbackPage(webDriver);
             publishFeedbackPage.FindOptionForPublishFeedback();
             publishFeedbackPage.SelectOptionForPublishFeedback();
             publishFeedbackPage.FindFeedbackForPublish();
             publishFeedbackPage.SubmitFeedbackForPublish();
+            publishFeedbackPage.ClickOkOnAlert();
+            publishFeedbackPage.NavigateToHomePage();
         }
     }
 }
