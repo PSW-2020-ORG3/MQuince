@@ -36,10 +36,10 @@ namespace MQuince.ActionAndBenefits.Infrastructure.Util
                 ActionKey = actionsAndBenefits.IDAction,
                 PharmacyName = actionsAndBenefits.PharmacyName,
                 ActionName = actionsAndBenefits.ActionName,
-                BeginDate = actionsAndBenefits.BeginDate,
-                EndDate = actionsAndBenefits.EndDate,
-                OldCost = actionsAndBenefits.OldCost,
-                NewCost = actionsAndBenefits.NewCost,
+                BeginDate = actionsAndBenefits.DateRange.StartDateTime,
+                EndDate = actionsAndBenefits.DateRange.EndDateTime,
+                OldCost = actionsAndBenefits.Price.OldPrice,
+                NewCost = actionsAndBenefits.Price.NewPrice,
                 IsApproved = actionsAndBenefits.IsApproved
             };
             return retVal;
@@ -56,10 +56,10 @@ namespace MQuince.ActionAndBenefits.Infrastructure.Util
                                                    IsApproved = actionsAndBenefits.IsApproved,
                                                    PharmacyName = actionsAndBenefits.PharmacyName,
                                                    ActionName = actionsAndBenefits.ActionName,
-                                                   BeginDate = actionsAndBenefits.BeginDate,
-                                                   EndDate = actionsAndBenefits.EndDate,
-                                                   OldCost = actionsAndBenefits.OldCost,
-                                                   NewCost = actionsAndBenefits.NewCost
+                                                   BeginDate = actionsAndBenefits.DateRange.StartDateTime,
+                                                   EndDate = actionsAndBenefits.DateRange.EndDateTime,
+                                                   OldCost = actionsAndBenefits.Price.OldPrice,
+                                                   NewCost = actionsAndBenefits.Price.NewPrice
                                                }
                                            };
 
