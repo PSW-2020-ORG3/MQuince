@@ -22,8 +22,8 @@
             submitMessage:'',
             selectedDoctor: '',
             selectedAppointment: '',
-            disabledDates: { to: new Date() }
-
+            disabledDates: { to: new Date() },
+            sessionId: ''
         }
     },
     template: ` 
@@ -105,14 +105,26 @@
 `, components: {
         vuejsDatepicker
     },
+    created() {
+        window.addEventListener('beforeunload', this.sendData)
+    },
     mounted() {
         var role = localStorage.getItem('keyRole');
-
+        this.sessionId = this.generateUUID();
         if (role == 1) {
             window.location.href = "/public/index.html";
         } else if (role == null) {
             window.location.href = "/public/Login/Login.html";
         }
+
+        axios
+            .post('/gateway/scheduleevent', {
+                EventType: 0,
+                SessionId: this.sessionId
+            }).then((response) => {
+            }, (error) => {
+                console.log(error);
+            });
 
         axios
             .get('/gateway/specialization', {
@@ -123,11 +135,30 @@
             .then(response => (this.specializations = response.data));
     },
     methods: {
+        sendData() {
+            axios
+                .post('/gateway/scheduleevent', {
+                    EventType: 2,
+                    SessionId: this.sessionId
+                }).then((response) => {
+                }, (error) => {
+                    console.log(error);
+                });
+        },
         next: function () {
             if (this.currentStep == 0 && this.selectedSpecialization != '') {
                 this.currentStep = 1;
                 this.visiblePrevious = true;
                 this.visibleSpecialization = false;
+
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 3, //from spec to doctor
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
 
                 axios
                     .get('/gateway/doctor/specialization/' + this.selectedSpecialization, {
@@ -144,6 +175,15 @@
                 this.visiblePrevious = true;
                 this.visibleDoctors = false;
 
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 5, //from doctor to date
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
+
                 this.visibleDate = true;
             } else if (this.currentStep == 2 && this.dateForAppointment != '') {
                 this.currentStep = 3;
@@ -151,6 +191,15 @@
                 this.visibleSubmit = true;
                 this.visibleNext= false;
                 this.visibleDate = false;
+
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 7, //from date to app
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
 
                 axios
                     .get('/gateway/Appointment/GetFreeApp', {
@@ -177,6 +226,14 @@
                 this.visiblePrevious = false;
                 this.visibleSpecialization = true;
 
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 4, //from doctor to spec
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
 
                 this.visibleDoctors = false;
             } else if (this.currentStep == 2) {
@@ -184,12 +241,29 @@
                 this.visiblePrevious = true;
                 this.visibleDoctors = true;
 
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 6, //from date to doctor
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
 
                 this.visibleDate = false;
             } else if (this.currentStep == 3) {
                 this.currentStep = 2;
                 this.visiblePrevious = true;
                 this.visibleDate = true;
+
+                axios
+                    .post('/gateway/scheduleevent', {
+                        EventType: 8, //from period to date
+                        SessionId: this.sessionId
+                    }).then((response) => {
+                    }, (error) => {
+                        console.log(error);
+                    });
 
                 this.visibleNext = true;
                 this.visibleAppointment = false;
@@ -208,6 +282,15 @@
                                 'Authorization': localStorage.getItem('keyToken')
                         }
                     }).then((response) => {
+
+                        axios
+                            .post('/gateway/scheduleevent', {
+                                EventType: 1, //from period to date
+                                SessionId: this.sessionId
+                            }).then((response) => {
+                            }, (error) => {
+                                console.log(error);
+                            });
                         alert('Your appointment has been saved!')
                         //JSAlert.alert("Your appointment has been saved!");
                         window.location.href = "../../public/index.html";
@@ -215,6 +298,19 @@
                             console.log(error);
                         });
             }
+        },
+        generateUUID() { // Public Domain/MIT
+            var d = new Date().getTime();
+            if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+                d += performance.now(); //use high-precision timer if available
+            }
+            var newGuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = (d + Math.random() * 16) % 16 | 0;
+                d = Math.floor(d / 16);
+                return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            });
+
+            return newGuid;
         }
     }
 });

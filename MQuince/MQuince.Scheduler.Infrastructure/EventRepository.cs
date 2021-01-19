@@ -4,6 +4,8 @@ using MQuince.Scheduler.Contracts.Repository;
 using MQuince.Scheduler.Domain.Events;
 using MQuince.Scheduler.Infrastructure.Util;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MQuince.Scheduler.Infrastructure
 {
@@ -21,6 +23,14 @@ namespace MQuince.Scheduler.Infrastructure
             {
                 _context.ScheduleEvents.Add(EventMapper.MapScheduleEventEntityToScheduleEventPersistence(entity));
                 _context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<ScheduleEvent> GetAll()
+        {
+            using (MQuinceDbContext _context = new MQuinceDbContext(_dbContext))
+            {
+                return EventMapper.MapSchedulesPersistenceCollectionTSchedulesEntityCollection(_context.ScheduleEvents.ToList());
             }
         }
     }

@@ -2,8 +2,14 @@
 {
     public enum ScheduleEventType
     {
+        JOIN,
         CREATED,
-        CANCELED,
-        FINISHED
+        EXIT,
+        FROMSPECTODOCTOR,
+        FROMDOCTORTOSPEC,
+        FROMDOCTORTODATEPICKER,
+        FROMDATEPICKERTODOCTOR,
+        FROMDATEPICKERTOPERIOD,
+        FROMPERIODTODATEPICKER
     }
 }

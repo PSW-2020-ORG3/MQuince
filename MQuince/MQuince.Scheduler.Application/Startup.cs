@@ -46,6 +46,7 @@ namespace MQuince.Scheduler.Application
             {
                 dbContextOptionsBuilder.UseNpgsql(CreateConnectionStringFromEnvironment());
             }
+            services.AddTransient(typeof(IScheduleEventService), s => new ScheduleEventService(new EventRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IAppointmentService), s => new AppointmentService(new AppointmentRepository(dbContextOptionsBuilder), new ReportRepository(dbContextOptionsBuilder), new EventRepository(dbContextOptionsBuilder)));
 
             services.AddControllers();
