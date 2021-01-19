@@ -9,11 +9,9 @@ namespace MQuince.ActionAndBenefits.Domain
         private Guid _actionKey;
         public string PharmacyName { get; set; }
         public string ActionName { get; set; }
-        public DateTime BeginDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public double OldCost { get; set; }
-        public double NewCost { get; set; }
-        public Boolean IsApproved { get; set; }
+        public DateRange DateRange { get; set;}
+        public Price Price { get; set; }
+        public bool IsApproved { get; set; }
 
         public void Approve()
         {
@@ -24,10 +22,8 @@ namespace MQuince.ActionAndBenefits.Domain
             _actionKey = actionKey;
             PharmacyName = pharmacyName;
             ActionName = actionName;
-            BeginDate = beginDate;
-            EndDate = endDate;
-            OldCost = oldCost;
-            NewCost = newCost;
+            DateRange = new DateRange(beginDate, endDate);
+            Price = new Price(oldCost, newCost);
             IsApproved = isApproved;
         }
         public ActionsAndBenefits() { }
@@ -43,10 +39,8 @@ namespace MQuince.ActionAndBenefits.Domain
                 IDAction = Guid.NewGuid();
                 PharmacyName = pharmacyName;
                 ActionName = actionName;
-                BeginDate = beginDate;
-                EndDate = endDate;
-                OldCost = oldCost;
-                NewCost = newCost;
+                DateRange = new DateRange(beginDate, endDate);
+                Price = new Price(oldCost, newCost);
                 IsApproved = false;
             }
         }

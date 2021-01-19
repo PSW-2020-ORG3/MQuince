@@ -52,13 +52,13 @@ namespace MQuince.Integration.HospitalApp.Tests
             if (!action.ActionName.Equals(actionsAndBenefitsDTO.EntityDTO.ActionName))
                 return false;
 
-            if (action.BeginDate != actionsAndBenefitsDTO.EntityDTO.BeginDate)
+            if (action.DateRange.StartDateTime != actionsAndBenefitsDTO.EntityDTO.BeginDate)
                 return false;
-            if (action.EndDate != actionsAndBenefitsDTO.EntityDTO.EndDate)
+            if (action.DateRange.EndDateTime != actionsAndBenefitsDTO.EntityDTO.EndDate)
                 return false;
-            if (action.OldCost != actionsAndBenefitsDTO.EntityDTO.OldCost)
+            if (action.Price.OldPrice != actionsAndBenefitsDTO.EntityDTO.OldCost)
                 return false;
-            if (action.NewCost != actionsAndBenefitsDTO.EntityDTO.NewCost)
+            if (action.Price.NewPrice != actionsAndBenefitsDTO.EntityDTO.NewCost)
                 return false;
 
             return true;
@@ -75,15 +75,15 @@ namespace MQuince.Integration.HospitalApp.Tests
             if (!actions.ActionName.Equals(actionsAndBenefitsPersistence.ActionName))
                 return false;
 
-            if (actions.BeginDate != actionsAndBenefitsPersistence.BeginDate)
+            if (actions.DateRange.StartDateTime != actionsAndBenefitsPersistence.BeginDate)
                 return false;
-            if (actions.EndDate != actionsAndBenefitsPersistence.EndDate)
-                return false;
-
-            if (actions.OldCost != actionsAndBenefitsPersistence.OldCost)
+            if (actions.DateRange.EndDateTime != actionsAndBenefitsPersistence.EndDate)
                 return false;
 
-            if (actions.NewCost != actionsAndBenefitsPersistence.NewCost)
+            if (actions.Price.OldPrice != actionsAndBenefitsPersistence.OldCost)
+                return false;
+
+            if (actions.Price.NewPrice != actionsAndBenefitsPersistence.NewCost)
                 return false;
 
             return true;
@@ -108,10 +108,8 @@ namespace MQuince.Integration.HospitalApp.Tests
             {
                 IDAction = Guid.Parse("11115a55-094f-4081-89b3-757cafbd5ea1"),
                 ActionName = "Brufen",
-                BeginDate = new DateTime(2020, 12, 21),
-                EndDate = new DateTime(2020, 12, 31),
-                OldCost = 320,
-                NewCost = 200,
+                DateRange = new DateRange(new DateTime(2020, 12, 21), new DateTime(2020, 12, 31)),
+                Price = new Price(320 , 200),
                 IsApproved = true
             };
     }
