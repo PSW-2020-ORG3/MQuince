@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.Exceptions;
 using MQuince.TenderProcurement.Contracts.DTO;
+using MQuince.TenderProcurement.Contracts.Exceptions;
 using MQuince.TenderProcurement.Contracts.Services;
 
 namespace MQuince.Integration.HospitalApp.Controllers
@@ -32,6 +32,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
             {
                 return StatusCode(404);
             }
+
             catch (InternalServerErrorException e)
             {
                 return StatusCode(500);

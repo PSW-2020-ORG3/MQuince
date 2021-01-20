@@ -9,12 +9,14 @@ using Microsoft.Extensions.Hosting;
 using MQuince.ActionAndBenefits.Contracts.Service;
 using MQuince.ActionAndBenefits.Infrastructure;
 using MQuince.ActionAndBenefits.Services;
-using MQuince.Integration.Repository.MySQL.DataProvider;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
 using MQuince.Pharmacy.Contracts.Services;
 using MQuince.Pharmacy.Infrastructure;
 using MQuince.Pharmacy.Services;
+
+using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Infrastructure;
+using MQuince.Sftp.Services;
+
 using MQuince.UrgentProcurement.Contracts.Services;
 using MQuince.UrgentProcurement.Infrastructure;
 using MQuince.UrgentProcurement.Services;
@@ -40,7 +42,7 @@ namespace MQuince.Integration.HospitalApp
         {
             
             DbContextOptionsBuilder dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=Mucibabic*1;database=pharmacydb1");
+            dbContextOptionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
             services.AddTransient(typeof(IPharmacyService), s => new PharmacyService(new PharmacyRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsConsumptionService), s => new MedicationsConsumptationService(new MedicationsConsumptionRepository(dbContextOptionsBuilder)));
             services.AddTransient(typeof(IMedicationsService), s => new MedicationsService(new MedicationsRepository(dbContextOptionsBuilder)));

@@ -1,11 +1,9 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.MySQL.DataProvider.Util;
-using MQuince.Integration.Repository.MySQL.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Domain;
+using MQuince.Sftp.Infrastructure.Util;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace MQuince.HospitalAppTests
@@ -71,7 +69,7 @@ namespace MQuince.HospitalAppTests
         public bool IsEqualedicationsConsumptionPersistanceAndedicationsConsumptionEntity(IdentifiableDTO<MedicationsConsumptionDTO> medicationsConsumptionDTO, MedicationsConsumption medicationsConsumption)
         {
 
-            if (medicationsConsumption.KeyConsumtion != medicationsConsumptionDTO.Key)
+            if (medicationsConsumption.KeyConsumtion != medicationsConsumptionDTO.Id)
                 return false;
 
             if (!medicationsConsumption.Name.Equals(medicationsConsumptionDTO.EntityDTO.Name))

@@ -3,22 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Entities", "MQuince.Integration.Entities\MQuince.Integration.Entities.csproj", "{39709AE7-E32C-4920-A815-2171C271E2D7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Services.Constracts", "MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj", "{0949B52B-D3FC-493C-BA91-FC30C5E4BDA4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Services.Implementation", "MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj", "{FACF87B8-058D-4772-AA22-32D1E2EEB20E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Repository.Contracts", "MQuince.Integration.Repository.Contracts\MQuince.Integration.Repository.Contracts.csproj", "{389F101E-5E15-4E95-B76F-6D6305934DF1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Repository.MySQL", "MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj", "{11F9C7EB-4AB5-4A3A-9870-A4F10EDFF9BA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.HospitalApp", "MQuince.Integration.HospitalApp\MQuince.Integration.HospitalApp.csproj", "{02232EB7-2132-489F-A68B-DA67438E7586}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C7342C19-D303-4370-B26C-B3BB904D9117} = {C7342C19-D303-4370-B26C-B3BB904D9117}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.HospitalApp.Tests", "MQuince.Integration.HospitalApp.Tests\MQuince.Integration.HospitalApp.Tests.csproj", "{726C04F5-EC54-4E9D-A24C-6B2DA7DBED86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A} = {D7A9B03E-593B-4BED-B8D4-33994DA8202A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.WebAPI.Selenium.EndToEnd.Testing", "MQuince.WebAPI.Selenium.EndToEnd.Testing\MQuince.WebAPI.Selenium.EndToEnd.Testing.csproj", "{E0732ADC-4293-4A0D-8366-6AECC7DF81B8}"
 EndProject
@@ -116,7 +109,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Integration.Infrastructure", "MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj", "{98018434-9DE6-40FF-89BE-1CDBE343E2DB}"
 EndProject
-
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sftp", "Sftp", "{B1464F13-E379-4E38-9CCF-4838248ACE00}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Sftp.Constracts", "MQuince.Sftp.Constracts\MQuince.Sftp.Constracts.csproj", "{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Sftp.Domain", "MQuince.Sftp.Domain\MQuince.Sftp.Domain.csproj", "{544F5CE8-4938-409F-989B-6A3CC83C88B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Sftp.Infrastructure", "MQuince.Sftp.Infrastructure\MQuince.Sftp.Infrastructure.csproj", "{4D3D4C65-B69F-4405-A865-FAB730AFAB60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.Sftp.Services", "MQuince.Sftp.Services\MQuince.Sftp.Services.csproj", "{D7A9B03E-593B-4BED-B8D4-33994DA8202A}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ActionAndBenefits", "ActionAndBenefits", "{96E1192A-90E6-47EC-A49F-D1AFE76BDE95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.ActionAndBenefits.Contracts", "MQuince.ActionAndBenefits.Contracts\MQuince.ActionAndBenefits.Contracts.csproj", "{D6608C12-87E1-4963-B25F-E50CB01A9E5D}"
@@ -126,27 +128,26 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.ActionAndBenefits.Infrastructure", "MQuince.ActionAndBenefits.Infrastructure\MQuince.ActionAndBenefits.Infrastructure.csproj", "{E782FF15-499F-4259-8C4B-3DBC7FF81A6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.ActionAndBenefits.Services", "MQuince.ActionAndBenefits.Services\MQuince.ActionAndBenefits.Services.csproj", "{C7342C19-D303-4370-B26C-B3BB904D9117}"
-
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UrgentProcurement", "UrgentProcurement", "{3AE32E76-9525-4715-9168-09673B130CD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.UrgentProcurement.Contracts", "MQuince.UrgentProcurement.Contracts\MQuince.UrgentProcurement.Contracts.csproj", "{89BB8AB6-1277-4BD8-B308-F2F5FE9B951E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.UrgentProcurement.Contracts", "MQuince.UrgentProcurement.Contracts\MQuince.UrgentProcurement.Contracts.csproj", "{89BB8AB6-1277-4BD8-B308-F2F5FE9B951E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.UrgentProcurement.Domain", "MQuince.UrgentProcurement.Domain\MQuince.UrgentProcurement.Domain.csproj", "{A0AE357E-D0BD-46EB-8C16-4EAD8EAF6A62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.UrgentProcurement.Domain", "MQuince.UrgentProcurement.Domain\MQuince.UrgentProcurement.Domain.csproj", "{A0AE357E-D0BD-46EB-8C16-4EAD8EAF6A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.UrgentProcurement.Infrastructure", "MQuince.UrgentProcurement.Infrastructure\MQuince.UrgentProcurement.Infrastructure.csproj", "{21C1CCA1-E544-46B5-8703-3D4C05722C64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.UrgentProcurement.Infrastructure", "MQuince.UrgentProcurement.Infrastructure\MQuince.UrgentProcurement.Infrastructure.csproj", "{21C1CCA1-E544-46B5-8703-3D4C05722C64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.UrgentProcurement.Services", "MQuince.UrgentProcurement.Services\MQuince.UrgentProcurement.Services.csproj", "{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A}"
-
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.UrgentProcurement.Services", "MQuince.UrgentProcurement.Services\MQuince.UrgentProcurement.Services.csproj", "{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TenderProcurement", "TenderProcurement", "{69EA719F-9052-4465-B4F4-035A66D183FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Contracts", "MQuince.TenderProcurement.Contracts\MQuince.TenderProcurement.Contracts.csproj", "{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.TenderProcurement.Contracts", "MQuince.TenderProcurement.Contracts\MQuince.TenderProcurement.Contracts.csproj", "{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Domain", "MQuince.TenderProcurement.Domain\MQuince.TenderProcurement.Domain.csproj", "{B45170F5-3362-47C7-AADB-5C67D9F04945}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.TenderProcurement.Domain", "MQuince.TenderProcurement.Domain\MQuince.TenderProcurement.Domain.csproj", "{B45170F5-3362-47C7-AADB-5C67D9F04945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Infrastructure", "MQuince.TenderProcurement.Infrastructure\MQuince.TenderProcurement.Infrastructure.csproj", "{3BB2A714-C16E-4807-B028-CF967F2AC7D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.TenderProcurement.Infrastructure", "MQuince.TenderProcurement.Infrastructure\MQuince.TenderProcurement.Infrastructure.csproj", "{3BB2A714-C16E-4807-B028-CF967F2AC7D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQuince.TenderProcurement.Services", "MQuince.TenderProcurement.Services\MQuince.TenderProcurement.Services.csproj", "{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}"
-
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQuince.TenderProcurement.Services", "MQuince.TenderProcurement.Services\MQuince.TenderProcurement.Services.csproj", "{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -154,26 +155,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39709AE7-E32C-4920-A815-2171C271E2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39709AE7-E32C-4920-A815-2171C271E2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39709AE7-E32C-4920-A815-2171C271E2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39709AE7-E32C-4920-A815-2171C271E2D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0949B52B-D3FC-493C-BA91-FC30C5E4BDA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0949B52B-D3FC-493C-BA91-FC30C5E4BDA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0949B52B-D3FC-493C-BA91-FC30C5E4BDA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0949B52B-D3FC-493C-BA91-FC30C5E4BDA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FACF87B8-058D-4772-AA22-32D1E2EEB20E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FACF87B8-058D-4772-AA22-32D1E2EEB20E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FACF87B8-058D-4772-AA22-32D1E2EEB20E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FACF87B8-058D-4772-AA22-32D1E2EEB20E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{389F101E-5E15-4E95-B76F-6D6305934DF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{389F101E-5E15-4E95-B76F-6D6305934DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{389F101E-5E15-4E95-B76F-6D6305934DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{389F101E-5E15-4E95-B76F-6D6305934DF1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11F9C7EB-4AB5-4A3A-9870-A4F10EDFF9BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11F9C7EB-4AB5-4A3A-9870-A4F10EDFF9BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11F9C7EB-4AB5-4A3A-9870-A4F10EDFF9BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11F9C7EB-4AB5-4A3A-9870-A4F10EDFF9BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02232EB7-2132-489F-A68B-DA67438E7586}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -306,7 +287,22 @@ Global
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544F5CE8-4938-409F-989B-6A3CC83C88B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544F5CE8-4938-409F-989B-6A3CC83C88B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544F5CE8-4938-409F-989B-6A3CC83C88B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{544F5CE8-4938-409F-989B-6A3CC83C88B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3D4C65-B69F-4405-A865-FAB730AFAB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3D4C65-B69F-4405-A865-FAB730AFAB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3D4C65-B69F-4405-A865-FAB730AFAB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3D4C65-B69F-4405-A865-FAB730AFAB60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6608C12-87E1-4963-B25F-E50CB01A9E5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6608C12-87E1-4963-B25F-E50CB01A9E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6608C12-87E1-4963-B25F-E50CB01A9E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -339,7 +335,6 @@ Global
 		{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -356,8 +351,6 @@ Global
 		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6}.Release|Any CPU.Build.0 = Release|Any CPU
-
-
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -395,23 +388,22 @@ Global
 		{7833320E-BE87-46C4-96B5-A3D575472D79} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
 		{C6B72CDF-12C6-4F4E-827B-16A7D82103E8} = {711BB2B2-4CFE-4F94-A44D-4D23BD05B06D}
 		{98018434-9DE6-40FF-89BE-1CDBE343E2DB} = {1E91DDCB-ADF8-412C-AEE8-C6203B4F3682}
-
+		{7BE31EFB-93FB-4A85-A01E-B4B9F4801B41} = {B1464F13-E379-4E38-9CCF-4838248ACE00}
+		{544F5CE8-4938-409F-989B-6A3CC83C88B7} = {B1464F13-E379-4E38-9CCF-4838248ACE00}
+		{4D3D4C65-B69F-4405-A865-FAB730AFAB60} = {B1464F13-E379-4E38-9CCF-4838248ACE00}
+		{D7A9B03E-593B-4BED-B8D4-33994DA8202A} = {B1464F13-E379-4E38-9CCF-4838248ACE00}
 		{D6608C12-87E1-4963-B25F-E50CB01A9E5D} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
 		{F25186FC-923A-4323-83B2-DC065FCC5E86} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
 		{E782FF15-499F-4259-8C4B-3DBC7FF81A6C} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
 		{C7342C19-D303-4370-B26C-B3BB904D9117} = {96E1192A-90E6-47EC-A49F-D1AFE76BDE95}
-
-
 		{89BB8AB6-1277-4BD8-B308-F2F5FE9B951E} = {3AE32E76-9525-4715-9168-09673B130CD7}
 		{A0AE357E-D0BD-46EB-8C16-4EAD8EAF6A62} = {3AE32E76-9525-4715-9168-09673B130CD7}
 		{21C1CCA1-E544-46B5-8703-3D4C05722C64} = {3AE32E76-9525-4715-9168-09673B130CD7}
 		{B078EB59-07BB-4D6C-9CDB-4FF18BF1753A} = {3AE32E76-9525-4715-9168-09673B130CD7}
-
 		{A5BFAA55-C59E-4121-9CED-F5A0F85CCADA} = {69EA719F-9052-4465-B4F4-035A66D183FA}
 		{B45170F5-3362-47C7-AADB-5C67D9F04945} = {69EA719F-9052-4465-B4F4-035A66D183FA}
 		{3BB2A714-C16E-4807-B028-CF967F2AC7D8} = {69EA719F-9052-4465-B4F4-035A66D183FA}
 		{129DBCAE-36AA-41AF-ADBC-9529060CD2E6} = {69EA719F-9052-4465-B4F4-035A66D183FA}
-
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0689A13C-E5D1-40C4-A4B0-CA008A3CE5FE}

@@ -1,5 +1,5 @@
-﻿using MQuince.Integration.Infrastructure.PersistenceEntities;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Integration.Infrastructure.PersistenceEntities;
 using MQuince.Pharmacy.Contracts.DTO;
 using MQuince.Pharmacy.Domain;
 using MQuince.Pharmacy.Infrastructure.Util;
@@ -58,7 +58,7 @@ namespace MQuince.HospitalAppTests
         public bool IsEqualPharmacyPersistanceAndPharmacyEntity(IdentifiableDTO<PharmacyDTO> pharmacyDTO, MyPharmacy pharmacy)
         {
 
-            if (pharmacy.ApiKey != pharmacyDTO.Key)
+            if (pharmacy.ApiKey != pharmacyDTO.Id)
                 return false;
 
             if (!pharmacy.Name.Equals(pharmacyDTO.EntityDTO.Name))

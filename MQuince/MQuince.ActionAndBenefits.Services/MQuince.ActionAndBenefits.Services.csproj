@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MQuince.ActionAndBenefits.Contracts\MQuince.ActionAndBenefits.Contracts.csproj" />
     <ProjectReference Include="..\MQuince.Core\MQuince.Core.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Repository.Contracts\MQuince.Integration.Repository.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

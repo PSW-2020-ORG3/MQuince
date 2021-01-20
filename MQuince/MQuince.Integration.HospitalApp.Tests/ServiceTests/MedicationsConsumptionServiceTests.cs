@@ -1,9 +1,9 @@
-﻿using MQuince.Integration.Entities;
-using MQuince.Integration.Repository.Contracts;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
+﻿using MQuince.Core.IdentifiableDTO;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Constracts.Repository;
+using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Domain;
+using MQuince.Sftp.Services;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using Xunit;
 namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
 {
 
-	public class MedicationsConsumptionServiceTests
+    public class MedicationsConsumptionServiceTests
 	{
 		IMedicationsConsumptionService medicationService;
 		IMedicationsConsumptionRepository medicationRepository = Substitute.For<IMedicationsConsumptionRepository>();
@@ -93,7 +93,7 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTest
 
 		private bool CompareMedicationAndIdentifierMedication(MedicationsConsumption medication, IdentifiableDTO<MedicationsConsumptionDTO> identifierMedication)
 		{
-			if (medication.KeyConsumtion != identifierMedication.Key)
+			if (medication.KeyConsumtion != identifierMedication.Id)
 				return false;
 
 			if (!medication.Name.Equals(identifierMedication.EntityDTO.Name))
