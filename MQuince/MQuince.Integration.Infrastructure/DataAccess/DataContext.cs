@@ -32,7 +32,7 @@ namespace MQuince.Integration.Infrastructure.DataAccess
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb2");
+			optionsBuilder.UseMySql(@"server=localhost;user=root;password=root;database=pharmacydb");
 		}
 		
 
