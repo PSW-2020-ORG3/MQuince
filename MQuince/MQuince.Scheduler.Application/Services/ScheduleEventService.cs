@@ -13,7 +13,6 @@ namespace MQuince.Scheduler.Application.Services
     public class ScheduleEventService : IScheduleEventService
     {
         private IEventRepository _eventRepository;
-        private object sumOfPojavljivanja;
 
         public ScheduleEventService(IEventRepository eventRepository)
         {

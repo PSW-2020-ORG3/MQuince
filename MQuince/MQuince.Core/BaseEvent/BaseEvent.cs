@@ -4,8 +4,8 @@ namespace MQuince.Core.BaseEvent
 {
     public abstract class BaseEvent
     {
-        public Guid BaseEntityId { get; private set; }
-        public DateTime TimeStamp { get; private set; }
+        public Guid BaseEntityId { get; set; }
+        public DateTime TimeStamp { get; set; }
         public BaseEvent(Guid baseEntityId)
         {
             TimeStamp = DateTime.Now;
