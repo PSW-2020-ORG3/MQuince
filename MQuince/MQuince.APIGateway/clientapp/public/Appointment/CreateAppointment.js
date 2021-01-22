@@ -121,6 +121,10 @@
             .post('/gateway/scheduleevent', {
                 EventType: 0,
                 SessionId: this.sessionId
+            }, {
+                headers: {
+                    'Authorization': localStorage.getItem('keyToken')
+                }
             }).then((response) => {
             }, (error) => {
                 console.log(error);
@@ -140,6 +144,10 @@
                 .post('/gateway/scheduleevent', {
                     EventType: 2,
                     SessionId: this.sessionId
+                }, {
+                    headers: {
+                        'Authorization': localStorage.getItem('keyToken')
+                    }
                 }).then((response) => {
                 }, (error) => {
                     console.log(error);
@@ -155,6 +163,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 3, //from spec to doctor
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -179,6 +191,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 5, //from doctor to date
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -196,6 +212,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 7, //from date to app
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -230,6 +250,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 4, //from doctor to spec
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -245,6 +269,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 6, //from date to doctor
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -260,6 +288,10 @@
                     .post('/gateway/scheduleevent', {
                         EventType: 8, //from period to date
                         SessionId: this.sessionId
+                    }, {
+                        headers: {
+                            'Authorization': localStorage.getItem('keyToken')
+                        }
                     }).then((response) => {
                     }, (error) => {
                         console.log(error);
@@ -287,6 +319,10 @@
                             .post('/gateway/scheduleevent', {
                                 EventType: 1, //from period to date
                                 SessionId: this.sessionId
+                            }, {
+                                headers: {
+                                    'Authorization': localStorage.getItem('keyToken')
+                                }
                             }).then((response) => {
                             }, (error) => {
                                 console.log(error);

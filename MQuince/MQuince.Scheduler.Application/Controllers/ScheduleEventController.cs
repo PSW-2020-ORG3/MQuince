@@ -58,7 +58,6 @@ namespace MQuince.Scheduler.Application.Controllers
             {
                 return StatusCode(500);
             }
-
         }
 
         private bool IsValidAuthenticationRole(string requiredRole)

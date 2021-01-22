@@ -53,7 +53,9 @@
 		}
 		axios
 			.get('/gateway/ScheduleEvent', {
-				
+				headers: {
+					'Authorization': localStorage.getItem('keyToken')
+				}
 			}).then(response => {
 				this.event = response.data
 			})

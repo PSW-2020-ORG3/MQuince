@@ -24,7 +24,8 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing
             options.AddArguments("--disable-notifications");
 
             webDriver = new ChromeDriver(options);
-            webDriver.Manage().Window.Maximize(); 
+            webDriver.Manage().Window.Maximize();
+            //webDriver.Navigate().GoToUrl("http://localhost:5000/public/index.html");
             webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
         }
 
