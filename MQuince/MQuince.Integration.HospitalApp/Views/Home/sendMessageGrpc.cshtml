@@ -5,7 +5,6 @@
 
 @model IEnumerable<MQuince.UrgentProcurement.Domain.GrpcMessage>
 <div id="urgentMesssage-container">
-    <h3> Enter the medicine: </h3>
     <form onsubmit="sendName()" action="javascript:void(0);">
         <table style="margin-top: 0px; padding: -5px;" border="1px">
             <tr style="margin-top: -5px;">
@@ -17,7 +16,7 @@
             <tr> <td> <input type="text" id="quantity" /></td></tr>
 
         </table>
-        <input id="btn2" type="submit" value="Send" onclick="alert('Medication was successefully send to pharmacy!')">
+        <input id="btn2" type="submit" value="Send">
 
         <script src="~/Views/assets/js/availablemedication.js"></script>
     </form>
@@ -31,7 +30,8 @@
 
     table {
         background-color: deepskyblue;
-        margin-left: 20;
+        margin-left: 135px;
+        width: 80px;
     }
 
     p {
