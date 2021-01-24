@@ -200,41 +200,49 @@
             <h4 class=" text-center  mb-0 text-uppercase" style="margin-top: 55px;">Appointment statistics</h4>
            </br></br>
             <table id="t01">
-              <tr>
-                <td>Percent of successfully made appointments</td>
-                <td>{{event.percentOfSuccessfulCreating}}%</td> 
-              </tr>
-              <tr>
-                <td>Average time for making an appointment</td>
-                <td>{{event.averageCreatingTime}}s</td>
-              </tr>
-              <tr>
-                <td>Step where patients quit the most</td>
-                <td v-if="event.stepWherePatientsQuit == 0">Choosing specialization</td>
-                <td v-if="event.stepWherePatientsQuit == 1">Choosing doctor</td>
-                <td v-if="event.stepWherePatientsQuit == 2">Choosing date</td>
-                <td v-if="event.stepWherePatientsQuit == 3">Choosing period</td>
-              </tr>
-              <tr>
-                <td>Number of created appointments</td>
-                <td>{{event.numberOfCreatedAppointment}}</td>
-              </tr>
-              <tr>
-                <td>Average time spent on choosing specialization</td>
-                <td>{{event.averageTimeOnSpecialization}}s</td>
-              </tr>
-              <tr>
-                <td>Average time spent on choosing doctor</td>
-                <td>{{event.averageTimeOnDoctors}}s</td>
-              </tr>
-              <tr>
-                <td>Average time spent on choosing date</td>
-                <td>{{event.averageTimeOnChooseDate}}s</td>
-              </tr>
-              <tr>
-                <td>Average time spent on choosing period</td>
-                <td>{{event.averageTimeOnChoosePeriod}}s</td>
-              </tr>
+                <tr>
+                    <td>Percent of successfully made appointments</td>
+                    <td>{{event.percentOfSuccessfulCreating}}%</td>
+                </tr>
+                <tr>
+                    <td>Average time for making an appointment</td>
+                    <td>{{event.averageCreatingTime}}s</td>
+                </tr>
+                <tr>
+                    <td>Step where patients quit the most</td>
+                    <td v-if="event.stepWherePatientsQuit == 0">Choosing specialization</td>
+                    <td v-if="event.stepWherePatientsQuit == 1">Choosing doctor</td>
+                    <td v-if="event.stepWherePatientsQuit == 2">Choosing date</td>
+                    <td v-if="event.stepWherePatientsQuit == 3">Choosing period</td>
+                </tr>
+                <tr>
+                    <td>Number of created appointments</td>
+                    <td>{{event.numberOfCreatedAppointment}}</td>
+                </tr>
+                <tr>
+                    <td>Number of not created appointments</td>
+                    <td>{{event.numberOfNotCreatedAppointment}}</td>
+                </tr>
+                <tr>
+                    <td>Average time for not created appointment</td>
+                    <td>{{event.averageNotCreatedTime}}s</td>
+                </tr>
+                <tr>
+                    <td>Average time spent on choosing specialization</td>
+                    <td>{{event.averageTimeOnSpecialization}}s</td>
+                </tr>
+                <tr>
+                    <td>Average time spent on choosing doctor</td>
+                    <td>{{event.averageTimeOnDoctors}}s</td>
+                </tr>
+                <tr>
+                    <td>Average time spent on choosing date</td>
+                    <td>{{event.averageTimeOnChooseDate}}s</td>
+                </tr>
+                <tr>
+                    <td>Average time spent on choosing period</td>
+                    <td>{{event.averageTimeOnChoosePeriod}}s</td>
+                </tr>
             </table>
 
         </div>

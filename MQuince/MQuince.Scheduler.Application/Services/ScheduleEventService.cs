@@ -42,8 +42,10 @@ namespace MQuince.Scheduler.Application.Services
                 ScheduleEventStatisticsResponseDTO scheduleStatisticsResponseDTO = new ScheduleEventStatisticsResponseDTO();
                 scheduleStatisticsResponseDTO.PercentOfSuccessfulCreating = this.GetPercentOfSuccessfulCreating(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.AverageCreatingTime = this.GetAverageCreatingTime(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.AverageNotCreatedTime = this.GetAverageNotCreatedTime(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.StepWherePatientsQuit = this.GetStepWherePatientsMostQuit(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.NumberOfCreatedAppointment = this.GetNumberOfCreatedAppoitment(mapOfEventsPerSession);
+                scheduleStatisticsResponseDTO.NumberOfNotCreatedAppointment = this.GetNumberNotCreatedAppoitment(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.AverageTimeOnSpecialization = this.GetAverageTimeOnSpecialization(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.AverageTimeOnDoctors = this.GetAverageTimeOnDoctors(mapOfEventsPerSession);
                 scheduleStatisticsResponseDTO.AverageTimeOnChooseDate = this.GetAverageTimeOnChooseDate(mapOfEventsPerSession);
@@ -54,6 +56,19 @@ namespace MQuince.Scheduler.Application.Services
             {
                 throw new InternalServerErrorException();
             }
+        }
+
+        private int GetNumberNotCreatedAppoitment(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            int numberOfNotCreatedAppointment = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                if (!this.IsCreatedAppointmentInThisSession(sessionEvent.Value))
+                    numberOfNotCreatedAppointment++;
+            }
+
+            return numberOfNotCreatedAppointment;
         }
 
         private Tuple<double, double> GetAverageTimeOnPageAtDateChoose(List<ScheduleEvent> scheduleEventsInSession)
@@ -160,50 +175,6 @@ namespace MQuince.Scheduler.Application.Services
             return Tuple.Create(sumOfTimesOnPage, numberOfTimesOnPage);
         }
 
-        private Tuple<double, double> GetAverageTimeOnDoctorsAtOneSession(List<ScheduleEvent> scheduleEventsInSession)
-        {
-            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
-
-            double sumOfTimesOnDoctors = 0;
-            double numberOfTimesOnDoctors = 0;
-
-            for (int i = 0; i < scheduleEventsInSession.Count; i++)
-            {
-                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
-                    break;
-
-                if (scheduleEventsInSession[i].EventType == ScheduleEventType.FROMSPECTODOCTOR || scheduleEventsInSession[i].EventType == ScheduleEventType.FROMDATEPICKERTODOCTOR)
-                {
-                    sumOfTimesOnDoctors += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
-                    numberOfTimesOnDoctors++;
-                }
-            }
-
-            return Tuple.Create(sumOfTimesOnDoctors, numberOfTimesOnDoctors);
-        }
-
-        private Tuple<double, double> GetAverageTimeOnSpecificationAtOneSession(List<ScheduleEvent> scheduleEventsInSession)
-        {
-            scheduleEventsInSession.Sort((x, y) => DateTime.Compare(x.TimeStamp, y.TimeStamp));
-
-            double sumOfTimesOnSpecialization = 0;
-            double numberOfTimesOnSpecialization = 0;
-
-            for(int i=0; i < scheduleEventsInSession.Count; i++)
-            {
-                if (scheduleEventsInSession.ElementAtOrDefault(i + 1) == null)
-                    break;
-
-                if (scheduleEventsInSession[i].EventType == ScheduleEventType.JOIN || scheduleEventsInSession[i].EventType == ScheduleEventType.FROMDOCTORTOSPEC)
-                {
-                    sumOfTimesOnSpecialization += GetTimeBeetwenTwoEvents(scheduleEventsInSession[i + 1].TimeStamp, scheduleEventsInSession[i].TimeStamp);
-                    numberOfTimesOnSpecialization++;
-                }
-            }
-
-            return Tuple.Create(sumOfTimesOnSpecialization, numberOfTimesOnSpecialization);
-        }
-
         private double GetTimeBeetwenTwoEvents(DateTime endDate, DateTime startDate)
              => endDate.Subtract(startDate).TotalSeconds;
 
@@ -222,11 +193,7 @@ namespace MQuince.Scheduler.Application.Services
 
         private int GetStepWherePatientsMostQuit(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
         {
-            Dictionary<int, int> mapOfMostQuit = new Dictionary<int, int>();
-            mapOfMostQuit[0] = 0;
-            mapOfMostQuit[1] = 0;
-            mapOfMostQuit[2] = 0;
-            mapOfMostQuit[3] = 0;
+            Dictionary<int, int> mapOfMostQuit = new Dictionary<int, int>() { { 0, 0 },{ 1, 0 },{ 2, 0 },{ 3, 0 } } ;
 
             foreach (var sessionEvent in mapOfEventsPerSession)
             {
@@ -276,6 +243,23 @@ namespace MQuince.Scheduler.Application.Services
             return sumMinutesForCreate / numberOfCreatedAppointment;
         }
 
+        private double GetAverageNotCreatedTime(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
+        {
+            double numberOfCreatedAppointment = 0;
+            double sumMinutesForCreate = 0;
+
+            foreach (var sessionEvent in mapOfEventsPerSession)
+            {
+                if (!this.IsCreatedAppointmentInThisSession(sessionEvent.Value))
+                {
+                    numberOfCreatedAppointment++;
+                    sumMinutesForCreate += GetTimeForNotCreateAppointment(sessionEvent.Value);
+                }
+            }
+
+            return sumMinutesForCreate / numberOfCreatedAppointment;
+        }
+
         private double GetTimeForCreateAppointment(List<ScheduleEvent> scheduleEventsInSession)
         {
             DateTime startDate = DateTime.Now;
@@ -284,6 +268,22 @@ namespace MQuince.Scheduler.Application.Services
             foreach (ScheduleEvent scheduleEvent in scheduleEventsInSession)
             {
                 if (scheduleEvent.EventType == ScheduleEventType.CREATED)
+                    endDate = scheduleEvent.TimeStamp;
+                else if (scheduleEvent.EventType == ScheduleEventType.JOIN)
+                    startDate = scheduleEvent.TimeStamp;
+            }
+
+            return endDate.Subtract(startDate).TotalSeconds;
+        }
+
+        private double GetTimeForNotCreateAppointment(List<ScheduleEvent> scheduleEventsInSession)
+        {
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = DateTime.Now;
+
+            foreach (ScheduleEvent scheduleEvent in scheduleEventsInSession)
+            {
+                if (scheduleEvent.EventType == ScheduleEventType.EXIT)
                     endDate = scheduleEvent.TimeStamp;
                 else if (scheduleEvent.EventType == ScheduleEventType.JOIN)
                     startDate = scheduleEvent.TimeStamp;

@@ -19,8 +19,8 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
 
         public void Navigate()
         {
-            //webDriver.Navigate().GoToUrl("http://localhost:5000/public/index.html");
-            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Login/Login.html");
+            webDriver.Navigate().GoToUrl("http://localhost:5000/public/Login/Login.html");
+            //webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/Login/Login.html");
         }
 
         public void TypeUsername(string username)

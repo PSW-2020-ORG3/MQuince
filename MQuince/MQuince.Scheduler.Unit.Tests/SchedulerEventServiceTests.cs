@@ -73,6 +73,9 @@ namespace MQuince.Scheduler.Unit.Tests
             Assert.Equal(1.8, scheduleStatisticsDTO.AverageTimeOnDoctors);
             Assert.Equal(1.33, scheduleStatisticsDTO.AverageTimeOnChooseDate,2);
             Assert.Equal(2.8, scheduleStatisticsDTO.AverageTimeOnChoosePeriod);
+            Assert.Equal(4, scheduleStatisticsDTO.NumberOfNotCreatedAppointment);
+            Assert.Equal(4.75, scheduleStatisticsDTO.AverageNotCreatedTime);
+
 
         }
 
