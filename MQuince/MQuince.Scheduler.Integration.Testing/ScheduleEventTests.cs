@@ -43,7 +43,7 @@ namespace MQuince.Scheduler.Integration.Testing
             ScheduleEventDTO scheduleEventDTO = new ScheduleEventDTO()
             {
                 SessionId = Guid.NewGuid(),
-                EventType = Domain.Events.ScheduleEventType.CREATED
+                EventType = Domain.Events.ScheduleEventType.EXIT
             };
 
             var myContent = JsonConvert.SerializeObject(scheduleEventDTO);

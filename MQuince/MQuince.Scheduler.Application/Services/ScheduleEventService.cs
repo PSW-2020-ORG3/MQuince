@@ -176,7 +176,13 @@ namespace MQuince.Scheduler.Application.Services
         }
 
         private double GetTimeBeetwenTwoEvents(DateTime endDate, DateTime startDate)
-             => endDate.Subtract(startDate).TotalSeconds;
+        {
+            if (endDate > startDate)
+            {
+                return endDate.Subtract(startDate).TotalSeconds;
+            }
+            return 0;
+        }
 
         private int GetNumberOfCreatedAppoitment(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
         {
@@ -273,7 +279,7 @@ namespace MQuince.Scheduler.Application.Services
                     startDate = scheduleEvent.TimeStamp;
             }
 
-            return endDate.Subtract(startDate).TotalSeconds;
+            return GetTimeBeetwenTwoEvents(endDate, startDate);
         }
 
         private double GetTimeForNotCreateAppointment(List<ScheduleEvent> scheduleEventsInSession)
@@ -289,7 +295,7 @@ namespace MQuince.Scheduler.Application.Services
                     startDate = scheduleEvent.TimeStamp;
             }
 
-            return endDate.Subtract(startDate).TotalSeconds;
+            return GetTimeBeetwenTwoEvents(endDate, startDate);
         }
 
         private double GetPercentOfSuccessfulCreating(Dictionary<Guid, List<ScheduleEvent>> mapOfEventsPerSession)
