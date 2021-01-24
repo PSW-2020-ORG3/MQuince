@@ -8,7 +8,6 @@ namespace MQuince.UrgentProcurement.Domain
     {
         public string Name { get; set; }
         public string Status { get; set; }
-
         public string Quantity { get; set; }
 
         public GrpcMessage(string name, string status)

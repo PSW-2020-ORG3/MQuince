@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
-using MQuince.Integration.Services.Implementation;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Constracts.Services;
+using MQuince.Sftp.Services;
 using System;
 
 namespace MQuince.Integration.HospitalApp.Controllers
@@ -26,7 +26,7 @@ namespace MQuince.Integration.HospitalApp.Controllers
 		{
 			_medicationsConsumptionService.GeneratePdf(dto);
 
-			if (_sftpService.SendFile("izvjestaj.pdf"))
+			if (_sftpService.SendFile("Report_" + dto.From.Day.ToString() + "." + dto.From.Month.ToString() + "." + dto.From.Year.ToString() + "-" + dto.To.Day.ToString() + "." + dto.To.Month.ToString() + "." + dto.To.Year.ToString() + ".pdf"))
 				return Ok();
 			else
 				return BadRequest();

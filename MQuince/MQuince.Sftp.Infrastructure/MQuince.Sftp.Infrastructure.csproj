@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MQuince.ActionAndBenefits.Contracts\MQuince.ActionAndBenefits.Contracts.csproj" />
+    <ProjectReference Include="..\MQuince.Core\MQuince.Core.csproj" />
     <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Constracts\MQuince.Sftp.Constracts.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Domain\MQuince.Sftp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

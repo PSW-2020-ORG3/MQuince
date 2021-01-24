@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MQuince.Core.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Exceptions;
 using MQuince.TenderProcurement.Contracts.DTO;
 using MQuince.TenderProcurement.Contracts.Services;
+using MQuince.TenderProcurement.Contracts.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

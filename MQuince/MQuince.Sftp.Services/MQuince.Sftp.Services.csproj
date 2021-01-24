@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
+    <PackageReference Include="PdfSharp" Version="1.50.5147" />
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="SSH.NET" Version="2016.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MQuince.Sftp.Constracts\MQuince.Sftp.Constracts.csproj" />
+  </ItemGroup>
+
+</Project>

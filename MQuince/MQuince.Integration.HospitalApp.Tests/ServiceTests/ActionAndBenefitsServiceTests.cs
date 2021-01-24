@@ -59,16 +59,16 @@ namespace MQuince.Integration.HospitalApp.Tests.ServiceTests
 			if (!actionAndBenefits.ActionName.Equals(actionAndBenefitsDTO.EntityDTO.ActionName))
 				return false;
 
-			if (actionAndBenefits.BeginDate != actionAndBenefitsDTO.EntityDTO.BeginDate)
+			if (actionAndBenefits.DateRange.StartDateTime != actionAndBenefitsDTO.EntityDTO.BeginDate)
 				return false;
 
-			if (actionAndBenefits.EndDate != actionAndBenefitsDTO.EntityDTO.EndDate)
+			if (actionAndBenefits.DateRange.EndDateTime != actionAndBenefitsDTO.EntityDTO.EndDate)
 				return false;
 
-			if (actionAndBenefits.OldCost != actionAndBenefitsDTO.EntityDTO.OldCost)
+			if (actionAndBenefits.Price.OldPrice != actionAndBenefitsDTO.EntityDTO.OldCost)
 				return false;
 
-			if (actionAndBenefits.NewCost != actionAndBenefitsDTO.EntityDTO.NewCost)
+			if (actionAndBenefits.Price.NewPrice != actionAndBenefitsDTO.EntityDTO.NewCost)
 				return false;
 			if (actionAndBenefits.IsApproved != actionAndBenefitsDTO.EntityDTO.IsApproved)
 				return false;

@@ -42,20 +42,10 @@ namespace MQuince.ActionAndBenefits.Services
             {
                 byte[] body = ea.Body.ToArray();
                 string jsonMessage = Encoding.UTF8.GetString(body);
-                ActionsAndBenefits message = JsonConvert.DeserializeObject<ActionsAndBenefits>(jsonMessage);
+                ActionAndBenefitsDTO message = JsonConvert.DeserializeObject<ActionAndBenefitsDTO>(jsonMessage);
                 try
-                {
-                    ActionAndBenefitsDTO newAction = new ActionAndBenefitsDTO(                        
-                        message.PharmacyName,
-                        message.ActionName,
-                        new DateTime(message.BeginDate.Year, message.BeginDate.Month, message.BeginDate.Day),
-                        new DateTime(message.EndDate.Year, message.EndDate.Month, message.EndDate.Day),
-                        Convert.ToDouble(message.OldCost),
-                        Convert.ToDouble(message.NewCost),
-                        false
-                        );
-                   
-                   _actionAndBenefitsService.Create(newAction);
+                {                   
+                   _actionAndBenefitsService.Create(message);
 
                 }
                 catch (Exception e)

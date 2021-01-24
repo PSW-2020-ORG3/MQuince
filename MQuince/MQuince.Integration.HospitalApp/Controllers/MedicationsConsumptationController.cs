@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Sftp.Constracts.DTO;
+using MQuince.Sftp.Constracts.Services;
 using System;
 using System.Collections.Generic;
 
