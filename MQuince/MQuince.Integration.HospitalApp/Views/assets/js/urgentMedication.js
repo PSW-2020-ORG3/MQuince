@@ -16,7 +16,7 @@
         } else if (quantity < 1) {
             alert("Quantity can't be negative!");
         } else if (name != "" || quantity != "") {
-            alert("Medication sucesfully sent to the farmacy!");
+            alert("Medication sucesfully sent to the pharmacy!");
         }else {
 
 

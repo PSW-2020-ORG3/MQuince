@@ -14,7 +14,9 @@
 
     }
 
-    <div id="requestForDirector-container">
+<div id="requestForDirector-container">
+    <form onsubmit="sendName()" action="javascript:void(0);">
+
 
         <table style="margin-top: 0px; padding: -5px;" border="1px">
             <tr style="margin-top: -5px;">
@@ -25,21 +27,13 @@
 
 
         </table>
-        <button id="btn2" onclick="alert('Medication was successefully send to pharmacy!')">Sent</button>
+        <button id="btn2" )">Sent</button>
+    </form>
 
+    <script src="~/Views/assets/js/requestForDirector.js"></script>
+    <script src="~/Views/assets/js/jquery.min.js"></script>
 
-
-
-
-
-
-        <!--<button id="btn1" type="submit" class="send" onclick="alert('Medication was successefully send to pharmacy!')">Send HTTP</button>-->
-
-
-        <script src="~/Views/assets/js/requestForDirector.js"></script>
-        <script src="~/Views/assets/js/jquery.min.js"></script>
-
-    </div>
+</div>
     <style>
 
         table {

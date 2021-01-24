@@ -1,8 +1,13 @@
 ﻿const uri = '/api/Grpc'
 function sendName() {
     const name = document.getElementById('name');
-    const quantity = document.getElementById('quantity');
 
+    if (name.value == "" ) {
+
+        alert("You need to fill all fields!");
+    } else if (name.value != "" ) {
+        alert("Medication sucesfully sent to the pharmacy!");
+    } 
 
     const item = {
         name: name.value,
@@ -20,7 +25,6 @@ function sendName() {
         .then(response => response.json())
         .then(() => {
             name.value = '';
-            quantity.value = '';
 
         })
         .catch(error => console.error('Unable to add item.', error));
