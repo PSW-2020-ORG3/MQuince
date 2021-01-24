@@ -7,6 +7,13 @@ function sendName() {
     const startDate = document.getElementById('startDate');
     const endDate = document.getElementById('endDate');
 
+    if (name.value == "" || descritpion.value == "" || formLink.value == "" || startDate.value == "" || endDate.value == "") {
+
+        alert("You need to fill all fields!");
+    } else {
+        alert("Tender successfully create!");
+    }
+
     
     const item = {
         name: name.value,
