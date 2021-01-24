@@ -3,7 +3,6 @@ function sendName() {
     const name = document.getElementById('name');
 
     if (name.value == "" ) {
-
         alert("You need to fill all fields!");
     } else if (name.value != "" ) {
         alert("Medication sucesfully sent to the pharmacy!");
