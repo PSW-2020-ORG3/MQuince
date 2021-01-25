@@ -15,6 +15,7 @@ namespace MQuince.Scheduler.Contracts.DTO
         public double AverageTimeOnDoctors { get; set; }
         public double AverageTimeOnChooseDate { get; set; }
         public double AverageTimeOnChoosePeriod { get; set; }
-
+        public int NumberOfNotCreatedAppointment { get; set; }
+        public double AverageNotCreatedTime { get; set; }
     }
 }

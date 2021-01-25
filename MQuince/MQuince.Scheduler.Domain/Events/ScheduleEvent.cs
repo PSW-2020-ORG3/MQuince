@@ -7,9 +7,9 @@ namespace MQuince.Scheduler.Domain.Events
 {
     public class ScheduleEvent : BaseEvent
     {
-        public ScheduleEventType EventType { get; private set; }
+        public ScheduleEventType EventType { get; set; }
 
-        public Guid SessionId { get; private set; }
+        public Guid SessionId { get; set; }
 
         public ScheduleEvent(ScheduleEventType eventType, Guid baseEntityId, Guid sessionId) : base(baseEntityId)
         {

@@ -65,8 +65,8 @@ namespace MQuince.WebAPI.Selenium.EndToEnd.Testing.Pages
         }
         public void NavigateToHomePage()
         {
-            webDriver.Navigate().GoToUrl("https://mquince.herokuapp.com/public/index.html");
-            Assert.IsTrue(webDriver.Url.Equals("https://mquince.herokuapp.com/public/index.html"));
+            webDriver.Navigate().GoToUrl("http://localhost:5000/public/index.html");
+            Assert.IsTrue(webDriver.Url.Equals("http://localhost:5000/public/index.html"));
         }
 
     }
