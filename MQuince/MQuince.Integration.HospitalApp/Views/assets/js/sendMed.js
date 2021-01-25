@@ -4,6 +4,14 @@ function sendName() {
     const name = document.getElementById('name');
     const quantity = document.getElementById('quantity');
 
+    if (name.value == "" || quantity.value == "") {
+
+        alert("You need to fill all fields!");
+    } else if (quantity.value < 1) {
+        alert("Quantity can't be negative!");
+    } else if (name.value != "" || quantity.value != "") {
+        alert("Medication sucesfully sent to the farmacy!");
+    } 
 
     const item = {
         name: name.value,

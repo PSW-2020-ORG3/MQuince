@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    var medication = new Object();
+    medication.name = $('#name').val();
+    if (medication.name == '') {
+        alert("You need to fill all fields!");
+    }
+
+
     $("#send").click(function () {
         var medication = new Object();
          medication.name = $('#name').val();        
