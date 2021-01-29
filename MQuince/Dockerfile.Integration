@@ -1,0 +1,59 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /app
+
+COPY MQuince.APIGateway/MQuince.APIGateway.csproj MQuince.APIGateway/
+COPY MQuince.StaffManagement.Application/MQuince.StaffManagement.Application.csproj MQuince.StaffManagement.Application/
+COPY MQuince.StaffManagement.Contracts/MQuince.StaffManagement.Contracts.csproj MQuince.StaffManagement.Contracts/
+COPY MQuince.StaffManagement.Infrastructure/MQuince.StaffManagement.Infrastructure.csproj MQuince.StaffManagement.Infrastructure/
+COPY MQuince.StaffManagement.Domain/MQuince.StaffManagement.Domain.csproj MQuince.StaffManagement.Domain/
+COPY MQuince.StaffManagement.Integration.Testing/MQuince.StaffManagement.Integration.Testing.csproj MQuince.StaffManagement.Integration.Testing/
+
+COPY MQuince.Scheduler.Application/MQuince.Scheduler.Application.csproj MQuince.Scheduler.Application/
+COPY MQuince.Scheduler.Contracts/MQuince.Scheduler.Contracts.csproj MQuince.Scheduler.Contracts/
+COPY MQuince.Scheduler.Infrastructure/MQuince.Scheduler.Infrastructure.csproj MQuince.Scheduler.Infrastructure/
+COPY MQuince.Scheduler.Domain/MQuince.Scheduler.Domain.csproj MQuince.Scheduler.Domain/
+COPY MQuince.Scheduler.Integration.Testing/MQuince.Scheduler.Integration.Testing.csproj MQuince.Scheduler.Integration.Testing/
+
+COPY MQuince.Autentication.Application/MQuince.Autentication.Application.csproj MQuince.Autentication.Application/
+COPY MQuince.Autentication.Contracts/MQuince.Autentication.Contracts.csproj MQuince.Autentication.Contracts/
+COPY MQuince.Autentication.Infrastructure/MQuince.Autentication.Infrastructure.csproj MQuince.Autentication.Infrastructure/
+COPY MQuince.Autentication.Domain/MQuince.Autentication.Domain.csproj MQuince.Autentication.Domain/
+COPY MQuince.Autentication.Integration.Testing/MQuince.Autentication.Integration.Testing.csproj MQuince.Autentication.Integration.Testing/
+
+COPY MQuince.Review.Domain/MQuince.Review.Domain.csproj MQuince.Review.Domain/
+COPY MQuince.Infrastructure/MQuince.Infrastructure.csproj MQuince.Infrastructure/
+COPY MQuince.Core/MQuince.Core.csproj MQuince.Core/
+
+RUN dotnet restore MQuince.APIGateway/MQuince.APIGateway.csproj
+RUN dotnet restore MQuince.StaffManagement.Integration.Testing/MQuince.StaffManagement.Integration.Testing.csproj
+RUN dotnet restore MQuince.Scheduler.Integration.Testing/MQuince.Scheduler.Integration.Testing.csproj
+RUN dotnet restore MQuince.Autentication.Integration.Testing/MQuince.Autentication.Integration.Testing.csproj
+
+COPY . .
+
+FROM build AS publish
+
+ARG DATABASE_USERNAME
+ARG DATABASE_PASSWORD
+ARG DATABASE_DOMAIN
+ARG DATABASE_SCHEMA
+ARG DATABASE_PORT
+ARG STAGE
+ARG PORT
+
+ENV DATABASE_USERNAME = $DATABASE_USERNAME
+ENV DATABASE_PASSWORD = $DATABASE_PASSWORD
+ENV DATABASE_DOMAIN = $DATABASE_DOMAIN
+ENV DATABASE_SCHEMA = $DATABASE_SCHEMA
+ENV DATABASE_PORT = $DATABASE_PORT
+ENV STAGE = $STAGE
+ENV PORT = $PORT
+
+WORKDIR /app/MQuince.APIGateway
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef --version 3.1.0
+RUN dotnet ef migrations add Init
+
+#running script
+LABEL test=true
+CMD ["sh","../dockercmd.sh"]

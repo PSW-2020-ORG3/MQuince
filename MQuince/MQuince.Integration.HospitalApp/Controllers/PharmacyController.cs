@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MQuince.Integration.Services.Constracts.DTO;
-using MQuince.Integration.Services.Constracts.IdentifiableDTO;
-using MQuince.Integration.Services.Constracts.Interfaces;
+using MQuince.Core.IdentifiableDTO;
+using MQuince.Pharmacy.Constracts.Exceptions;
+using MQuince.Pharmacy.Contracts.DTO;
+using MQuince.Pharmacy.Contracts.Services;
 
 namespace MQuince.Integration.HospitalApp.Controllers
 {
@@ -22,14 +20,27 @@ namespace MQuince.Integration.HospitalApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<IdentifiableDTO<PharmacyDTO>> GetAll()
+        public IActionResult GetAll()
         {
-            return _pharmacyService.GetAll();
+            try
+            {
+                return Ok(_pharmacyService.GetAll());
+            }
+            catch (NotFoundEntityException e)
+            {
+                return StatusCode(404);
+            }
+
+            catch (InternalServerErrorException e)
+            {
+                return StatusCode(500);
+            }
         }
 
         [HttpPost]
         public IActionResult Add(PharmacyDTO dto)
         {
+
             try
             {
                 _pharmacyService.Create(dto);

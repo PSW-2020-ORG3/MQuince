@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "requestForDirector";
+    Layout = "_Layout";
+}
+
+
+@model IEnumerable<MQuince.UrgentProcurement.Domain.GrpcMessage>
+
+<div id="requestForDirector-container">
+    @foreach (var a in Model)
+    {
+        <p>  Medication @Html.DisplayFor(modelItem => a.Name) @Html.DisplayFor(modelItem => a.Status) </p>
+
+    }
+
+<div id="requestForDirector-container">
+    <form onsubmit="sendName()" action="javascript:void(0);">
+
+
+        <table style="margin-top: 0px; padding: -5px;" border="1px">
+            <tr style="margin-top: -5px;">
+                <td><label> Enter the pharmacy: </label></td>
+            </tr>
+            <tr> <td> <input type="text" id="name" /></td></tr>
+
+
+
+        </table>
+        <button id="btn2" )">Sent</button>
+    </form>
+
+    <script src="~/Views/assets/js/requestForDirector.js"></script>
+    <script src="~/Views/assets/js/jquery.min.js"></script>
+
+</div>
+    <style>
+
+        table {
+            border: none;
+            padding: 5px;
+            font-size: 22px;
+            text-align: center;
+            margin-top: 100px;
+            margin-left:20px;
+            background-color: deepskyblue;
+            opacity: 0.7;
+            width: 48%;
+        }
+
+        td {
+            font-size: 20px;
+            width: auto;
+        }
+
+        tr {
+            font-size: 20px;
+            width: auto;
+        }
+
+        button {
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+

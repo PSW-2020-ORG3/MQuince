@@ -10,16 +10,25 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.15.1" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0-beta.1" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha07" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="87.0.4280.8800" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MQuince.Integration.Entities\MQuince.Integration.Entities.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Repository.MySQL\MQuince.Integration.Repository.MySQL.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Services.Constracts\MQuince.Integration.Services.Constracts.csproj" />
-    <ProjectReference Include="..\MQuince.Integration.Services.Implementation\MQuince.Integration.Services.Implementation.csproj" />
+    <ProjectReference Include="..\MQuince.Integration.Infrastructure\MQuince.Integration.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Domain\MQuince.ActionAndBenefits.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Infrastructure\MQuince.ActionAndBenefits.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.ActionAndBenefits.Services\MQuince.ActionAndBenefits.Services.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Domain\MQuince.Pharmacy.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Infrastructure\MQuince.Pharmacy.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Pharmacy.Services\MQuince.Pharmacy.Services.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Domain\MQuince.Sftp.Domain.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Infrastructure\MQuince.Sftp.Infrastructure.csproj" />
+    <ProjectReference Include="..\MQuince.Sftp.Services\MQuince.Sftp.Services.csproj" />
   </ItemGroup>
 
 </Project>

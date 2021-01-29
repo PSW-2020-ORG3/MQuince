@@ -1,0 +1,49 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /app
+
+COPY MQuince.Scheduler.Application/MQuince.Scheduler.Application.csproj MQuince.Scheduler.Application/
+COPY MQuince.Scheduler.Contracts/MQuince.Scheduler.Contracts.csproj MQuince.Scheduler.Contracts/
+COPY MQuince.Scheduler.Infrastructure/MQuince.Scheduler.Infrastructure.csproj MQuince.Scheduler.Infrastructure/
+COPY MQuince.Scheduler.Domain/MQuince.Scheduler.Domain.csproj MQuince.Scheduler.Domain/
+COPY MQuince.Infrastructure/MQuince.Infrastructure.csproj MQuince.Infrastructure/
+COPY MQuince.Scheduler.Unit.Tests/MQuince.Scheduler.Unit.Tests.csproj MQuince.Scheduler.Unit.Tests/
+COPY MQuince.Core/MQuince.Core.csproj MQuince.Core/
+COPY MQuince.Review.Domain/MQuince.Review.Domain.csproj MQuince.Review.Domain/
+
+RUN dotnet restore MQuince.Scheduler.Application/MQuince.Scheduler.Application.csproj
+
+COPY . .
+
+FROM build AS test
+LABEL test=true
+RUN dotnet test -c Release --results-directory /testresults --logger "trx;LogFileName=test_results.trx" MQuince.Scheduler.Unit.Tests/MQuince.Scheduler.Unit.Tests.csproj
+
+FROM build AS publish
+
+ARG DATABASE_USERNAME
+ARG DATABASE_PASSWORD
+ARG DATABASE_DOMAIN
+ARG DATABASE_SCHEMA
+ARG DATABASE_PORT
+ARG STAGE
+ARG PORT
+
+ENV DATABASE_USERNAME = $DATABASE_USERNAME
+ENV DATABASE_PASSWORD = $DATABASE_PASSWORD
+ENV DATABASE_DOMAIN = $DATABASE_DOMAIN
+ENV DATABASE_SCHEMA = $DATABASE_SCHEMA
+ENV DATABASE_PORT = $DATABASE_PORT
+ENV STAGE = $STAGE
+ENV PORT = $PORT
+
+WORKDIR /app
+#COPY MQuince.WebAPI.Integration.Testing/MQuince.WebAPI.Integration.Testing.csproj out
+RUN dotnet publish MQuince.Scheduler.Application/MQuince.Scheduler.Application.csproj -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+#RUN useradd -ms /bin/bash defaultuser
+WORKDIR /app
+#ENV ASPNETCORE_URLS http://*:5000
+EXPOSE 5004
+COPY --from=publish /app/out .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet MQuince.Scheduler.Application.dll

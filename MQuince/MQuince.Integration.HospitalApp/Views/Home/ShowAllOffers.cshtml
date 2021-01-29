@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/Views/assets/bootstrap/css/bootstrap.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="~/Views/assets/js/vue.js"></script>
+
+    <script src="~/Views/assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/Views/assets/css/styles.css" type="text/css" runat="server">
+    <script>
+        function home() {
+            window.location.replace("http://localhost:49544/home");
+        }</script>
+
+    <link rel="stylesheet" href="~/Views/assets/css/AllOffersStyle.css" type="text/css" runat="server">
+
+    <script src="~/Views/assets/js/ShowAllOffers.js"></script>
+    <title> HOSPITAL SERVER </title>
+</head>
+
+<body>
+    <div id="root">
+        <div class="nav-bar">
+            <div class="hsp_server"> HOSPITAL  SERVER </div>
+            <div class="navButton">
+                <button asp-controller="Home" onclick="home()"> HOME </button>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="offers" id="offers">
+               
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+</html>

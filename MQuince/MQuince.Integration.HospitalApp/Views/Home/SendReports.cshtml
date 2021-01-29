@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "_Layout";
+}
+
+<div class="reportsDiv" id="reportsDiv">    
+            <form action="javascript:void(0);" onsubmit="postDate()" >
+                <table id="dates">
+                    <tr>
+                        <td> Date from: </td> 
+                        <td><input type="date" id="from"> </td>
+                    </tr>
+                    <tr>
+                        <td> Date To: </td> 
+                        <td><input type="date" id="to"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" value="Make report"></td>
+                    </tr>
+
+
+                </table>
+                 
+            </form>
+        <script src="~/Views/assets/js/SendReports.js"></script>
+
+        </div>
+        

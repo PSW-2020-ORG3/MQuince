@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Add";
+    Layout = "_Layout";
+}
+
+<div class="phamracyContainer">
+    <div class="containsForm">
+        <form onsubmit="addItem()" action="javascript:void(0);" >
+            <table style="margin-top: 5px; padding: -10px;" border="1px">
+                <tr style="margin-top: -10px;">
+                <td><label> API-KEY </label></td></tr>
+                <tr> <td> <input type="text" id="apiKey" v-model="apiKey"></input></td></tr>
+                <tr> <td> <label> NAME </label></td></tr>
+                <tr> <td> <input v-model="name" id="name"></input> </td></tr>
+                <tr> <td> <label> WEBSITE </label></td></tr>
+                <tr><td><input type="text" v-model="url" id="url"></input> </td></tr>
+                <tr> <td> <input id="btn" type="submit" value="Save"></td></tr>
+            </table>
+            <script src="~/Views/assets/js/AddPharmacy.js"></script>
+
+        </form>
+    </div>
+</div>
+<style>
+    table {
+        width: 50%;
+        border: none;
+        padding: 5px;
+        text-align: center;
+    }
+
+</style>

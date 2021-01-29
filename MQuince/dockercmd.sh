@@ -1,0 +1,1 @@
+dotnet ef database update && dotnet test ../MQuince.StaffManagement.Integration.Testing && dotnet test ../MQuince.Scheduler.Integration.Testing && dotnet test ../MQuince.Autentication.Integration.Testing

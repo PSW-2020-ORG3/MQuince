@@ -1,20 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using MQuince.Integration.Entities;
+using MQuince.ActionAndBenefits.Domain;
+using MQuince.ActionAndBenefits.Services;
+using MQuince.UrgentProcurement.Services;
+using System.Collections.Generic;
+
 
 namespace MQuince.Integration.HospitalApp
 {
     public class Program
     {
         public static List<ActionsAndBenefits> ActionAndBenefitMessage = new List<ActionsAndBenefits>();
-
 
         public static void Main(string[] args)
         {
